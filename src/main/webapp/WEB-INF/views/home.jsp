@@ -3,30 +3,30 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <html>
-<header>
- <nav>
-   <ul>
-     <li><a href="#">홈</a></li>
-       <li><a href="#">정보</a></li>
-       <li><a href="#">추천코스</a></li>
-       <li><a href="#">커뮤니티</a></li>
-       <li><a href="#">로그인</a></li>
-       <li><a href="#" class = "btn">Sign up</a></li>
-   </ul>
-   <div class="toggle-button">커뮤니티</div>
-   <div class="toggle-button">
-     <p>1:1문의</p>
-     <p>QnA</p>
-     <p>후기게시판</p>
-     <p>자유게시판</p>
-   </div>
- </nav>
-</header>
 <head>
-   <title>Home</title>
-   <link rel="stylesheet" type="text/css" href="styles/style.css">   
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 <body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="#">홈</a></li>
+            <li><a href="#">정보</a></li>
+            <li><a href="#">추천코스</a></li>
+            <li><a href="#">커뮤니티</a></li>
+            <li><a href="#">로그인</a></li>
+            <li><a href="#" class = "btn">Sign up</a></li>
+        </ul>
+        <div class="toggle-button">커뮤니티</div>
+        <div class="toggle-button">
+            <p>1:1문의</p>
+            <p>QnA</p>
+            <p>후기게시판</p>
+            <p>자유게시판</p>
+        </div>
+    </nav>
+</header>
 <h1>
    Hello world!  
 </h1>
