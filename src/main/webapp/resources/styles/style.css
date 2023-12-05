@@ -1,0 +1,120 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.main-menu-item {
+    color: #e03939;
+}
+
+
+.dropdown-item {
+    color: #000000;
+}
+
+
+.btn {
+    background-color: #2359a5;
+    border-radius: 30px;
+    padding: 7px 20px;
+}
+
+img {
+    float: left;
+    width: 200px;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+nav {
+    background-color: #232a37;
+    height: 50px;
+    padding: 5px;
+    display: block;
+    width: 100%;
+}
+
+nav ul {
+    float: right;
+    margin-top: 10px;
+}
+
+nav li {
+    display: inline-block;
+    padding: 0 10px;
+}
+
+/* 새 드롭다운 css */
+.toggle-button div {
+    display: none;
+    position: absolute;
+    background-color: #ffffff; /* White background for dropdown */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Optional: adds a shadow for some depth */
+    z-index: 1; /* Makes sure the dropdown is on top of other elements */
+}
+
+.toggle-button div p {
+    color: #000000; /* Black text for dropdown items */
+    padding: 12px 16px; /* Spacing inside dropdown items */
+    text-decoration: none;
+    display: block; /* Makes each <p> take up the full width */
+}
+
+/* 드랍다운 hover */
+.toggle-button:hover div {
+    display: block;
+}
+
+
+
+/*!* 추가된 부분: 커뮤니티 아코디언 스타일 *!*/
+/*.toggle-button > div a {*/
+/*    color: #000000; !* 커뮤니티 메뉴 글자색 설정 *!*/
+/*    text-decoration: none;*/
+/*    display: block;*/
+/*    padding: 5px;*/
+/*}*/
+
+/*.toggle-button > div a:hover {*/
+/*    color: #ffd700; !* 마우스 오버 시 연노란색으로 변경 *!*/
+/*}*/
+
+/* @charset "EUC-KR";
+*{
+    padding:0px;
+    margin:0px;
+}
+a{
+    text-decoration: none;
+    color:#ffffff;
+}
+.btn{
+  background-color: #2359a5;
+  border-radius:30px;
+  padding:7px 20px;
+}
+img{
+    float:left;
+    width:200px;
+    margin-left:20px;
+    margin-top:5px;
+}
+nav{
+    background-color:#232a37;
+    height:50px;
+    padding:5px;
+    display:block;
+    width:100%;
+  }
+
+  nav ul{
+      float:right;
+      margin-top:10px;
+  }
+
+  nav li{
+      display:inline-block;
+      padding:0 10px;
+  } */
