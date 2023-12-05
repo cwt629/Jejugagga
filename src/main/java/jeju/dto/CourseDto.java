@@ -6,17 +6,14 @@ import lombok.Data;
 
 @Data
 public class CourseDto {
+	private int coursecode;
 	private int usercode;
-	private String id;
-	private String nickname;
-	private String password;
-	private String photo;
 	private String name;
-	private String phone;
-	private String email;
-	private Timestamp birth;
-	private String gender;
-	private String type;
+	private int spendingtime;
+	private String timestandard;
+	private double distance;
+	private String briefcontent;
+	private String longdetail;
 	private Timestamp registereddate;
 
 }

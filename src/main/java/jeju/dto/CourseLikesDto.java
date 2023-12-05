@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class CourseLikesDto {
-	private int courseroutecode;
+	private int courselikecode;
 	private int usercode;
 	private int coursecode;
 	private Timestamp registereddate;
