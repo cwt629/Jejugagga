@@ -46,7 +46,7 @@ nav li {
     padding: 0 10px;
 }
 
-/* »õ µå·Ó´Ù¿î css */
+/* ï¿½ï¿½ ï¿½ï¿½Ó´Ù¿ï¿½ css */
 .toggle-button div {
     display: none;
     position: absolute;
@@ -62,23 +62,23 @@ nav li {
     display: block; /* Makes each <p> take up the full width */
 }
 
-/* µå¶ø´Ù¿î hover */
+/* ï¿½ï¿½ï¿½ï¿½Ù¿ï¿½ hover */
 .toggle-button:hover div {
     display: block;
 }
 
 
-
-/*!* Ãß°¡µÈ ºÎºÐ: Ä¿¹Â´ÏÆ¼ ¾ÆÄÚµð¾ð ½ºÅ¸ÀÏ *!*/
+/* í•œê¸€*/
+/*!* ï¿½ß°ï¿½ï¿½ï¿½ ï¿½Îºï¿½: Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½Úµï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ *!*/
 /*.toggle-button > div a {*/
-/*    color: #000000; !* Ä¿¹Â´ÏÆ¼ ¸Þ´º ±ÛÀÚ»ö ¼³Á¤ *!*/
+/*    color: #000000; !* Ä¿ï¿½Â´ï¿½Æ¼ ï¿½Þ´ï¿½ ï¿½ï¿½ï¿½Ú»ï¿½ ï¿½ï¿½ï¿½ï¿½ *!*/
 /*    text-decoration: none;*/
 /*    display: block;*/
 /*    padding: 5px;*/
 /*}*/
 
 /*.toggle-button > div a:hover {*/
-/*    color: #ffd700; !* ¸¶¿ì½º ¿À¹ö ½Ã ¿¬³ë¶õ»öÀ¸·Î º¯°æ *!*/
+/*    color: #ffd700; !* ï¿½ï¿½ï¿½ì½º ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ *!*/
 /*}*/
 
 /* @charset "EUC-KR";
