@@ -11,4 +11,9 @@ public class MainController {
 	public String main() {
 		return "layout/main_layout";
 	}
+	
+	@GetMapping("/community/nav")
+	public String community() {
+		return "community/communitypage";
+	}
 }

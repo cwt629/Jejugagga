@@ -5,9 +5,16 @@
 	
 <html>
 <head>
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<title>Home</title>
+	<link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
 </head>
+<style>
+   body * {
+       font-family: 'Orbit';
+   }
+  
+</style>
 <body>
 <h1>
 	Hello world!  
