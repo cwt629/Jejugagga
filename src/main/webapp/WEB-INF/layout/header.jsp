@@ -2,10 +2,11 @@
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<c:set var="root" value="<%=request.getContextPath()%>"/>
 <html>
 <head>
-    <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="resources/styles/style.css">
+    <title>menubar</title>
+    <link rel="stylesheet" type="text/css" href="${root}/res/styles/style.css">
 </head>
 <body>
 <header>
