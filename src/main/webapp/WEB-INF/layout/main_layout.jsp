@@ -13,6 +13,5 @@
 <div class="header">
 		<tiles:insertAttribute name="header" />
 </div>
-여기는 메인페이지
 </body>
 </html>

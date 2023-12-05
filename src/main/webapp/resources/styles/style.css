@@ -3,22 +3,35 @@
     margin: 0;
 }
 
-
-
 .main-menu-item {
-    color: #e03939;
+    color: #000000;
+    text-decoration: none;
+}
+
+.main-menu-item img {
+    float: left;
+    margin-right: 10px; /* 조절 가능한 마진 값 */
+}
+
+.main-menu-item:hover {
+    color: #e78e08;
 }
 
 
 .dropdown-item {
     color: #000000;
+    text-decoration: none;
 }
 
 
 .btn {
-    background-color: #2359a5;
+    background-color: #b7a89f;
+    color: #ffffff;
     border-radius: 30px;
     padding: 7px 20px;
+}
+.btn:hover {
+   color: #e78e08;
 }
 
 img {
@@ -29,16 +42,30 @@ img {
 }
 
 nav {
-    background-color: #232a37;
+    margin-top: 30px;
+    background-color: #ffffff;
     height: 50px;
     padding: 5px;
     display: block;
     width: 100%;
+    position: relative;
 }
+
+nav::before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px; /* Adjust the height of the border as needed */
+    background-color: #050505; /* Adjust the color of the border as needed */
+}
+
 
 nav ul {
     float: right;
-    margin-top: 10px;
+    margin-right: 150px;
 }
 
 nav li {
@@ -46,7 +73,7 @@ nav li {
     padding: 0 10px;
 }
 
-/* �� ��Ӵٿ� css */
+/* 드랍다운 css */
 .toggle-button div {
     display: none;
     position: absolute;
@@ -68,53 +95,3 @@ nav li {
 }
 
 
-/* 한글*/
-/*!* �߰��� �κ�: Ŀ�´�Ƽ ���ڵ�� ��Ÿ�� *!*/
-/*.toggle-button > div a {*/
-/*    color: #000000; !* Ŀ�´�Ƽ �޴� ���ڻ� ���� *!*/
-/*    text-decoration: none;*/
-/*    display: block;*/
-/*    padding: 5px;*/
-/*}*/
-
-/*.toggle-button > div a:hover {*/
-/*    color: #ffd700; !* ���콺 ���� �� ����������� ���� *!*/
-/*}*/
-
-/* @charset "EUC-KR";
-*{
-    padding:0px;
-    margin:0px;
-}
-a{
-    text-decoration: none;
-    color:#ffffff;
-}
-.btn{
-  background-color: #2359a5;
-  border-radius:30px;
-  padding:7px 20px;
-}
-img{
-    float:left;
-    width:200px;
-    margin-left:20px;
-    margin-top:5px;
-}
-nav{
-    background-color:#232a37;
-    height:50px;
-    padding:5px;
-    display:block;
-    width:100%;
-  }
-
-  nav ul{
-      float:right;
-      margin-top:10px;
-  }
-
-  nav li{
-      display:inline-block;
-      padding:0 10px;
-  } */
