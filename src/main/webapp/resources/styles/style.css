@@ -1,0 +1,120 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.main-menu-item {
+    color: #e03939;
+}
+
+
+.dropdown-item {
+    color: #000000;
+}
+
+
+.btn {
+    background-color: #2359a5;
+    border-radius: 30px;
+    padding: 7px 20px;
+}
+
+img {
+    float: left;
+    width: 200px;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+nav {
+    background-color: #232a37;
+    height: 50px;
+    padding: 5px;
+    display: block;
+    width: 100%;
+}
+
+nav ul {
+    float: right;
+    margin-top: 10px;
+}
+
+nav li {
+    display: inline-block;
+    padding: 0 10px;
+}
+
+/* �� ��Ӵٿ� css */
+.toggle-button div {
+    display: none;
+    position: absolute;
+    background-color: #ffffff; /* White background for dropdown */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Optional: adds a shadow for some depth */
+    z-index: 1; /* Makes sure the dropdown is on top of other elements */
+}
+
+.toggle-button div p {
+    color: #000000; /* Black text for dropdown items */
+    padding: 12px 16px; /* Spacing inside dropdown items */
+    text-decoration: none;
+    display: block; /* Makes each <p> take up the full width */
+}
+
+/* ����ٿ� hover */
+.toggle-button:hover div {
+    display: block;
+}
+
+
+/* 한글*/
+/*!* �߰��� �κ�: Ŀ�´�Ƽ ���ڵ�� ��Ÿ�� *!*/
+/*.toggle-button > div a {*/
+/*    color: #000000; !* Ŀ�´�Ƽ �޴� ���ڻ� ���� *!*/
+/*    text-decoration: none;*/
+/*    display: block;*/
+/*    padding: 5px;*/
+/*}*/
+
+/*.toggle-button > div a:hover {*/
+/*    color: #ffd700; !* ���콺 ���� �� ����������� ���� *!*/
+/*}*/
+
+/* @charset "EUC-KR";
+*{
+    padding:0px;
+    margin:0px;
+}
+a{
+    text-decoration: none;
+    color:#ffffff;
+}
+.btn{
+  background-color: #2359a5;
+  border-radius:30px;
+  padding:7px 20px;
+}
+img{
+    float:left;
+    width:200px;
+    margin-left:20px;
+    margin-top:5px;
+}
+nav{
+    background-color:#232a37;
+    height:50px;
+    padding:5px;
+    display:block;
+    width:100%;
+  }
+
+  nav ul{
+      float:right;
+      margin-top:10px;
+  }
+
+  nav li{
+      display:inline-block;
+      padding:0 10px;
+  } */
