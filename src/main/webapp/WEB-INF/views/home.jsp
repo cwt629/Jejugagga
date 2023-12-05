@@ -14,7 +14,8 @@
             <li><a href="#">홈</a></li>
             <li><a href="#">정보</a></li>
             <li><a href="#">추천코스</a></li>
-            <li><a href="#">커뮤니티</a></li>
+            <li><a href="#">커뮤니티</a></li>``````````````````````````````````````
+
             <li><a href="#">로그인</a></li>
             <li><a href="#" class = "btn">Sign up</a></li>
         </ul>
