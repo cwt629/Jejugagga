@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="jeju.dto.BoardFreeCommentDto" alias="BoardFreeCommentDto"/>
+		<typeAlias type="jeju.dto.BoardFreeDto" alias="BoardFreeDto"/>
+		<typeAlias type="jeju.dto.BoardInquiryAnswerDto" alias="BoardInquiryAnswerDto"/>
+		<typeAlias type="jeju.dto.BoardInquiryDto" alias="BoardInquiryDto"/>
+		<typeAlias type="jeju.dto.BoardReviewDto" alias="BoardReviewDto"/>
+		<typeAlias type="jeju.dto.BoardReviewPhotoDto" alias="BoardReviewPhotoDto"/>
+		<typeAlias type="jeju.dto.CourseDto" alias="CourseDto"/>
+		<typeAlias type="jeju.dto.CourseLikesDto" alias="CourseLikesDto"/>
+		<typeAlias type="jeju.dto.CourseRouteDto" alias="CourseRouteDto"/>
+		<typeAlias type="jeju.dto.MemberTableDto" alias="MemberTableDto"/>
+		<typeAlias type="jeju.dto.TourDetailDto" alias="TourDetailDto"/>
+		<typeAlias type="jeju.dto.TourDto" alias="TourDto"/>
+		<typeAlias type="jeju.dto.TourLikesDto" alias="TourLikesDto"/>
+
+	</typeAliases>
+</configuration>
