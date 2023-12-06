@@ -19,5 +19,12 @@
 </style>
 </head>
 <body>
+해당 이메일로 임시코드를 보내드릴게요
+<form action="login/findpass" method="post" >
+	<input type="email" name="id">이메일<br>
+	<input type="id" name="pass">아이디<br>
+	<input type="submit" value="임시코드 보내기"> 
+</form>
+<input type="text"> <button type="button">임시코드 확인</button>
 </body>
 </html>
