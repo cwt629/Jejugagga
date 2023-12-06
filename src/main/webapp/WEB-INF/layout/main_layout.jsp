@@ -31,6 +31,5 @@
 		<tiles:insertAttribute name="home"/>
 	</div>
 </div>
-
 </body>
 </html>

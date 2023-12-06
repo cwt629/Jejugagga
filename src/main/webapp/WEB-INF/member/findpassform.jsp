@@ -19,11 +19,12 @@
 </style>
 </head>
 <body>
-<form action="login/check" method="post" >
-	<input type="text" name="id">아이디<br>
-	<input type="password" name="password">패스워드<br>
-	<input type="submit" value="로그인"> 
-	<a href="./login/findpass">비밀번호 찾기</a>
+해당 이메일로 임시코드를 보내드릴게요
+<form action="login/findpass" method="post" >
+	<input type="email" name="id">이메일<br>
+	<input type="id" name="pass">아이디<br>
+	<input type="submit" value="임시코드 보내기"> 
 </form>
+<input type="text"> <button type="button">임시코드 확인</button>
 </body>
 </html>
