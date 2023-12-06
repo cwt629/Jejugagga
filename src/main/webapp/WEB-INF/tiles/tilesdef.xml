@@ -12,7 +12,7 @@
 	<!-- layout 1 -->
 	<definition name="layout1" template="/WEB-INF/layout/main_layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/header.jsp"></put-attribute>
-		<put-attribute name="home" value="/WEB-INF/layout/main_layout.jsp"></put-attribute>
+		<put-attribute name="home" value="/WEB-INF/layout/main.jsp"></put-attribute>
 	</definition>
 	
 	<!-- macro 1 -->

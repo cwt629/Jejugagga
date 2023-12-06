@@ -5,6 +5,7 @@
 <c:set var="root" value="<%=request.getContextPath()%>"/>
 <html>
 <head>
+	<meta charset="UTF-8">
     <title>menubar</title>
     <link rel="stylesheet" type="text/css" href="${root}/res/styles/style.css">
 </head>
@@ -12,7 +13,7 @@
 <header>
     <nav>
         <ul>
-            <li><a href="${root}/main/start" class="main-menu-item">홈</a></li>
+            <li><a href="${root}/main" class="main-menu-item">홈</a></li>
             <li><a href="${root}/tour/list" class="main-menu-item">여행지 정보</a></li>
             <li><a href="${root}/course/list" class="main-menu-item">추천코스</a></li>
             <li class="toggle-button">
