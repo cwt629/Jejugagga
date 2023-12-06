@@ -11,10 +11,10 @@
           href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Permanent+Marker&family=Single+Day&display=swap"
           rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../../resources/startpage/new.css">
-  <link rel="stylesheet" href="../../resources/startpage/new2.css">
-  <link rel="stylesheet" href="../../resources/startpage/loading2.css">
-  <link rel="stylesheet" href="../../resources/startpage/loading.css">
+  <link rel="stylesheet" href="../res/startpage/new.css">
+  <link rel="stylesheet" href="../res/startpage/new2.css">
+  <link rel="stylesheet" href="../res/startpage/loading2.css">
+  <link rel="stylesheet" href="../res/startpage/loading.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
   <style>
@@ -103,7 +103,7 @@
   <!--네온 사인 전광판-->
   <main class="blue" ng-app="app" ng-controller="neon">
     <div class="wrapper">
-      <a href="javascript:void(0);" style="cursor: pointer">
+      <a href="javascript:void(0);" style="cursor: pointer; text-decoration: none;" >
       <h1 class="font1">
         <span ng-bind="user.name()"></span>
         <h2 class="font2"> made by @Bitcamp</h2>
@@ -121,6 +121,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/SplitText.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-<script src="../../resources/startpage/startjs.js"></script>
-<script src="../../resources/startpage/startjs2.js"></script>
+<script src="../res/startpage/startjs.js"></script>
+<script src="../res/startpage/startjs2.js"></script>
 </html>
