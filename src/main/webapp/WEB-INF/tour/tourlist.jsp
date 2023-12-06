@@ -15,11 +15,53 @@
    body * {
        font-family: 'Orbit';
    }
-  
-</style>
- <script>
- </script>
+
+	div.box{
+		width: 500px;
+		height: 160px;
+		padding:10px;
+		border: 2px solid gray;
+		box-shadow: 3px 3px 3px gray;
+		margin-bottom: 10px;
+	}
+</style>	
+<script>
+	$(function() {
+		list();
+	});
+	
+	function list() {
+		$.ajax({
+			type : "get",
+			dataType : "json",
+			url:"./view",
+			success:function(res){
+				let s="";
+				$.each(res, function(idx,item) {
+					s+=
+						`
+						<div class="box">
+							<a href="./content?tourcode=\${item.tourcode}">
+								<h1>\${item.title}</h1>
+							</a>
+						</div>
+						`;
+				});
+				$(".tourlist").html(s);
+			}
+		});
+		
+	}
+
+</script>
 </head>
 <body>
+<h1>
+	투어
+</h1>
+
+<div class="tourlist">
+ 리스트
+</div>
 </body>
 </html>
