@@ -1,0 +1,83 @@
+.page-search {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+@media (max-width: 768px)
+.page-search {
+    width: 20rem;
+    height: 4rem;
+    padding: 0.1rem;
+    border-radius: 2rem;
+}
+
+.page-search {
+    height: 4.5rem;
+    position: relative;
+    background-image: linear-gradient(to right, #ffc000 0%, #ff8d73 100%);
+    border-radius: 2.25rem;
+    padding: 0.2rem;
+}
+
+div {
+    display: block;
+}
+
+.page-search .search-wrap {
+    background: #fff;
+    border-radius: 2.05rem;
+    overflow: hidden;
+    display: flex;
+}
+
+txt {
+    height: 3.8rem;
+    border-radius: 1.9rem;
+    font-size: 1.4rem;
+    padding: 0 1.5rem;
+}
+
+.page-search .txt {
+    flex: 1 1 100%;
+    min-width: 0;
+}
+
+.page-search .sel, .page-search .txt {
+    height: 4.1rem;
+    border: 0;
+    font-size: 1.8rem;
+    padding: 0 2rem;
+    background: transparent;
+    vertical-align: top;
+    outline: none;
+    border-radius: 0;
+    box-shadow: none !important;
+}
+
+@media (max-width: 768px)
+.page-search .btn-search {
+    font-size: 1.6rem;
+    width: 4.5rem;
+}
+
+.page-search .btn-search {
+    flex: 0 0 auto;
+    color: #ff6888;
+    font-size: 2.2rem;
+    width: 5rem;
+}
+
+button {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.blind, legend {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: -9999em;
+}

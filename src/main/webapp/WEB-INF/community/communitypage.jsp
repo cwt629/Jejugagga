@@ -41,9 +41,13 @@
 
         .community-container {
             width: 90%;
-            max-width: 1000px;
+            max-width: 1100px;
             box-sizing: border-box;
             margin: auto;
+            font-family: "Hind", sans-serif;
+            background: #fff;
+            color: #4d5974;
+            min-height: 100vh;
         }
 
         body {
@@ -53,7 +57,6 @@
             background: #fff;
             color: #4d5974;
             display: flex;
-            min-height: 100vh;
             font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
             font-weight: 400;
             font-size: 14px;
@@ -67,10 +70,6 @@
             position: relative;
             margin: 0 auto;
             width: 1080px;
-        }
-
-        div {
-            display: block;
         }
 
         .inner:after {
@@ -163,7 +162,7 @@
 
         #content {
             position: relative;
-            padding-top: 110px;
+            padding-top:110px;
             width: 100%;
         }
 
@@ -212,7 +211,7 @@
     </style>
 </head>
 <body>
-<div class="community-container">
+<div class="community-container" style="margin-top: 0px">
     <div class="no-pd-bm" id="content">
         <ul id="location">
             <li><a href="startPage.jsp">Home</a></li>
