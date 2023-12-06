@@ -15,9 +15,73 @@
    body * {
        font-family: 'Orbit';
    }
-  
+   
+   div.course_innerheader {
+       box-sizing: border-box;
+       margin: 15px 0 0 15px;
+       height: 50px;
+       display: flex;
+       align-items: center;
+   }
+   
+   div.course_innerheader span.course_title {
+       font-size: 30px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+   
+   div.course_innerheader button.course_addbtn {
+       margin: 0 15px;
+       color: white;
+       background-color: #ab6749;
+       border: none;
+       padding: 5px;
+   }
+   
+   div.course_innerheader div.course_search {
+       margin-left: auto;
+       margin-right: 30px;
+   }
+   
+   div.course_innerheader div.course_search div.course_search_input {
+       border: 3px solid #cfa38f;
+       width: 300px;
+       height: 36px;
+       border-radius: 30px;
+   }
+   
+   div.course_innerheader div.course_search div.course_search_input>input[type="text"] {
+       border: none;
+       width: 230px;
+       height: 30px;
+       font-size: 20px;
+       margin-left: 15px;
+   }  
+   
+   div.course_innerheader div.course_search div.course_search_input>input[type="text"]:focus {
+       outline: none;
+   }
+   
+   div.course_innerheader div.course_search div.course_search_input>i.coursesearch {
+       cursor: pointer;
+       color: #cfa38f;
+       margin: 5px;
+       font-size: 20px;
+   }
+   
 </style>
 </head>
 <body>
+	<div class="course_innerheader">
+		<span class="course_title">추천코스</span>
+		<button type="button" class="course_addbtn">코스추가</button>
+		<div class="course_search">
+			<div class="course_search_input">
+				<input type="text" placeholder="코스명으로 찾아보세요">
+				<i class="bi bi-search coursesearch"></i>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
