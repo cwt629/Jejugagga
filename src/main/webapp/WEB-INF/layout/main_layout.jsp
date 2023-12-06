@@ -6,13 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<div class="header">
-		<tiles:insertAttribute name="header" />
-</div>
-여기는 메인페이지
+
 </body>
 </html>
