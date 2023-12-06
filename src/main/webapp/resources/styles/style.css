@@ -28,13 +28,18 @@ div.dropdown p:hover {
 }
 
 
-.btn {
+.signupbtn {
     background-color: #b7a89f;
     color: #ffffff;
     border-radius: 30px;
     padding: 7px 20px;
 }
-.btn:hover {
+
+.signupbtn:hover {
+    color: #e78e08;
+}
+
+li a:hover {
    color: #e78e08;
 }
 

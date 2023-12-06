@@ -26,7 +26,7 @@
                 </div>
             </li>
             <li><a href="${root}/member/login" class="main-menu-item">로그인</a></li>
-            <li><a href="${root}/member/signup" class="btn">Sign up</a></li>
+            <li><a href="${root}/member/signup" class="signupbtn">Sign up</a></li>
         </ul>
     </nav>
 </header>
