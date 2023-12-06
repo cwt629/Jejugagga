@@ -15,7 +15,7 @@ public class TourDto {
 	private double mapy;
 	private String firstimage;
 	private String firstimage2;
-	private int zipcode;
+	private String zipcode;
 	private String overview;
 	private String homepage;
 	private String addr1;

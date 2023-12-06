@@ -14,7 +14,7 @@ public class TourDao {
 	
 	@Autowired
 	private SqlSession session;
-	private String nameSpace="test.dao.TourDao.";
+	private String nameSpace="jeju.dao.TourDao.";
 	
 	//전체갯수
 	public int getTotalCount()

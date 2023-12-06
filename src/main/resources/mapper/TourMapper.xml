@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jeju.dao.TourDao">
+
+	<select id="totalCountOfTour" resultType="int">
+		select count(*) from tour
+	</select>
+	<select id="selectAllTour" resultType="Map">
+		select * from tour order by tourcode desc
+	</select><!-- 리스트 -->
+	<select id="selectOneTour" parameterType="int" resultType="TourDto">
+		select * from tour where tourcode=#{tourcode}
+	</select><!-- 하나만 -->
+	
+		
+</mapper>

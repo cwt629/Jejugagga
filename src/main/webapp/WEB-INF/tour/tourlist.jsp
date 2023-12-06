@@ -34,14 +34,14 @@
 		$.ajax({
 			type : "get",
 			dataType : "json",
-			url:"./view",
+			url:"../view",
 			success:function(res){
 				let s="";
 				$.each(res, function(idx,item) {
 					s+=
 						`
 						<div class="box">
-							<a href="./content?tourcode=\${item.tourcode}">
+							<a href="../content?tourcode=\${item.tourcode}">
 								<h1>\${item.title}</h1>
 							</a>
 						</div>
