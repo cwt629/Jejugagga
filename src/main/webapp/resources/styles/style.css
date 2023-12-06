@@ -23,6 +23,10 @@
     text-decoration: none;
 }
 
+div.dropdown p:hover {
+    color: #e78e08;
+}
+
 
 .btn {
     background-color: #b7a89f;
@@ -89,9 +93,5 @@ nav li {
     display: block; /* Makes each <p> take up the full width */
 }
 
-/* ����ٿ� hover */
-.toggle-button:hover div {
-    display: block;
-}
 
 

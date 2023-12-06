@@ -18,7 +18,7 @@
             <li><a href="${root}/course/list" class="main-menu-item">추천코스</a></li>
             <li class="toggle-button">
                 <a href="${root}/community/nav" class="main-menu-item">커뮤니티</a>
-                <div>
+                <div class="dropdown">
                     <p><a href="${root}/community/inquiry/list" class="dropdown-item">1:1문의</a></p>
                     <p><a href="${root}/community/faq/list" class="dropdown-item">FAQ</a></p>
                     <p><a href="${root}/community/review/list" class="dropdown-item">후기게시판</a></p>
