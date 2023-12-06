@@ -9,7 +9,8 @@ public class MainController {
 	
 	@GetMapping("/main")
 	public String main() {
-		return "layout/home";
+		return "layout/main";
+
 	}
 	
 	@GetMapping("/community/nav")
