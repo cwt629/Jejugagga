@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <c:set var="root" value="<%=request.getContextPath()%>"/>
@@ -10,6 +9,9 @@
     <link rel="stylesheet" type="text/css" href="${root}/res/styles/style.css">
 </head>
 <body>
+<script>
+	console.log("헤더에서는 ${sessionScope.loginok}");
+</script>
 <header>
     <nav>
         <ul>
@@ -30,5 +32,21 @@
         </ul>
     </nav>
 </header>
+
+<div style="width: 200px; position: fixed; right: -45px; top: 30px;">
+	<c:if test="${sessionScope.loginok==null }">
+		<button type="button" class="btn btn-success"
+		style="width: 100px;" onclick="location.href='${root}/member/login'">로그인</button>
+	</c:if>
+	
+	<c:if test="${sessionScope.loginok!=null }">
+			<h5>${sessionScope.nickname}님</h5>&nbsp;&nbsp;
+			<button type="button" class="btn btn-success"
+			style="width: 100px;" id="btnlogout" onclick="location.href='${root}/member/logout'">로그아웃</button>
+	</c:if>
+
+</div>
+
+
 </body>
 </html>
