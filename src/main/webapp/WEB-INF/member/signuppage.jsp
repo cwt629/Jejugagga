@@ -15,10 +15,70 @@
    body * {
        font-family: 'Orbit';
    }
-  
 </style>
+<script>
+    $(document).ready(function() {
+        $("#signupForm").submit(function() {
+            return validatePassword();
+        });
+
+        $("#password, #confirmPass").on("keyup", function() {
+            validatePassword();
+        });
+
+        function validatePassword() {
+            var password = $("#password").val();
+            var confirmPassword = $("#confirmPass").val();
+
+            // 비밀번호 일치 여부 확인
+            if (password !== confirmPassword) {
+                $("#passwordMismatch").show();
+                return false;
+            } else {
+                $("#passwordMismatch").hide();
+            }
+
+            // 강력한 비밀번호 조건 확인
+            // 8자리 이상 : .{8,} 특수문자 : (?=.*?[#?!@$%^&*-]) 대문자(?=.*[A-Z]) 정규식 문법 참고했음
+            var passwordRegex = /^(?=.*[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+            if (!passwordRegex.test(password)) {
+                $("#passwordStrength").show();
+                return false;
+            } else {
+                $("#passwordStrength").hide();
+            }
+
+            return true;
+        }
+    });
+</script>
 </head>
 <body>
-   
+<form id="signupForm" action="/jeju/member/signup/submit" method="post">
+    <input type="text" name="name" required>이름<br>
+    <input type="datetime" name="birth" required>생년월일 0000-00-00 00:00:00<br>
+    <input type="text" name="id" required>아이디<br>
+    <input type="password" name="password" id="password" required>비밀번호<br>
+    <input type="password" name="confirmPass" id="confirmPass" required>비밀번호 확인<br>
+       성별 <select name="gender" id="gender">
+    		<option value="남자">남자</option>
+    		<option value="여자">여자</option>
+  		</select>
+  <br>
+    <input type="email" name="email" required>이메일<br>
+    <input type="text" name="nickname" required>닉네임<br>
+    <input type="text" name="phone" required>핸드폰 번호<br>
+    <input type="submit" value="회원가입"> 
+
+    <!-- 비번 불일치 알림-->
+    <div id="passwordMismatch" style="color: red; display: none;">
+        비밀번호가 일치하지 않습니다.
+    </div>
+
+    <!-- 비번 조건 -->
+    <div id="passwordStrength" style="color: orange; display: none;">
+        비밀번호는 8자이상, 숫자와 특수문자가 포함되어야해요~
+    </div>
+</form>
 </body>
 </html>
