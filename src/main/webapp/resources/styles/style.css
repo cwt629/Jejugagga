@@ -1,0 +1,97 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.main-menu-item {
+    color: #000000;
+    text-decoration: none;
+}
+
+.main-menu-item img {
+    float: left;
+    margin-right: 10px; /* 조절 가능한 마진 값 */
+}
+
+.main-menu-item:hover {
+    color: #e78e08;
+}
+
+
+.dropdown-item {
+    color: #000000;
+    text-decoration: none;
+}
+
+
+.btn {
+    background-color: #b7a89f;
+    color: #ffffff;
+    border-radius: 30px;
+    padding: 7px 20px;
+}
+.btn:hover {
+   color: #e78e08;
+}
+
+img {
+    float: left;
+    width: 200px;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+nav {
+    margin-top: 30px;
+    background-color: #ffffff;
+    height: 50px;
+    padding: 5px;
+    display: block;
+    width: 100%;
+    position: relative;
+}
+
+nav::before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px; /* Adjust the height of the border as needed */
+    background-color: #050505; /* Adjust the color of the border as needed */
+}
+
+
+nav ul {
+    float: right;
+    margin-right: 150px;
+}
+
+nav li {
+    display: inline-block;
+    padding: 0 10px;
+}
+
+/* 드랍다운 css */
+.toggle-button div {
+    display: none;
+    position: absolute;
+    background-color: #ffffff; /* White background for dropdown */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Optional: adds a shadow for some depth */
+    z-index: 1; /* Makes sure the dropdown is on top of other elements */
+}
+
+.toggle-button div p {
+    color: #000000; /* Black text for dropdown items */
+    padding: 12px 16px; /* Spacing inside dropdown items */
+    text-decoration: none;
+    display: block; /* Makes each <p> take up the full width */
+}
+
+/* ����ٿ� hover */
+.toggle-button:hover div {
+    display: block;
+}
+
+
