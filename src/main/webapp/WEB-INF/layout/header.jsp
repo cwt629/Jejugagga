@@ -9,9 +9,6 @@
     <link rel="stylesheet" type="text/css" href="${root}/res/styles/style.css">
 </head>
 <body>
-<script>
-	console.log("헤더에서는 ${sessionScope.loginok}");
-</script>
 <header>
     <nav>
         <ul>

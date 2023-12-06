@@ -19,10 +19,5 @@
 </style>
 </head>
 <body>
-<script>
-	console.log("${sessionScope.loginok}");
-	console.log("${sessionScope.myname}");
-	
-</script>
 </body>
 </html>
