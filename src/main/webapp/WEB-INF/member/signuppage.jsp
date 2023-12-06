@@ -68,8 +68,8 @@
     <input type="email" name="email" required>이메일<br>
     <input type="text" name="nickname" required>닉네임<br>
     <input type="text" name="phone" required>핸드폰 번호<br>
-    <input type="submit" value="회원가입"> 
-
+    <input type="submit" value="회원가입">
+</form>
     <!-- 비번 불일치 알림-->
     <div id="passwordMismatch" style="color: red; display: none;">
         비밀번호가 일치하지 않습니다.
@@ -79,6 +79,6 @@
     <div id="passwordStrength" style="color: orange; display: none;">
         비밀번호는 8자이상, 숫자와 특수문자가 포함되어야해요~
     </div>
-</form>
+
 </body>
 </html>
