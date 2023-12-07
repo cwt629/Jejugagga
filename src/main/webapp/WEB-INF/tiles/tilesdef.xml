@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+   	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<!-- start page -->
+	<definition name="start" template="/WEB-INF/views/startPage.jsp">
+		<put-attribute name="start" value="/WEB-INF/views/startPage.jsp"></put-attribute> <!-- 홈은 뷰의 홈.jsp로 설정 -->
+	</definition>
+	
+	
+	<!-- layout 1 -->
+	<definition name="layout1" template="/WEB-INF/layout/main_layout.jsp">
+		<put-attribute name="home" value="/WEB-INF/layout/main.jsp"></put-attribute>
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp"></put-attribute>
+	</definition>
+	
+	<!-- macro 1 -->
+	<definition name="*/*" extends="layout1">
+		<put-attribute name="home" value="/WEB-INF/{1}/{2}.jsp"/>
+	</definition>
+	
+	<!-- macro 2 -->
+	<definition name="*/*/*" extends="layout1">
+		<put-attribute name="home" value="/WEB-INF/{1}/{2}/{3}.jsp"/>
+	</definition>
+	
+
+</tiles-definitions>
