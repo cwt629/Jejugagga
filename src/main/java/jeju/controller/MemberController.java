@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class MemberController {
 		return "member/findpassform";
 	}
 	@PostMapping("/member/login/check")
-	public String check(@RequestParam String id,@RequestParam String password, HttpSession session) 
+	public String check(@RequestParam String id,@RequestParam String password, HttpSession session, @RequestParam boolean saveidvalue) 
 	{
 		Map<String, Object> map=new HashMap<String, Object>();
 		// ��й�ȣ �ؽ� ����
@@ -47,6 +48,7 @@ public class MemberController {
 			session.setMaxInactiveInterval(60*60*6);
 			//�α��� ������ ���ǿ� ������ �����
 			session.setAttribute("loginok","yes");
+			session.setAttribute("saveid",saveidvalue?"yes":"no");
 			session.setAttribute("id",id);
 			
 			//���̵� �ش��ϴ� �شϿ�(����) ���
@@ -64,6 +66,7 @@ public class MemberController {
 		}else {
 			map.put("success", false); //�α��� ���н�	
 		}
+				
 		return 	"redirect:../../main";
 	}
 	
@@ -84,6 +87,15 @@ public class MemberController {
         dao.insertMember(dto);
 		
 		return "redirect/main";
+	}
+	
+	@GetMapping("/member/idcheck")
+	@ResponseBody public Map<String, Integer> getIdCount(@RequestParam String id)
+	{
+		int count=dao.searchIdCount(id);
+		Map<String, Integer> map=new HashMap<String, Integer>();
+		map.put("count", count);
+		return map;
 	}
 	
 }

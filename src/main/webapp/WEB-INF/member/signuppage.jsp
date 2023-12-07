@@ -15,6 +15,65 @@
    body * {
        font-family: 'Orbit';
    }
+   	.signupdiv {
+		width: 400px;
+		height: 350px;
+		padding: 40px;
+		position: absolute;
+	    margin: 0 auto;
+	    left: 0;
+	    right: 0px;
+	    TOP: 13%;
+		
+	}
+	
+	#signupForm {
+		margin-left: 0px;
+	}
+	
+	#signupForm > input {
+		width: 300px;
+		height: 48px;
+		padding: 0 10px;
+		margin-bottom: 16px;
+		border-radius: 6px;
+		background-color: #F8F8F8;
+	}
+	
+	#signupForm > button {
+		width: 70px;
+		height: 40px;
+		border-radius: 6px;
+		background-color: #EEB182;
+		color: #fff;
+		font-size: 16px;
+	}
+	
+	#signupForm > input[type="submit"] {
+		color: #fff;
+		font-size: 16px;
+		background-color: #EEB182;
+		margin-top: 20px;
+	}
+	
+	#signupForm > input[type="checkbox"] {
+		display: none;
+	}
+	
+	
+	#signupForm input[type="checkbox"]+label {
+		cursor: pointer;
+		padding-left: 26px;
+		background-image: url("checkbox.png");
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
+	
+	#signupForm input[type="checkbox"]:checked+label {
+		background-image: url("checkbox-active.png");
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
 </style>
 <script>
     $(document).ready(function() {
@@ -52,33 +111,82 @@
         }
     });
 </script>
+<c:set var="root" value="<%=request.getContextPath() %>"/>
+<script type="text/javascript">
+	let idok=false;
+	$(function(){
+		 //중복체크 버튼 이벤트
+		$(".idcheck").click(function(){
+			//입력한 아이디
+			let id=$("#id").val();
+			$.ajax({
+				type:"get",
+				dataType:"json",
+				url:"./idcheck",
+				data:{"id":id},
+				success:function(res){
+					if(res.count!=0){
+						alert("이미 가입된 아이디입니다! 다른 아이디를 사용해주세요");
+						idok=false;
+						$("#id").val("");
+					}else{
+						alert("사용이 가능한 아이디 입니다");
+						idok=true;
+					}
+				}
+			});	
+		});
+		
+		//아이디 입력 시 발생하는 이벤트
+		$("#id").keyup(function(){
+			idok=false;
+		});
+		
+	});//close fucntion
+	
+	function check(){
+		if(!idok){
+			alert("중복체크 버튼을 눌러주세요!!!!!!!!!!!!!!!!!!!!");
+			return false;
+		}		
+	}
+</script>
 </head>
+<c:set var="root" value="<%=request.getContextPath() %>"/>
 <body>
-<form id="signupForm" action="/jeju/member/signup/submit" method="post">
-    <input type="text" name="name" required>이름<br>
-    <input type="datetime" name="birth" required>생년월일 0000-00-00 00:00:00<br>
-    <input type="text" name="id" required>아이디<br>
-    <input type="password" name="password" id="password" required>비밀번호<br>
-    <input type="password" name="confirmPass" id="confirmPass" required>비밀번호 확인<br>
-       성별 <select name="gender" id="gender">
-    		<option value="남자">남자</option>
-    		<option value="여자">여자</option>
-  		</select>
-  <br>
-    <input type="email" name="email" required>이메일<br>
-    <input type="text" name="nickname" required>닉네임<br>
-    <input type="text" name="phone" required>핸드폰 번호<br>
-    <input type="submit" value="회원가입">
-</form>
-    <!-- 비번 불일치 알림-->
-    <div id="passwordMismatch" style="color: red; display: none;">
-        비밀번호가 일치하지 않습니다.
-    </div>
-
-    <!-- 비번 조건 -->
-    <div id="passwordStrength" style="color: orange; display: none;">
-        비밀번호는 8자이상, 숫자와 특수문자가 포함되어야해요~
-    </div>
-
+	<div class="signupdiv">
+		<img alt="logo" src="${root }/res/photo/jejuhome.png" style="margin-left: 55px; margin-right: 65px;">
+		<div>
+			<form id="signupForm" action="${root }/member/signup/submit" method="post" onsubmit="return check()">
+			    이름<br><input type="text" name="name" required>
+			    <br>
+			    생년월일 0000-00-00 00:00:00<br>
+			    <input type="datetime" name="birth" required><br>
+			    아이디<br><input type="text" name="id" id="id" required>
+			    <button type="button" class="idcheck">중복확인</button><br>
+			    비밀번호 <br><input type="password" name="password" id="password" required><br>
+			    비밀번호 확인<br><input type="password" name="confirmPass" id="confirmPass" required><br>
+			      	 성별<select name="gender" id="gender">
+			    		<option value="남자">남자</option>
+			    		<option value="여자">여자</option>
+			  		</select>
+			  <br>
+			    이메일<br><input type="email" name="email" required><br>
+			    닉네임<br><input type="text" name="nickname" required><br>
+			    핸드폰번호 <br><input type="text" name="phone" required><br>
+			    <input type="submit" value="회원가입"> 
+			
+			    <!-- 비번 불일치 알림-->
+			    <div id="passwordMismatch" style="color: red; display: none;">
+			        비밀번호가 일치하지 않습니다.
+			    </div>
+			
+			    <!-- 비번 조건 -->
+			    <div id="passwordStrength" style="color: orange; display: none;">
+			        비밀번호는 8자이상, 숫자와 특수문자가 포함되어야해요~
+			    </div>
+			</form>
+		</div>
+	</div>
 </body>
 </html>
