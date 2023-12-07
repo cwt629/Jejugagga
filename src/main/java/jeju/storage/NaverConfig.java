@@ -15,9 +15,9 @@ public class NaverConfig {
 	@Value("kr-standard")
 	private String regionName;
 	
-	@Value("KBWbeoPeKDJhL2RLATtd") //¿øÅÂÇü Å° KBWbeoPeKDJhL2RLATtd 
+	@Value("KBWbeoPeKDJhL2RLATtd") //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å° KBWbeoPeKDJhL2RLATtd 
 	private String accessKey;
-	
-	@Value("407hL347PDkJvmhw5olS0zH481ClFmArm2gKChPd") //¿øÅÂÇü Å°  407hL347PDkJvmhw5olS0zH481ClFmArm2gKChPd
+
+	@Value("407hL347PDkJvmhw5olS0zH481ClFmArm2gKChPd") //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å°  407hL347PDkJvmhw5olS0zH481ClFmArm2gKChPd
 	private String secretKey;
 }
