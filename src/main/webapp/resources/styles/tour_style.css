@@ -304,7 +304,7 @@
 	margin-bottom: 1rem;
 }
 .map-info .info-badge .space-badge {
-	font-family: inherit;
+	
 	min-width: 0;
 }
 .map-info .info-title {
@@ -327,7 +327,7 @@
 	position: absolute;
 	right: 0;
 	top: 50%;
-	font-family: "Font Awesome 5 Pro";
+	
 	transform: translateY(-50%);
 	color: #dd3256;
 	font-size: 120%;
@@ -546,7 +546,7 @@
 	margin-bottom: 1rem;
 }
 .map-popup .info-badge .space-badge {
-	font-family: inherit;
+	
 	min-width: 0;
 }
 .map-popup .info-title {
@@ -569,7 +569,7 @@
 	position: absolute;
 	right: 0;
 	top: 50%;
-	font-family: "Font Awesome 5 Pro";
+	
 	transform: translateY(-50%);
 	color: #dd3256;
 	font-size: 120%;
@@ -885,7 +885,7 @@
 	width: 100%;
 	height: 5rem;
 	padding: 0 6rem 0 3rem;
-	font-family: "S-CoreDream", sans-serif;
+	
 	font-size: 1.5rem;
 	font-weight: 600;
 	text-align: left;
@@ -909,7 +909,7 @@
 	top: 50%;
 	right: 4rem;
 	margin-top: -0.7rem;
-	font-family: "Font Awesome 5 Pro";
+	
 	color: #93989f;
 	font-size: 1.5rem;
 	font-weight: bold;
@@ -943,7 +943,7 @@
 	position: relative;
 	color: #494949;
 	font-size: 1.2rem;
-	font-family: "S-CoreDream", sans-serif;
+	
 	font-weight: 500;
 }
 
@@ -2156,7 +2156,7 @@
 
 .local-content .text-box .title::after {
 	content: "\f061";
-	font-family: "Font Awesome 5 Pro";
+	
 	font-size: 2rem;
 	font-weight: 300;
 	line-height: 1;
@@ -3316,7 +3316,7 @@
 }
 
 .banner-number-pagination.swiper-pagination-fraction {
-	font-family: "S-CoreDream";
+	
 	font-size: 2.8rem;
 	color: #fff;
 	letter-spacing: 0.01em;
@@ -3408,7 +3408,7 @@
 
 .login-section .login-title {
 	font-size: 4.2rem;
-	font-family: "EliceDigitalBaeum";
+	
 	font-weight: 700;
 	position: relative;
 }
@@ -3494,7 +3494,7 @@
 }
 
 .login-section .bottom-content h3 {
-	font-family: "EliceDigitalBaeum";
+	
 	font-size: 3.2rem;
 	font-weight: 700;
 	letter-spacing: -0.05em;
@@ -3611,7 +3611,7 @@
 
 .login-set .title-box .contents-title {
 	display: inline-block;
-	font-family: "EliceDigitalBaeum";
+	
 	font-size: 4.2rem;
 	font-weight: 700;
 	letter-spacing: -0.05em;
@@ -3937,7 +3937,7 @@
 }
 
 .sub-title-box .title {
-	font-family: "EliceDigitalBaeum";
+	
 	font-size: 7rem;
 	font-weight: 700;
 	color: #fff;
@@ -4082,7 +4082,7 @@
 
 #sub_visual .sub-sharing .heart-btn .number {
 	margin-left: 1rem;
-	font-family: "S-CoreDream";
+	
 	font-size: 1.6rem;
 }
 
@@ -4180,7 +4180,7 @@
 
 .share-wrap .share-list .btn-url::before {
 	content: "\f0c1";
-	font-family: "Font Awesome 5 Pro";
+	
 	font-weight: bold;
 	font-size: 18px;
 	color: #717171;
@@ -5070,7 +5070,7 @@
 
 /* 이벤트 > 선물 받을 정보 작성 */
 .gift-title {
-	font-family: "EliceDigitalBaeum", sans-serif;
+	
 	text-align: center;
 	font-weight: bold;
 	color: #503639;
@@ -5440,7 +5440,7 @@
 }
 /* .grid-list .item-address::before {
 	content: "\f3c5";
-	font-family: "Font Awesome 5 Pro";
+	
 	font-weight: bold;
 	position: absolute;
 	top: 0;
@@ -5494,7 +5494,7 @@
 .grid-list .item-meta span {
 	color: #717171;
 	font-size: 1.6rem;
-	font-family: "S-CoreDream", sans-serif;
+	
 	margin-left: 0.8rem;
 }
 
@@ -5516,7 +5516,7 @@
 
 .grid-list .item-review::after {
 	content: "\f303";
-	font-family: "Font Awesome 5 Pro";
+	
 	font-size: 2rem;
 	font-weight: 700;
 	margin-left: 1.2rem;
@@ -6354,12 +6354,12 @@
 /* F1 플랫폼 소개 */
 /* 공통 */
 .platform-title {
-	font-family: "IropkeBatangM";
+	
 	font-size: 6.4rem;
 	font-weight: 600;
 }
 .platform-sub-title {
-	font-family: "LucidaBrightRegular";
+	
 	font-size: 1.9rem;
 	font-weight: 400;
 	font-style: italic;
@@ -6464,7 +6464,7 @@
 }
 
 .about-section .about-title {
-	font-family: "LucidaBrightRegular";
+	
 	font-size: 3.6rem;
 	font-weight: 600;
 	line-height: 1.3;
@@ -7153,7 +7153,7 @@
 .cls-36,
 .cls-38 {
 	fill: #a3959a;
-	font-family: AdobeMyungjoStd-Medium-KSCpc-EUC-H, Adobe Myungjo Std;
+	
 }
 .cls-27 {
 	letter-spacing: -0.04em;
