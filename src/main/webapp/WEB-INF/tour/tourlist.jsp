@@ -112,7 +112,7 @@
 				<div class="head-option">
 					<div class="page-search">
 						<div class="search-wrap">
-							<input placeholder="공간명으로 찾아보세요" class="txt">
+							<input placeholder="여행지명으로 찾아보세요" class="txt">
 							<button type="button" class="btn-search">
 								<i class="bi bi-search"></i>
 								<span class="blind">검색</span>
@@ -121,7 +121,7 @@
 					</div>
 					<div class="option-wrap">
 						<button type="button" class="btn-filter">
-							<i class="bi bi-funnel"></i>
+							<i class="bi bi-sliders"></i>
 						</button>
 						
 					</div>
@@ -136,7 +136,30 @@
 				</div>
 			</div>
 		</div>
+		<div style="text-align: center;">
+			<!-- 이전 -->
+			<c:if test="${startPage>1 }">
+				<a href="./list?currentPage=${startPage-1 }">이전</a>
+			</c:if>
+			&nbsp;
+			<c:forEach var="pno" begin="${startPage }" end="${endPage }">
+				<a href="./list?currentPage=${pno }" style="cursor: pointer;">
+					<c:if test="${pno==currentPage }">
+						<span style="color: tomato;">${pno }</span>
+					</c:if>
+					<c:if test="${pno!=currentPage }">
+						<span style="color: gray;">${pno }</span>
+					</c:if>
+				</a>
+				&nbsp;	
+			</c:forEach>
+			<!-- 다음 -->
+			<c:if test="${endPage<totalPage }">
+				<a href="./list?currentPage=${endPage+1 }">다음</a>
+			</c:if>
+		</div>
 	</div>
-	x`
+	
+	
 </body>
 </html>

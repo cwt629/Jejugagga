@@ -2,6 +2,7 @@ package jeju.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,15 @@ public class TourDao {
 	}
 	
 	//리스트
-	public List<TourDto> getAllTour()
+	public List<TourDto> getAllTour(int start, int perpage)
 	{
-		return session.selectList(nameSpace+"selectAllTour");
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("start", start);
+		map.put("perpage", perpage);
+		return session.selectList(nameSpace+"selectPagingOfTour",map);
 	}
+	
+	
 	
 	//내용
 	public TourDto getData(int tourcode)
