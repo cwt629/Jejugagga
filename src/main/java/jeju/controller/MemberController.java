@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jeju.dao.MemberTableDao;
 import jeju.dto.MemberTableDto;
@@ -36,36 +37,38 @@ public class MemberController {
 		return "member/findpassform";
 	}
 	@PostMapping("/member/login/check")
-	public String check(@RequestParam String id,@RequestParam String password, HttpSession session) 
+	public String check(@RequestParam String id,@RequestParam String password, HttpSession session, @RequestParam boolean saveidvalue) 
 	{
 		Map<String, Object> map=new HashMap<String, Object>();
-		// ºñ¹Ð¹øÈ£ ÇØ½Ì Àû¿ë
+		// ï¿½ï¿½Ð¹ï¿½È£ ï¿½Ø½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		password = HashService.hashPassword(password);
         
 		boolean bLogin=dao.isLoginCheck(id, password);
 		if(bLogin)
 		{
-			//¤µ¼¼¼Ç À¯Áö½Ã°£
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½
 			session.setMaxInactiveInterval(60*60*6);
-			//·Î±×ÀÎ ¼º°ø½Ã ¼¼¼Ç¿¡ ÀúÀåÇÒ ³»¿ëµé
+			//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 			session.setAttribute("loginok","yes");
+			session.setAttribute("saveid",saveidvalue?"yes":"no");
 			session.setAttribute("id",id);
 			
-			//¾ÆÀÌµð¿¡ ÇØ´çÇÏ´Â ³Ø´Ï¿¥(º°¸í) ¾ò±â
+			//ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½Ø´Ï¿ï¿½(ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½
 			String nickname=dao.getData(id).getNickname();
 			session.setAttribute("nickname", nickname);
-			//¾ÆÀÌµð¿¡ ÇØ´çÇÏ´Â ÀÌ¸§ ¾ò±â
+			//ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½
 			int usercode=dao.getData(id).getUsercode();
 			session.setAttribute("usercode", usercode);
-			//¾ÆÀÌµð¿¡ ÇØ´çÇÏ´Â »çÁø ¾ò±â
+			//ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			String myphoto=dao.getData(id).getPhoto();
 			session.setAttribute("myphoto", myphoto);
 		
 			
 			map.put("success", true);
 		}else {
-			map.put("success", false); //·Î±×ÀÎ ½ÇÆÐ½Ã	
+			map.put("success", false); //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ð½ï¿½	
 		}
+				
 		return 	"redirect:../../main";
 	}
 	
@@ -80,12 +83,21 @@ public class MemberController {
 	@PostMapping("/member/signup/submit")
 	public String signin(@ModelAttribute MemberTableDto dto)
 	{
-		 // ºñ¹Ð¹øÈ£ ÇØ½Ì Àû¿ë
+		 // ï¿½ï¿½Ð¹ï¿½È£ ï¿½Ø½ï¿½ ï¿½ï¿½ï¿½ï¿½
         HashService.hashAndSetPassword(dto, dto.getPassword());
 
         dao.insertMember(dto);
 		
 		return "redirect:../../main";
+	}
+	
+	@GetMapping("/member/idcheck")
+	@ResponseBody public Map<String, Integer> getIdCount(@RequestParam String id)
+	{
+		int count=dao.searchIdCount(id);
+		Map<String, Integer> map=new HashMap<String, Integer>();
+		map.put("count", count);
+		return map;
 	}
 	
 }
