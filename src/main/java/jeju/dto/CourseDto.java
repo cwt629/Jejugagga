@@ -15,5 +15,5 @@ public class CourseDto {
 	private String briefcontent;
 	private String longdetail;
 	private Timestamp registereddate;
-
+	private int readcount;
 }
