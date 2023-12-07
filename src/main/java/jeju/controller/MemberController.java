@@ -38,33 +38,33 @@ public class MemberController {
 	public String check(@RequestParam String id,@RequestParam String password, HttpSession session, @RequestParam boolean saveidvalue) 
 	{
 		Map<String, Object> map=new HashMap<String, Object>();
-		// ��й�ȣ �ؽ� ����
+		// 패스워드 해싱
 		password = HashService.hashPassword(password);
         
 		boolean bLogin=dao.isLoginCheck(id, password);
 		if(bLogin)
 		{
-			//������ �����ð�
+			// 세션의 저장 기한 설정
 			session.setMaxInactiveInterval(60*60*6);
-			//�α��� ������ ���ǿ� ������ �����
+			// 세션에 정보 저장
 			session.setAttribute("loginok","yes");
 			session.setAttribute("saveid",saveidvalue?"yes":"no");
 			session.setAttribute("id",id);
 			
-			//���̵� �ش��ϴ� �شϿ�(����) ���
+			// 받은 아이디에 대한 닉네임 받아오기
 			String nickname=dao.getData(id).getNickname();
 			session.setAttribute("nickname", nickname);
-			//���̵� �ش��ϴ� �̸� ���
+			// 받은 아이디에 대한 유저코드 받아오기
 			int usercode=dao.getData(id).getUsercode();
 			session.setAttribute("usercode", usercode);
-			//���̵� �ش��ϴ� ���� ���
+			// 받은 아이디에 대한 사진 URL 받아오기
 			String myphoto=dao.getData(id).getPhoto();
 			session.setAttribute("myphoto", myphoto);
 		
 			
 			map.put("success", true);
 		}else {
-			map.put("success", false); //�α��� ���н�	
+			map.put("success", false); // 실패 시 false로 넘겨줌	
 		}
 				
 		return 	"redirect:../../main";
@@ -81,12 +81,12 @@ public class MemberController {
 	@PostMapping("/member/signup/submit")
 	public String signin(@ModelAttribute MemberTableDto dto)
 	{
-		 // ��й�ȣ �ؽ� ����
+		 // 비밀번호 해싱
         HashService.hashAndSetPassword(dto, dto.getPassword());
 
         dao.insertMember(dto);
 		
-		return "redirect/main";
+		return "redirect:../../main";
 	}
 	
 	@GetMapping("/member/idcheck")
