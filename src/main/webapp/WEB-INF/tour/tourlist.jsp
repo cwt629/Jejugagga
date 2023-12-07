@@ -24,6 +24,21 @@
 <style>
    body * {
        font-family: 'Orbit';
+       word-break: keep-all;
+   }
+   
+   .item-title a{
+   		color: inherit;
+		background-color: transparent;
+		-webkit-text-decoration-skip: objects;
+		text-decoration: none;
+		
+   }
+   .container button{
+   	    padding: 0;
+	    border: 0;
+	    background-color: transparent;
+	    cursor: pointer;
    }
 </style>	
 <script>
@@ -78,7 +93,9 @@
 								<div class="item-title">
 									<a href="./content?tourcode=\${item.tourcode}"><b>\${item.title}</b></a>
 								</div><br>
-								<div class="item-address" style="font-size:15px;">\${item.addr1}</div>
+								<div class="item-address" style="font-size:15px;">
+									<i class="bi bi-geo-alt-fill"></i>
+								\${item.addr1}</div>
 								<div class="item-meta">
 									<div class="meta-wrap">
 										<input type="checkbox" id="scrap0" class="chk-scrap"> 
@@ -115,7 +132,7 @@
 							<input placeholder="여행지명으로 찾아보세요" class="txt">
 							<button type="button" class="btn-search">
 								<i class="bi bi-search"></i>
-								<span class="blind">검색</span>
+								
 							</button>
 						</div>
 					</div>
