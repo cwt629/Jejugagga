@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="root" value="<%=request.getContextPath()%>"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,10 +13,10 @@
             href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Permanent+Marker&family=Single+Day&display=swap"
             rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/res/startpage/new.css">
-    <link rel="stylesheet" href="/res/startpage/new2.css">
-    <link rel="stylesheet" href="/res/startpage/loading2.css">
-    <link rel="stylesheet" href="/res/startpage/loading.css">
+    <link rel="stylesheet" href="${root}/res/startpage/new.css">
+    <link rel="stylesheet" href="${root}/res/startpage/new2.css">
+    <link rel="stylesheet" href="${root}/res/startpage/loading2.css">
+    <link rel="stylesheet" href="${root}/res/startpage/loading.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 
     <style>
@@ -124,9 +125,13 @@
     Typekit.load({async: true});
 } catch (e) {
 }</script>
+<script>
+    // 서버사이드의 루트 경로를 JavaScript 변수로 설정
+    var rootPath = '<c:url value="/" />';
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/SplitText.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-<script src="/res/startpage/startjs.js"></script>
-<script src="/res/startpage/startjs2.js"></script>
+<script src="${root}/res/startpage/startjs.js"></script>
+<script src="${root}/res/startpage/startjs2.js"></script>
 </html>

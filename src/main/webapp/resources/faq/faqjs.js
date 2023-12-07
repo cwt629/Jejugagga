@@ -1,9 +1,10 @@
+// rootPath 쓸수있음
 const pages = {
     '회원/가입-수정': `
         <div class="accordion">
     <div class="accordion-item">
     <button id="accordion-button-1" aria-expanded="false">
-        <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+        <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
     <span class="accordion-title" style="margin-left: 0px;">아이디를 분실했습니다.</span>
 <span class="icon" aria-hidden="true"></span>
 </button>
@@ -13,7 +14,7 @@ const pages = {
 </div>
 <div class="accordion-item">
     <button id="accordion-button-2" aria-expanded="false">
-        <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+        <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
             <span class="accordion-title" style="margin-left: 0px;">비밀번호를 분실했습니다</span>
             <span class="icon" aria-hidden="true"></span>
     </button>
@@ -24,7 +25,7 @@ const pages = {
 
 <div class="accordion-item">
     <button id="accordion-button-3" aria-expanded="false">
-        <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+        <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
             <span class="accordion-title" style="margin-left: 0px;">회원 탈퇴는 어떻게 하나요?</span>
             <span class="icon" aria-hidden="true"></span>
     </button>
@@ -35,7 +36,7 @@ const pages = {
 </div>
 <div class="accordion-item">
     <button id="accordion-button-4" aria-expanded="false">
-        <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+        <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
             <span class="accordion-title" style="margin-left: 0px;">비밀번호 변경은 어떻게 하나요?</span>
             <span class="icon" aria-hidden="true"></span>
     </button>
@@ -46,7 +47,7 @@ const pages = {
 </div>
 <div class="accordion-item">
     <button id="accordion-button0" aria-expanded="false">
-        <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+        <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
             <span class="accordion-title" style="margin-left: 0px;">회원정보 수정은 어떻게 하나요?</span>
             <span class="icon" aria-hidden="true"></span>
     </button>
@@ -59,7 +60,7 @@ const pages = {
 <div class="accordion">
     <div class="accordion-item">
         <button id="accordion-button-6" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">커뮤니티 이용 규정</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -70,7 +71,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-7" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">아이디 중복 사용이 가능한가요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -82,7 +83,7 @@ const pages = {
 
     <div class="accordion-item">
         <button id="accordion-button-8" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">요금 규정이 어떻게 되나요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -93,7 +94,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-9" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">저작권 규정</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -106,7 +107,7 @@ const pages = {
 <div class="accordion">
     <div class="accordion-item">
         <button id="accordion-button0" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">여행 정보는 광고인가요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -116,7 +117,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-11" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">여행 정보 추가 건의는 어디서 하나요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -127,7 +128,7 @@ const pages = {
 
     <div class="accordion-item">
         <button id="accordion-button-12" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">후기 게시판 사진에 대해서</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -138,7 +139,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-13" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">내가 등록한 코스정보는 어디서 확인하나요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -148,7 +149,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-14" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">목적지에 가고있는 사람의 수 정보는 알수없나요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -161,7 +162,7 @@ const pages = {
 <div class="accordion">
     <div class="accordion-item">
         <button id="accordion-button-15" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">명의 도용</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -172,7 +173,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-16" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">요금 규정이 어떻게 되나요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -184,7 +185,7 @@ const pages = {
 
     <div class="accordion-item">
         <button id="accordion-button-17" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">여행 정보는 광고인가요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -198,7 +199,7 @@ const pages = {
 <div class="accordion">
     <div class="accordion-item">
         <button id="accordion-button-18" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">아이디를 분실했습니다.</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -208,7 +209,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-19" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">비밀번호를 분실했습니다</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -218,7 +219,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-20" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">회원 탈퇴는 어떻게 하나요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -229,7 +230,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-21" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">비밀번호 변경은 어떻게 하나요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -240,7 +241,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-22" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">회원정보 수정은 어떻게 하나요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -250,7 +251,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-23" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">커뮤니티 이용 규정</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -261,7 +262,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-24" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">아이디 중복 사용이 가능한가요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -273,7 +274,7 @@ const pages = {
 
     <div class="accordion-item">
         <button id="accordion-button-25" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">요금 규정이 어떻게 되나요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -284,7 +285,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-26" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">저작권 규정</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -294,7 +295,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-27" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">여행 정보는 광고인가요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -304,7 +305,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-28" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">여행 정보 추가 건의는 어디서 하나요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -315,7 +316,7 @@ const pages = {
 
     <div class="accordion-item">
         <button id="accordion-button-29" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">후기 게시판 사진에 대해서</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -326,7 +327,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-30" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">내가 등록한 코스정보는 어디서 확인하나요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>
@@ -336,7 +337,7 @@ const pages = {
     </div>
     <div class="accordion-item">
         <button id="accordion-button-31" aria-expanded="false">
-            <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+            <img src="${rootPath}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                 <span class="accordion-title" style="margin-left: 0px;">목적지에 가고있는 사람의 수 정보는 알수없나요?</span>
                 <span class="icon" aria-hidden="true"></span>
         </button>

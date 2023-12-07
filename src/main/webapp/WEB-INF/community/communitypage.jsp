@@ -7,7 +7,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/res/community/community.css">
+    <link rel="stylesheet" href="${root}/res/community/community.css">
     <style>
         #location {
             list-style: none;
@@ -187,7 +187,7 @@
                         <span class="tit">
                             1대1 문의
                             <span class="icon-new">
-                                <img src="../res/photo/servicecenter.png" alt="New Icon" id="service">
+                                <img src="${root}/res/photo/servicecenter.png" alt="New Icon" id="service">
                             </span>
                         </span>
                         <span class="txt">
@@ -200,7 +200,7 @@
                         <span class="tit">
                             자주하는 질문
                             <span class="icon-new">
-                                 <img src="../res/photo/qnaboard.png" alt="New Icon" id="qna">
+                                 <img src="${root}/res/photo/qnaboard.png" alt="New Icon" id="qna">
                             </span>
                         </span>
                         <span class="txt">
@@ -213,7 +213,7 @@
                         <span class="tit">
                             후기게시판
                             <span class="icon-new">
-                               <img src="../res/photo/reviewboard.png" alt="New Icon" id="review">
+                               <img src="${root}/res/photo/reviewboard.png" alt="New Icon" id="review">
                             </span>
                         </span>
                         <span class="txt">
@@ -226,7 +226,7 @@
                         <span class="tit">
                             자유게시판
                             <span class="icon-new">
-                                  <img src="../res/photo/noticeboard.png" alt="New Icon" id="notice">
+                                  <img src="${root}/res/photo/noticeboard.png" alt="New Icon" id="notice">
                             </span>
                         </span>
                         <span class="txt">
@@ -244,7 +244,7 @@
         <div class="accordion">
             <div class="accordion-item">
                 <button id="accordion-button-18" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="${root}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">여행 정보는 광고인가요?</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -254,7 +254,7 @@
             </div>
             <div class="accordion-item">
                 <button id="accordion-button-19" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="${root}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">요금 규정이 어떻게 되나요?</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -265,7 +265,7 @@
             </div>
             <div class="accordion-item">
                 <button id="accordion-button-20" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="${root}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">회원 탈퇴는 어떻게 하나요?</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -276,7 +276,7 @@
             </div>
             <div class="accordion-item">
                 <button id="accordion-button-21" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="${root}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">비밀번호 변경은 어떻게 하나요?</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -287,7 +287,7 @@
             </div>
             <div class="accordion-item">
                 <button id="accordion-button-22" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="${root}/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">회원정보 수정은 어떻게 하나요?</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -298,5 +298,5 @@
         </div>
     </div>
 </body>
-<script src="/res/community/communityjs.js"></script>
+<script src="${root}/res/community/communityjs.js"></script>
 </html>
