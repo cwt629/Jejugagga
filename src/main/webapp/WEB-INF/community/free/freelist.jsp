@@ -44,7 +44,6 @@
             </div>
         </div>
     </div>
-
     <!-- board list area -->
     <div id="board-list">
         <div class="container">
