@@ -11,7 +11,7 @@
 	
 	<!-- layout 1 -->
 	<definition name="layout1" template="/WEB-INF/layout/main_layout.jsp">
-		<put-attribute name="home" value="/WEB-INF/layout/main_layout.jsp"></put-attribute>
+		<put-attribute name="home" value="/WEB-INF/layout/main.jsp"></put-attribute>
 		<put-attribute name="header" value="/WEB-INF/layout/header.jsp"></put-attribute>
 	</definition>
 	
@@ -24,7 +24,6 @@
 	<definition name="*/*/*" extends="layout1">
 		<put-attribute name="home" value="/WEB-INF/{1}/{2}/{3}.jsp"/>
 	</definition>
-	
 	
 
 </tiles-definitions>

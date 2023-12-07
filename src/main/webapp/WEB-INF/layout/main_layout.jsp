@@ -6,13 +6,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	/*
+	div.main_container div.header {
+		width: 100%;
+		height: 100px;
+	}
+	
+	div.main_container div.home {
+		width: 100%;
+		height: auto;
+	}
+	*/
+</style>
 </head>
 <body>
-<div class="header">
+<div class="main_container">
+	<div class="header">
 		<tiles:insertAttribute name="header" />
+	</div>
+	<div class="home">
+		<tiles:insertAttribute name="home"/>
+	</div>
 </div>
-여기는 메인페이지
 </body>
 </html>
