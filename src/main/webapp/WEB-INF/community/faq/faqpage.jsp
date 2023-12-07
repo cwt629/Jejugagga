@@ -2,13 +2,15 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="root" value="<%=request.getContextPath()%>"/>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../res/faq/faq.css">
+    <link rel="stylesheet" href="/res/faq/faq.css">
+
 
     <style>
         .accordion-button-img {
@@ -30,7 +32,7 @@
 
         #location li::after {
             content: '>';
-            color: gray;
+            color: grey;
             margin-left: 8px;
         }
 
@@ -72,23 +74,6 @@
             box-sizing: border-box;
         }
 
-        ul, ol, li {
-            list-style: none;
-        }
-
-        li {
-            display: list-item;
-            text-align: -webkit-match-parent;
-        }
-
-        ul {
-            margin-block-start: 1em;
-            margin-block-end: 1em;
-            margin-inline-start: 0px;
-            margin-inline-end: 0px;
-            padding-inline-start: 40px;
-        }
-
         .tab-masonry
         .btn.active {
             font-weight: 700;
@@ -96,7 +81,7 @@
             background-color: #f6f6f6;
         }
 
-        .tab-masonry .btn {
+        .tab-masonry, .btn11, .btn12, .btn13, .btn14 {
             display: block;
             padding: 12px 0;
             font-size: 14px;
@@ -106,15 +91,11 @@
             border-bottom: 1px solid #eee;
         }
 
-        a {
-            text-decoration: none;
-        }
-
         a:-webkit-any-link {
             cursor: pointer;
         }
 
-        ul, li {
+        .faq-lo-1, .faq-lo-2, .faq-lo-3 {
             padding: 0;
         }
 
@@ -133,6 +114,14 @@
             color: #4d5974;
         }
 
+        #all, #A01, #A02, #A03, #A04 {
+            text-decoration: none;
+        }
+
+        .faq-ta-1 {
+            padding: 0;
+            list-style: none;
+        }
     </style>
 </head>
 
@@ -140,27 +129,27 @@
 <div class="faq-container" style="margin-top: 110px">
 
     <ul id="location">
-        <li><a href="startPage.jsp">Home</a></li>
-        <li><a href="./community_main.jsp">커뮤니티</a></li>
-        <li><a href="faq.jsp">자주하는 질문</a></li>
+        <li><a href="startPage.jsp" class="faq-lo-1">Home</a></li>
+        <li><a href="./community_main.jsp" class="faq-lo-2">커뮤니티</a></li>
+        <li><a href="faq.jsp" class="faq-lo-3">자주하는 질문</a></li>
     </ul>
 
     <div class="tab-masonry mt20" style="margin-top: 25px">
-        <ul>
+        <ul class="faq-ta-1">
             <li>
                 <a class="btn active" id="all" href="javascript:void(0)">전체</a>
             </li>
             <li>
-                <a class="btn" id="A01" href="javascript:void(0)">BEST</a>
+                <a class="btn11" id="A01" href="javascript:void(0)">BEST</a>
             </li>
             <li>
-                <a class="btn" id="A02" href="javascript:void(0)">회원/가입-수정</a>
+                <a class="btn12" id="A02" href="javascript:void(0)">회원/가입-수정</a>
             </li>
             <li>
-                <a class="btn" id="A03" href="javascript:void(0)">규정</a>
+                <a class="btn13" id="A03" href="javascript:void(0)">규정</a>
             </li>
             <li>
-                <a class="btn" id="A04" href="javascript:void(0)">여행</a>
+                <a class="btn14" id="A04" href="javascript:void(0)">여행</a>
             </li>
         </ul>
     </div>
@@ -170,7 +159,7 @@
         <div class="accordion">
             <div class="accordion-item">
                 <button id="accordion-button-18" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">아이디를 분실했습니다.</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -180,7 +169,7 @@
             </div>
             <div class="accordion-item">
                 <button id="accordion-button-19" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">비밀번호를 분실했습니다</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -190,7 +179,7 @@
             </div>
             <div class="accordion-item">
                 <button id="accordion-button-20" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">회원 탈퇴는 어떻게 하나요?</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -201,7 +190,7 @@
             </div>
             <div class="accordion-item">
                 <button id="accordion-button-21" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">비밀번호 변경은 어떻게 하나요?</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -212,7 +201,7 @@
             </div>
             <div class="accordion-item">
                 <button id="accordion-button-22" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">회원정보 수정은 어떻게 하나요?</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -222,7 +211,7 @@
             </div>
             <div class="accordion-item">
                 <button id="accordion-button-23" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">커뮤니티 이용 규정</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -233,7 +222,7 @@
             </div>
             <div class="accordion-item">
                 <button id="accordion-button-24" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">아이디 중복 사용이 가능한가요?</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -245,7 +234,7 @@
 
             <div class="accordion-item">
                 <button id="accordion-button-25" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">요금 규정이 어떻게 되나요?</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -256,7 +245,7 @@
             </div>
             <div class="accordion-item">
                 <button id="accordion-button-26" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">저작권 규정</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -266,7 +255,7 @@
             </div>
             <div class="accordion-item">
                 <button id="accordion-button-27" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">여행 정보는 광고인가요?</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -276,7 +265,7 @@
             </div>
             <div class="accordion-item">
                 <button id="accordion-button-28" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">여행 정보 추가 건의는 어디서 하나요?</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -287,7 +276,7 @@
 
             <div class="accordion-item">
                 <button id="accordion-button-29" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">후기 게시판 사진에 대해서</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -298,7 +287,7 @@
             </div>
             <div class="accordion-item">
                 <button id="accordion-button-30" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">내가 등록한 코스정보는 어디서 확인하나요?</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -308,7 +297,7 @@
             </div>
             <div class="accordion-item">
                 <button id="accordion-button-31" aria-expanded="false">
-                    <img src="../res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
+                    <img src="/res/photo/qnaQ4.png" alt="아이콘" class="accordion-button-img">
                     <span class="accordion-title" style="margin-left: 0px;">목적지에 가고있는 사람의 수 정보는 알수없나요?</span>
                     <span class="icon" aria-hidden="true"></span>
                 </button>
@@ -320,6 +309,6 @@
     </div>
 </div>
 </body>
-<script src="../res/faq/faqjs.js"></script>
+<script src="/res/faq/faqjs.js"></script>
 
 </html>

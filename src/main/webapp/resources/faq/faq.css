@@ -47,6 +47,7 @@
     border: 1px solid;
     border-radius: 22px;
     top: 30px;
+    float: right;
 }
 .accordion button .icon::before {
     display: block;
