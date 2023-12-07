@@ -42,6 +42,8 @@
    div.course_innerheader div.course_search {
        margin-left: auto;
        margin-right: 30px;
+       display: flex;
+       align-items: center;
    }
    
    div.course_innerheader div.course_search div.course_search_input {
@@ -70,6 +72,15 @@
        font-size: 20px;
    }
    
+   div.course_innerheader div.course_search i.coursefilter {
+       font-size: 30px;
+       color: #cfa38f;
+       margin: 0 20px;
+       position: relative;
+       bottom: 2px;
+       cursor: pointer;
+   }
+   
 </style>
 </head>
 <body>
@@ -81,7 +92,11 @@
 				<input type="text" placeholder="코스명으로 찾아보세요">
 				<i class="bi bi-search coursesearch"></i>
 			</div>
+			<i class="bi bi-sliders coursefilter"></i>
 		</div>
+	</div>
+	<div class="course_list_contents">
+		
 	</div>
 </body>
 </html>
