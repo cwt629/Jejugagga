@@ -1,10 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Hind:300,400&display=swap");
-* {
-    box-sizing: border-box;
-}
-*::before, *::after {
-    box-sizing: border-box;
-}
 
 .accordion .accordion-item {
     border-bottom: 1px solid #e5e5e5;
@@ -12,6 +6,7 @@
 .accordion .accordion-item button[aria-expanded=true] {
     border-bottom: 1px solid #775555;
 }
+
 .accordion button {
     position: relative;
     display: block;
@@ -38,6 +33,7 @@
 .accordion button .accordion-title {
     padding: 1em 1.5em 1em 0;
 }
+
 .accordion button .icon {
     display: inline-block;
     position: absolute;

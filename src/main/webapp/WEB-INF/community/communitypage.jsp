@@ -2,11 +2,12 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="root" value="<%=request.getContextPath()%>"/>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="../res/community/community.css">
+    <link rel="stylesheet" href="/res/community/community.css">
     <style>
         #location {
             list-style: none;
@@ -18,7 +19,7 @@
 
         #location li::after {
             content: '>';
-            color: gray;
+            color: grey;
             margin-left: 8px;
         }
 
@@ -48,15 +49,9 @@
             background: #fff;
             color: #4d5974;
             min-height: 100vh;
-        }
-
-        body {
-            margin: 0;
             padding: 0;
-            font-family: "Hind", sans-serif;
             background: #fff;
             color: #4d5974;
-            display: flex;
             font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
             font-weight: 400;
             font-size: 14px;
@@ -64,12 +59,6 @@
             letter-spacing: -.5px;
             line-height: 22px;
             -webkit-text-size-adjust: 100%;
-        }
-
-        .inner {
-            position: relative;
-            margin: 0 auto;
-            width: 1080px;
         }
 
         .inner:after {
@@ -82,23 +71,7 @@
             margin-top: 0;
         }
 
-        .border-box-btn ul {
-            display: flex;
-        }
-
-        ul, ol, li {
-            list-style: none;
-        }
-
-        ul {
-            margin-block-start: 1em;
-            margin-block-end: 1em;
-            margin-inline-start: 0;
-            margin-inline-end: 0;
-            padding-inline-start: 40px;
-        }
-
-        .border-box-btn li {
+        .border-box-btn .cs1 {
             position: relative;
             width: calc((100% - 48px) / 4);
             height: 238px;
@@ -106,12 +79,7 @@
             transition: all .2s ease;
         }
 
-        li {
-            display: list-item;
-            text-align: -webkit-match-parent;
-        }
-
-        .border-box-btn li a {
+        .border-box-btn li .bbx-a {
             position: relative;
             display: block;
             padding: 30px;
@@ -125,13 +93,7 @@
             color: inherit;
         }
 
-        a:-webkit-any-link {
-            color: -webkit-link;
-            cursor: pointer;
-            text-decoration: underline;
-        }
-
-        .border-box-btn li .tit {
+        .border-box-btn .cs1 .tit {
             display: block;
             font-size: 16px;
             line-height: 24px;
@@ -164,13 +126,6 @@
             position: relative;
             padding-top:110px;
             width: 100%;
-        }
-
-        body, header, div, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, p, form, fieldset, table, tr, th, td, a, input, span, section, article {
-            margin: 3px;
-            padding: 0;
-            box-sizing: border-box;
-            word-break: keep-all;
         }
 
         #service {
@@ -208,22 +163,27 @@
             top: 160px;
             opacity: 0.9;
         }
+
+        .com-ul {
+            list-style: none;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
-<div class="community-container" style="margin-top: 0px">
+<div class="community-container" style="margin-top: -60px;" >
     <div class="no-pd-bm" id="content">
         <ul id="location">
-            <li><a href="startPage.jsp">Home</a></li>
-            <li><a href="community_main.jsp">커뮤니티</a></li>
+            <li><a href="${root}/main">Home</a></li>
+            <li><a href="${root}/community/nav">커뮤니티</a></li>
         </ul>
     </div>
 
     <div class="inner customer-main" style="margin-top: 15px">
         <div class="border-box-btn">
-            <ul>
+            <ul style="display: flex; gap: 7px;" class="com-ul">
                 <li class="cs1">
-                    <a href="javascript:void(0);">
+                    <a href="${root}/community/inquiry/list" style="cursor: pointer" class="bbx-a">
                         <span class="tit">
                             1대1 문의
                             <span class="icon-new">
@@ -235,8 +195,8 @@
                         </span>
                     </a>
                 </li>
-                <li class="cs2">
-                    <a href="javascript:void(0);">
+                <li class="cs1">
+                    <a href="${root}/community/faq/list;" class="bbx-a">
                         <span class="tit">
                             자주하는 질문
                             <span class="icon-new">
@@ -248,8 +208,8 @@
                         </span>
                     </a>
                 </li>
-                <li class="cs3">
-                    <a href="javascript:void(0);">
+                <li class="cs1">
+                    <a href="${root}/community/review/list;" class="bbx-a">
                         <span class="tit">
                             후기게시판
                             <span class="icon-new">
@@ -257,12 +217,12 @@
                             </span>
                         </span>
                         <span class="txt">
-                             다른 사람들의 후기가 궁금하다면<br>후기게시판에서 <br> 내용을 확인해 보세요.
+                             다른 사람들의 후기가 궁금하다면 후기게시판에서 <br> 내용을 확인해 보세요.
                         </span>
                     </a>
                 </li>
-                <li class="cs4">
-                    <a href="javascript:void(0);">
+                <li class="cs1">
+                    <a href="${root}/community/free/list;" class="bbx-a">
                         <span class="tit">
                             자유게시판
                             <span class="icon-new">
@@ -338,5 +298,5 @@
         </div>
     </div>
 </body>
-<script src="../res/community/communityjs.js"></script>
+<script src="/res/community/communityjs.js"></script>
 </html>

@@ -74,18 +74,17 @@
             box-sizing: border-box;
         }
 
-        .tab-masonry
-        .btn.active {
+        .tab-masonry .btn-active {
             font-weight: 700;
             color: #75444A;
             background-color: #f6f6f6;
         }
 
-        .tab-masonry, .btn11, .btn12, .btn13, .btn14 {
+        .tab-masonry .btn-ta ,#all {
             display: block;
-            padding: 12px 0;
+            padding: 14px 0;
             font-size: 14px;
-            color: #555;
+
             text-align: center;
             border-right: 1px solid #eee;
             border-bottom: 1px solid #eee;
@@ -116,6 +115,7 @@
 
         #all, #A01, #A02, #A03, #A04 {
             text-decoration: none;
+            color: #555;
         }
 
         .faq-ta-1 {
@@ -126,30 +126,30 @@
 </head>
 
 <body>
-<div class="faq-container" style="margin-top: 110px">
+<div class="faq-container" style="margin-top: 70px">
 
     <ul id="location">
-        <li><a href="startPage.jsp" class="faq-lo-1">Home</a></li>
-        <li><a href="./community_main.jsp" class="faq-lo-2">커뮤니티</a></li>
-        <li><a href="faq.jsp" class="faq-lo-3">자주하는 질문</a></li>
+        <li><a href="${root}/main" class="faq-lo-1">Home</a></li>
+        <li><a href="${root}/community/nav" class="faq-lo-2">커뮤니티</a></li>
+        <li><a href="${root}/community/faq/list" class="faq-lo-3">자주하는 질문</a></li>
     </ul>
 
     <div class="tab-masonry mt20" style="margin-top: 25px">
         <ul class="faq-ta-1">
             <li>
-                <a class="btn active" id="all" href="javascript:void(0)">전체</a>
+                <a class="btn-active" id="all" href="javascript:void(0)">전체</a>
             </li>
             <li>
-                <a class="btn11" id="A01" href="javascript:void(0)">BEST</a>
+                <a class="btn-ta" id="A01" href="javascript:void(0)">BEST</a>
             </li>
             <li>
-                <a class="btn12" id="A02" href="javascript:void(0)">회원/가입-수정</a>
+                <a class="btn-ta" id="A02" href="javascript:void(0)">회원/가입-수정</a>
             </li>
             <li>
-                <a class="btn13" id="A03" href="javascript:void(0)">규정</a>
+                <a class="btn-ta" id="A03" href="javascript:void(0)">규정</a>
             </li>
             <li>
-                <a class="btn14" id="A04" href="javascript:void(0)">여행</a>
+                <a class="btn-ta" id="A04" href="javascript:void(0)">여행</a>
             </li>
         </ul>
     </div>

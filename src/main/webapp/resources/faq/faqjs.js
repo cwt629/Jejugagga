@@ -350,51 +350,22 @@ const pages = {
 };
 
 function loadPage() {
-    // 페이지 로드 시 "전체" 콘텐츠를 디폴트로 표시합니다.
     document.querySelector('.tab-content').innerHTML = pages['전체'];
 
-    // 각 탭에 해당하는 버튼에 이벤트 리스너를 추가합니다.
-    document.querySelectorAll('.tab-masonry .btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-            // 버튼의 텍스트(ID)를 사용하여 해당 페이지 콘텐츠를 가져옵니다.
-            const pageContent = pages[btn.innerText.trim()] || pages['전체'];
-            // .tab-content 요소의 내용을 업데이트합니다.
-            document.querySelector('.tab-content').innerHTML = pageContent;
-            // 모든 버튼의 active 클래스를 제거하고, 현재 클릭된 버튼에만 클래스를 추가합니다.
-            document.querySelectorAll('.tab-masonry .btn').forEach(button => {
-                button.classList.remove('active');
-            });
-            btn.classList.add('active');
-
-            // 새로운 아코디언 버튼에 대해 이벤트 리스너를 설정합니다.
-            updateAccordionListeners();
-        });
-    });
-}
-
-function loadPage() {
-    // 페이지 로드 시 "전체" 콘텐츠를 디폴트로 표시합니다.
-    document.querySelector('.tab-content').innerHTML = pages['전체'];
-
-    // 새로 로드된 "전체" 콘텐츠에 대한 아코디언 이벤트 리스너를 설정합니다.
     updateAccordionListeners();
 
-    // 각 탭에 해당하는 버튼에 이벤트 리스너를 추가합니다.
-    document.querySelectorAll('.tab-masonry .btn').forEach(btn => {
+    // 각 탭에 해당하는 버튼 이벤트 리스너 추가.
+    document.querySelectorAll('.tab-masonry .btn-active, .tab-masonry .btn-ta').forEach(btn => {
         btn.addEventListener('click', function () {
-            // 버튼의 텍스트(ID)를 사용하여 해당 페이지 콘텐츠를 가져옵니다.
             const pageContent = pages[btn.innerText.trim()] || pages['전체'];
-            // .tab-content 요소의 내용을 업데이트합니다.
             document.querySelector('.tab-content').innerHTML = pageContent;
 
-            // 새로 로드된 콘텐츠에 대한 아코디언 이벤트 리스너를 설정합니다.
-            updateAccordionListeners();
-
-            // 모든 버튼의 active 클래스를 제거하고, 현재 클릭된 버튼에만 클래스를 추가합니다.
-            document.querySelectorAll('.tab-masonry .btn').forEach(button => {
-                button.classList.remove('active');
+            document.querySelectorAll('.tab-masonry .btn-active, .tab-masonry .btn-ta').forEach(button => {
+                button.classList.remove('btn-active');
             });
-            btn.classList.add('active');
+            btn.classList.add('btn-active');
+
+            updateAccordionListeners();
         });
     });
 }

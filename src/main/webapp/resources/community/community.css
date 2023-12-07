@@ -1,10 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Hind:300,400&display=swap");
-* {
-    box-sizing: border-box;
-}
-*::before, *::after {
-    box-sizing: border-box;
-}
 
 .accordion .accordion-item {
     border-bottom: 1px solid #e5e5e5;
@@ -35,9 +29,11 @@
     color: #775555;
     border: 1px solid #775555;
 }
+
 .accordion button .accordion-title {
     padding: 1em 1.5em 1em 0;
 }
+
 .accordion button .icon {
     display: inline-block;
     position: absolute;
@@ -48,6 +44,7 @@
     border-radius: 22px;
     top: 30px;
 }
+
 .accordion button .icon::before {
     display: block;
     position: absolute;
@@ -68,18 +65,22 @@
     height: 10px;
     background: currentColor;
 }
+
 .accordion button[aria-expanded=true] {
     color: #775555;
 }
+
 .accordion button[aria-expanded=true] .icon::after {
     width: 0;
 }
+
 .accordion button[aria-expanded=true] + .accordion-content {
     opacity: 1;
     max-height: 9em;
     transition: all 200ms linear;
     will-change: opacity, max-height;
 }
+
 .accordion .accordion-content {
     opacity: 0;
     max-height: 0;
@@ -87,6 +88,7 @@
     transition: opacity 200ms linear, max-height 200ms linear;
     will-change: opacity, max-height;
 }
+
 .accordion .accordion-content p {
     font-size: 1rem;
     font-weight: 300;

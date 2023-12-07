@@ -14,7 +14,7 @@
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-DVMBJVCWZ8"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../res/review/reviewlist.css">
+    <link rel="stylesheet" href="/res/review/reviewlist.css">
     <style>
 
         #location {
@@ -72,32 +72,41 @@
     </style>
 </head>
 <body>
-    <div class="review-container" style="margin-top:25px;">
-        <div class="no-pd-bm" id="content">
-            <ul id="location">
-                <li><a href="startPage.jsp">Home</a></li>
-                <li><a href="community_main.jsp">커뮤니티</a></li>
-                <li><a href="community_main.jsp">후기게시판</a></li>
-            </ul>
-        </div>
+<div class="review-container" style="margin-top:-30px;">
+    <div class="no-pd-bm" id="content">
+        <ul id="location">
+            <li><a href="${root}/main">Home</a></li>
+            <li><a href="${root}/community/nav">커뮤니티</a></li>
+            <li><a href="${root}/community/review/list">후기게시판</a></li>
+        </ul>
+    </div>
 
+    <div class="contents-head">
         <h2 style="font-size: 45px;">
             고객후기
         </h2>
 
-        <div class="page-search">
-            <form id="search-form" name="searchForm" method="post">
-                <input type="hidden" name="app" value="10217">
-                <input type="hidden" name="spacSeqValueSearchOr" class="search-field">
-                <div class="search-wrap">
-                    <input type="search" placeholder="공간명으로 찾아보세요" name="searchText" required="required" class="txt">
-                    <button type="submit" class="btn-search">
-                        <i class="fas fa-search"></i>
-                        <span class="blind">검색</span>
-                    </button>
-                </div>
-            </form>
+        <div class="head-option">
+            <div class="page-search">
+                <form id="search-form" name="searchForm" method="post">
+                    <input type="hidden" name="app" value="10217">
+                    <input type="hidden" name="spacSeqValueSearchOr" class="search-field">
+                    <div class="search-wrap">
+                        <input type="search" placeholder="공간명으로 찾아보세요" name="searchText" required="required"
+                               class="txt">
+                        <button type="submit" class="btn-search">
+                            <i class="fas fa-search"></i>
+                            <span class="blind">검색</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <div
         </div>
     </div>
+</div>
 </body>
 </html>

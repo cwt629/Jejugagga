@@ -3,20 +3,20 @@
     min-width: 0;
 }
 
-@media (max-width: 768px)
+@media (max-width: 468px)
 .page-search {
-    width: 20rem;
+    width: 10rem;
     height: 4rem;
-    padding: 0.1rem;
     border-radius: 2rem;
 }
 
 .page-search {
-    height: 4.5rem;
+    height: 3.8rem;
     position: relative;
     background-image: linear-gradient(to right, #ffc000 0%, #ff8d73 100%);
     border-radius: 2.25rem;
     padding: 0.2rem;
+
 }
 
 div {
@@ -30,7 +30,7 @@ div {
     display: flex;
 }
 
-txt {
+.txt {
     height: 3.8rem;
     border-radius: 1.9rem;
     font-size: 1.4rem;
@@ -43,10 +43,8 @@ txt {
 }
 
 .page-search .sel, .page-search .txt {
-    height: 4.1rem;
+    height: 3.4rem;
     border: 0;
-    font-size: 1.8rem;
-    padding: 0 2rem;
     background: transparent;
     vertical-align: top;
     outline: none;
@@ -64,10 +62,10 @@ txt {
     flex: 0 0 auto;
     color: #ff6888;
     font-size: 2.2rem;
-    width: 5rem;
+    width: 4rem;
 }
 
-button {
+.search-wrap .btn-search {
     padding: 0;
     border: 0;
     background-color: transparent;
@@ -80,4 +78,17 @@ button {
     position: absolute;
     left: 0;
     top: -9999em;
+}
+
+.contents-head {
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-end;
+}
+
+.contents-head .head-option {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
 }
