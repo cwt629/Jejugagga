@@ -168,8 +168,13 @@
    
    div.course_list_contents div.course_summary {
        display: flex;
-       justify-content: center;
+       justify-content: space-around;
        align-items: center;
+   }
+   
+   div.course_list_contents div.course_summary>div {
+       width: 20%;
+       border: 1px solid black;
    }
    
 </style>
@@ -220,10 +225,18 @@
 		  		</pre>
 		  		<hr>
 		  		<div class="course_summary">
-		  			<div>여행지 개수</div>
-		  			<div>총 거리</div>
-		  			<div>총 소요시간</div>
-		  			<div>작성자</div>
+		  			<div>
+		  			여행지 개수
+		  			</div>
+		  			<div>
+		  			총 거리
+		  			</div>
+		  			<div>
+		  			총 소요시간
+		  			</div>
+		  			<div>
+		  			작성자
+		  			</div>
 		  		</div>
 			</div>
 		</div>
