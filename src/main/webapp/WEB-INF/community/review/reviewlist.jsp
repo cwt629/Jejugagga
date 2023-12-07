@@ -86,25 +86,9 @@
             고객후기
         </h2>
 
-        <div class="head-option">
-            <div class="page-search">
-                <form id="search-form" name="searchForm" method="post">
-                    <input type="hidden" name="app" value="10217">
-                    <input type="hidden" name="spacSeqValueSearchOr" class="search-field">
-                    <div class="search-wrap">
-                        <input type="search" placeholder="공간명으로 찾아보세요" name="searchText" required="required"
-                               class="txt">
-                        <button type="submit" class="btn-search">
-                            <i class="fas fa-search"></i>
-                            <span class="blind">검색</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div>
-            <div
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="공간명으로 찾아보세요">
+            <i class="fas fa-search search-icon"></i>
         </div>
     </div>
 </div>

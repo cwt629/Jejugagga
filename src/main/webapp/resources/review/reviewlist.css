@@ -1,94 +1,38 @@
-.page-search {
-    flex: 1 1 auto;
-    min-width: 0;
-}
 
-@media (max-width: 468px)
-.page-search {
-    width: 10rem;
-    height: 4rem;
-    border-radius: 2rem;
-}
+/**/
 
-.page-search {
-    height: 3.8rem;
-    position: relative;
-    background-image: linear-gradient(to right, #ffc000 0%, #ff8d73 100%);
-    border-radius: 2.25rem;
-    padding: 0.2rem;
-
-}
-
-div {
-    display: block;
-}
-
-.page-search .search-wrap {
-    background: #fff;
-    border-radius: 2.05rem;
-    overflow: hidden;
+.search-container {
     display: flex;
-}
-
-.txt {
-    height: 3.8rem;
-    border-radius: 1.9rem;
-    font-size: 1.4rem;
-    padding: 0 1.5rem;
-}
-
-.page-search .txt {
-    flex: 1 1 100%;
-    min-width: 0;
-}
-
-.page-search .sel, .page-search .txt {
-    height: 3.4rem;
-    border: 0;
-    background: transparent;
-    vertical-align: top;
-    outline: none;
-    border-radius: 0;
-    box-shadow: none !important;
-}
-
-@media (max-width: 768px)
-.page-search .btn-search {
-    font-size: 1.6rem;
-    width: 4.5rem;
-}
-
-.page-search .btn-search {
-    flex: 0 0 auto;
-    color: #ff6888;
-    font-size: 2.2rem;
-    width: 4rem;
-}
-
-.search-wrap .btn-search {
-    padding: 0;
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.blind, legend {
-    display: block;
-    overflow: hidden;
-    position: absolute;
-    left: 0;
-    top: -9999em;
-}
-
-.contents-head {
-    padding-top: 1rem;
-    padding-bottom: 1.5rem;
-    display: flex;
-    align-items: flex-end;
-}
-
-.contents-head .head-option {
-    margin-left: auto;
-    display: flex;
+    justify-content: center;
     align-items: center;
+    padding: 10px;
+    background: white;
+    border-radius: 25px;
+    /* Simulate an outset border with box-shadow */
+    box-shadow:
+            0 0 0 2px #fff, /* Inner white border */
+            0 0 0 4px #ff8d73; /* Second gradient color */
+    max-width: 300px;
+    position: relative;
+    right: 0px;
 }
+
+.search-input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    width: 100%;
+    padding: 8px 16px;
+    background: transparent;
+}
+
+.search-input::placeholder {
+    color: #d1d1d1;
+}
+
+.search-icon {
+    color: #ff6888;
+    font-size: 20px;
+    margin-left: -35px;
+}
+
