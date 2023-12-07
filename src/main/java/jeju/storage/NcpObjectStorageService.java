@@ -21,7 +21,7 @@ public class NcpObjectStorageService implements ObjectStorageService {
 	AmazonS3 s3;
 	
 	public NcpObjectStorageService(NaverConfig naverConfig) {
-		System.out.println("NcpObjectStorageService »ı¼º");
+		System.out.println("NcpObjectStorageService ìƒì„± ì™„ë£Œ");
 		s3 = AmazonS3ClientBuilder.standard()
 				.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(
 						naverConfig.getEndPoint(), naverConfig.getRegionName()))
@@ -56,7 +56,7 @@ public class NcpObjectStorageService implements ObjectStorageService {
 			return filename;
 
 		} catch (Exception e) {
-			throw new RuntimeException("ÆÄÀÏ ¾÷·Îµå ¿À·ù", e);
+			throw new RuntimeException("íŒŒì¼ ì—…ë¡œë“œ ì˜¤ë¥˜", e);
 		}
 	}
 
@@ -65,13 +65,13 @@ public class NcpObjectStorageService implements ObjectStorageService {
 		// TODO Auto-generated method stub
 		String path=directoryPath+"/"+fileName;
 		System.out.println("path="+path);
-		//ÇØ´ç ¹öÅ¶¿¡ ÆÄÀÏÀÌ Á¸ÀçÇÏ¸é true ¹İÈ¯
+		//í•´ë‹¹ ë²„í‚·ì— íŒŒì¼ì´ ì¡´ì¬í•˜ë©´ true ë°˜í™˜ 
 		boolean isfind=s3.doesObjectExist(bucketName, path);
 		System.out.println("isfind="+isfind);
-		//Á¸ÀçÇÒ°æ¿ì »èÁ¦
+		//ì¡´ì¬í• ê²½ìš° ì‚­ì œ
 		if(isfind) {
 			s3.deleteObject(bucketName, path);
-			System.out.println(path+":»èÁ¦¿Ï·á!");
+			System.out.println(path+":ì‚­ì œì™„ë£Œ!");
 		}				
 	}
 }

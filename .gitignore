@@ -146,6 +146,10 @@ $RECYCLE.BIN/
 *.msp
 *.idea
 
+
+
+
+
 # Intellij
 .idea/
 
