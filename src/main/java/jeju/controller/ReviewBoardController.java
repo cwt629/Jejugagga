@@ -10,5 +10,7 @@ public class ReviewBoardController {
 	public String reviewlist() {
 		return "community/review/reviewlist";
 	}
-	
+
+	@GetMapping("/community/review/write")
+	public String reviewwrite() { return "community/review/reviewwrite"; }
 }

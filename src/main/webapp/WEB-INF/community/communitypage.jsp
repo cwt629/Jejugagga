@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="root" value="<%=request.getContextPath()%>"/>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="${root}/res/community/community.css">
@@ -124,7 +124,7 @@
 
         #content {
             position: relative;
-            padding-top:110px;
+            margin-top:110px;
             width: 100%;
         }
 
@@ -167,7 +167,10 @@
         .com-ul {
             list-style: none;
             text-decoration: none;
+        }
 
+        .cs1 {
+            height: 238px;
         }
     </style>
 </head>
