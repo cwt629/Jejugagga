@@ -10,7 +10,7 @@ const pages = {
 </button>
 <div class="accordion-content">
     <p> ○ 로그인 → 아이디찾기를 통해 확인이 가능합니다. </p>
-</div>
+</div>w
 </div>
 <div class="accordion-item">
     <button id="accordion-button-2" aria-expanded="false">
