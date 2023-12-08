@@ -2,6 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="root" value="<%=request.getContextPath()%>"/>
  <!DOCTYPE html>
 <html>
 <head>
@@ -16,12 +17,12 @@
 		font-family: 'Orbit';
 	}
 	
-	.mypagebox {
+	#mypageBox {
 		position: relative;
 		height: 2000px;
 	}
 	
-	.mypagecontext {
+	#mypageContext {
 		position: absolute;
 		width: 85%;
 		top: 20px;
@@ -49,7 +50,7 @@
 		border-radius: 60px;
 	}
 	
-	.navmenuline {
+	.navmenu_line {
 		border-top: 5px double darkgoldenrod;
 		position: absolute;
 		bottom: 120px;
@@ -74,11 +75,12 @@
 	
 	.profilebox {
 		border: 1px solid black;
+		
 	}
 </style>
 </head>
 <body>
-<div class="mypagebox">
+<div id="mypageBox">
 	<nav class="navbar navbar-expand-lg" id="sideNav">
 		<div>
 			<img src="../res/photo/noimage.png" id="profilePhoto">
@@ -89,17 +91,19 @@
 			
 		</div>
 		<div class="navmenu">
-			<h5>내 프로필</h5>
-			<h5>활동 기록</h5>
-			<h5>나의 여행 코스</h5>
+			<span class="navmenu_list" id="myProfile">내 프로필</span>
+			<br>
+			<span class="navmenu_list" id="userHistory">활동 기록</span>
+			<br>
+			<span class="navmenu_list" id="myCourse">나의 여행 코스</span>
 		</div>
-		<div class="navmenuline"></div>
+		<div class="navmenu_line"></div>
 		<div class="navmenu2">
 			<h5>도움말</h5>
 			<h5>로그아웃</h5>
 		</div>
 	</nav>
-	<div class="mypagecontext">
+	<div id="mypageContext">
 		<div class="profilebox">1</div>
 		<br>
 		<div class="profilebox">2</div>
