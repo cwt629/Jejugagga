@@ -199,7 +199,8 @@
 		<div class="course_innerheader">
 			<span class="course_title">추천코스</span>
 			<c:if test="${sessionScope.loginok != null}">
-				<button type="button" class="course_addbtn">코스추가</button>
+				<button type="button" class="course_addbtn"
+				onclick="location.href = './add'">코스추가</button>
 			</c:if>
 			<div class="course_search">
 				<div class="course_search_input">
