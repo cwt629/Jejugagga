@@ -1,0 +1,120 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900,900italic,300);
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    padding: 1em;
+    font-family: "industry", sans-serif;
+    background-color: #fff;
+}
+@media (min-width: 960px) {
+    body {
+        padding: 2em;
+    }
+}
+
+.siteWrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.will-animate {
+    visibility: hidden;
+}
+
+.textMask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.textMask__svg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.textMask__textWrap {
+    /* text-anchor: middle; */
+}
+.textMask__title {
+    font-weight: 900;
+    font-size: 3em;
+    text-transform: uppercase;
+}
+@media (min-width: 960px) {
+    .textMask__title {
+        font-size: 20vh;
+    }
+}
+.textMask__mask {
+    font-weight: 900;
+}
+.textMask text {
+    /* text-anchor: middle; */
+}
+.textMask__alpha {
+    fill: #fff;
+    transition: opacity 0.6s ease;
+}
+.textMask__base {
+    fill: #fff;
+    mask: url(#mask);
+    transition: opacity 0.6s ease;
+}
+
+.siteTitle {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    transform: translateY(-50%);
+    line-height: 1;
+    margin: 0;
+    color: #fff;
+    font-size: 3em;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+@media (min-width: 960px) {
+    .siteTitle {
+        font-size: 20vh;
+    }
+}
+
+.bgImage {
+    width: 100%;
+    height: 100%;
+    background-position: center left;
+    background-size: cover;
+    position: relative;
+    z-index: -1;
+}
+
+#replay {
+    border: 1px solid #fff;
+    position: absolute;
+    bottom: 1em;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    background-color: transparent;
+    height: 50px;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 0 2em;
+    transition: all 0.3s ease;
+}
+#replay:hover {
+    background-color: #fff;
+    opacity: 0.5;
+    color: #000;
+}

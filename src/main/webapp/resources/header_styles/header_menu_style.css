@@ -38,7 +38,7 @@ div.dropdown p:hover {
     color: #e78e08;
 }
 
-li a:hover {
+.li-menu-bar a:hover {
    color: #e78e08;
 }
 
@@ -68,7 +68,7 @@ li a:hover {
     margin-right: 150px;
 }
 
-nav li {
+nav .li-menu-bar {
     display: inline-block;
     padding: 0 10px;
 }
