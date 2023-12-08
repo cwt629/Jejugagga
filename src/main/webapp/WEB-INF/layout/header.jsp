@@ -32,19 +32,5 @@
     </nav>
 </header>
 
-<%--<div style="width: 200px; position: fixed; right: -45px; top: 30px;">--%>
-<%--	<c:if test="${sessionScope.loginok==null }">--%>
-<%--		<button type="button" class="btn btn-success"--%>
-<%--		style="width: 100px;" onclick="location.href='${root}/member/login'">로그인</button>--%>
-<%--	</c:if>--%>
-
-<%--	<c:if test="${sessionScope.loginok!=null }">--%>
-<%--			<h5><a href="${root}/mypage/user">${sessionScope.nickname}님</a></h5>&nbsp;&nbsp;--%>
-<%--			<button type="button" class="btn btn-success"--%>
-<%--			style="width: 100px;" id="btnlogout" onclick="location.href='${root}/member/logout'">로그아웃</button>--%>
-<%--	</c:if>--%>
-<%--</div>--%>
-
-
 </body>
 </html>
