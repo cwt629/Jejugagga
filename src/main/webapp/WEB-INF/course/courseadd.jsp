@@ -34,8 +34,10 @@
    }
    
    div.courseadd_formdiv {
+       /*
        display: flex;
        justify-content: center;
+       */
    }
    
    div.courseadd_formdiv form.courseadd_form table.courseadd_table {
@@ -47,9 +49,9 @@
        padding: 10px;
    }
    
-   div.courseadd_formdiv form.courseadd_form input.courseadd_textinput {
+   form.courseadd_form input.courseadd_textinput, form.courseadd_form textarea {
        border: none;
-       background-color: #eee;
+       background-color: #d9d9d9;
    }
    
    div.courseadd_routes {
@@ -59,6 +61,8 @@
    
    div.courseadd_routes div.courseadd_routeplace {
        height: 200px;
+       position: relative;
+       top: 22px;
    }
    
    div.courseadd_routes div.courseadd_routeplace div.courseadd_routephoto {
@@ -66,10 +70,84 @@
        height: 150px;
        background-color: #d9d9d9;
        border-radius: 5px;
+       
+   }
+   
+   div.courseadd_routes div.courseadd_routeplace>h5 {
+       text-align: center;
+   }
+   
+   div.courseadd_routes div.courseadd_routeplace div.courseadd_tag {
+       color: white;
+       background-color: skyblue; /* 임시 */
+       height: 30px;
+       padding: 5px;
+       display: flex;
+       align-items: center;
+       border-radius: 30px;
+       text-align: center;
+       position: absolute;
+       top: 5px;
+       left: 5px;
+   }
+   
+   table.courseadd_table button.courseadd_addbtn {
+       border: none;
+       background-color: #bf5b4b;
+       color: white;
+       width: 200px;
+       height: 40px;
+       border-radius: 40px;
+       font-size: 20px;
+       margin: 15px 0px;
+   }
+   
+   table.courseadd_table button.courseadd_timebtn {
+       border: 2px solid #d9d9d9;
+       background-color: transparent;
+       width: 80px;
+       height: 30px;
+       border-radius: 30px;
+   }
+   
+   table.courseadd_table button.courseadd_timebtn.selectedstd {
+       border: 2px solid #d7897e;
+   }
+   
+   table.courseadd_table button.courseadd_distcalbtn {
+       border: 2px solid #ca8462;
+       background-color: transparent;
+       width: 120px;
+       height: 30px;
+       border-radius: 30px;
+       font-weight: bold;
+       margin: 0px 24px;
+   }
+   
+   table.courseadd_table button.courseadd_submitbtn {
+       border: none;
+       background-color: #bf5b4b;
+       color: white;
+       width: 240px;
+       height: 40px;
+       border-radius: 40px;
+       font-size: 20px;
+       margin: 15px 0px;
    }
    
 </style>
 </head>
+<script>
+	$(function(){
+		// 소요 시간 단위 클릭 이벤트
+		$(".courseadd_timebtn").click(function(){
+			$(this).siblings(".courseadd_timebtn").removeClass("selectedstd");
+			$(this).addClass("selectedstd");
+			// input에도 그 단위를 넣어준다
+			$("#courseadd_timestd").val($(this).text());
+		});
+	})
+</script>
 <body>
 	<div class="courseadd_app">
 		<div class="courseadd_innerheader">
@@ -84,7 +162,7 @@
 					<tr>
 						<td width="160"><b>코스 이름 *</b></td>
 						<td>
-							<input type="text" name="title" class="courseadd_textinput" placeholder="코스 이름을 입력하세요" 
+							<input type="text" name="name" class="courseadd_textinput" placeholder="코스 이름을 입력하세요" 
 							style="width: 800px;" required>
 						</td>
 					</tr>
@@ -97,18 +175,27 @@
 									<div class="courseadd_routephoto">
 									</div>
 									<h5>대충 제목</h5>
+									<div class="courseadd_tag">
+										여행지
+									</div>
 								</div>
 								<img src="../res/photo/course_icons/next_enabled.png">
 								<div class="courseadd_routeplace">
 									<div class="courseadd_routephoto">
 									</div>
 									<h5>대충 제목</h5>
+									<div class="courseadd_tag">
+										문화시설
+									</div>
 								</div>
 								<img src="../res/photo/course_icons/next_enabled.png">
 								<div class="courseadd_routeplace">
 									<div class="courseadd_routephoto">
 									</div>
 									<h5>대충 제목</h5>
+									<div class="courseadd_tag">
+										축제행사
+									</div>
 								</div>
 								<img src="../res/photo/course_icons/next_disabled.png">
 								<div class="courseadd_routeplace">
@@ -121,30 +208,46 @@
 									</div>
 								</div>
 							</div>
+							<button type="button" class="courseadd_addbtn">+ 여행지 추가</button>
 						</td>
 					</tr>
 					<tr>
 						<td><b>예상 소요 시간 *</b></td>
 						<td>
-						
+							<input type="text" name="spendingtime" class="courseadd_textinput" placeholder="소요 시간" 
+							style="width: 100px;" required>
+							<!-- 소요 시간의 단위를 넘겨받을 input -->
+							<input type="hidden" name="timestandard" value="시간" id="courseadd_timestd"> 
+							<button type="button" class="courseadd_timebtn">일</button>
+							<button type="button" class="courseadd_timebtn selectedstd">시간</button>
+							<button type="button" class="courseadd_timebtn">분</button>
 						</td>
 					</tr>
 					<tr>
 						<td><b>이동 거리 *</b></td>
 						<td>
-						
+							<input type="text" name="distance" class="courseadd_textinput" placeholder="이동 거리" 
+							style="width: 100px;" required>
+							km
+							<button type="button" class="courseadd_distcalbtn">자동 계산</button>
+							<span class="courseadd_distmessage">이동 거리를 직접 입력할 수 있습니다.</span>
 						</td>
 					</tr>
 					<tr>
 						<td><b>짧은 소개</b></td>
 						<td>
-						
+							<textarea style="width: 80%; height: 60px;" name="briefcontent"></textarea>
 						</td>
 					</tr>
 					<tr>
 						<td><b>상세 설명</b></td>
 						<td>
-						
+							<textarea style="width: 80%; height: 200px;" name="longdetail"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align: center;">
+							<button type="submit" class="courseadd_submitbtn">코스 등록하기</button>
 						</td>
 					</tr>
 				</table>
