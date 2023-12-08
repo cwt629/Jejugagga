@@ -25,6 +25,7 @@ public class boardFreeDao {
 
 	public int getMaxNum() {
 		return session.selectOne(nameSpace + "selectMaxOfBoard");
+
 	}
 
 }

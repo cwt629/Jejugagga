@@ -35,7 +35,7 @@
                     <div class="search-wrap">
                         <label for="search" class="blind">자유게시판 검색</label>
                         <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
-                        <button type="submit" class="btn btn-dark">검색</button>
+                        <button type="submit" class="board_free_btn board_free_btn-dark">검색</button>
                     </div>
                 </form>
             </div>
@@ -44,7 +44,7 @@
     <!-- board list area -->
     <div id="board-list">
         <div class="container">
-            <table class="board-table">
+            <table class="All-board-table board-table">
                 <thead>
                 <tr>
                     <th scope="col" class="th-num">번호</th>
