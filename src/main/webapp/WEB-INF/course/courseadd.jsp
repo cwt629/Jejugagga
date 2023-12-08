@@ -11,6 +11,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
    body * {
        font-family: 'Orbit';
@@ -49,7 +51,7 @@
        padding: 10px;
    }
    
-   form.courseadd_form input.courseadd_textinput, form.courseadd_form textarea {
+   input.courseadd_textinput, form.courseadd_form textarea {
        border: none;
        background-color: #d9d9d9;
    }
@@ -91,26 +93,28 @@
        left: 5px;
    }
    
-   table.courseadd_table button.courseadd_addbtn {
+   
+   
+   div.courseadd_app button.courseadd_general_brownbtn {
        border: none;
        background-color: #bf5b4b;
        color: white;
-       width: 200px;
+       width: 240px;
        height: 40px;
        border-radius: 40px;
        font-size: 20px;
        margin: 15px 0px;
    }
    
-   table.courseadd_table button.courseadd_timebtn {
+   div.courseadd_app button.courseadd_selectablebtn {
        border: 2px solid #d9d9d9;
        background-color: transparent;
-       width: 80px;
-       height: 30px;
+       padding: 5px 25px;
        border-radius: 30px;
+       font-weight: bold;
    }
    
-   table.courseadd_table button.courseadd_timebtn.selectedstd {
+   div.courseadd_app button.courseadd_selectablebtn.courseadd_selected {
        border: 2px solid #d7897e;
    }
    
@@ -124,29 +128,129 @@
        margin: 0px 24px;
    }
    
-   table.courseadd_table button.courseadd_submitbtn {
-       border: none;
-       background-color: #bf5b4b;
-       color: white;
-       width: 240px;
-       height: 40px;
-       border-radius: 40px;
-       font-size: 20px;
-       margin: 15px 0px;
+   table.courseadd_searchquery td {
+       padding: 15px;
+   }
+   
+   table.courseadd_searchquery {
+       width: 800px;
+   }
+   
+   div.courseadd_search div.courseadd_searchdiv {
+       display: flex;
+       justify-content: center;
+   }
+   
+   div.courseadd_searchresultdiv {
+       height: 485px;
+       display: flex;
+       flex-wrap: wrap;
+       overflow-y: auto;
+   }
+   
+   div.courseadd_searchresultdiv>figure {
+       margin: 15px;
+       padding: 10px;
+       width: 180px;
+   }
+   
+   div.courseadd_searchresultdiv>figure:hover {
+       background-color: #d9d9d9;
+   }
+   
+   div.courseadd_searchresultdiv>figure>img {
+       width: 150px;
+       height: 150px;
+       border-radius: 5px;
+   }
+   
+   div.courseadd_searchresultdiv>figure>figcaption>h6 {
+       color: #888;
    }
    
 </style>
 </head>
 <script>
+	
 	$(function(){
+		// 여행지 추가 모달 - 카테고리 버튼 클릭 이벤트
+		$(".courseadd_searchcategory").click(function(){
+			$(this).toggleClass("courseadd_selected");
+		});
+		
 		// 소요 시간 단위 클릭 이벤트
 		$(".courseadd_timebtn").click(function(){
-			$(this).siblings(".courseadd_timebtn").removeClass("selectedstd");
-			$(this).addClass("selectedstd");
+			$(this).siblings(".courseadd_timebtn").removeClass("courseadd_selected");
+			$(this).addClass("courseadd_selected");
 			// input에도 그 단위를 넣어준다
 			$("#courseadd_timestd").val($(this).text());
 		});
+		
+		// 여행지 검색 버튼 클릭 이벤트
+		$("#courseadd_searchbtn").click(function(){
+			let searchingName = $("#courseadd_searchname").val();
+			let categories = []; // 선택된 카테고리 번호 배열
+			
+			// 선택된 카테고리를 담아준다.
+			$("button.courseadd_searchcategory").each(function(idx, item){
+				if ($(this).hasClass("courseadd_selected"))
+					categories.push($(this).attr("infocode"));
+			})
+			
+			// [예외처리] 카테고리가 아무것도 안담겨있다면, 돌아가게 한다
+			if (categories.length === 0){
+				alert("카테고리를 최소 1개 선택해야 합니다.");
+				return;
+			}
+			
+			// TODO : 검색하기
+			displaySearchedTour(searchingName, categories);
+		})
 	})
+	
+	// TODO : 여행지 추가 창에서 검색 후 리스트 띄우기
+	function displaySearchedTour(name = "", categories = []){
+		/*
+		[Trouble-Shooting]
+		배열을 넘겨주려면, traditional: true 를 넘겨줘야 한다.
+		그리고 Controller에서는 List 형태로 받아오면 된다.
+		*/
+		$.ajax({
+			type: "get",
+			dataType: "json",
+			url: "./searchtour",
+			data: {"name": name, "categories": categories},
+			traditional: true,
+			success: function(res){
+				console.log(res);
+				let results = "";
+				
+				$.each(res, function(idx, item){
+					// 카테고리명
+					let category = (item.contenttype == 12)? "관광지": (item.contenttype == 14)? "문화시설"
+							: (item.contenttype == 15)? "행사": (item.contenttype == 39)? "음식점" : "기타";
+					
+					results += 
+						`
+						<figure tourcode="\${item.tourcode}">
+			        		<img src=\${(item.firstimage)? item.firstimage : '../res/photo/noimage.png'}>
+			        		<figcaption>
+			        			<h5>\${item.title}</h5>
+			        			<h6>\${category}</h6>
+			        		</figcaption>
+			        	</figure>
+						`;
+				})
+				
+				if (results.length === 0){
+					results = "<h6>검색된 결과가 없습니다.</h6>"
+				}
+				
+				// 문서 반영
+				$("div.courseadd_searchresultdiv").html(results);
+			}
+		});
+	}
 </script>
 <body>
 	<div class="courseadd_app">
@@ -208,7 +312,7 @@
 									</div>
 								</div>
 							</div>
-							<button type="button" class="courseadd_addbtn">+ 여행지 추가</button>
+							<button type="button" class="courseadd_general_brownbtn" data-bs-toggle="modal" data-bs-target="#courseAddModal">+ 여행지 추가</button>
 						</td>
 					</tr>
 					<tr>
@@ -218,9 +322,9 @@
 							style="width: 100px;" required>
 							<!-- 소요 시간의 단위를 넘겨받을 input -->
 							<input type="hidden" name="timestandard" value="시간" id="courseadd_timestd"> 
-							<button type="button" class="courseadd_timebtn">일</button>
-							<button type="button" class="courseadd_timebtn selectedstd">시간</button>
-							<button type="button" class="courseadd_timebtn">분</button>
+							<button type="button" class="courseadd_timebtn courseadd_selectablebtn">일</button>
+							<button type="button" class="courseadd_timebtn courseadd_selectablebtn courseadd_selected">시간</button>
+							<button type="button" class="courseadd_timebtn courseadd_selectablebtn">분</button>
 						</td>
 					</tr>
 					<tr>
@@ -247,12 +351,79 @@
 					</tr>
 					<tr>
 						<td colspan="2" style="text-align: center;">
-							<button type="submit" class="courseadd_submitbtn">코스 등록하기</button>
+							<button type="submit" class="courseadd_general_brownbtn">코스 등록하기</button>
 						</td>
 					</tr>
 				</table>
 			</form>
 		</div>
+		
+		<!-- The Modal -->
+		<div class="modal fade" id="courseAddModal">
+		  <div class="modal-dialog modal-xl">
+		    <div class="modal-content">
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">여행지 추가</h4>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <div class="modal-body">
+		        <!-- 검색창 -->
+		        <div class="courseadd_search">
+		        	<table class="courseadd_searchquery">
+		        		<tr>
+		        			<td width="100">이름</td>
+		        			<td>
+		        				<input type="text" id="courseadd_searchname" class="courseadd_textinput"
+		        				style="width: 500px;">
+		        			</td>
+		        		</tr>
+		        		<tr>
+		        			<td>카테고리</td>
+		        			<td>
+		        				<button type="button" class="courseadd_searchcategory courseadd_selectablebtn" infocode="12">관광지</button>
+		        				<button type="button" class="courseadd_searchcategory courseadd_selectablebtn" infocode="14">문화시설</button>
+		        				<button type="button" class="courseadd_searchcategory courseadd_selectablebtn" infocode="15">축제행사</button>
+		        				<button type="button" class="courseadd_searchcategory courseadd_selectablebtn" infocode="39">음식점</button>
+		        			</td>
+		        		</tr>
+		        	</table>
+		        	<div class="courseadd_searchdiv">
+		        		<button type="button" class="courseadd_general_brownbtn" id="courseadd_searchbtn">여행지 검색</button>
+		        	</div>
+		        </div>
+		        <hr>
+		        <!-- 검색 결과 출력 -->
+		        <div class="courseadd_searchresultdiv">
+		        	<h4>이 곳에 검색 결과가 출력됩니다.</h4>
+		        	<!-- dummy data -->
+		        	<!-- 
+		        	<figure>
+		        		<img src="../res/photo/course_dummy/dummy_tourphoto1.jpg">
+		        		<figcaption>
+		        			<h5>대충 제목</h5>
+		        			<h6>카테고리</h6>
+		        		</figcaption>
+		        	</figure>
+		        	 -->
+		        </div>
+		      </div>
+		      	
+		      <!-- Modal footer -->
+		      <div class="modal-footer">
+		      	<!-- TODO: 데이터 추가 이후, 모달창 닫히게 트리거 줘야함 -->
+		        <button type="button" class="btn btn-danger">추가</button>
+		      </div>
+		
+		    </div>
+		  </div>
+		</div>
+		
 	</div>
+	
+	
 </body>
 </html>
