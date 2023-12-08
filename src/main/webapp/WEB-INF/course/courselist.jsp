@@ -246,15 +246,15 @@
 		  		<hr>
 		  		<div class="course_summary">
 		  			<figure>
-		  				<img src="../res/photo/Icon_MapMarker.png">
+		  				<img src="../res/photo/course_icons/Icon_MapMarker.png">
 		  				<figcaption>5개</figcaption>
 		  			</figure>
 		  			<figure>
-		  				<img src="../res/photo/Icon_Journey.png">
+		  				<img src="../res/photo/course_icons/Icon_Journey.png">
 		  				<figcaption>24km</figcaption>
 		  			</figure>
 		  			<figure>
-		  				<img src="../res/photo/Icon_Timesheet.png">
+		  				<img src="../res/photo/course_icons/Icon_Timesheet.png">
 		  				<figcaption>4시간</figcaption>
 		  			</figure>
 		  			<figure>
@@ -291,15 +291,15 @@
 		  		<hr>
 		  		<div class="course_summary">
 		  			<figure>
-		  				<img src="../res/photo/Icon_MapMarker.png">
+		  				<img src="../res/photo/course_icons/Icon_MapMarker.png">
 		  				<figcaption>3개</figcaption>
 		  			</figure>
 		  			<figure>
-		  				<img src="../res/photo/Icon_Journey.png">
+		  				<img src="../res/photo/course_icons/Icon_Journey.png">
 		  				<figcaption>15km</figcaption>
 		  			</figure>
 		  			<figure>
-		  				<img src="../res/photo/Icon_Timesheet.png">
+		  				<img src="../res/photo/course_icons/Icon_Timesheet.png">
 		  				<figcaption>2시간</figcaption>
 		  			</figure>
 		  			<figure>
@@ -334,15 +334,15 @@
 		  		<hr>
 		  		<div class="course_summary">
 		  			<figure>
-		  				<img src="../res/photo/Icon_MapMarker.png">
+		  				<img src="../res/photo/course_icons/Icon_MapMarker.png">
 		  				<figcaption>1개</figcaption>
 		  			</figure>
 		  			<figure>
-		  				<img src="../res/photo/Icon_Journey.png">
+		  				<img src="../res/photo/course_icons/Icon_Journey.png">
 		  				<figcaption>0km</figcaption>
 		  			</figure>
 		  			<figure>
-		  				<img src="../res/photo/Icon_Timesheet.png">
+		  				<img src="../res/photo/course_icons/Icon_Timesheet.png">
 		  				<figcaption>30분</figcaption>
 		  			</figure>
 		  			<figure>
@@ -380,15 +380,15 @@
 		  		<hr>
 		  		<div class="course_summary">
 		  			<figure>
-		  				<img src="../res/photo/Icon_MapMarker.png">
+		  				<img src="../res/photo/course_icons/Icon_MapMarker.png">
 		  				<figcaption>4개</figcaption>
 		  			</figure>
 		  			<figure>
-		  				<img src="../res/photo/Icon_Journey.png">
+		  				<img src="../res/photo/course_icons/Icon_Journey.png">
 		  				<figcaption>23km</figcaption>
 		  			</figure>
 		  			<figure>
-		  				<img src="../res/photo/Icon_Timesheet.png">
+		  				<img src="../res/photo/course_icons/Icon_Timesheet.png">
 		  				<figcaption>2일</figcaption>
 		  			</figure>
 		  			<figure>
