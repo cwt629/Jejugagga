@@ -26,7 +26,7 @@
             </c:if>
             <c:if test="${sessionScope.loginok!=null }"> <!-- header menu가 안밀리고 00님 환영합니다! 라고 나오게 해주세요 -->
               <li class="li-menu-bar"><a href="${root}/member/logout" class="main-menu-item">로그아웃</a></li>
-              <li class="li-menu-bar"><a href="${root}/mypage/user" class="main-menu-item">${sessionScope.nickname}환영합니다!</a></li>&nbsp;&nbsp;
+              <li class="li-menu-bar"><a href="${root}/mypage/user" class="main-menu-item">${sessionScope.nickname}환영합니다!</a></li>
             </c:if>
         </ul>
     </nav>

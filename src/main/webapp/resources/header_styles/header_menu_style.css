@@ -3,6 +3,7 @@
     margin: 0;
 }
 
+
 .main-menu-item {
     color: #000000;
     text-decoration: none;
@@ -16,7 +17,6 @@
 .main-menu-item:hover {
     color: #e78e08;
 }
-
 
 .dropdown-item {
     color: #000000;
@@ -65,7 +65,7 @@ div.dropdown p:hover {
 
 .ul-menu-bar {
     float: right;
-    margin-right: 150px;
+    margin-right: 0;
 }
 
 nav .li-menu-bar {
@@ -76,6 +76,7 @@ nav .li-menu-bar {
 .dropdown {
     display: none;
 }
+
 
 
 
