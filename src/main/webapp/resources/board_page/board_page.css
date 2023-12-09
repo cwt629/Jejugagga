@@ -39,7 +39,7 @@
 
 .pagination-item--wide {
     list-style-type: none;
-    display: inline-block;
+    display: flex;
 }
 
 .pagination-item--wide.first {
@@ -83,7 +83,7 @@
 
 .image-container {
     position: relative;
-    display: inline-block;
+    display: flex;
 }
 
 .image-container img {
