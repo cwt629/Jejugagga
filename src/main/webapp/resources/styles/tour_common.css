@@ -661,7 +661,7 @@ ol {
 	margin-left: 2rem;
 }
 .contents-head .btn-filter {
-	color: #ff6888;
+	color: #EEB182;
     font-size: 2.2rem;
 }
 
@@ -707,7 +707,7 @@ ol {
 	height: 0;
 	border-bottom: 5rem solid transparent;
 	border-top: 5rem solid transparent;
-	border-left: 5rem solid #ff6888;
+	border-left: 5rem solid #EEB182;
 	border-right: 5rem solid transparent;
 	font-size: 2.4rem;
 	position: fixed;
@@ -753,7 +753,7 @@ ol {
 		border-radius: 50%;
 		text-align: center;
 		border: none;
-		/* background: #ff6888; */
+		/* background: #EEB182; */
 		position: static;
 		transform: none;
 		font-size: 3.6rem;
@@ -763,7 +763,7 @@ ol {
 		position: static;
 		transform: none;
 		margin-right: 0;
-		color: #ff6888;
+		color: #EEB182;
 	}
 }
 
@@ -877,7 +877,7 @@ h3.contents-title {
 
 .page-search .btn-search {
 	flex: 0 0 auto;
-	color: #ff6888;
+	color: #EEB182;
 	font-size: 2.2rem;
 	width: 5rem;
 }
@@ -2110,7 +2110,7 @@ table td.text-right {
 .board-list th {
 	height: 6.4rem;
 	font-size: 1.8rem;
-	border-bottom: 0.1rem solid #ff6888;
+	border-bottom: 0.1rem solid #EEB182;
 	font-weight: 600;
 }
 .board-list td {
@@ -2122,18 +2122,18 @@ table td.text-right {
 	padding-left: 5rem;
 }
 .board-list tr.strong td {
-	color: #ff6888;
+	color: #EEB182;
 }
 .board-list tr.notice td {
 	background: #fff8fa;
 	font-weight: bold;
 }
 .board-list tr.notice .icon-notice {
-	color: #ff6888;
+	color: #EEB182;
 	font-size: 2.4rem;
 }
 .board-list tr.on td {
-	background: #ff6888;
+	background: #EEB182;
 	color: #fff;
 }
 .board-list .btn-download {
@@ -2145,7 +2145,7 @@ table td.text-right {
 
 @media (max-width: 768px) {
 	.board-list {
-		border-top: 0.1rem solid #ff6888;
+		border-top: 0.1rem solid #EEB182;
 		margin: 0 -2rem;
 		width: auto;
 	}
@@ -2305,7 +2305,7 @@ table td.text-right {
 	font-weight: 600;
 }
 .pagination a.num:hover {
-	color: #ff6888;
+	color: #EEB182;
 }
 .pagination .pg-btn {
 	display: block;
@@ -2320,7 +2320,7 @@ table td.text-right {
 	color: #b8b8b8;
 }
 .pagination .pg-btn:hover::before {
-	color: #ff6888;
+	color: #EEB182;
 }
 .pagination .pg-btn.pg-first::before {
 	content: "\f100";
@@ -3645,7 +3645,7 @@ table td.text-right {
 }
 
 .drop-menu-list a:hover {
-	color: #ff6888;
+	color: #EEB182;
 }
 
 .drop-menu-list li + li {

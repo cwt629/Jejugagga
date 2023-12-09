@@ -1,8 +1,6 @@
 package jeju.controller;
 
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,12 +21,10 @@ public class TourController {
 	
 	
 	@GetMapping("/tour/list")
-	public String list(Model model,
-			@RequestParam (defaultValue = "1") int currentPage) {
-		
+	public String list(Model model, @RequestParam (defaultValue = "1") int currentPage) {
 		//페이징처리
 		//페이징에 처리에 필요한 변수들
-		int perPage=8; //한페이지당 보여지는 게시글의 갯수
+		int perPage=12; //한페이지당 보여지는 게시글의 갯수
 		int totalCount=0; //총 개시글의 개수
 		int totalPage;//총페이지수
 		int startNum;//각페이지당 보여지는 글의 시작번호
@@ -58,34 +54,52 @@ public class TourController {
 		model.addAttribute("totalPage",totalPage);
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("endPage",endPage);
+		model.addAttribute("startNum",startNum);
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("no",no);
+		model.addAttribute("word", "");
 		
 		return "tour/tourlist";
 	}
 	
 	//내용페이지
 	@GetMapping("/tour/content")
-	public String content()
+	public String content(Model model, @RequestParam int tourcode)
 	{
+		TourDto tourDto = new TourDto();
+		tourDto = tourDao.getData(tourcode);
+		
+		model.addAttribute("tourDto", tourDto);
 		return "tour/content";
 	}
 	
 	@GetMapping("/tour/photo")
-	public String photo()
+	public String photo(Model model, @RequestParam int tourcode)
 	{
+		TourDto tourDto = new TourDto();
+		tourDto = tourDao.getData(tourcode);
+		
+		model.addAttribute("tourDto", tourDto);
 		return "tour/photo";
 	}
 	
 	@GetMapping("/tour/info")
-	public String info()
+	public String info(Model model, @RequestParam int tourcode)
 	{
+		TourDto tourDto = new TourDto();
+		tourDto = tourDao.getData(tourcode);
+		
+		model.addAttribute("tourDto", tourDto);
 		return "tour/info";
 	}
 	
 	@GetMapping("/tour/review")
-	public String review()
+	public String review(Model model, @RequestParam int tourcode)
 	{
+		TourDto tourDto = new TourDto();
+		tourDto = tourDao.getData(tourcode);
+		
+		model.addAttribute("tourDto", tourDto);
 		return "tour/review";
 	}
 	

@@ -2,7 +2,6 @@ package jeju.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +17,12 @@ public class TourRestController {
 	@Autowired
 	private TourDao tourDao;
 	
-	
 	@GetMapping("/tour/view")
-	public List<TourDto> getAllTour(
-			@RequestParam(defaultValue = "0") int start,
-            @RequestParam(defaultValue = "8") int perpage
-			)
-	{
-		return tourDao.getAllTour(start, perpage);
+	public List<TourDto> getAllTour(@RequestParam String word, @RequestParam int start) {
+		System.out.println(" =============== word : " + word + " === start : " + start);
+		return tourDao.getAllTour(word, start);
 	}
+	
+	
 }
 
