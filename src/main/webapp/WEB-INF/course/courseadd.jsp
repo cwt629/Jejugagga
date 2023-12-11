@@ -72,7 +72,13 @@
        height: 150px;
        background-color: #d9d9d9;
        border-radius: 5px;
-       
+   }
+   
+   div.courseadd_routes div.courseadd_routeplace div.courseadd_routephoto>img {
+       width: 100%;
+       height: 100%;
+       border-radius: 5px;
+       object-fit: cover;
    }
    
    div.courseadd_routes div.courseadd_routeplace>h5 {
@@ -215,7 +221,11 @@
 	let routes = []; // 루트에 포함되는 여행지 정보
 	let selectedCode = -1; // 현재 검색창에서 선택된 여행지 코드
 	
+	const MAX_SPOTS_IN_COURSE = 5; // 하나의 코스에 들어갈 수 있는 여행지 최대 개수
+	
 	$(function(){
+		displayCurrentRoute(); // 여행지 루트 렌더링
+		
 		// 여행지 추가 모달 - 카테고리 버튼 클릭 이벤트
 		$(".courseadd_searchcategory").click(function(){
 			$(this).toggleClass("courseadd_selected");
@@ -257,6 +267,38 @@
 			selectedCode = $(this).attr("tourcode");
 			alert(selectedCode);
 		})
+		
+		// 여행지 추가 버튼 클릭 이벤트
+		$("button.courseadd_addroute").click(function(){
+			// 추가한 여행지가 없는 경우
+			if (selectedCode === -1) {
+				alert("선택한 여행지가 없습니다.");
+				return;
+			}
+			
+			// 이미 여행지 최대치를 넘은 경우
+			if (routes.length >= MAX_SPOTS_IN_COURSE) {
+				alert("더 이상 여행지를 추가할 수 없습니다.");
+				return;
+			}
+			
+			let tourcode = $("div.courseadd_searchresultdiv>figure.courseadd_selected").attr("tourcode");
+			let title = $("div.courseadd_searchresultdiv>figure.courseadd_selected").children("figcaption").children("h5").text();
+			let contenttype = $("div.courseadd_searchresultdiv>figure.courseadd_selected").attr("contenttype");
+			let image = $("div.courseadd_searchresultdiv>figure.courseadd_selected>img").attr("src");
+			
+			// 여행지 추가해주기
+			routes.push(new CourseSpot(tourcode, title, contenttype, image));
+			console.log(routes);
+			
+			// 실제 루트 렌더링
+			displayCurrentRoute();
+			
+			// 마무리
+			selectedCode = -1;
+			$("button.courseadd_modalclose").trigger("click"); // 모달창 닫기
+		})
+		
 	});
 	
 	// 특정 contenttype에 대한 카테고리명을 출력하는 함수
@@ -308,7 +350,52 @@
 				$("div.courseadd_searchresultdiv").html(results);
 			}
 		});
+	};
+	
+	// 현재 추가된 여행지 리스트를 출력하는 함수
+	function displayCurrentRoute(){
+		let result = ``;
+		const ARROW_ENABLED = `<img src="../res/photo/course_icons/next_enabled.png">`;
+		const ARROW_DISABLED = `<img src="../res/photo/course_icons/next_disabled.png">`;
+		
+		for (let i = 0; i < MAX_SPOTS_IN_COURSE; i++){
+			// 첫 시작을 제외하고는 화살표부터 그려준다
+			if (i > 0) {
+				// 해당 번째에 여행지가 있으면 화살표가 활성화되고, 그렇지 않으면 비활성화
+				let currentArrow = (i < routes.length)? ARROW_ENABLED : ARROW_DISABLED;
+				result += currentArrow;
+			}
+			
+			// 여행지가 있으면 표시해준다
+			if (i < routes.length) {
+				result += 
+					`
+					<div class="courseadd_routeplace">
+						<div class="courseadd_routephoto">
+							<img src="\${routes[i].image}">
+						</div>
+						<h5>\${routes[i].title}</h5>
+						<div class="courseadd_tag">
+							\${getCategory(routes[i].contenttype)}
+						</div>
+					</div>
+					`;
+			}
+			// 여행지가 없으면 빈칸 표시
+			else {
+				result += 
+					`
+					<div class="courseadd_routeplace">
+						<div class="courseadd_routephoto">
+						</div>
+					</div>
+					`;
+			}
+		}
+		
+		$("table.courseadd_table div.courseadd_routes").html(result);
 	}
+	
 </script>
 <body>
 	<div class="courseadd_app">
@@ -424,7 +511,7 @@
 		      <!-- Modal Header -->
 		      <div class="modal-header">
 		        <h4 class="modal-title">여행지 추가</h4>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+		        <button type="button" class="btn-close courseadd_modalclose" data-bs-dismiss="modal"></button>
 		      </div>
 		
 		      <!-- Modal body -->
@@ -466,7 +553,7 @@
 		      		선택된 여행지: 없음
 		      	</div>
 		      	<!-- TODO: 데이터 추가 이후, 모달창 닫히게 트리거 줘야함 -->
-		        <button type="button" class="courseadd_general_brownbtn">추가</button>
+		        <button type="button" class="courseadd_general_brownbtn courseadd_addroute">추가</button>
 		      </div>
 		
 		    </div>
