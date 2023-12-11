@@ -370,11 +370,11 @@
 					`
 					<div class="courseadd_routeplace">
 						<div class="courseadd_routephoto">
-							<img src="\${routes[i].image}">
+							<img src="\${routes[i].getImage()}">
 						</div>
-						<h5>\${routes[i].title}</h5>
+						<h5>\${routes[i].getTitle()}</h5>
 						<div class="courseadd_tag">
-							\${getCategory(routes[i].contenttype)}
+							\${getCategory(routes[i].getContenttype())}
 						</div>
 					</div>
 					`;
@@ -407,7 +407,7 @@
 			let inputtag = document.createElement("input");
 			inputtag.type = "hidden";
 			inputtag.name = "routes[]";
-			inputtag.value = item.tourcode; // tourcode만 넘겨준다
+			inputtag.value = item.getTourcode(); // tourcode만 넘겨준다
 			$("form.courseadd_form").appendChild(inputtag);
 		}
 		
