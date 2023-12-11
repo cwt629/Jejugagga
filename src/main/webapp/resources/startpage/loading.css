@@ -73,18 +73,24 @@ body {background: #333333;}
     50% {opacity: 1}
     100%{opacity: 0}
 }
-.loading-container,
-.loading {
-    height: 100px;
-    position: fixed;
-    width: 100px;
-    border-radius: 100%;
 
-    top: 550px;
-    left: 800px;
+.loading-container {
+    position: fixed;
+    top: 63%; /* 상단에서 50% 위치 */
+    left: 50%; /* 왼쪽에서 50% 위치 */
+    transform: translate(-50%, -50%); /* 컨테이너의 중심을 화면 중앙에 맞춤 */
+    width: 100px; /* 필요한 너비 지정 */
+    height: 100px; /* 필요한 높이 지정 */
 }
 
-
+.loading {
+    border: 2px solid transparent;
+    border-color: transparent #fff transparent #FFF;
+    border-radius: 50%;
+    width: 100%; /* 컨테이너의 전체 너비 사용 */
+    height: 100%; /* 컨테이너의 전체 높이 사용 */
+    animation: rotate-loading 1.5s linear 0s infinite normal;
+}
 
 .loading-container { margin: 40px auto }
 
@@ -99,6 +105,9 @@ body {background: #333333;}
     -webkit-transform-origin: 50% 50%;
     animation: rotate-loading 1.5s linear 0s infinite normal;
     transform-origin: 50% 50%;
+    border-radius: 50%;
+    width: 100%; /* 컨테이너의 전체 너비 사용 */
+    height: 100%; /* 컨테이너의 전체 높이 사용 */
 }
 
 .loading-container:hover .loading,
@@ -119,12 +128,13 @@ body {background: #333333;}
     font-family: "Helvetica Neue, "Helvetica", ""arial";
     font-size: 10px;
     font-weight: bold;
-
     opacity: 0;
     position: absolute;
     text-align: center;
     text-transform: uppercase;
-    top: 7px;
-    width: 100px;
     z-index: 10;
+    top: 46%; /* 로딩 아이콘 아래에 텍스트 위치 */
+    left: 50%; /* 컨테이너 중앙에 위치 */
+    transform: translateX(-50%); /* 텍스트의 중심을 X축 기준으로 중앙에 맞춤 */
+    width: 100%; /* 컨테이너의 전체 너비 사용 */
 }
