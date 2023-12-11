@@ -1,6 +1,8 @@
 package jeju.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jeju.dto.CourseDto;
+import jeju.dto.CourseRouteDto;
 import jeju.dto.TourDto;
 import jeju.service.CourseRouteService;
 import jeju.service.CourseService;
@@ -52,12 +55,32 @@ public class CourseController {
 			@RequestParam(defaultValue = "") String route5
 			) {
 		// TODO DB에 저장
-		System.out.println("다음 줄부터 쭈루룩 코드들");
-		System.out.println(route1);
-		System.out.println(route2);
-		System.out.println(route3);
-		System.out.println(route4);
-		System.out.println(route5);
+		// course 정보 먼저 저장
+		courseService.insertCourse(dto);
+		
+		// course_route 테이블 저장을 위한 배열
+		List<String> route = new ArrayList<String>();
+		route.add(route1);
+		route.add(route2);
+		route.add(route3);
+		route.add(route4);
+		route.add(route5);
+		
+		// 루트 저장
+		for (int i = 0; i < route.size(); i++) {
+			// 빈 문자가 온다면 그때부터 break
+			if (route.get(i).equals(""))
+				break;
+			
+			// course_route에 대한 dto
+			CourseRouteDto routeDto = new CourseRouteDto();
+			routeDto.setCoursecode(dto.getCoursecode());
+			routeDto.setTourcode(Integer.parseInt(route.get(i))); // 코드를 int 타입으로 넣어주기
+			routeDto.setRouteorder(i); // 그 코스에서의 인덱스로 삽입
+			
+			// course_route에도 insert해주기
+			courseRouteService.insertCourseRoute(routeDto);
+		}
 		
 		return "redirect:./list";
 	}
