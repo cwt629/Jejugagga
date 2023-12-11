@@ -169,6 +169,12 @@
        color: #888;
    }
    
+   div.courseadd_searchresultdiv div.courseadd_searchmessage {
+       font-size: 22px;
+       text-align: center;
+       width: 100%;
+   }
+   
 </style>
 </head>
 <script>
@@ -216,6 +222,10 @@
 	
 	// 검색된 여행지 목록을 출력하는 함수
 	function displaySearchedTour(name = "", categories = []){
+		// 로딩 멘트
+		const LOADING_DISPLAY = "<div class='courseadd_searchmessage'>데이터 로딩중입니다...</div>";
+		$("div.courseadd_searchresultdiv").html(LOADING_DISPLAY);
+		
 		/*
 		[Trouble-Shooting]
 		배열을 넘겨주려면, traditional: true 를 넘겨줘야 한다.
@@ -245,7 +255,7 @@
 				})
 				
 				if (results.length === 0){
-					results = "<h6>검색된 결과가 없습니다.</h6>"
+					results = "<div class='courseadd_searchmessage'>검색된 결과가 없습니다.</div>";
 				}
 				
 				// 문서 반영
@@ -400,7 +410,7 @@
 		        <hr>
 		        <!-- 검색 결과 출력 -->
 		        <div class="courseadd_searchresultdiv">
-		        	<h4>이 곳에 검색 결과가 출력됩니다.</h4>
+		        	<div class="courseadd_searchmessage">이 곳에 검색 결과가 출력됩니다.</div>
 		        	<!-- dummy data -->
 		        	<!-- 
 		        	<figure>
