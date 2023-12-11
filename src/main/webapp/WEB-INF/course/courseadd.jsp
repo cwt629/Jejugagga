@@ -152,6 +152,7 @@
        margin: 15px;
        padding: 10px;
        width: 180px;
+       cursor: pointer;
    }
    
    div.courseadd_searchresultdiv>figure:hover {
@@ -159,7 +160,7 @@
    }
    
    div.courseadd_searchresultdiv>figure>img {
-       width: 150px;
+       width: 100%;
        height: 150px;
        border-radius: 5px;
    }
@@ -203,12 +204,10 @@
 				return;
 			}
 			
-			// TODO : 검색하기
 			displaySearchedTour(searchingName, categories);
 		})
 	})
 	
-	// TODO : 여행지 추가 창에서 검색 후 리스트 띄우기
 	function displaySearchedTour(name = "", categories = []){
 		/*
 		[Trouble-Shooting]
