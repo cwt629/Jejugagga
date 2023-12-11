@@ -265,7 +265,6 @@
 			$(this).addClass("courseadd_selected");
 			$("div.courseadd_selectedspot").text("선택된 여행지: " + $(this).children("figcaption").children("h5").text());
 			selectedCode = $(this).attr("tourcode");
-			alert(selectedCode);
 		})
 		
 		// 여행지 추가 버튼 클릭 이벤트
@@ -289,7 +288,6 @@
 			
 			// 여행지 추가해주기
 			routes.push(new CourseSpot(tourcode, title, contenttype, image));
-			console.log(routes);
 			
 			// 실제 루트 렌더링
 			displayCurrentRoute();
@@ -396,6 +394,26 @@
 		$("table.courseadd_table div.courseadd_routes").html(result);
 	}
 	
+	// 폼 제출 시 호출할 함수
+	function handleCourseFormSubmit(){
+		// 여행지를 하나도 선택하지 않은 경우
+		if (routes.length === 0){
+			alert("여행지를 하나 이상 선택해주세요.");
+			return false;
+		}
+		
+		// 각 여행지의 코드를 input에 넣어준다
+		for (let item of routes){
+			let inputtag = document.createElement("input");
+			inputtag.type = "hidden";
+			inputtag.name = "routes[]";
+			inputtag.value = item.tourcode; // tourcode만 넘겨준다
+			$("form.courseadd_form").appendChild(inputtag);
+		}
+		
+		return true;
+	}
+	
 </script>
 <body>
 	<div class="courseadd_app">
@@ -406,7 +424,8 @@
 		</div>
 		
 		<div class="courseadd_formdiv">
-			<form method="post" action="./addcourse" class="courseadd_form">
+			<form method="post" action="./addcourse" class="courseadd_form"
+			onsubmit="return handleCourseFormSubmit()">
 				<table class="courseadd_table">
 					<tr>
 						<td width="160"><b>코스 이름 *</b></td>
@@ -419,43 +438,7 @@
 						<td><b>여행지 *</b></td>
 						<td>
 							<div class="courseadd_routes">
-								<!-- 1~5번 여행지 -->
-								<div class="courseadd_routeplace">
-									<div class="courseadd_routephoto">
-									</div>
-									<h5>대충 제목</h5>
-									<div class="courseadd_tag">
-										여행지
-									</div>
-								</div>
-								<img src="../res/photo/course_icons/next_enabled.png">
-								<div class="courseadd_routeplace">
-									<div class="courseadd_routephoto">
-									</div>
-									<h5>대충 제목</h5>
-									<div class="courseadd_tag">
-										문화시설
-									</div>
-								</div>
-								<img src="../res/photo/course_icons/next_enabled.png">
-								<div class="courseadd_routeplace">
-									<div class="courseadd_routephoto">
-									</div>
-									<h5>대충 제목</h5>
-									<div class="courseadd_tag">
-										축제행사
-									</div>
-								</div>
-								<img src="../res/photo/course_icons/next_disabled.png">
-								<div class="courseadd_routeplace">
-									<div class="courseadd_routephoto">
-									</div>
-								</div>
-								<img src="../res/photo/course_icons/next_disabled.png">
-								<div class="courseadd_routeplace">
-									<div class="courseadd_routephoto">
-									</div>
-								</div>
+								<!-- 여행지 코스 출력 부분 -->
 							</div>
 							<button type="button" class="courseadd_general_brownbtn" data-bs-toggle="modal" data-bs-target="#courseAddModal">+ 여행지 추가</button>
 						</td>
