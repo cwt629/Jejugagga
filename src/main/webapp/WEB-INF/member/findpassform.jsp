@@ -22,11 +22,10 @@
 		height: 350px;
 		padding: 40px;
 		position: absolute;
-	    margin: 0 auto;
-	    left: 0;
-	    right: 0px;
-	    TOP: 13%;
-		
+	        margin: 0 auto;
+	        left: 0;
+	        right: 0px;
+	        TOP: 13%;
 	}
 	
 	.checkdiv > .login_logo_photo{
