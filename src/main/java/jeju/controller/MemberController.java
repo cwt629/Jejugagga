@@ -102,7 +102,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/member/login/findpass/check")
-	public String findapss(MemberTableDto dto, Model model, @RequestParam String id,
+	public String findpass(MemberTableDto dto, Model model, @RequestParam String id,
 			@RequestParam String name, @RequestParam Date birth)
 	{
 		dto.setId(id);
