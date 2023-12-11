@@ -208,6 +208,13 @@
 		})
 	})
 	
+	// 특정 contenttype에 대한 카테고리명을 출력하는 함수
+	function getCategory(contenttype) {
+		return (contenttype == 12)? "관광지": (contenttype == 14)? "문화시설"
+				: (contenttype == 15)? "축제행사": (contenttype == 39)? "음식점" : "기타";
+	}
+	
+	// 검색된 여행지 목록을 출력하는 함수
 	function displaySearchedTour(name = "", categories = []){
 		/*
 		[Trouble-Shooting]
@@ -221,21 +228,17 @@
 			data: {"name": name, "categories": categories},
 			traditional: true,
 			success: function(res){
-				console.log(res);
+				//console.log(res);
 				let results = "";
 				
 				$.each(res, function(idx, item){
-					// 카테고리명
-					let category = (item.contenttype == 12)? "관광지": (item.contenttype == 14)? "문화시설"
-							: (item.contenttype == 15)? "행사": (item.contenttype == 39)? "음식점" : "기타";
-					
 					results += 
 						`
-						<figure tourcode="\${item.tourcode}">
+						<figure tourcode="\${item.tourcode}" contenttype="\${item.contenttype}">
 			        		<img src=\${(item.firstimage)? item.firstimage : '../res/photo/noimage.png'}>
 			        		<figcaption>
 			        			<h5>\${item.title}</h5>
-			        			<h6>\${category}</h6>
+			        			<h6>\${getCategory(item.contenttype)}</h6>
 			        		</figcaption>
 			        	</figure>
 						`;
