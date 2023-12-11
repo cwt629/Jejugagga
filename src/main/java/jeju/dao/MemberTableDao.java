@@ -44,4 +44,14 @@ public class MemberTableDao {
 	{
 		return session.selectOne(nameSpace+"searchIdCount",id);
 	}
+	
+	public void pwdTempUpdate(MemberTableDto dto)
+	{
+		session.update(nameSpace+"pwdTempUpdate",dto);
+	}
+	
+	public int pwdCheck(MemberTableDto dto)
+	{
+		return session.selectOne(nameSpace+"pwdCheck",dto);
+	}
 }

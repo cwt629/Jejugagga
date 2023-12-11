@@ -14,8 +14,16 @@
 	<select id="selectDataByNum" parameterType="int" resultType="MemberTableDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
 		select * from member_table where num=#{num}
 	</select>	
-		
 	<select id="searchIdCount" parameterType="String" resultType="int">
 		select count(*) from member_table where id=#{id}
 	</select>
+	<update id="pwdTempUpdate" parameterType="MemberTableDto">
+		update member_table set password = #{password} where id =
+		#{id} and name = #{name} and birth = #{birth}
+	</update>
+	<select id="pwdCheck" parameterType="MemberTableDto" resultType="int">
+		select count(*) from member_table where id =
+		#{id} and name = #{name} and birth = #{birth}
+	</select>
+	
 </mapper>
