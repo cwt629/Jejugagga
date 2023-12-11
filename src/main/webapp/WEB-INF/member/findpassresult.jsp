@@ -83,20 +83,9 @@
 <body>
 	<div class="checkdiv">
 		<img alt="logo" src="${root }/res/photo/jejuhome.png" style="margin-left: 55px" class="login_logo_photo">
-		<div class="findtext" style="text-align: center;"><b>찾으시려는 계정의 회원정보를 입력해주세요</b></div>
-		<form action="findpass/check" method="post" id="findform">
-			<br>아이디<br>
-	        <input type="text" name="id" placeholder="ID" class="findname" autofocus="autofocus">
-			이름<br>
-			<input type="text" name="name" placeholder="이름" autofocus="autofocus">
-			생년월일<br>
-			<input type="date" name="birth" required><br>			
-			<input type="submit" value="회원정보 확인"> 
-		</form>
+		<div class="findtext" style="text-align: center;"><b>아마도 당신의 비밀번호는 이것입니까 ? ${rawnewPwd}</b></div>
 	</div>
-<script type="text/javascript">
 
-</script>
 	
 </body>
 </html>

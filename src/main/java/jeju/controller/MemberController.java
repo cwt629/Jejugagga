@@ -5,6 +5,7 @@ import jeju.dto.MemberTableDto;
 import jeju.service.HashService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,9 +22,10 @@ import java.util.Map;
 public class MemberController {
 	@Autowired
 	MemberTableDao dao;
-
+	
 	@GetMapping("/member/login")
-	public String login() {
+	public String login(@RequestParam(defaultValue = "1") int num , Model model) {
+		model.addAttribute("num",num);
 		return "member/loginform";
 	}
 	
@@ -37,7 +41,6 @@ public class MemberController {
 	@PostMapping("/member/login/check")
 	public String check(@RequestParam String id,@RequestParam String password, HttpSession session, @RequestParam boolean saveidvalue) 
 	{
-		Map<String, Object> map=new HashMap<String, Object>();
 		// 패스워드 해싱
 		password = HashService.hashPassword(password);
         
@@ -62,12 +65,12 @@ public class MemberController {
 			session.setAttribute("myphoto", myphoto);
 		
 			
-			map.put("success", true);
 		}else {
-			map.put("success", false); // 실패 시 false로 넘겨줌	
+			return 	"redirect:../login?num=2";
+			
 		}
 				
-		return 	"redirect:../../main";
+		return 	"redirect:/main";
 	}
 	
 	
@@ -75,7 +78,7 @@ public class MemberController {
 	public String logout(HttpSession session)
 	{
 		session.removeAttribute("loginok");
-		return 	"redirect:../main";
+		return 	"redirect:/main";
 	}
 	
 	@PostMapping("/member/signup/submit")
@@ -86,7 +89,7 @@ public class MemberController {
 
         dao.insertMember(dto);
 		
-		return "redirect:../../main";
+		return "redirect:/main";
 	}
 	
 	@GetMapping("/member/idcheck")
@@ -97,5 +100,24 @@ public class MemberController {
 		map.put("count", count);
 		return map;
 	}
+	
+	@PostMapping("/member/login/findpass/check")
+	public String findapss(MemberTableDto dto, Model model, @RequestParam String id,
+			@RequestParam String name, @RequestParam Date birth)
+	{
+		dto.setId(id);
+		dto.setName(name);
+		dto.setBirth(birth);
+		int search = dao.pwdCheck(dto);
+		
+		String rawnewPwd = "12345";
+		String newPwd="";
+		newPwd = HashService.hashPassword(rawnewPwd);
+		dto.setPassword(newPwd);
+		dao.pwdTempUpdate(dto);
+		model.addAttribute("rawnewPwd", rawnewPwd);
+		return "member/findpassresult";
+	}
+
 	
 }
