@@ -526,7 +526,6 @@
 		      	<div class="courseadd_selectedspot">
 		      		선택된 여행지: 없음
 		      	</div>
-		      	<!-- TODO: 데이터 추가 이후, 모달창 닫히게 트리거 줘야함 -->
 		        <button type="button" class="courseadd_general_brownbtn courseadd_addroute">추가</button>
 		      </div>
 		
@@ -551,8 +550,6 @@
 					$(this).val(routes[idx].getTourcode());
 				else
 					$(this).val("");
-				
-				alert("들어갈 tourcode는 분명히 " + routes[idx].getTourcode() + "입니다...");
 			});
 			
 			return true;

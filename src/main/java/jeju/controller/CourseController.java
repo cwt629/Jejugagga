@@ -54,7 +54,6 @@ public class CourseController {
 			@RequestParam(defaultValue = "") String route4,
 			@RequestParam(defaultValue = "") String route5
 			) {
-		// TODO DB에 저장
 		// course 정보 먼저 저장
 		courseService.insertCourse(dto);
 		
@@ -74,7 +73,7 @@ public class CourseController {
 			
 			// course_route에 대한 dto
 			CourseRouteDto routeDto = new CourseRouteDto();
-			routeDto.setCoursecode(dto.getCoursecode());
+			routeDto.setCoursecode(dto.getCoursecode()); // 앞서 저장된 코스의 코드 대입
 			routeDto.setTourcode(Integer.parseInt(route.get(i))); // 코드를 int 타입으로 넣어주기
 			routeDto.setRouteorder(i); // 그 코스에서의 인덱스로 삽입
 			
