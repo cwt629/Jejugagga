@@ -159,6 +159,10 @@
        background-color: #d9d9d9;
    }
    
+   div.courseadd_searchresultdiv>figure.courseadd_selected {
+       background-color: #cc9e89;
+   }
+   
    div.courseadd_searchresultdiv>figure>img {
        width: 100%;
        height: 150px;
@@ -175,9 +179,41 @@
        width: 100%;
    }
    
+   div.courseadd_selectedspot {
+       margin: 20px;
+   }
+   
 </style>
 </head>
 <script>
+	class CourseSpot {
+		constructor(tourcode, title, contenttype, image){
+			this.tourcode = tourcode;
+			this.title = title;
+			this.contenttype = contenttype;
+			this.image = image;
+		}
+		
+		getTourcode(){
+			return this.tourcode;
+		}
+		
+		getTitle(){
+			return this.title;
+		}
+		
+		getContenttype(){
+			return this.contenttype;
+		}
+		
+		getImage(){
+			return this.image;
+		}
+	}
+</script>
+<script>
+	let routes = []; // 루트에 포함되는 여행지 정보
+	let selectedCode = -1; // 현재 검색창에서 선택된 여행지 코드
 	
 	$(function(){
 		// 여행지 추가 모달 - 카테고리 버튼 클릭 이벤트
@@ -212,7 +248,16 @@
 			
 			displaySearchedTour(searchingName, categories);
 		})
-	})
+		
+		// 검색된 여행지 클릭 이벤트
+		$(document).on("click", "div.courseadd_searchresultdiv>figure", function(){
+			$(this).siblings().removeClass("courseadd_selected");
+			$(this).addClass("courseadd_selected");
+			$("div.courseadd_selectedspot").text("선택된 여행지: " + $(this).children("figcaption").children("h5").text());
+			selectedCode = $(this).attr("tourcode");
+			alert(selectedCode);
+		})
+	});
 	
 	// 특정 contenttype에 대한 카테고리명을 출력하는 함수
 	function getCategory(contenttype) {
@@ -244,7 +289,8 @@
 				$.each(res, function(idx, item){
 					results += 
 						`
-						<figure tourcode="\${item.tourcode}" contenttype="\${item.contenttype}">
+						<figure tourcode="\${item.tourcode}" contenttype="\${item.contenttype}"
+						\${(item.tourcode == selectedCode)? 'class="courseadd_selected"' : ''}>
 			        		<img src=\${(item.firstimage)? item.firstimage : '../res/photo/noimage.png'}>
 			        		<figcaption>
 			        			<h5>\${item.title}</h5>
@@ -411,23 +457,16 @@
 		        <!-- 검색 결과 출력 -->
 		        <div class="courseadd_searchresultdiv">
 		        	<div class="courseadd_searchmessage">이 곳에 검색 결과가 출력됩니다.</div>
-		        	<!-- dummy data -->
-		        	<!-- 
-		        	<figure>
-		        		<img src="../res/photo/course_dummy/dummy_tourphoto1.jpg">
-		        		<figcaption>
-		        			<h5>대충 제목</h5>
-		        			<h6>카테고리</h6>
-		        		</figcaption>
-		        	</figure>
-		        	 -->
 		        </div>
 		      </div>
 		      	
 		      <!-- Modal footer -->
 		      <div class="modal-footer">
+		      	<div class="courseadd_selectedspot">
+		      		선택된 여행지: 없음
+		      	</div>
 		      	<!-- TODO: 데이터 추가 이후, 모달창 닫히게 트리거 줘야함 -->
-		        <button type="button" class="btn btn-danger">추가</button>
+		        <button type="button" class="courseadd_general_brownbtn">추가</button>
 		      </div>
 		
 		    </div>
