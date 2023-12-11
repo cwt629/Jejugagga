@@ -8,7 +8,7 @@ public class PagingCriteria {
     private int perPageNum;
 
     public PagingCriteria() {
-        this.page = 1;
+        this.page = 0;
         this.perPageNum = 5;
     }
 
