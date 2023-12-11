@@ -394,25 +394,7 @@
 		$("table.courseadd_table div.courseadd_routes").html(result);
 	}
 	
-	// 폼 제출 시 호출할 함수
-	function handleCourseFormSubmit(){
-		// 여행지를 하나도 선택하지 않은 경우
-		if (routes.length === 0){
-			alert("여행지를 하나 이상 선택해주세요.");
-			return false;
-		}
-		
-		// 각 여행지의 코드를 input에 넣어준다
-		for (let item of routes){
-			let inputtag = document.createElement("input");
-			inputtag.type = "hidden";
-			inputtag.name = "routes[]";
-			inputtag.value = item.getTourcode(); // tourcode만 넘겨준다
-			$("form.courseadd_form").appendChild(inputtag);
-		}
-		
-		return true;
-	}
+	
 	
 </script>
 <body>
@@ -426,6 +408,8 @@
 		<div class="courseadd_formdiv">
 			<form method="post" action="./addcourse" class="courseadd_form"
 			onsubmit="return handleCourseFormSubmit()">
+				<!-- usercode는 hidden으로 받는다 -->
+				<input type="hidden" name="usercode" value="${sessionScope.usercode}">
 				<table class="courseadd_table">
 					<tr>
 						<td width="160"><b>코스 이름 *</b></td>
@@ -437,6 +421,13 @@
 					<tr>
 						<td><b>여행지 *</b></td>
 						<td>
+							<div class="courseadd_routeinputs">
+								<input type="hidden" name="route1" value="">
+								<input type="hidden" name="route2" value="">
+								<input type="hidden" name="route3" value="">
+								<input type="hidden" name="route4" value="">
+								<input type="hidden" name="route5" value="">
+							</div>
 							<div class="courseadd_routes">
 								<!-- 여행지 코스 출력 부분 -->
 							</div>
@@ -545,6 +536,27 @@
 		
 	</div>
 	
-	
+	<script>
+		// 폼 제출 시 호출할 함수
+		function handleCourseFormSubmit(){
+			// 여행지를 하나도 선택하지 않은 경우
+			if (routes.length === 0){
+				alert("여행지를 하나 이상 선택해주세요.");
+				return false;
+			}
+			
+			// 각 여행지의 코드를 input에 넣어준다
+			$("div.courseadd_routeinputs input").each(function(idx){
+				if (idx < routes.length)
+					$(this).val(routes[idx].getTourcode());
+				else
+					$(this).val("");
+				
+				alert("들어갈 tourcode는 분명히 " + routes[idx].getTourcode() + "입니다...");
+			});
+			
+			return true;
+		}
+	</script>
 </body>
 </html>
