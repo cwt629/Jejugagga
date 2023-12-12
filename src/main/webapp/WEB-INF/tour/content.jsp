@@ -20,6 +20,8 @@
 
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=tpq2iczfgo"></script>
+
 <style>
 	body * {
        font-family: 'Orbit';
@@ -45,13 +47,37 @@
 
 
 </head>
+<script>
+	$(function() {
+		
+		$('.section-story2').hide();
+		$('.section-story3').hide();
+		$('.section-story4').hide();
+	    
+		
+		$('.tab-item').click(function() {
+			$('.tab-item.active').removeClass('active');
+			$(this).addClass('active');
+			var tabId = $(this).attr('val'); // val 속성 값 가져오기
+			$('.section-story1').hide();
+			$('.section-story2').hide();
+			$('.section-story3').hide();
+			$('.section-story4').hide();
+			
+	        $('.section-story' + tabId).show();
+		});
+		
+		
+	});
+</script>
 <body>
 
 	<div id="container">
 		<div id="sub_visual"
 			style="background-image: linear-gradient(rgba(0, 0, 0, 0.7),
-        		rgba(255, 255, 255, 0.7)), url(${tourDto.firstimage});">
+        		rgba(255, 255, 255, 0.1)), url(${tourDto.firstimage});">
 			<div class="container">
+				<button onclick="history.back()">Back</button>
 				<div class="sub-title-box">
 					<h2 class="title aos-init aos-animate" data-aos="fade-up"
 						data-aos-duration="180" data-aos-delay="100">${tourDto.title}</h2>
@@ -94,14 +120,303 @@
 			<div class="sub-content">
 				<div class="container">
 					<ul class="sub-tab">
-						<li class="tab-item active"><a class="text-small">이야기</a></li>
-						<li class="tab-item"><a class="text-small" href="../tour/photo?tourcode=${param.tourcode}">갤러리</a></li>
-						<li class="tab-item"><a class="text-small" href="../tour/info?tourcode=${param.tourcode}">오시는길</a></li>
-						<li class="tab-item"><a class="text-small" href="../tour/review?tourcode=${param.tourcode}">후기</a></li>
+						<li class="tab-item active" val="1"><a class="text-small">이야기</a></li>
+						<li class="tab-item" val="2"><a class="text-small">갤러리</a></li>
+						<li class="tab-item" val="3"><a class="text-small">오시는길</a></li>
+						<li class="tab-item" val="4"><a class="text-small">후기</a></li>
 					</ul>
-					<div class="section-story">
+					<div class="section-story1">
 						<strong>
 							<span style="font-size: 18px;">${tourDto.overview}</span>
+						</strong>
+					</div>
+					
+					<div class="section-story2">
+						<strong>
+							<img src="${tourDto.firstimage}" alt="등록된 사진이 없습니다.">
+							
+							
+							
+						</strong>
+					</div>
+					
+					<div class="section-story3" style="text-align: -webkit-center;">
+						<strong>
+							<span style="font-size: 18px;"></span>
+						</strong>
+						<div style="padding-left : 30px">
+							<div id="map" style="width:700px; height:400px; border:1px;">
+								<script>							
+								var mapOptions = {
+										center : new naver.maps.LatLng(${tourDto.mapy}, ${tourDto.mapx}),
+										zoom:20
+								};
+								var map= new naver.maps.Map('map', mapOptions);
+								
+								var markerOptions = {
+										position : new naver.maps.LatLng(${tourDto.mapy}, ${tourDto.mapx}),
+										map : map
+								};
+								
+								var market= new naver.maps.Marker(markerOptions);
+								</script>
+							</div>
+							<div id="tableContainer" class="tableContainer" style="width:700px; font-size : 20px;">
+								<table border="1" cellpadding="1" cellspacing="1" class="table table-bordered">
+								<thead class="fixedHeader">
+								</thead>
+								<tbody class="scrollContent">
+								  <tr>
+								    <td width="30%" style="text-align: center;">우편번호</td>
+								    <td>${tourDto.zipcode}</td>
+								  </tr>
+								  <tr>
+								    <td width="30%" style="text-align: center;">주소</td>
+								    <td>${tourDto.addr1}</td>
+								  </tr>
+							  	<c:if test="${tourDto.homepage!=''}">
+								  <tr>
+							    	<td width="30%" style="text-align: center;">홈페이지</td>
+							    	<td>${tourDto.homepage}</td>
+								  </tr>
+								</c:if>
+								
+								<c:if test="${tourDto.contenttype==12}">
+									<c:if test="${tourDto.infocenter!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">문의</td>
+								    	<td>${tourDto.infocenter}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.expguide!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">체험안내</td>
+								    	<td>${tourDto.expguide}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.usetime!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">이용시간</td>
+								    	<td>${tourDto.usetime}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.restdate!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">쉬는날</td>
+								    	<td>${tourDto.restdate}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.parking!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">주차시설</td>
+								    	<td>${tourDto.parking}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.chkbabycarriage!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">유모차대여</td>
+								    	<td>${tourDto.chkbabycarriage}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.chkpet!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">애완동물동반</td>
+								    	<td>${tourDto.chkpet}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.chkcreditcard!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">신용카드</td>
+								    	<td>${tourDto.chkcreditcard}</td>
+									  </tr>
+									</c:if>
+								</c:if>
+								
+								<c:if test="${tourDto.contenttype==14}">
+								  <c:if test="${tourDto.infocenterculture!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">문의</td>
+								    	<td>${tourDto.infocenterculture}</td>
+									  </tr>
+									</c:if><c:if test="${tourDto.usefee!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">이용요금</td>
+								    	<td>${tourDto.usefee}</td>
+									  </tr>
+									</c:if><c:if test="${tourDto.usetimeculture!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">이용시간</td>
+								    	<td>${tourDto.usetimeculture}</td>
+									  </tr>
+									</c:if><c:if test="${tourDto.restdateculture!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">쉬는날</td>
+								    	<td>${tourDto.restdateculture}</td>
+									  </tr>
+									</c:if><c:if test="${tourDto.parkingculture!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">주차시설</td>
+								    	<td>${tourDto.parkingculture}</td>
+									  </tr>
+									</c:if><c:if test="${tourDto.parkingfee!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">주차비</td>
+								    	<td>${tourDto.parkingfee}</td>
+									  </tr>
+									</c:if><c:if test="${tourDto.chkbabycarriageculture!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">유모차대여</td>
+								    	<td>${tourDto.chkbabycarriageculture}</td>
+									  </tr>
+									</c:if><c:if test="${tourDto.chkpetculture!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">애완동물동반</td>
+								    	<td>${tourDto.chkpetculture}</td>
+									  </tr>
+									</c:if><c:if test="${tourDto.chkcreditcardculture!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">신용카드</td>
+								    	<td>${tourDto.chkcreditcardculture}</td>
+									  </tr>
+									</c:if>
+								</c:if>
+								
+								<c:if test="${tourDto.contenttype==15}">
+								  <c:if test="${tourDto.eventhomepage!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">이벤트 홈페이지</td>
+								    	<td>${tourDto.eventhomepage}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.sponsor1!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">주최자</td>
+								    	<td>${tourDto.sponsor1}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.sponsor1tel!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">주최자 번호</td>
+								    	<td>${tourDto.sponsor1tel}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.eventstartdate!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">행사 시작일</td>
+								    	<td>${tourDto.eventstartdate}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.eventenddate!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">행사 종료일</td>
+								    	<td>${tourDto.eventenddate}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.eventplace!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">행사장소</td>
+								    	<td>${tourDto.eventplace}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.spendtimefestival!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">행사시간</td>
+								    	<td>${tourDto.spendtimefestival}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.usetimefestival!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">이용요금</td>
+								    	<td>${tourDto.usetimefestival}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.playtime!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">공연시간</td>
+								    	<td>${tourDto.playtime}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.agelimit!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">관람가능 연령</td>
+								    	<td>${tourDto.agelimit}</td>
+									  </tr>
+									</c:if>
+								</c:if>
+								
+								<c:if test="${tourDto.contenttype==39}">
+								  <c:if test="${tourDto.infocenterfood!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">문의</td>
+								    	<td>${tourDto.infocenterfood}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.opentimefood!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">영업시간</td>
+								    	<td>${tourDto.opentimefood}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.restdatefood!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">쉬는날</td>
+								    	<td>${tourDto.restdatefood}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.firstmenu!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">대표메뉴</td>
+								    	<td>${tourDto.firstmenu}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.treatmenu!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">취급메뉴</td>
+								    	<td>${tourDto.treatmenu}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.reservationfood!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">예약안내</td>
+								    	<td>${tourDto.reservationfood}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.packing!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">포장여부</td>
+								    	<td>${tourDto.packing}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.parkingfood!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">주차시설</td>
+								    	<td>${tourDto.parkingfood}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.smoking!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">흡연여부</td>
+								    	<td>${tourDto.smoking}</td>
+									  </tr>
+									</c:if>
+									<c:if test="${tourDto.chkcreditcardfood!=''}">
+									  <tr>
+								    	<td width="30%" style="text-align: center;">신용카드</td>
+								    	<td>${tourDto.chkcreditcardfood}</td>
+									  </tr>
+									</c:if>
+								</c:if>
+								  
+								  
+								</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					
+					<div class="section-story4">
+						<strong>
+							<span style="font-size: 18px;">후기</span>
 						</strong>
 					</div>
 					

@@ -10,7 +10,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${root}/res/styles/tour_common.css">
 <link rel="stylesheet" type="text/css" href="${root}/res/styles/tour_css.css">
@@ -131,23 +132,26 @@
 <script>
 	const urlParams = new URL(location.href).searchParams;
 	let word = urlParams.get('word');
+	let currentPage = urlParams.get('currentPage');
 	
 	$(function() {
 		list();
 	
-		console.log(${totalCount});
-		console.log(${totalCount});
+		//console.log(${totalCount});
+		//console.log(${totalCount});
 		
 		//검색버튼 클릭 이벤트
 		$("#btnsearch").click(function() {
 			word=$("#word").val();
+			currentPage = 1;
+			urlParams.set('currentPage', currentPage);
 			list();
 		});
 		
 		//페이지 클릭 이벤트
-		$(".pagination-link").click(function() {
-			console.log(this.innerText);
-			let currentPage = parseInt(this.innerText);
+		$(document).on("click", ".pagination-link", function(){
+			console.log($(this).attr('data'));
+			let currentPage = parseInt($(this).attr('data'));
 			
 			let link = word != null ? 
 					`./list?currentPage=\${currentPage}&word=` + word :
@@ -156,6 +160,11 @@
 			location.href = link;
 		});
 		
+		
+		
+
+		
+		//좋아요 이벤트
 		$(document).on("click", ".tourlikes", function(){
 			
 		});
@@ -169,14 +178,18 @@
 			type : "get",
 			dataType : "json",
 			url:"./view",
-			data: {"word":word,"start" :${startNum}},
+			data: {"word":word, "currentPage":currentPage, 
+				"currentPage":currentPage, "currentPage":currentPage},
 			success:function(res){
+				let datas = res.data;
+				let pages = res.pageInfo;
+				
 				let s=
 					`
 					<ul class="grid-list">
 					
 					`;
-				$.each(res, function(idx,item) {
+				$.each(datas, function(idx,item) {
 					s+=`
 						 <li>
 							<div class="item-image">
@@ -227,6 +240,40 @@
 				s+=`</ul>`;
 				
 				$(".tourlist").html(s);
+				
+				var startPage = pages.startPage;
+	            var currentPage = pages.currentPage;
+	            var endPage = pages.endPage;
+	            var totalPage = pages.totalPage;
+				
+			
+				let t =`<ul class="pagination" style="justify-content: center;">`;
+	            // 이전
+	            if (startPage > 1) 
+	            {
+	                t += `<li class="pagination-item"><a class="pagination-link" data="\${startPage - 1}">Previous</a></li>`;
+	            }
+	            // 페이징
+	            for (let pno = startPage; pno <= endPage; pno++) 
+	            {
+	                if (pno == currentPage) 
+	                {
+	                    t += `<li class="pagination-item is-active"><a class="pagination-link" data="\${pno}">\${pno}</a></li>`;
+	                } else 
+	                {
+	                    t += `<li class="pagination-item"><a class="pagination-link" data="\${pno}">\${pno}</a></li>`;
+	                }
+	            }
+	            // 다음
+	            if (endPage < totalPage) 
+	            {
+	                t += `<li class="pagination-item"><a class="pagination-link" data="\${endPage + 1}">Next</a></li>`;
+	            }
+	            
+	            t += `</ul>`;
+				
+				
+				$(".tourpaginglist").html(t);
 			}
 		});
 		
@@ -250,7 +297,8 @@
 						</div>
 					</div>
 					<div class="option-wrap">
-						<button type="button" class="btn-filter">
+						<button type="button" class="btn btn-primary btn-filter" 
+						data-bs-toggle="modal" data-bs-target="#myModal">
 							<i class="bi bi-sliders"></i>
 						</button>
 					</div>
@@ -267,38 +315,60 @@
 		
 	</div>
 	<div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s" style="text-align: center; margin-top: 50px;">
-		<ul class="pagination" style="justify-content: center;">
-			<!-- 이전 -->
-			<c:if test="${startPage>1 }">
-				<li class="pagination-item--wide first"> <a name="page" class="pagination-link--wide first" href="./list?currentPage=${startPage-1 }">Previous</a> </li>
-			</c:if>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<!-- 페이징 -->
-			<c:forEach var="pno" begin="${startPage}" end="${endPage}">
-					<c:if test="${pno==currentPage}">
-						<c:if test="${pno==startPage}">
-							<li class="pagination-item is-active first-number"> <a class="pagination-link">${pno}</a> </li>
-						</c:if>
-						<c:if test="${pno!=startPage}">
-							<li class="pagination-item is-active"> <a class="pagination-link">${pno}</a> </li>
-						</c:if>
-					</c:if>
-					<c:if test="${pno!=currentPage }">
-						<c:if test="${pno==startPage}">
-							<li class="pagination-item first-number"> <a class="pagination-link">${pno }</a> </li>
-						</c:if>
-						<c:if test="${pno!=startPage}">
-							<li class="pagination-item"> <a class="pagination-link">${pno }</a> </li>
-						</c:if>
-					</c:if>
-				</a>
-				&nbsp;	
-			</c:forEach>
-			<!-- 다음 -->
-			<c:if test="${endPage<totalPage }">
-				<li class="pagination-item--wide last"> <a class="pagination-link--wide last" href="./list?currentPage=${endPage+1 }">Next</a> </li>
-			</c:if>
-		</ul>
+		
+		<div class="tourpaginglist">
+			페이징
+		</div>
+		
 	</div>
+	
+		<!-- The Modal -->
+	<div class="modal" id="myModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">필터 선택</h4>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        <div class="modalfilter">
+		        	<table class="modalfilterquery">
+		        		<tr><td>지역</td></tr>
+		        		<tr>	
+		        			<td>
+		        				<button type="button" class="courseadd_searchcategory courseadd_selectablebtn" infocode="3">제주시</button>
+		        				<button type="button" class="courseadd_searchcategory courseadd_selectablebtn" infocode="4">서귀포시</button>
+		        			</td>
+		        		</tr>
+		        		
+		        		<tr><td>카테고리</td></tr>
+		        		<tr>	
+		        			<td>
+		        				<button type="button" infocode="12">관광지</button>
+		        				<button type="button" infocode="14">문화시설</button>
+		        				<button type="button" infocode="15">축제행사</button>
+		        				<button type="button" infocode="39">음식점</button>
+		        			</td>
+		        		</tr>
+		        		
+		        		
+		        	</table>
+		        </div>
+	      </div>
+	
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">필터 적용</button>
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
+	
+	
 </body>
 </html>
