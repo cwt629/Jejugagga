@@ -23,4 +23,5 @@ public class CourseDto {
 	private int totalLikes;
 	private String writersPhoto;
 	private String writersNickname;
+	private int totalSpots;
 }

@@ -2,7 +2,6 @@ package jeju.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,10 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jeju.dto.CourseDto;
 import jeju.dto.CourseRouteDto;
+import jeju.dto.MemberTableDto;
 import jeju.dto.TourDto;
 import jeju.service.CourseLikesService;
 import jeju.service.CourseRouteService;
 import jeju.service.CourseService;
+import jeju.service.MemberTableService;
 import jeju.service.TourService;
 
 @Controller
@@ -38,12 +39,17 @@ public class CourseController {
 	@Autowired
 	private CourseLikesService courseLikesService;
 	
+	@Autowired
+	private MemberTableService memberTableService;
+	
 	@GetMapping("/course/list")
 	public String list(Model model, HttpSession session) {
 		List<CourseDto> courses = courseService.selectAllCourses();
 		
 		// 현재 로그인한 유저 코드
-		int currentUserCode = (int)session.getAttribute("usercode");
+		int currentUserCode = -1;
+		if (session.getAttribute("usercode") != null)
+			currentUserCode = (int)session.getAttribute("usercode");
 		
 		// 각 코스에 대해 정보 저장
 		for (CourseDto dto: courses) {
@@ -67,6 +73,23 @@ public class CourseController {
 			// 3. 현재 코스에 대한 좋아요 개수 저장
 			int likesCount = courseLikesService.getLikesCount(coursecode);
 			dto.setTotalLikes(likesCount);
+			
+			// 4. 이 코스를 작성한 사람의 프로필 사진과 닉네임 저장
+			int usercode = dto.getUsercode();
+			MemberTableDto memberDto = memberTableService.getData(usercode);
+			String writersPhoto = memberDto.getPhoto();
+			String nickname = memberDto.getNickname();
+			dto.setWritersPhoto(writersPhoto);
+			dto.setWritersNickname(nickname);
+			
+			// 5. 이 코스의 여행지 개수 저장
+			dto.setTotalSpots(thumbnails.size());
+			
+			// 기타: briefcontent에서 띄어쓰기를 <br>로 바꿔주기
+			String briefContent = dto.getBriefcontent();
+			String replacedBrief = briefContent.replaceAll("\n", "<br>");
+			dto.setBriefcontent(replacedBrief);
+			
 		}
 		
 		model.addAttribute("courses", courses);
