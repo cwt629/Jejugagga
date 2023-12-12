@@ -18,11 +18,14 @@
 		select count(*) from member_table where id=#{id}
 	</select>
 	<update id="pwdTempUpdate" parameterType="MemberTableDto">
-		update member_table set password = #{password} where id =
-		#{id} and name = #{name} and birth = #{birth}
+		update member_table set password = #{password} where id = #{id}
 	</update>
 	<select id="pwdCheck" parameterType="MemberTableDto" resultType="int">
 		select count(*) from member_table where id =
+		#{id} and name = #{name} and birth = #{birth}
+	</select>
+	<select id="selectGetMail" parameterType="MemberTableDto" resultType="String">
+		select email from member_table where id =
 		#{id} and name = #{name} and birth = #{birth}
 	</select>
 	
