@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReviewTitleDao">
+    <select id="selectAllTitles" resultType="jeju.dto.BoardReviewDto">
+        SELECT title FROM tour;
+    </select>
+    <select id="searchTitles" resultType="BoardReviewDto">
+        SELECT title FROM tour WHERE title LIKE #{keyword};
+    </select>
+</mapper>

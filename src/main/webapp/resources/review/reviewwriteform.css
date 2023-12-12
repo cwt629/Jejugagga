@@ -1,0 +1,390 @@
+.css-17x4j04 {
+    position: fixed;
+    z-index: 1300;
+    inset: 0px;
+}
+
+.MuiModal-root MuiDialog-root effbbsc6 css-17x4j04 {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.css-919eu4 {
+    position: fixed;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    inset: 0px;
+    -webkit-tap-highlight-color: transparent;
+    z-index: -1;
+}
+
+.css-ekeie0 {
+    height: 100%;
+    outline: 0px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.css-17x4j04 .MuiPaper-elevation24 {
+    box-shadow: none;
+}
+
+ .css-17x4j04 .MuiPaper-root {
+     display: flex;
+     flex-direction: column;
+     width: 800px;
+     max-width: none;
+     max-height: 740px;
+     border-radius: 12px;
+ }
+
+.css-mvvywf {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    width: 100%;
+}
+
+.css-bvqroo {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0px;
+    border: 0px;
+    margin: -1px;
+    clip: rect(0px, 0px, 0px, 0px);
+    overflow: hidden;
+    white-space: nowrap;
+    overflow-wrap: normal;
+}
+
+ .css-mbdu2s {
+     background-color: rgb(255, 255, 255);
+     color: rgba(0, 0, 0, 0.87);
+     transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+     border-radius: 4px;
+     box-shadow: rgba(119, 85, 85, 0.2) 0px 11px 15px -7px, rgba(119, 85, 85, 0.14) 0px 24px 38px 3px, rgba(119, 85, 85, 0.12) 0px 9px 46px 8px;
+     margin: 32px;
+     position: relative;
+     overflow-y: auto;
+     display: flex;
+     flex-direction: column;
+     max-height: calc(100% - 64px);
+     max-width: 1000px;
+     width: calc(100% - 64px);
+ }
+
+.css-1286rwr {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    padding-bottom: 10px;
+    margin: 30px 30px 0px;
+    border-bottom: 1px solid rgb(244, 244, 244);
+    letter-spacing: -1px;
+}
+
+.css-3bav5k {
+    margin: 0px;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    flex: 0 0 auto;
+    padding: 0px;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: -0.5px;
+    color: rgb(51, 51, 51);
+}
+
+.css-73ml3g {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    overflow: visible;
+    background-color: transparent;
+    border: none;
+}
+
+.css-17x4j04 .MuiDialogContent-root {
+    overflow: hidden scroll;
+}
+
+ .css-4lpgzu {
+     flex: 1 1 auto;
+     overflow-y: auto;
+     position: relative;
+     padding: 0px 30px;
+     font-weight: 400;
+     font-size: 14px;
+     line-height: 19px;
+ }
+
+.css-1qln2j0 {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    gap: 20px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgb(244, 244, 244);
+}
+
+.css-zkol1g {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50%;
+    border: 1px solid rgb(221, 221, 221);
+    overflow: hidden;
+    border-radius: 6px;
+    -webkit-appearance: button;
+    cursor: pointer;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    padding-block: 1px;
+    padding-inline: 6px;
+
+}
+
+.css-antbrd {
+    flex-shrink: 0;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.css-urqszi {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.css-13jxu16 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 21px;
+    color: rgb(51, 51, 51);
+    display: -webkit-box;
+    overflow: hidden;
+    word-break: break-all;
+    white-space: normal;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.css-4ej2a1 {
+    padding: 30px;
+    border-bottom: 1px solid rgb(244, 244, 244);
+}
+
+.css-g752yr {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    color: rgb(51, 51, 51);
+}
+
+.css-54qg3g {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: rgb(128, 128, 128);
+    white-space: pre-line;
+    margin-top: 6px;
+}
+
+.css-54qg3g > span {
+    color: rgb(119, 85, 85);
+}
+
+.css-d0alj1 {
+    display: flex;
+    gap: 30px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 17px;
+}
+
+.css-1bvg9b5 p {
+    text-align: center;
+    white-space: pre-line;
+    padding-top: 6px;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgb(153, 153, 153);
+}
+
+.css-8gakwa {
+    position: relative;
+    min-height: 411px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.css-mevgy3 {
+    display: flex;
+    gap: 30px;
+    padding-top: 16px;
+}
+
+.css-14ai4tl {
+    position: relative;
+    flex-shrink: 0;
+    width: 70px;
+    padding-top: 12px;
+    line-height: 19px;
+    color: rgb(51, 51, 51);
+}
+
+.css-19lkxd2 {
+    color: rgb(250, 98, 47);
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+.css-8atqhb {
+    width: 100%;
+}
+
+.css-12julfn {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 205px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 4px;
+}
+
+.css-5etceh {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 15px 16px;
+    font-size: 16px;
+    line-height: 21px;
+    word-break: break-all;
+    z-index: 1;
+    background: none;
+    border-radius: 4px;
+    color: rgb(51, 51, 51);
+    outline: none;
+    resize: none;
+    border: none;
+}
+
+.css-1ofzfyp {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    padding: 15px 15px 32px;
+}
+
+.css-1s4qubi {
+    position: relative;
+    height: 100%;
+    width: 72px;
+    padding-bottom: 72px;
+}
+
+.css-1s8jlp7 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    color: rgb(204, 204, 204);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.css-dbwxb9 {
+    padding: 0px 16px 16px;
+    font-size: 12px;
+    text-align: right;
+}
+
+.css-14kcwq8 {
+    color: rgb(153, 153, 153);
+}
+
+.css-3exdeo {
+    position: sticky;
+    bottom: 0px;
+    left: 0px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    gap: 8px;
+    height: 106px;
+    margin-top: 20px;
+    border-top: 1px solid rgb(244, 244, 244);
+    background-color: rgb(255, 255, 255);
+}
+
+.css-cyv420 {
+    width: 160px;
+    height: 56px;
+    padding: 0px 10px;
+    text-align: center;
+    letter-spacing: 0px;
+    border-radius: 3px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    margin-top: 14px;
+    border: 1px solid rgb(221, 221, 221);
+    background-color: white;
+    color: rgb(0, 0, 0);
+}
+
+.css-6j45ao[disabled] {
+    background-color: rgb(221, 221, 221);
+}
+
+button[disabled], input[disabled] {
+    cursor: default;
+}
+
+.css-6j45ao {
+     width: 160px;
+     height: 56px;
+     padding: 0px 10px;
+     text-align: center;
+     letter-spacing: 0px;
+     border-radius: 3px;
+     font-size: 16px;
+     line-height: 20px;
+     font-weight: 500;
+     margin-top: 14px;
+     color: rgb(255, 255, 255);
+     background-color: rgb(221, 221, 221);
+}
