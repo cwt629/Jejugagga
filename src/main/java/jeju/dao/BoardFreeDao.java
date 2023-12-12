@@ -24,20 +24,28 @@ public class BoardFreeDao {
 	}
 
 	public int getMaxNum() {
-		return session.selectOne(nameSpace + "selectMaxOfBoardFree");
+		return session.selectOne(nameSpace + "selectMaxNumOfBoardFree");
 
 	}
 
-	public void insertBoard(BoardFreeDto dto) {
+	public void insertBoardFree(BoardFreeDto dto) {
 		session.insert(nameSpace + "insertBoard", dto);
 	}
 
 	public void updateReadCount(int num) {
-		session.update(nameSpace + "updateReadCountOfBoard", num);
+		session.update(nameSpace + "updateReadCountOfBoardFree", num);
 	}
 
 	public BoardFreeDto getData(int num) {
 		return session.selectOne(nameSpace + "selectDataByNum", num);
+	}
+
+	public void updateBoardFree(BoardFreeDto dto) {
+		session.update(nameSpace + "updateBoardFree", dto);
+	}
+
+	public void deleteBoardFree(int num) {
+		session.delete(nameSpace + "deleteBoardFree", num);
 	}
 
 }
