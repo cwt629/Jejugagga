@@ -13,7 +13,7 @@ public class PagingCriteria {
         this.perPageNum = 5;
     }
 
-    /* */
+    /* 0을 넘기면 1로 돼서 페이지로 등록이 된다. */
     public void setPage(int page) {
         if (page <= 0) {
             this.page = 1;

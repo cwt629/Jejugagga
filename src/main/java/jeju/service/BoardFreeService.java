@@ -20,7 +20,7 @@ public class BoardFreeService {
 		int perPageNum = criteria.getPerPageNum();
 
 		// DAO에 페이징 정보를 전달하여 페이징된 데이터를 받아온다..
-		return boardFreeDao.getList(start ,perPageNum);
+		return boardFreeDao.getList(start, perPageNum);
 	}
 
 	public void updateReadCount(int num) {
