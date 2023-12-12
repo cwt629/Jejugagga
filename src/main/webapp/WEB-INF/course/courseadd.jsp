@@ -98,6 +98,7 @@
        opacity: 0.5;
        position: absolute;
        display: none;
+
    }
    
    div.courseadd_routes>img.courseadd_arrow {
