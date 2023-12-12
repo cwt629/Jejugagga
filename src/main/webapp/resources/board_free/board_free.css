@@ -1,7 +1,8 @@
-table {
+.All-board-table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
 section.notice {
     padding: 80px 0;
 }
@@ -39,7 +40,7 @@ section.notice {
     outline: 0;
     border-width: 1px;
 }
-#board-search .search-window .search-wrap .btn {
+#board-search .search-window .search-wrap .board_free_btn {
     position: absolute;
     right: 0;
     top: 0;
@@ -62,9 +63,10 @@ section.notice {
     line-height: 1.4;
     word-break: break-all;
     vertical-align: middle;
+    text-decoration: none;
 }
 .board-table a:hover {
-    text-decoration: underline;
+    color: #75444A;
 }
 .board-table th {
     text-align: center;
@@ -92,14 +94,14 @@ section.notice {
     padding-left: 28px;
     padding-right: 14px;
     border-top: 1px solid #e7e7e7;
-    text-align: left;
+    text-align: center;
 }
 
 .board-table tbody th p{
     display: none;
 }
 
-.btn {
+.board_btn {
     display: inline-block;
     padding: 0 30px;
     font-size: 15px;
@@ -125,25 +127,26 @@ section.notice {
     -ms-transition: all 0.3s;
     -o-transition: all 0.3s;
     transition: all 0.3s;
+
 }
 
-.btn-dark {
+.board_free_btn-dark {
     background: #555;
     color: #fff;
 }
 
-.btn-dark:hover, .btn-dark:focus {
+.board_free_btn-dark:hover, .board_free_btn-dark:focus {
     background: #373737;
     border-color: #373737;
     color: #fff;
 }
 
-.btn-dark {
+.board_free_btn-dark {
     background: #555;
     color: #fff;
 }
 
-.btn-dark:hover, .btn-dark:focus {
+.board_free_btn-dark:hover, .board_free_btn-dark:focus {
     background: #373737;
     border-color: #373737;
     color: #fff;
@@ -175,3 +178,4 @@ section.notice {
     width: 1px;
     height: 1px;
 }
+
