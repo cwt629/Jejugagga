@@ -24,10 +24,10 @@
 		width: 100%;
 	}
 	
-	#mypageContext {
+	#historyContext {
 		position: absolute;
 		width: 85%;
-		top: 150px;
+		top: 100px;
 		left: 22%;
 		text-align: center;
 		display: flex;
@@ -75,11 +75,12 @@
 		text-align: left;
 	}
 	
-	.profilebox {
+	.historybox {
 		width: 80%;
 		border-radius: 30px;
 		box-shadow: 5px 5px 10px;
 		padding: 30px 30px 30px 30px;
+		text-align: left;
 	}
 	
 	.navmenu_list {
@@ -101,10 +102,6 @@
 		flex-direction: column;
 	}
 	
-	.profilebox {
-		text-align: left;
-	}
-	
 	hr {
 		width: 100%;
 	}
@@ -116,9 +113,9 @@
 		if(navmenu==null || navmenu=='one')
 			  $(".navmenu_list>a").eq(0).css("color","red");
 		else if(navmenu=='two')
-			  $(".navmenu_list").eq(1).css("color","red");
+			  $(".navmenu_list>a").eq(1).css("color","red");
 		else if(navmenu=='three')
-			  $(".navmenu_list").eq(2).css("color","red");
+			  $(".navmenu_list>a").eq(2).css("color","red");
 	});
 </script>
 </head>
@@ -156,44 +153,57 @@
 			<h6><a href="${root}/member/logout" style="color: brown;">로그아웃</a></h6>
 		</div>
 	</nav>
-	<div id="mypageContext">
-		<div class="profilebox" style="text-align: left;">
+	<div id="historyContext">
+		<div class="historybox" style="text-align: left;">
 			<div>
-				<h4>기본정보</h4>
-				<img src="../res/photo/noimage.png" style="width: 50px; height: 50px; border: 2px solid black; float: left;">
-				<div class="profile_text">
-					<span>${sessionScope.nickname }</span>
-					<span>${sessionScope.myemail }</span>
-				</div>
-				<button type="button" style="float: right;  transform: translate(-100%, -50%);">수정</button>
+				<i class="bi bi-chat-left-text"></i>
+				내가 쓴 자유게시판 글
+				<span style="float: right;">전체보기 ></span>
 			</div>
 			<hr>
-			<div>
-			<i class="bi bi-phone"></i>
-			핸드폰
+			<!-- 내부 글 목록 코드 작성 필요 -->
+			<div class="history_innerbox" style="text-align: left;">
+				<div>
+				글 제목
+				<span style="float: right;">작성일</span>
+				</div>		
 			</div>
-			<hr>
-			<div>
-			<i class="bi bi-envelope"></i>
-			이메일
-			</div>		
+			<!-- 내부 글 목록 코드 작성 필요 -->
 		</div>
 		<br><br><br>
-		<div class="profilebox">
-			<h4>부가 정보 관리</h4>
+		<div class="historybox" style="text-align: left;">
+			<div>
+				<i class="bi bi-hand-thumbs-up"></i>
+				내가 쓴 후기
+				<span style="float: right;">전체보기 ></span>
+			</div>
+			<hr>
+			<!-- 내부 글 목록 코드 작성 필요 -->
+			<div class="history_innerbox" style="text-align: left;">
 				<div>
-				<i class="bi bi-building-add"></i>
-				주소
-				<button type="button" style="float: right;  transform: translate(-100%, -50%);">수정</button>
-				</div>
-				<hr>
-				<div>
-				<i class="bi bi-key"></i>
-				비밀번호 변경
-				</div>
+				글 제목
+				<span style="float: right;">작성일</span>
+				</div>		
+			</div>
+			<!-- 내부 글 목록 코드 작성 필요 -->
 		</div>
-		<br><br><br><br>
-		<button type="button" class="btn btn-warning user_withdraw" style="width: 10%;">회원탈퇴</button>
+		<br><br><br>
+		<div class="historybox" style="text-align: left;">
+			<div>
+				<i class="bi bi-question-circle"></i>
+				1:1 문의
+				<span style="float: right;">전체보기 ></span>
+			</div>
+			<hr>
+			<!-- 내부 글 목록 코드 작성 필요 -->
+			<div class="history_innerbox" style="text-align: left;">
+				<div>
+				글 제목
+				<span style="float: right;">작성일</span>
+				</div>		
+			</div>
+			<!-- 내부 글 목록 코드 작성 필요 -->
+		</div>
 	</div>
 </div>
 </body>
