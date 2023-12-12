@@ -24,4 +24,8 @@ public class TourService {
 		
 		return tourDao.getSearchedTourByQueries(queryMap);
 	}
+	
+	public TourDto getData(int tourcode) {
+		return tourDao.getData(tourcode);
+	}
 }
