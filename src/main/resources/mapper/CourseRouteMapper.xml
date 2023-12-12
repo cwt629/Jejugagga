@@ -6,4 +6,8 @@
 		insert into course_route (coursecode, tourcode, routeorder, registereddate)
 		values (#{coursecode}, #{tourcode}, #{routeorder}, now())
 	</insert>
+	<select id="selectOneRoute" parameterType="int" resultType="CourseRouteDto">
+		select * from course_route where coursecode = #{coursecode}
+		order by routeorder asc
+	</select>
 </mapper>

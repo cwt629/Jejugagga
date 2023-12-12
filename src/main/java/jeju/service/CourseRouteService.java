@@ -1,5 +1,7 @@
 package jeju.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import jeju.dao.CourseRouteDao;
@@ -14,5 +16,9 @@ public class CourseRouteService {
 	
 	public void insertCourseRoute(CourseRouteDto dto) {
 		courseRouteDao.insertCourseRoute(dto);
+	}
+	
+	public List<CourseRouteDto> selectOneRoute(int coursecode) {
+		return courseRouteDao.selectOneRoute(coursecode);
 	}
 }
