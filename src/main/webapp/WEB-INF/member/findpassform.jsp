@@ -83,7 +83,7 @@
 	<div class="checkdiv">
 		<img alt="logo" src="${root }/res/photo/jejuhome.png" style="margin-left: 55px" class="login_logo_photo">
 		<div class="findtext" style="text-align: center;"><b>찾으시려는 계정의 회원정보를 입력해주세요</b></div>
-		<form action="findpass/check" method="post" id="findform">
+		<form action="${root }/member/login/findpass/check" method="post" id="findform">
 			<br>아이디<br>
 	        <input type="text" name="id" placeholder="ID" class="findname" autofocus="autofocus">
 			이름<br>
