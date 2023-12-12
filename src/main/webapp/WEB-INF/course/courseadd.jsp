@@ -62,7 +62,8 @@
    }
    
    div.courseadd_routes div.courseadd_routeplace {
-       height: 200px;
+       width: 160px;
+       height: 250px;
        position: relative;
        top: 22px;
    }
@@ -83,6 +84,11 @@
    
    div.courseadd_routes div.courseadd_routeplace>h5 {
        text-align: center;
+   }
+   
+   div.courseadd_routes>img.courseadd_arrow {
+       position: relative;
+       top: -25px;
    }
    
    div.courseadd_routes div.courseadd_routeplace div.courseadd_tag {
@@ -353,8 +359,8 @@
 	// 현재 추가된 여행지 리스트를 출력하는 함수
 	function displayCurrentRoute(){
 		let result = ``;
-		const ARROW_ENABLED = `<img src="../res/photo/course_icons/next_enabled.png">`;
-		const ARROW_DISABLED = `<img src="../res/photo/course_icons/next_disabled.png">`;
+		const ARROW_ENABLED = `<img class="courseadd_arrow" src="../res/photo/course_icons/next_enabled.png">`;
+		const ARROW_DISABLED = `<img class="courseadd_arrow" src="../res/photo/course_icons/next_disabled.png">`;
 		
 		for (let i = 0; i < MAX_SPOTS_IN_COURSE; i++){
 			// 첫 시작을 제외하고는 화살표부터 그려준다
