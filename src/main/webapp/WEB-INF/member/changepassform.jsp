@@ -20,10 +20,10 @@
 		height: 350px;
 		padding: 40px;
 		position: absolute;
-	    margin: 0 auto;
-	    left: 0;
-	    right: 0px;
-	    TOP: 13%;
+	        margin: 0 auto;
+	        left: 0;
+	        right: 0px;
+	        TOP: 13%;
 	}
 	
 	.signupdiv > .signup_logo_photo{
@@ -119,88 +119,33 @@
         }
     });
 </script>
-<c:set var="root" value="<%=request.getContextPath() %>"/>
-<script type="text/javascript">
-	let idok=false;
-	$(function(){
-		 //중복체크 버튼 이벤트
-		$(".idcheck").click(function(){
-			//입력한 아이디
-			let id=$("#id").val();
-			$.ajax({
-				type:"get",
-				dataType:"json",
-				url:"./idcheck",
-				data:{"id":id},
-				success:function(res){
-					if(res.count!=0){
-						alert("이미 가입된 아이디입니다! 다른 아이디를 사용해주세요");
-						idok=false;
-						$("#id").val("");
-					}else{
-						alert("사용이 가능한 아이디 입니다");
-						idok=true;
-					}
-				}
-			});	
-		});
-		
-		//아이디 입력 시 발생하는 이벤트
-		$("#id").keyup(function(){
-			idok=false;
-		});
-		
-	});//close fucntion
-	
-	function check(){
-		if(!idok){
-			alert("중복체크 버튼을 눌러주세요!!!!!!!!!!!!!!!!!!!!");
-			return false;
-		}		
-	}
-</script>
 </head>
 <c:set var="root" value="<%=request.getContextPath() %>"/>
 <body>
 	<div class="signupdiv">
 		<img alt="logo" src="${root }/res/photo/jejuhome.png" class="signup_logo_photo">
 		<div>
-			<form id="signupForm" action="${root }/member/signup/submit" method="post" onsubmit="return check()">
-			    이름<br><input type="text" name="name" required>
-			    <br>
-			    생년월일<br>
-			    <input type="date" name="birth" required><br>
-			    아이디<br><input type="text" name="id" id="id" required>
-			    <button type="button" class="idcheck">중복확인</button><br>
-			    비밀번호 <br><input type="password" name="password" id="password" required>
+		<b style="font-size: 18px; text-align: center; color: #EEB182;">
+		변경할 비밀번호를 입력해주세요
+		</b>
+			<form id="signupForm" action="${root }/member/changepass/change" method="post" onsubmit="return check()">
+
+			    <br><input type="password" name="password" id="password" required placeholder="변경할 비밀번호 입력">
 			    <!-- 비번 조건 -->
 			    <div id="passwordStrength" style="color: orange; display: none;">
 			        비밀번호는 8자이상, 숫자와 특수문자가 포함되어야합니다.<br>
 			    </div>
 			    <br> 
-			    비밀번호 확인<br><input type="password" name="confirmPass" id="confirmPass" required><br>
+			    <input type="password" name="confirmPass" id="confirmPass" required placeholder="비밀번호 확인"><br>
 			    <!-- 비번 불일치 알림-->
 			    <div id="passwordMismatch" style="color: red; display: none;">
 			        비밀번호가 일치하지 않습니다.<br><br>
 			    </div>
-			      	 성별<select name="gender" id="gender">
-			    		<option value="남자">남자</option>
-			    		<option value="여자">여자</option>
-			  		</select>
-			  <br>
-			    이메일<br><input type="email" name="email" required><br>
-			    닉네임<br><input type="text" name="nickname" required><br>
-			    핸드폰번호 <br><input type="text" name="phone" maxlength="13" oninput="hypen(this)" required><br>
-			    <input type="submit" value="회원가입"> 
+			    <input type="hidden" value="${id}"name="id">
+			    <input type="submit" value="비밀번호 변경"> 
 			</form>
 		</div>
+		<h1>${id }</h1>
 	</div>
-	<script type="text/javascript">// 핸드폰번호 하이픈 주는 코드
-		const hypen = (target) => {
-		 target.value = target.value
-		   .replace(/[^0-9]/g, '')
-		  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
-		}
-	</script>
 </body>
 </html>
