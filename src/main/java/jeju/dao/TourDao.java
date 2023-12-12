@@ -18,18 +18,29 @@ public class TourDao {
 	private String nameSpace="jeju.dao.TourDao.";
 	
 	//전체갯수
-	public int getTotalCount()
+	public int getTotalCount(String word)
 	{
-		return session.selectOne(nameSpace+"totalCountOfTour");
+		//word에 검색단어가 안들어 있을 경우 null값을 보내야 where문이 실행안된다
+		word=word==null || word.length()==0?null:word;
+		
+		Map<String, Object>map=new HashMap<String, Object>();
+		map.put("searchword", word);
+		
+		return session.selectOne(nameSpace+"totalCountOfTour",word);
 	}
 	
 	//리스트
-	public List<TourDto> getAllTour(int start, int perpage)
+	public List<TourDto> getAllTour(String word, int start)
 	{
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		//word에 검색단어가 안들어 있을 경우 null값을 보내야 where문이 실행안된다
+		word=word==null || word.length()==0?null:word;
+		
+		
+		Map<String, Object>map=new HashMap<String, Object>();
+		map.put("searchword", word);
 		map.put("start", start);
-		map.put("perpage", perpage);
-		return session.selectList(nameSpace+"selectPagingOfTour",map);
+		
+		return session.selectList(nameSpace+"selectPagingOfTour", map);
 	}
 	
 	
@@ -40,7 +51,10 @@ public class TourDao {
 		return session.selectOne(nameSpace+"selectOneTour", tourcode);
 	}
 	
-	
-	
+	// 검색어와 카테고리에 대해 검색하기(by 장원태)
+	public List<TourDto> getSearchedTourByQueries(Map<String, Object> queryMap)
+	{
+		return session.selectList(nameSpace + "searchTourByQueries", queryMap);
+	}
 	
 }

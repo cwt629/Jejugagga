@@ -57,6 +57,5 @@ public class TourDto {
 	private String usetimefestival;
 	private String spendtimefestival;
 
-	
 
 }
