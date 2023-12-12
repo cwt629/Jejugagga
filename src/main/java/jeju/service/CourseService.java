@@ -1,5 +1,7 @@
 package jeju.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import jeju.dao.CourseDao;
@@ -15,5 +17,10 @@ public class CourseService {
 	public void insertCourse(CourseDto dto)
 	{
 		courseDao.insertCourse(dto);
+	}
+	
+	public List<CourseDto> selectAllCourses()
+	{
+		return courseDao.selectAllCourses();
 	}
 }

@@ -19,4 +19,8 @@ public class CourseDao {
 	public void insertCourse(CourseDto dto) {
 		session.insert(nameSpace + "insertCourse", dto);
 	}
+	
+	public List<CourseDto> selectAllCourses() {
+		return session.selectList(nameSpace + "selectAllCourses");
+	}
 }

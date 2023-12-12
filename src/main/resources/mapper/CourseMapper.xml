@@ -10,4 +10,7 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
+	<select id="selectAllCourses" resultType="CourseDto">
+		select * from course order by coursecode desc
+	</select>
 </mapper>
