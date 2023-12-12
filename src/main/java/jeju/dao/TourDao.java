@@ -56,7 +56,10 @@ public class TourDao {
 		return session.selectOne(nameSpace+"selectOneTour", tourcode);
 	}
 	
-	
-	
+	// 검색어와 카테고리에 대해 검색하기(by 장원태)
+	public List<TourDto> getSearchedTourByQueries(Map<String, Object> queryMap)
+	{
+		return session.selectList(nameSpace + "searchTourByQueries", queryMap);
+	}
 	
 }

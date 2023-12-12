@@ -27,7 +27,7 @@ public class TourRestController {
 		//페이징에 처리에 필요한 변수들
 		int perPage=12; //한페이지당 보여지는 게시글의 갯수
 		int totalCount=0; //총 개시글의 개수
-		int totalPage;//총페이지수
+		int totalPage = 0;//총페이지수
 		int startNum;//각페이지당 보여지는 글의 시작번호
 		int perBlock=5; //한블럭당 보여지는 페이지의 개수
 		int startPage; //각블럭당 보여지는 페이지의 시작번호

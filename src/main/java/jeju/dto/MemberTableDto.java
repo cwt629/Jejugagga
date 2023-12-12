@@ -1,5 +1,6 @@
 package jeju.dto;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import lombok.Data;
@@ -14,7 +15,7 @@ public class MemberTableDto {
 	private String name;
 	private String phone;
 	private String email;
-	private Timestamp birth;
+	private Date birth;
 	private String gender;
 	private String type;
 	private Timestamp registereddate;
