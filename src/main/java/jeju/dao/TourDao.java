@@ -30,15 +30,20 @@ public class TourDao {
 	}
 	
 	//리스트
-	public List<TourDto> getAllTour(String word, int start)
+	public List<TourDto> getAllTour(String word, int start,  Integer[] contenttype, int sigungucode)
 	{
 		//word에 검색단어가 안들어 있을 경우 null값을 보내야 where문이 실행안된다
 		word=word==null || word.length()==0?null:word;
+				
 		
 		
 		Map<String, Object>map=new HashMap<String, Object>();
 		map.put("searchword", word);
 		map.put("start", start);
+		map.put("contenttype", (contenttype == null || contenttype.length == 0) ? null : contenttype);
+		map.put("sigungucode", sigungucode);
+		
+		System.out.println(map);
 		
 		return session.selectList(nameSpace+"selectPagingOfTour", map);
 	}

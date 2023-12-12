@@ -128,11 +128,27 @@
 	  -moz-osx-font-smoothing: grayscale;
 	}
 	
+	.filtertablebtn_sigungu, .filtertablebtn_content  {
+       border: 2px solid #d9d9d9;
+       background-color: transparent;
+       padding: 5px 25px;
+       border-radius: 30px;
+       font-weight: bold;
+   }
+   
+   .filtertablebtn_sigungu.filtertablebtn_selected,
+   .filtertablebtn_content.filtertablebtn_selected {
+       border: 2px solid #d7897e;
+   }
+	
+	
 </style>	
 <script>
 	const urlParams = new URL(location.href).searchParams;
 	let word = urlParams.get('word');
 	let currentPage = urlParams.get('currentPage');
+	let sigungu_categories = 0; // 시군구 카테고리 번호 인트
+	let content_categories = []; // 컨텐트 카테고리 번호 배열
 	
 	$(function() {
 		list();
@@ -160,7 +176,37 @@
 			location.href = link;
 		});
 		
+		// 여행지 추가 모달 - 카테고리 버튼 클릭 이벤트
+		$(".filtertablebtn_sigungu").click(function(){
+			$(this).toggleClass("filtertablebtn_selected");
+			sigungu_categories = parseInt($(this).attr("infocode")); // 정수로 변환
+		});
+		$(".filtertablebtn_content").click(function(){
+			$(this).toggleClass("filtertablebtn_selected");
+            content_categories = []; // 배열 초기화
+            $(".filtertablebtn_content.filtertablebtn_selected").each(function (idx, item) {
+                content_categories.push(parseInt($(this).attr("infocode"))); // 정수로 변환하여 배열에 추가
+            });
+		});
 		
+		
+		// 여행지 검색 버튼 클릭 이벤트
+		$("#filtersearchbtn").click(function(){
+			if (sigungu_categories == 0) {
+                alert("지역을 선택해야 합니다.");
+                return;
+            }
+
+            if (content_categories.length === 0) {
+                alert("카테고리를 최소 1개 선택해야 합니다.");
+                return;
+            }
+
+			
+			console.log("sigungu_categories : "+sigungu_categories);
+			console.log("content_categories:"+content_categories);
+			
+		})
 		
 
 		
@@ -179,7 +225,7 @@
 			dataType : "json",
 			url:"./view",
 			data: {"word":word, "currentPage":currentPage, 
-				"currentPage":currentPage, "currentPage":currentPage},
+				"sigungucode":sigungu_categories, "contenttype":content_categories},
 			success:function(res){
 				let datas = res.data;
 				let pages = res.pageInfo;
@@ -340,18 +386,18 @@
 		        		<tr><td>지역</td></tr>
 		        		<tr>	
 		        			<td>
-		        				<button type="button" class="courseadd_searchcategory courseadd_selectablebtn" infocode="3">제주시</button>
-		        				<button type="button" class="courseadd_searchcategory courseadd_selectablebtn" infocode="4">서귀포시</button>
+		        				<button type="button" class="filtertablebtn_sigungu" infocode="3">제주시</button>
+		        				<button type="button" class="filtertablebtn_sigungu" infocode="4">서귀포시</button>
 		        			</td>
 		        		</tr>
 		        		
 		        		<tr><td>카테고리</td></tr>
 		        		<tr>	
 		        			<td>
-		        				<button type="button" infocode="12">관광지</button>
-		        				<button type="button" infocode="14">문화시설</button>
-		        				<button type="button" infocode="15">축제행사</button>
-		        				<button type="button" infocode="39">음식점</button>
+		        				<button type="button" class="filtertablebtn_content" infocode="12">관광지</button>
+		        				<button type="button" class="filtertablebtn_content" infocode="14">문화시설</button>
+		        				<button type="button" class="filtertablebtn_content" infocode="15">축제행사</button>
+		        				<button type="button" class="filtertablebtn_content" infocode="39">음식점</button>
 		        			</td>
 		        		</tr>
 		        		
@@ -362,7 +408,7 @@
 	
 	      <!-- Modal footer -->
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">필터 적용</button>
+	        <button type="button" class="btn btn-danger" id="filtersearchbtn" data-bs-dismiss="modal">필터 적용</button>
 	      </div>
 	
 	    </div>

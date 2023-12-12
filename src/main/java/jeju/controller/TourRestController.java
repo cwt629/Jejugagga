@@ -19,7 +19,8 @@ public class TourRestController {
 	private TourDao tourDao;
 	
 	@GetMapping("/tour/view")
-	public HashMap<String, Object> getAllTour(@RequestParam String word, @RequestParam (defaultValue = "1") int currentPage) {
+	public HashMap<String, Object> getAllTour(@RequestParam String word, @RequestParam (defaultValue = "1") int currentPage,
+			@RequestParam(name = "contenttype", required = false) Integer[] contenttype,@RequestParam (defaultValue = "0") int sigungucode) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		
 		//페이징처리
@@ -51,7 +52,7 @@ public class TourRestController {
 		
 		HashMap<String, Object> pageMap = new HashMap<String, Object>();
 		
-		resultMap.put("data", tourDao.getAllTour(word, startNum));
+		resultMap.put("data", tourDao.getAllTour(word, startNum, contenttype, sigungucode));
 		
 		//page info put
 		pageMap.put("totalCount",totalCount);

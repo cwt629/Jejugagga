@@ -18,14 +18,14 @@
 		<if test="searchword!=null">
 			where title like concat('%',#{searchword},'%')
 		</if>
-		<if test="typecode!=null">
+		<if test="contenttype != null and contenttype.size() > 0">
 			and contenttype in
-			<foreach collection="categories" item="typecode" open="(" close=")" separator=",">
+			<foreach collection="contenttype" item="typecode" open="(" close=")" separator=",">
 				#{typecode}
 			</foreach>
 		</if>
-		<if test="sigungucode!=null">
-			and contenttype = #{sigungucode}
+		<if test="sigungucode!=0">
+			and sigungucode = #{sigungucode}
 		</if>
 		order by title
 		limit #{start}, 12
