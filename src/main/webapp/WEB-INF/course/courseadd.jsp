@@ -59,6 +59,7 @@
    div.courseadd_routes {
        display: flex;
        align-items: center;
+       margin: 30px 0px;
    }
    
    div.courseadd_routes div.courseadd_routeplace {
@@ -66,6 +67,10 @@
        height: 250px;
        position: relative;
        top: 22px;
+   }
+   
+   div.courseadd_routes div.courseadd_routeplace.courseadd_enabled {
+       cursor: pointer;
    }
    
    div.courseadd_routes div.courseadd_routeplace div.courseadd_routephoto {
@@ -84,6 +89,15 @@
    
    div.courseadd_routes div.courseadd_routeplace>h5 {
        text-align: center;
+   }
+   
+   div.courseadd_routes div.courseadd_routeplace.courseadd_enabled>img.courseadd_remove {
+       width: 150px;
+       height: 150px;
+       border-radius: 5px;
+       opacity: 0.5;
+       position: absolute;
+       display: none;
    }
    
    div.courseadd_routes>img.courseadd_arrow {
@@ -303,7 +317,31 @@
 			$("button.courseadd_modalclose").trigger("click"); // 모달창 닫기
 		})
 		
-	});
+		// 코스 내 여행지 마우스 오버&아웃 이벤트
+		$(document).on("mouseover", "div.courseadd_routeplace.courseadd_enabled", function(){
+			$(this).children("img.courseadd_remove").css("display", "block");
+		}).on("mouseout", "div.courseadd_routeplace.courseadd_enabled", function(){
+			$(this).children("img.courseadd_remove").css("display", "none");
+		});
+		
+		// 코스 내 여행지 클릭 이벤트(삭제)
+		$(document).on("click", "div.courseadd_routeplace.courseadd_enabled", function(){
+			let title = $(this).children("h5").text();
+			// 삭제 여부 확인
+			if (!confirm(`정말로 해당 여행지를 코스에서 삭제하시겠습니까?\n삭제 여행지: \${title}`)){
+				return;
+			}
+			
+			let index = parseInt($(this).attr("index"));
+			
+			// 현재 코스에서 삭제
+			routes.splice(index, 1);
+			
+			// 코스 다시 그리기
+			displayCurrentRoute();
+		})
+		
+	}); // end of $(function())
 	
 	// 특정 contenttype에 대한 카테고리명을 출력하는 함수
 	function getCategory(contenttype) {
@@ -374,7 +412,8 @@
 			if (i < routes.length) {
 				result += 
 					`
-					<div class="courseadd_routeplace">
+					<div class="courseadd_routeplace courseadd_enabled" index=\${i}>
+						<img class="courseadd_remove" src="../res/photo/course_icons/Icon_remove.png">
 						<div class="courseadd_routephoto">
 							<img src="\${routes[i].getImage()}">
 						</div>
