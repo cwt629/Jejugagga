@@ -313,7 +313,7 @@
 	            // 다음
 	            if (endPage < totalPage) 
 	            {
-	                t += `<li class="pagination-item"><a class="pagination-link" data="\${endPage + 1}">Next</a></li>`;
+	                t += `<li class="pagination-item" style="border-right: none;"><a class="pagination-link" data="\${endPage + 1}">Next</a></li>`;
 	            }
 	            
 	            t += `</ul>`;

@@ -119,7 +119,7 @@
 		<div id="contents">
 			<div class="sub-content">
 				<div class="container">
-					<ul class="sub-tab">
+					<ul class="sub-tab"  style="cursor: pointer;">
 						<li class="tab-item active" val="1"><a class="text-small">이야기</a></li>
 						<li class="tab-item" val="2"><a class="text-small">갤러리</a></li>
 						<li class="tab-item" val="3"><a class="text-small">오시는길</a></li>
@@ -131,11 +131,9 @@
 						</strong>
 					</div>
 					
-					<div class="section-story2">
+					<div class="section-story2" style="text-align: -webkit-center;">
 						<strong>
 							<img src="${tourDto.firstimage}" alt="등록된 사진이 없습니다.">
-							
-							
 							
 						</strong>
 					</div>
@@ -166,10 +164,12 @@
 								<thead class="fixedHeader">
 								</thead>
 								<tbody class="scrollContent">
+								  <c:if test="${tourDto.zipcode!='0'}">
 								  <tr>
 								    <td width="30%" style="text-align: center;">우편번호</td>
 								    <td>${tourDto.zipcode}</td>
 								  </tr>
+								  </c:if>
 								  <tr>
 								    <td width="30%" style="text-align: center;">주소</td>
 								    <td>${tourDto.addr1}</td>
@@ -177,7 +177,7 @@
 							  	<c:if test="${tourDto.homepage!=''}">
 								  <tr>
 							    	<td width="30%" style="text-align: center;">홈페이지</td>
-							    	<td>${tourDto.homepage}</td>
+							    	<td style="color : blue;">${tourDto.homepage}</td>
 								  </tr>
 								</c:if>
 								
