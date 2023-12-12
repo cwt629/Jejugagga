@@ -376,21 +376,20 @@
 
 /* -------------- loader4 -------------- */
 
-.loader4{
-    position: relative;
-
+.loader4 {
+    position: fixed; /* 고정된 위치 */
     width: 150px;
     height: 20px;
 
-    top: 45%;
-    top: -webkit-calc(50% - 10px);
-    top: calc(50% - 10px);
-    left: 25%;
-    left: -webkit-calc(50% - 75px);
-    left: calc(50% - 75px);
+    /* 중앙 정렬을 위해 상위 요소에서 50% 떨어진 위치에 놓고, */
+    /* 요소의 크기의 절반만큼 뺌으로써 요소의 중심을 화면의 중심에 맞춥니다. */
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 중앙 정렬을 위한 변환 */
 
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
 }
+
 
 .loader4:before{
     content: "";
