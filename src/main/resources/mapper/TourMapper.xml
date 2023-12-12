@@ -2,15 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jeju.dao.TourDao">
 
-	<select id="totalCountOfTour" resultType="int">
+	<select id="totalCountOfTour" parameterType="String" resultType="int">
 		select count(*) from tour
-	</select>
-	<select id="selectAllTour" resultType="Map">
-		select * from tour order by title limit 8
-	</select><!-- 리스트 -->
-	<select id="selectPagingOfTour" resultType="Map">
-		select * from tour order by title limit #{start}, #{perpage}
+		<if test="searchword!=null">
+		where title like concat('%',#{searchword},'%')
+		</if>
+	</select><!-- 갯수뽑기 -->
+	
+	<!-- <select id="selectAllTour" resultType="Map">
+		select * from tour order by title limit 12
+	</select>리스트 -->
+	
+	<select id="selectPagingOfTour" parameterType="Map" resultType="Map">
+		select * from tour 
+		<if test="searchword!=null">
+			where title like concat('%',#{searchword},'%')
+		</if>
+		<if test="typecode!=null">
+			and contenttype in
+			<foreach collection="categories" item="typecode" open="(" close=")" separator=",">
+				#{typecode}
+			</foreach>
+		</if>
+		<if test="sigungucode!=null">
+			and contenttype = #{sigungucode}
+		</if>
+		order by title
+		limit #{start}, 12
 	</select><!-- 리스트 페이징 -->
+	
 	<select id="selectOneTour" parameterType="int" resultType="TourDto">
 		select * from tour where tourcode=#{tourcode}
 	</select><!-- 하나만 -->
