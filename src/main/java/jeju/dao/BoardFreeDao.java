@@ -28,4 +28,16 @@ public class BoardFreeDao {
 
 	}
 
+	public void insertBoard(BoardFreeDto dto) {
+		session.insert(nameSpace + "insertBoard", dto);
+	}
+
+	public void updateReadCount(int num) {
+		session.update(nameSpace + "updateReadCountOfBoard", num);
+	}
+
+	public BoardFreeDto getData(int num) {
+		return session.selectOne(nameSpace + "selectDataByNum", num);
+	}
+
 }

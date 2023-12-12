@@ -7,11 +7,13 @@ public class PagingCriteria {
     private int page;
     private int perPageNum;
 
+    /* 페이징 처리 0이 1부터 시작, 5번부터 끊기*/
     public PagingCriteria() {
         this.page = 0;
         this.perPageNum = 5;
     }
 
+    /* */
     public void setPage(int page) {
         if (page <= 0) {
             this.page = 1;
