@@ -8,6 +8,8 @@
     <meta charset="UTF-8">
     <title>menubar</title>
     <link rel="stylesheet" type="text/css" href="${root}/res/header_styles/header_menu_style.css">
+
+
 </head>
 <body>
 
@@ -19,32 +21,18 @@
             <li class="li-menu-bar"><a href="${root}/course/list" class="main-menu-item">추천코스</a></li>
             <li class="li-menu-bar">
                 <a href="${root}/community/nav" class="main-menu-item">커뮤니티</a>
-                <div class="dropdown">
-                    <p><a href="${root}/community/inquiry/list" class="dropdown-item">1:1문의</a></p>
-                    <p><a href="${root}/community/faq/list" class="dropdown-item">FAQ</a></p>
-                    <p><a href="${root}/community/review/list" class="dropdown-item">후기게시판</a></p>
-                    <p><a href="${root}/community/free/list" class="dropdown-item">자유게시판</a></p>
-                </div>
             </li>
-            <li class="li-menu-bar"><a href="${root}/member/login" class="main-menu-item">로그인</a></li>
-            <li class="li-menu-bar"><a href="${root}/member/signup" class="signupbtn">Sign up</a></li>
+            <li class="li-menu-bar"><a href="${root}/mypage/user" class="signupbtn">마이페이지</a></li>
+              <c:if test="${sessionScope.loginok==null }">
+               <li class="li-menu-bar"><a href="${root}/member/login" class="main-menu-item">로그인</a></li>
+            </c:if>
+            <c:if test="${sessionScope.loginok!=null }"> <!-- header menu가 안밀리고 00님 환영합니다! 라고 나오게 해주세요 -->
+              <li class="li-menu-bar"><a href="${root}/member/logout" class="main-menu-item">로그아웃</a></li>
+              <li class="li-menu-bar"><a href="${root}/mypage/user" class="main-menu-item">${sessionScope.nickname}환영합니다!</a></li>
+            </c:if>
         </ul>
     </nav>
 </header>
-
-<div style="width: 200px; position: fixed; right: -45px; top: 30px;">
-	<c:if test="${sessionScope.loginok==null }">
-		<button type="button" class="btn btn-success"
-		style="width: 100px;" onclick="location.href='${root}/member/login'">로그인</button>
-	</c:if>
-	
-	<c:if test="${sessionScope.loginok!=null }">
-			<h5><a href="${root}/mypage/user">${sessionScope.nickname}님</a></h5>&nbsp;&nbsp;
-			<button type="button" class="btn btn-success"
-			style="width: 100px;" id="btnlogout" onclick="location.href='${root}/member/logout'">로그아웃</button>
-	</c:if>
-</div>
-
 
 </body>
 </html>
