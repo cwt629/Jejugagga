@@ -1,14 +1,14 @@
-package jeju.common;
+package jeju.boardfree_utils;
 
 import lombok.Getter;
 
 @Getter
-public class PagingCriteria {
+public class BoardFreePagingCriteria {
     private int page;
     private int perPageNum;
 
     /* 페이징 처리 0이 1부터 시작, 5번부터 끊기*/
-    public PagingCriteria() {
+    public BoardFreePagingCriteria() {
         this.page = 1;
         this.perPageNum = 5;
     }
