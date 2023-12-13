@@ -1,6 +1,5 @@
 package jeju.dao;
 
-import jeju.common.PagingCriteria;
 import jeju.dto.BoardFreeDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,9 @@ public class BoardFreeDao {
 		return session.selectOne(nameSpace + "totalCountOfBoardFree");
 	}
 
-	public List<BoardFreeDto> getList(int start, int perPageNum) {
+	public List<BoardFreeDto> getList(int pageStart, int perPageNum) {
 		Map<String, Integer> paramMap = new HashMap<>();
-		paramMap.put("start", start);
+		paramMap.put("pageStart", pageStart);
 		paramMap.put("perPageNum", perPageNum);
 		return session.selectList(nameSpace + "selectPagingOfBoardFreeCriteria", paramMap);
 	}
