@@ -223,66 +223,66 @@
 			<c:forEach var="dto" items="${courses}">
 				<c:set var="photoFlag" value="0"/> <!-- 해당 코스에서 하나라도 사진이 있는지 여부 -->
 				<div class="course_content">
-				<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
-				    <c:forEach var="photo" items="${dto.routePhotos}">
-				    	<c:if test="${photo != ''}">
-				    		<c:set var="photoFlag" value="1"/> <!-- 해당 코스에서 하나라도 사진이 있음 표시 -->
-				    		<swiper-slide>
-				    			<img src="${photo}">
-				    		</swiper-slide>
-				    	</c:if>
-				    </c:forEach>
-				    <!-- 사진이 하나도 없었다면, noimage를 넣어준다 -->
-				    <c:if test="${photoFlag == 0}">
-				    	<swiper-slide>
-				    		<img src="../res/photo/noimage.png">
-				    	</swiper-slide>
-				    </c:if>
-		  		</swiper-container>
-		  		
-		  		<!-- 좋아요 버튼 -->
-		  		<c:if test="${sessionScope.loginok != null}">
-			  		<div class="course_like_button">
-			  			<c:if test="${dto.likedByCurrentUser}">
-			  				<i class="bi bi-heart-fill"></i>
-			  			</c:if>
-			  			<c:if test="${!dto.likedByCurrentUser}">
-			  				<i class="bi bi-heart"></i>
-			  			</c:if>
+					<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
+					    <c:forEach var="photo" items="${dto.routePhotos}">
+					    	<c:if test="${photo != ''}">
+					    		<c:set var="photoFlag" value="1"/> <!-- 해당 코스에서 하나라도 사진이 있음 표시 -->
+					    		<swiper-slide>
+					    			<img src="${photo}">
+					    		</swiper-slide>
+					    	</c:if>
+					    </c:forEach>
+					    <!-- 사진이 하나도 없었다면, noimage를 넣어준다 -->
+					    <c:if test="${photoFlag == 0}">
+					    	<swiper-slide>
+					    		<img src="../res/photo/course_image/homeicon_incourse.png">
+					    	</swiper-slide>
+					    </c:if>
+			  		</swiper-container>
+			  		
+			  		<!-- 좋아요 버튼 -->
+			  		<c:if test="${sessionScope.loginok != null}">
+				  		<div class="course_like_button">
+				  			<c:if test="${dto.likedByCurrentUser}">
+				  				<i class="bi bi-heart-fill"></i>
+				  			</c:if>
+				  			<c:if test="${!dto.likedByCurrentUser}">
+				  				<i class="bi bi-heart"></i>
+				  			</c:if>
+				  		</div>
+			  		</c:if>
+			  		
+			  		<!-- 조회수와 좋아요 개수 -->
+			  		<div class="course_guest_info">
+			  			<i class="bi bi-eye">&nbsp;${dto.readcount}</i><br>
+			  			<i class="bi bi-heart-fill">&nbsp;${dto.totalLikes}</i>
 			  		</div>
-		  		</c:if>
-		  		
-		  		<!-- 조회수와 좋아요 개수 -->
-		  		<div class="course_guest_info">
-		  			<i class="bi bi-eye">&nbsp;${dto.readcount}</i><br>
-		  			<i class="bi bi-heart-fill">&nbsp;${dto.totalLikes}</i>
-		  		</div>
-		  		<div class="course_name">
-		  			<h4 style="text-align: center;">${dto.name}</h4>
-		  		</div>
-		  		<div class="course_brief">
-		  			${dto.briefcontent}
-		  		</div>
-		  		<hr>
-		  		<div class="course_summary">
-		  			<figure>
-		  				<img src="../res/photo/course_icons/Icon_MapMarker.png">
-		  				<figcaption>${dto.totalSpots }개</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/course_icons/Icon_Journey.png">
-		  				<figcaption>${dto.distance}km</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/course_icons/Icon_Timesheet.png">
-		  				<figcaption>${dto.spendingtime}${dto.timestandard}</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="${dto.writersPhoto == null? '../res/photo/noimage.png' : dto.writersPhoto }">
-		  				<figcaption>${dto.writersNickname}</figcaption>
-		  			</figure>
-		  		</div>
-			</div>
+			  		<div class="course_name">
+			  			<h4 style="text-align: center;">${dto.name}</h4>
+			  		</div>
+			  		<div class="course_brief">
+			  			${dto.briefcontent}
+			  		</div>
+			  		<hr>
+			  		<div class="course_summary">
+			  			<figure>
+			  				<img src="../res/photo/course_icons/Icon_MapMarker.png">
+			  				<figcaption>${dto.totalSpots }개</figcaption>
+			  			</figure>
+			  			<figure>
+			  				<img src="../res/photo/course_icons/Icon_Journey.png">
+			  				<figcaption>${dto.distance}km</figcaption>
+			  			</figure>
+			  			<figure>
+			  				<img src="../res/photo/course_icons/Icon_Timesheet.png">
+			  				<figcaption>${dto.spendingtime}${dto.timestandard}</figcaption>
+			  			</figure>
+			  			<figure>
+			  				<img src="${dto.writersPhoto == null? '../res/photo/noimage.png' : dto.writersPhoto }">
+			  				<figcaption>${dto.writersNickname}</figcaption>
+			  			</figure>
+			  		</div>
+				</div>
 			</c:forEach>
 		</div>
 	</div>
