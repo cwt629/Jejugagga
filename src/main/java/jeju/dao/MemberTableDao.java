@@ -35,9 +35,9 @@ public class MemberTableDao {
 		return session.selectOne(nameSpace+"selectDataById",id);
 	}
 	
-	public MemberTableDto getData(int num)
+	public MemberTableDto getData(int usercode)
 	{
-		return session.selectOne(nameSpace+"selectDataByNum",num);
+		return session.selectOne(nameSpace+"selectDataByNum",usercode);
 	}
 	
 	public int searchIdCount(String id)

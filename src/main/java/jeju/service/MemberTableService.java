@@ -14,9 +14,9 @@ public class MemberTableService {
 	
 	private MemberTableDao memberTableDao;
 	
-	public MemberTableDto getData(int num)
+	public MemberTableDto getData(int usercode)
 	{
-		return memberTableDao.getData(num);
+		return memberTableDao.getData(usercode);
 	}
 	
 	public void pwdUpdate(MemberTableDto dto)

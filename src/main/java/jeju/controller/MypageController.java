@@ -13,9 +13,9 @@ public class MypageController {
 	@GetMapping("/mypage/user")
 	public String userpage(HttpServletRequest request, Model model) {
 		
-    String currentUrl = request.getRequestURI();
+                String currentUrl = request.getRequestURI();
 
-    model.addAttribute("currentUrl", currentUrl);
+                model.addAttribute("currentUrl", currentUrl);
 		return "mypage/userpage";
 	}
 	

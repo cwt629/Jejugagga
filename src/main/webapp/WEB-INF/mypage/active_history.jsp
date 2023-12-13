@@ -138,7 +138,7 @@
 		<script type="text/javascript">
 			$(".navmenu_list>a").click(function(){
 				let id=$(this).parent().attr("id");
-				if(id=='myProfile')
+				if (id=='myProfile')
 					 localStorage.navmenu="one";
 				else if(id=='userHistory')
 					 localStorage.navmenu="two";
