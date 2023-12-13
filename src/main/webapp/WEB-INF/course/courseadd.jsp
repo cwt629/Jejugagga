@@ -59,12 +59,18 @@
    div.courseadd_routes {
        display: flex;
        align-items: center;
+       margin: 30px 0px;
    }
    
    div.courseadd_routes div.courseadd_routeplace {
-       height: 200px;
+       width: 160px;
+       height: 250px;
        position: relative;
        top: 22px;
+   }
+   
+   div.courseadd_routes div.courseadd_routeplace.courseadd_enabled {
+       cursor: pointer;
    }
    
    div.courseadd_routes div.courseadd_routeplace div.courseadd_routephoto {
@@ -83,6 +89,21 @@
    
    div.courseadd_routes div.courseadd_routeplace>h5 {
        text-align: center;
+   }
+   
+   div.courseadd_routes div.courseadd_routeplace.courseadd_enabled>img.courseadd_remove {
+       width: 150px;
+       height: 150px;
+       border-radius: 5px;
+       opacity: 0.5;
+       position: absolute;
+       display: none;
+
+   }
+   
+   div.courseadd_routes>img.courseadd_arrow {
+       position: relative;
+       top: -25px;
    }
    
    div.courseadd_routes div.courseadd_routeplace div.courseadd_tag {
@@ -297,7 +318,31 @@
 			$("button.courseadd_modalclose").trigger("click"); // 모달창 닫기
 		})
 		
-	});
+		// 코스 내 여행지 마우스 오버&아웃 이벤트
+		$(document).on("mouseover", "div.courseadd_routeplace.courseadd_enabled", function(){
+			$(this).children("img.courseadd_remove").css("display", "block");
+		}).on("mouseout", "div.courseadd_routeplace.courseadd_enabled", function(){
+			$(this).children("img.courseadd_remove").css("display", "none");
+		});
+		
+		// 코스 내 여행지 클릭 이벤트(삭제)
+		$(document).on("click", "div.courseadd_routeplace.courseadd_enabled", function(){
+			let title = $(this).children("h5").text();
+			// 삭제 여부 확인
+			if (!confirm(`정말로 해당 여행지를 코스에서 삭제하시겠습니까?\n삭제 여행지: \${title}`)){
+				return;
+			}
+			
+			let index = parseInt($(this).attr("index"));
+			
+			// 현재 코스에서 삭제
+			routes.splice(index, 1);
+			
+			// 코스 다시 그리기
+			displayCurrentRoute();
+		})
+		
+	}); // end of $(function())
 	
 	// 특정 contenttype에 대한 카테고리명을 출력하는 함수
 	function getCategory(contenttype) {
@@ -353,8 +398,8 @@
 	// 현재 추가된 여행지 리스트를 출력하는 함수
 	function displayCurrentRoute(){
 		let result = ``;
-		const ARROW_ENABLED = `<img src="../res/photo/course_icons/next_enabled.png">`;
-		const ARROW_DISABLED = `<img src="../res/photo/course_icons/next_disabled.png">`;
+		const ARROW_ENABLED = `<img class="courseadd_arrow" src="../res/photo/course_icons/next_enabled.png">`;
+		const ARROW_DISABLED = `<img class="courseadd_arrow" src="../res/photo/course_icons/next_disabled.png">`;
 		
 		for (let i = 0; i < MAX_SPOTS_IN_COURSE; i++){
 			// 첫 시작을 제외하고는 화살표부터 그려준다
@@ -368,13 +413,14 @@
 			if (i < routes.length) {
 				result += 
 					`
-					<div class="courseadd_routeplace">
+					<div class="courseadd_routeplace courseadd_enabled" index=\${i}>
+						<img class="courseadd_remove" src="../res/photo/course_icons/Icon_remove.png">
 						<div class="courseadd_routephoto">
-							<img src="\${routes[i].image}">
+							<img src="\${routes[i].getImage()}">
 						</div>
-						<h5>\${routes[i].title}</h5>
+						<h5>\${routes[i].getTitle()}</h5>
 						<div class="courseadd_tag">
-							\${getCategory(routes[i].contenttype)}
+							\${getCategory(routes[i].getContenttype())}
 						</div>
 					</div>
 					`;
@@ -394,25 +440,7 @@
 		$("table.courseadd_table div.courseadd_routes").html(result);
 	}
 	
-	// 폼 제출 시 호출할 함수
-	function handleCourseFormSubmit(){
-		// 여행지를 하나도 선택하지 않은 경우
-		if (routes.length === 0){
-			alert("여행지를 하나 이상 선택해주세요.");
-			return false;
-		}
-		
-		// 각 여행지의 코드를 input에 넣어준다
-		for (let item of routes){
-			let inputtag = document.createElement("input");
-			inputtag.type = "hidden";
-			inputtag.name = "routes[]";
-			inputtag.value = item.tourcode; // tourcode만 넘겨준다
-			$("form.courseadd_form").appendChild(inputtag);
-		}
-		
-		return true;
-	}
+	
 	
 </script>
 <body>
@@ -426,6 +454,8 @@
 		<div class="courseadd_formdiv">
 			<form method="post" action="./addcourse" class="courseadd_form"
 			onsubmit="return handleCourseFormSubmit()">
+				<!-- usercode는 hidden으로 받는다 -->
+				<input type="hidden" name="usercode" value="${sessionScope.usercode}">
 				<table class="courseadd_table">
 					<tr>
 						<td width="160"><b>코스 이름 *</b></td>
@@ -437,6 +467,13 @@
 					<tr>
 						<td><b>여행지 *</b></td>
 						<td>
+							<div class="courseadd_routeinputs">
+								<input type="hidden" name="route1" value="">
+								<input type="hidden" name="route2" value="">
+								<input type="hidden" name="route3" value="">
+								<input type="hidden" name="route4" value="">
+								<input type="hidden" name="route5" value="">
+							</div>
 							<div class="courseadd_routes">
 								<!-- 여행지 코스 출력 부분 -->
 							</div>
@@ -535,7 +572,6 @@
 		      	<div class="courseadd_selectedspot">
 		      		선택된 여행지: 없음
 		      	</div>
-		      	<!-- TODO: 데이터 추가 이후, 모달창 닫히게 트리거 줘야함 -->
 		        <button type="button" class="courseadd_general_brownbtn courseadd_addroute">추가</button>
 		      </div>
 		
@@ -545,6 +581,25 @@
 		
 	</div>
 	
-	
+	<script>
+		// 폼 제출 시 호출할 함수
+		function handleCourseFormSubmit(){
+			// 여행지를 하나도 선택하지 않은 경우
+			if (routes.length === 0){
+				alert("여행지를 하나 이상 선택해주세요.");
+				return false;
+			}
+			
+			// 각 여행지의 코드를 input에 넣어준다
+			$("div.courseadd_routeinputs input").each(function(idx){
+				if (idx < routes.length)
+					$(this).val(routes[idx].getTourcode());
+				else
+					$(this).val("");
+			});
+			
+			return true;
+		}
+	</script>
 </body>
 </html>

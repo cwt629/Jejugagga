@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jeju.dao.CourseDao">
-		
+	<!-- 들어간 아이디 값을 course_route 테이블에도 넣어줘야 하므로,
+	그 아이디를 dto에 넣어줘야 함 -->
+	<insert id="insertCourse" parameterType="CourseDto">
+		insert into course (usercode, name, spendingtime, timestandard, distance, briefcontent, longdetail, registereddate)
+		values (#{usercode}, #{name}, #{spendingtime}, #{timestandard}, #{distance}, #{briefcontent}, #{longdetail}, now())
+		<selectKey keyProperty="coursecode" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	<select id="selectAllCourses" resultType="CourseDto">
+		select * from course order by coursecode desc
+	</select>
 </mapper>
