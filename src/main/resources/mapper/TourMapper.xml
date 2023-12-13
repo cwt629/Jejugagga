@@ -2,38 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jeju.dao.TourDao">
 
-	<select id="totalCountOfTour" parameterType="String" resultType="int">
-		select count(*) from tour
-		<if test="searchword!=null">
-		where title like concat('%',#{searchword},'%')
-		</if>
-	</select><!-- 갯수뽑기 -->
-	
-	<!-- <select id="selectAllTour" resultType="Map">
-		select * from tour order by title limit 12
-	</select>리스트 -->
-	
-	<select id="selectPagingOfTour" parameterType="Map" resultType="Map">
-		select * from tour 
-		<if test="searchword!=null">
-			where title like concat('%',#{searchword},'%')
-		</if>
-		<if test="contenttype != null and contenttype.size() > 0">
+	<!-- 토탈갯수 -->
+	<select id="totalCountOfTour" parameterType="Map" resultType="int">
+		select count(*) from tour where title like concat('%',#{searchword},'%')
+		<if test="contenttype != null and contenttype.size > 0">
 			and contenttype in
-			<foreach collection="contenttype" item="typecode" open="(" close=")" separator=",">
-				#{typecode}
+			<foreach collection="contenttype" item="code" open="(" close=")" separator=",">
+				#{code}
 			</foreach>
 		</if>
-		<if test="sigungucode!=0">
+		<if test="sigungucode != 0">
+			and sigungucode = #{sigungucode}
+		</if>
+	</select>
+	
+	<!-- 리스트 -->
+	<select id="selectListOfTour" parameterType="Map" resultType="Map">
+		select * from tour where title like concat('%',#{searchword},'%')
+		<if test="contenttype != null and contenttype.size > 0">
+			and contenttype in
+			<foreach collection="contenttype" item="code" open="(" close=")" separator=",">
+				#{code}
+			</foreach>
+		</if>
+		<if test="sigungucode != 0">
 			and sigungucode = #{sigungucode}
 		</if>
 		order by title
 		limit #{start}, 12
-	</select><!-- 리스트 페이징 -->
+	</select>
 	
-	<select id="selectOneTour" parameterType="int" resultType="TourDto">
+	<!-- 정보 -->
+	<select id="selectOneOfTour" parameterType="int" resultType="TourDto">
 		select * from tour where tourcode=#{tourcode}
-	</select><!-- 하나만 -->
+	</select>
 	
 	<!-- 선택된 카테고리들과 검색어에 해당하는 데이터 검색(by 장원태) -->
 	<!-- 

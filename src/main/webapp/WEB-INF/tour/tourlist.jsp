@@ -145,17 +145,37 @@
 </style>	
 <script>
 	const urlParams = new URL(location.href).searchParams;
-	let word = urlParams.get('word');
-	let currentPage = urlParams.get('currentPage');
-	let sigungu_categories = 0; // 시군구 카테고리 번호 인트
-	let content_categories = []; // 컨텐트 카테고리 번호 배열
+	let word = (urlParams.get('word') == undefined || urlParams.get('word') == '') ? '' : urlParams.get('word');
+	let currentPage = (urlParams.get('currentPage') == undefined || urlParams.get('currentPage') == '') ? 1 : urlParams.get('currentPage');
+	// 시군구 카테고리 번호 인트
+	let sigungu_categories = (urlParams.get('sigungu_categories') == undefined || urlParams.get('sigungu_categories') == '') ? 0 : urlParams.get('sigungu_categories');
+	// 컨텐트 카테고리 번호 배열
+	let content_categories = (urlParams.get('content_categories') == undefined || urlParams.get('content_categories') == '') ? [] : urlParams.get('content_categories').split(',');
+	
+	//console.log(' ===== content_categories : ', content_categories);
+	
+	$(document).ready(function(){
+		// 필터 활성화 체크
+		if(content_categories.length != 4 && urlParams.get('content_categories') != undefined) {			
+			let contentData = $('.filtertablebtn_content');
+			
+			for(var i=0; i<contentData.length; i++) {
+				let infoCode = $(contentData[i]).attr('infocode');
+				let classChk = true;
+				
+				for(var j=0; j<content_categories.length; j++){
+					if(content_categories[j] == infoCode) classChk = false;
+				}
+				
+				if(classChk) $(contentData[i]).removeClass('filtertablebtn_selected');
+			}
+		} 
+    });
+	
 	
 	$(function() {
 		list();
 	
-		//console.log(${totalCount});
-		//console.log(${totalCount});
-		
 		//검색버튼 클릭 이벤트
 		$("#btnsearch").click(function() {
 			word=$("#word").val();
@@ -164,51 +184,62 @@
 			list();
 		});
 		
+		
+		// 모달 버튼 클릭 이벤트
+		$(".filtertablebtn_sigungu").click(function(){
+			$(".filtertablebtn_sigungu").removeClass("filtertablebtn_selected");
+			$(this).toggleClass("filtertablebtn_selected");
+		});
+		
+		$(".filtertablebtn_content").click(function(){
+			$(this).toggleClass("filtertablebtn_selected");
+		});
+		
+		
+		// 필터 적용 버튼 클릭 이벤트
+		$("#filtersearchbtn").click(function(){
+			
+
+			//console.log("sigungu_categories : "+sigungu_categories);
+			//console.log("content_categories : "+content_categories);
+			
+			//시군구코드변경시
+			let newSigungu = $('.filtertablebtn_sigungu.filtertablebtn_selected').attr('infocode');
+			if(sigungu_categories != newSigungu) {
+				sigungu_categories = newSigungu;
+				currentPage = 1;
+			}
+			//카테고리코드변경시
+			let newContent = [];
+			$(".filtertablebtn_content.filtertablebtn_selected").each(function (idx, item) {
+            	newContent.push(parseInt($(this).attr("infocode"))); // 정수로 변환하여 배열에 추가
+            });
+			if(JSON.stringify(content_categories) != JSON.stringify(newContent)){
+				content_categories = newContent;
+				currentPage = 1;
+				//console.log(content_categories);
+			}
+			
+			if (content_categories.length === 0) {
+                alert("카테고리를 최소 1개 선택해야 합니다.");
+                return;
+            }
+			
+			list();
+		})
+		
+		
 		//페이지 클릭 이벤트
 		$(document).on("click", ".pagination-link", function(){
 			console.log($(this).attr('data'));
 			let currentPage = parseInt($(this).attr('data'));
-			
-			let link = word != null ? 
-					`./list?currentPage=\${currentPage}&word=` + word :
-					`./list?currentPage=\${currentPage}`;
+
+			let link =  `./list?currentPage=\${currentPage}&word=\${word}`
+						+ `&sigungu_categories=\${sigungu_categories}`
+						+ `&content_categories=\${content_categories}`;			
 			
 			location.href = link;
 		});
-		
-		// 여행지 추가 모달 - 카테고리 버튼 클릭 이벤트
-		$(".filtertablebtn_sigungu").click(function(){
-			$(this).toggleClass("filtertablebtn_selected");
-			sigungu_categories = parseInt($(this).attr("infocode")); // 정수로 변환
-		});
-		$(".filtertablebtn_content").click(function(){
-			$(this).toggleClass("filtertablebtn_selected");
-            content_categories = []; // 배열 초기화
-            $(".filtertablebtn_content.filtertablebtn_selected").each(function (idx, item) {
-                content_categories.push(parseInt($(this).attr("infocode"))); // 정수로 변환하여 배열에 추가
-            });
-		});
-		
-		
-		// 여행지 검색 버튼 클릭 이벤트
-		$("#filtersearchbtn").click(function(){
-			if (sigungu_categories == 0) {
-                alert("지역을 선택해야 합니다.");
-                return;
-            }
-
-            if (content_categories.length === 0) {
-                alert("카테고리를 최소 1개 선택해야 합니다.");
-                return;
-            }
-
-			
-			console.log("sigungu_categories : "+sigungu_categories);
-			console.log("content_categories:"+content_categories);
-			
-		})
-		
-
 		
 		//좋아요 이벤트
 		$(document).on("click", ".tourlikes", function(){
@@ -220,15 +251,25 @@
 	function list() {
 		$('#word').val(word);
 		
+		// 서버 전송 테이터 셋팅
+		let reqData = {
+			"word"			:	word				,				// 검색 어
+			"currentPage"	:	currentPage			, 				// 현재 페이지
+			"sigungucode"	:	sigungu_categories	,				// 지역코드
+			"contenttype"	:	JSON.stringify(content_categories)	// 카테고리
+		};
+		
 		$.ajax({
-			type : "get",
+			type : "POST",
 			dataType : "json",
 			url:"./view",
-			data: {"word":word, "currentPage":currentPage, 
-				"sigungucode":sigungu_categories, "contenttype":content_categories},
+			data: reqData,
 			success:function(res){
 				let datas = res.data;
 				let pages = res.pageInfo;
+				
+				var totalCount = pages.totalCount;
+				$(".contents-title").html("여행지("+totalCount+")");
 				
 				let s=
 					`
@@ -334,6 +375,7 @@
 			<div class="contents-head">
 				<b class="contents-title" style="font-size: 50px;">여행지</b>
 				<div class="head-option">
+					<!-- 검색창 -->
 					<div class="page-search">
 						<div class="search-wrap">
 							<input placeholder="여행지명으로 찾아보세요" class="txt" id="word">
@@ -342,6 +384,7 @@
 							</button>
 						</div>
 					</div>
+					<!-- 필터버튼 -->
 					<div class="option-wrap">
 						<button type="button" class="btn btn-primary btn-filter" 
 						data-bs-toggle="modal" data-bs-target="#myModal">
@@ -352,6 +395,7 @@
 			</div>
 			
 			<div class="loader" style="display: none;"></div>
+			<!-- 리스트 띄울곳 -->
 			<div class="contents-body aos-init aos-animate" data-aos="fade-up" data-aos-duration="380">
 				<div class="tourlist">
 				 리스트
@@ -360,6 +404,8 @@
 		</div>
 		
 	</div>
+	
+	<!-- 페이징 띄울곳 -->
 	<div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s" style="text-align: center; margin-top: 50px;">
 		
 		<div class="tourpaginglist">
@@ -368,7 +414,7 @@
 		
 	</div>
 	
-		<!-- The Modal -->
+	<!-- 필터 모달 -->
 	<div class="modal" id="myModal">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
@@ -386,18 +432,19 @@
 		        		<tr><td>지역</td></tr>
 		        		<tr>	
 		        			<td>
-		        				<button type="button" class="filtertablebtn_sigungu" infocode="3">제주시</button>
-		        				<button type="button" class="filtertablebtn_sigungu" infocode="4">서귀포시</button>
+		        				<button type="button" class="filtertablebtn_sigungu filtertablebtn_selected" infocode="0">전체</button>
+		        				<button type="button" class="filtertablebtn_sigungu" infocode="4">제주시</button>
+		        				<button type="button" class="filtertablebtn_sigungu" infocode="3">서귀포시</button>
 		        			</td>
 		        		</tr>
 		        		
 		        		<tr><td>카테고리</td></tr>
 		        		<tr>	
 		        			<td>
-		        				<button type="button" class="filtertablebtn_content" infocode="12">관광지</button>
-		        				<button type="button" class="filtertablebtn_content" infocode="14">문화시설</button>
-		        				<button type="button" class="filtertablebtn_content" infocode="15">축제행사</button>
-		        				<button type="button" class="filtertablebtn_content" infocode="39">음식점</button>
+		        				<button type="button" class="filtertablebtn_content filtertablebtn_selected" infocode="12">관광지</button>
+		        				<button type="button" class="filtertablebtn_content filtertablebtn_selected" infocode="14">문화시설</button>
+		        				<button type="button" class="filtertablebtn_content filtertablebtn_selected" infocode="15">축제행사</button>
+		        				<button type="button" class="filtertablebtn_content filtertablebtn_selected" infocode="39">음식점</button>
 		        			</td>
 		        		</tr>
 		        		
