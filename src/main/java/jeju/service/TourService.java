@@ -29,6 +29,6 @@ public class TourService {
 	}
 	
 	public TourDto getData(int tourcode) {
-		return tourDao.getData(tourcode);
+		return tourDao.getTourData(tourcode);
 	}
 }
