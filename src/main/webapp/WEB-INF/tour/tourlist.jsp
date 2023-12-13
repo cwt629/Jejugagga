@@ -217,9 +217,9 @@
 			}
 			
 			if (content_categories.length === 0) {
-                alert("카테고리를 최소 1개 선택해야 합니다.");
-                return;
-            }
+                            alert("카테고리를 최소 1개 선택해야 합니다.");
+                            return;
+                        }
 			
 			list();
 		})
