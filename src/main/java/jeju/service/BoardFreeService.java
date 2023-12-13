@@ -34,10 +34,12 @@ public class BoardFreeService {
 	}
 
 	public BoardFreeDto getData(int num) {
+
 		return boardFreeDao.getData(num);
 	}
 
 	public void updateBoardFree(BoardFreeDto dto) {
+
 		boardFreeDao.updateBoardFree(dto);
 	}
 

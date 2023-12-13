@@ -9,7 +9,7 @@ public class PagingCriteria {
 
     /* 페이징 처리 0이 1부터 시작, 5번부터 끊기*/
     public PagingCriteria() {
-        this.page = 0;
+        this.page = 1;
         this.perPageNum = 5;
     }
 
