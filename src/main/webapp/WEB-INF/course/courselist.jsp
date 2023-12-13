@@ -199,7 +199,22 @@
    
 </style>
 <script>
+	let clickingHeart= false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
 	
+	$(function(){
+		// 빈 하트 아이콘 클릭 시
+		$(document).on("click", "div.course_content i.course_heart", function(){
+			// 이미 다른 좋아요 처리중인 경우
+			if (clickingHeart) {
+				alert("다른 좋아요 기능 처리중입니다. 잠시 후 시도해주세요.");
+				return;
+			}
+			
+			alert("하트 클릭함");
+			// TODO: ajax 처리로 좋아요 처리 및 리스트에 반영
+			
+		});
+	});
 </script>
 </head>
 <body>
@@ -244,10 +259,10 @@
 			  		<c:if test="${sessionScope.loginok != null}">
 				  		<div class="course_like_button">
 				  			<c:if test="${dto.likedByCurrentUser}">
-				  				<i class="bi bi-heart-fill"></i>
+				  				<i class="bi bi-heart-fill course_heart"></i>
 				  			</c:if>
 				  			<c:if test="${!dto.likedByCurrentUser}">
-				  				<i class="bi bi-heart"></i>
+				  				<i class="bi bi-heart course_heart"></i>
 				  			</c:if>
 				  		</div>
 			  		</c:if>
