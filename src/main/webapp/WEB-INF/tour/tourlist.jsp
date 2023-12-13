@@ -199,10 +199,6 @@
 		// 필터 적용 버튼 클릭 이벤트
 		$("#filtersearchbtn").click(function(){
 			
-
-			//console.log("sigungu_categories : "+sigungu_categories);
-			//console.log("content_categories : "+content_categories);
-			
 			//시군구코드변경시
 			let newSigungu = $('.filtertablebtn_sigungu.filtertablebtn_selected').attr('infocode');
 			if(sigungu_categories != newSigungu) {
@@ -268,6 +264,7 @@
 				let datas = res.data;
 				let pages = res.pageInfo;
 				
+				//토탈갯수
 				var totalCount = pages.totalCount;
 				$(".contents-title").html("여행지("+totalCount+")");
 				
