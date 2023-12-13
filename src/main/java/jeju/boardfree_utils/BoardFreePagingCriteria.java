@@ -1,17 +1,19 @@
-package jeju.common;
+package jeju.boardfree_utils;
 
 import lombok.Getter;
 
 @Getter
-public class PagingCriteria {
+public class BoardFreePagingCriteria {
     private int page;
     private int perPageNum;
 
-    public PagingCriteria() {
-        this.page = 0;
+    /* 페이징 처리 0이 1부터 시작, 5번부터 끊기*/
+    public BoardFreePagingCriteria() {
+        this.page = 1;
         this.perPageNum = 5;
     }
 
+    /* 0을 넘기면 1로 돼서 페이지로 등록이 된다. */
     public void setPage(int page) {
         if (page <= 0) {
             this.page = 1;

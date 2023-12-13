@@ -1,10 +1,9 @@
 package jeju.controller;
 
-import jeju.common.PagingCriteria;
+import jeju.boardfree_utils.BoardFreePagingCriteria;
 import jeju.dto.BoardFreeDto;
 import jeju.service.BoardFreeService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class FreeBoardController {
@@ -21,10 +19,11 @@ public class FreeBoardController {
 
 	@GetMapping("/community/free/list")
 	public String list(Model model,
-					   @RequestParam(defaultValue = "1") int currentPage) {
+					   @RequestParam(defaultValue = "1") int currentPage)  {
 
-		PagingCriteria criteria = new PagingCriteria();
+		BoardFreePagingCriteria criteria = new BoardFreePagingCriteria();
 		List<BoardFreeDto> result = boardFreeService.getList(criteria);
+		model.addAttribute("list", result);
 		return "community/free/freelist";
 	}
 
