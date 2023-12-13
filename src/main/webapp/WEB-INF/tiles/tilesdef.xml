@@ -19,11 +19,9 @@
 	<definition name="*/*" extends="layout1">
 		<put-attribute name="home" value="/WEB-INF/{1}/{2}.jsp"/>
 	</definition>
-	
+
 	<!-- macro 2 -->
 	<definition name="*/*/*" extends="layout1">
 		<put-attribute name="home" value="/WEB-INF/{1}/{2}/{3}.jsp"/>
 	</definition>
-	
-
 </tiles-definitions>

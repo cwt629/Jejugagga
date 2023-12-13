@@ -133,7 +133,7 @@
             width: 55px;
             height: 55px;
             left: 165px;
-            top: 160px;
+            top: 220px;
             opacity: 0.8;
         }
 
@@ -142,7 +142,7 @@
             width: 55px;
             height: 55px;
             left: 165px;
-            top: 160px;
+            top: 220px;
             opacity: 0.9;
         }
 
@@ -151,7 +151,7 @@
             width: 55px;
             height: 55px;
             left: 165px;
-            top: 160px;
+            top: 220px;
             opacity: 0.9;
         }
 
@@ -160,13 +160,14 @@
             width: 55px;
             height: 55px;
             left: 165px;
-            top: 160px;
+            top: 220px;
             opacity: 0.9;
         }
 
         .com-ul {
             list-style: none;
             text-decoration: none;
+
         }
     </style>
 </head>
@@ -238,7 +239,7 @@
         </div>
     </div>
 
-    <h2 style="font-size: 35px; padding-top: 50px">자주하는 질문 TOP 5</h2>
+    <h2 style="font-size: 35px; padding-top: 70px">자주하는 질문 TOP 5</h2>
 
     <div class="tab-content" style="margin-top: 20px">
         <div class="accordion">
