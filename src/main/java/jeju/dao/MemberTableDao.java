@@ -35,9 +35,9 @@ public class MemberTableDao {
 		return session.selectOne(nameSpace+"selectDataById",id);
 	}
 	
-	public MemberTableDto getData(int num)
+	public MemberTableDto getData(int usercode)
 	{
-		return session.selectOne(nameSpace+"selectDataByNum",num);
+		return session.selectOne(nameSpace+"selectDataByNum",usercode);
 	}
 	
 	public int searchIdCount(String id)
@@ -45,7 +45,7 @@ public class MemberTableDao {
 		return session.selectOne(nameSpace+"searchIdCount",id);
 	}
 	
-	public void pwdTempUpdate(MemberTableDto dto)
+	public void pwdUpdate(MemberTableDto dto)
 	{
 		session.update(nameSpace+"pwdTempUpdate",dto);
 	}
@@ -53,5 +53,10 @@ public class MemberTableDao {
 	public int pwdCheck(MemberTableDto dto)
 	{
 		return session.selectOne(nameSpace+"pwdCheck",dto);
+	}
+	
+	public String selectGetMail(MemberTableDto dto)
+	{
+		return session.selectOne(nameSpace+"selectGetMail",dto);
 	}
 }
