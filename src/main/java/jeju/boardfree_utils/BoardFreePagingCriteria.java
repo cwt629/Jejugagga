@@ -1,6 +1,9 @@
 package jeju.boardfree_utils;
 
 import lombok.Getter;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Getter
 public class BoardFreePagingCriteria {
@@ -34,4 +37,5 @@ public class BoardFreePagingCriteria {
         return (this.page - 1) * perPageNum;
     }
 }
+
 

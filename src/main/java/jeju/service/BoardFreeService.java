@@ -43,5 +43,8 @@ public class BoardFreeService {
 		boardFreeDao.updateBoardFree(dto);
 	}
 
+	public int getTotalCount() {
+		return boardFreeDao.getTotalCount();
+	}
 }
 
