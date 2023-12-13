@@ -5,9 +5,9 @@
       select count(*) from board_free
     </select>
     <select id="selectPagingOfBoardFreeCriteria" parameterType="jeju.common.PagingCriteria" resultType="BoardFreeDto">
-      select * from board_free
-      limit #{perPageNum}
-      offset #{page, jdbcType=INTEGER}
+        select * from board_free
+        limit #{perPageNum}
+            offset #{pageStart}
     </select>
     <insert id="insertBoardFree" parameterType="BoardFreeDto">
         insert into board_free (freeboardcode, usercode, title, content, viewcount, registereddate)
