@@ -200,21 +200,69 @@
 </style>
 <script>
 	let clickingHeart= false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
+	const FULL_HEART_BUTTON = `<i class="bi bi-heart-fill course_heart"></i>`;
+	const EMPTY_HEART_BUTTON = `<i class="bi bi-heart course_heart"></i>`;
 	
 	$(function(){
-		// 빈 하트 아이콘 클릭 시
-		$(document).on("click", "div.course_content i.course_heart", function(){
+		// 하트 아이콘 클릭 시
+		$(document).on("click", "div.course_content div.course_like_button", function(){
 			// 이미 다른 좋아요 처리중인 경우
 			if (clickingHeart) {
 				alert("다른 좋아요 기능 처리중입니다. 잠시 후 시도해주세요.");
 				return;
 			}
 			
-			alert("하트 클릭함");
-			// TODO: ajax 처리로 좋아요 처리 및 리스트에 반영
+			// 하트가 되어있는지 확인
+			let heartFilled = $(this).children("i.course_heart").hasClass("bi-heart-fill");
 			
+			clickingHeart = true;
+			let coursecode = $(this).parents("div.course_content").attr("coursecode"); // 클릭한 코스의 아이디
+			let currentButton = $(this); // 현재 버튼 요소
+			let likesInfoToUpdate = $(this).siblings("div.course_guest_info").children("i.course_totalLikes"); // 클릭한 코스의 총 좋아요 수 부분
+			
+			// 1. 하트가 이미 되어있는 경우: 좋아요 취소
+			if (heartFilled) {
+				$.ajax({
+					type: "post",
+					dataType: "json",
+					url: "./like/remove",
+					data: {
+						"coursecode": coursecode,
+						"usercode": "${sessionScope.usercode}"
+					},
+					success: function(res){
+						currentButton.html(EMPTY_HEART_BUTTON);
+						// 이 코스에 대한 좋아요 수 갱신
+						likesInfoToUpdate.html(`&nbsp;\${res.totalLikes}`);
+						
+						// 플래그 원상 복구
+						clickingHeart = false;
+					}
+				});
+			}
+			else {
+				// 2. 하트가 되어있지 않은 경우: 좋아요 추가
+				$.ajax({
+					type: "post",
+					dataType: "json",
+					url: "./like/grant",
+					data: {
+						"coursecode": coursecode,
+						"usercode": "${sessionScope.usercode}"
+					},
+					success: function(res){
+						currentButton.html(FULL_HEART_BUTTON);
+						// 이 코스에 대한 좋아요 수 갱신
+						likesInfoToUpdate.html(`&nbsp;\${res.totalLikes}`);
+						
+						// 플래그 원상 복구
+						clickingHeart = false;
+					}
+				});
+			}
 		});
-	});
+		
+	}); // end of $(function())
 </script>
 </head>
 <body>
@@ -237,7 +285,7 @@
 		<div class="course_list_contents">
 			<c:forEach var="dto" items="${courses}">
 				<c:set var="photoFlag" value="0"/> <!-- 해당 코스에서 하나라도 사진이 있는지 여부 -->
-				<div class="course_content">
+				<div class="course_content" coursecode="${dto.coursecode}">
 					<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
 					    <c:forEach var="photo" items="${dto.routePhotos}">
 					    	<c:if test="${photo != ''}">
@@ -270,7 +318,7 @@
 			  		<!-- 조회수와 좋아요 개수 -->
 			  		<div class="course_guest_info">
 			  			<i class="bi bi-eye">&nbsp;${dto.readcount}</i><br>
-			  			<i class="bi bi-heart-fill">&nbsp;${dto.totalLikes}</i>
+			  			<i class="bi bi-heart-fill course_totalLikes">&nbsp;${dto.totalLikes}</i>
 			  		</div>
 			  		<div class="course_name">
 			  			<h4 style="text-align: center;">${dto.name}</h4>
