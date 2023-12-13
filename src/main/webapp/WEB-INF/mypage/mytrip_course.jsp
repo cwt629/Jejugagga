@@ -24,10 +24,10 @@
 		width: 100%;
 	}
 	
-	#mypageContext {
+	#historyContext {
 		position: absolute;
 		width: 85%;
-		top: 150px;
+		top: 100px;
 		left: 22%;
 		text-align: center;
 		display: flex;
@@ -75,11 +75,12 @@
 		text-align: left;
 	}
 	
-	.profilebox {
+	.historybox {
 		width: 80%;
 		border-radius: 30px;
 		box-shadow: 5px 5px 10px;
 		padding: 30px 30px 30px 30px;
+		text-align: left;
 	}
 	
 	.navmenu_list {
@@ -101,10 +102,6 @@
 		flex-direction: column;
 	}
 	
-	.profilebox {
-		text-align: left;
-	}
-	
 	hr {
 		width: 100%;
 	}
@@ -116,9 +113,9 @@
 		if(navmenu==null || navmenu=='one')
 			  $(".navmenu_list>a").eq(0).css("color","red");
 		else if(navmenu=='two')
-			  $(".navmenu_list").eq(1).css("color","red");
+			  $(".navmenu_list>a").eq(1).css("color","red");
 		else if(navmenu=='three')
-			  $(".navmenu_list").eq(2).css("color","red");
+			  $(".navmenu_list>a").eq(2).css("color","red");
 	});
 </script>
 </head>
@@ -156,44 +153,57 @@
 			<h6><a href="${root}/member/logout" style="color: brown;">로그아웃</a></h6>
 		</div>
 	</nav>
-	<div id="mypageContext">
-		<div class="profilebox" style="text-align: left;">
+	<div id="historyContext">
+		<div class="historybox" style="text-align: left;">
 			<div>
-				<h4>기본정보</h4>
-				<img src="../res/photo/noimage.png" style="width: 50px; height: 50px; border: 2px solid black; float: left;">
-				<div class="profile_text">
-					<span>${sessionScope.nickname }</span>
-					<span>${sessionScope.myemail }</span>
-				</div>
-				<button type="button" style="float: right;  transform: translate(-100%, -50%);">수정</button>
+				<i class="bi bi-heart"></i>
+				좋아요 목록
+				<span style="float: right; margin-left: 15px;">삭제</span>
+				<span style="float: right;">수정</span>
 			</div>
 			<hr>
-			<div>
-			<i class="bi bi-phone"></i>
-			핸드폰
+			<!-- 좋아요 표시 여행지 정렬 코드 작성 필요 -->
+			<div class="history_innerbox" style="text-align: left;">
+				<div>
+				
+				</div>		
 			</div>
-			<hr>
-			<div>
-			<i class="bi bi-envelope"></i>
-			이메일
-			</div>		
+			<!-- 좋아요 표시 여행지 정렬 코드 작성 필요 -->
 		</div>
 		<br><br><br>
-		<div class="profilebox">
-			<h4>부가 정보 관리</h4>
+		<div class="historybox" style="text-align: left;">
+			<div>
+				<i class="bi bi-star"></i>
+				즐겨찾기 목록
+				<span style="float: right; margin-left: 15px;">삭제</span>
+				<span style="float: right;">수정</span>
+			</div>
+			<hr>
+			<!-- 즐겨찾기 표시 여행지 정렬 코드 작성 필요 -->
+			<div class="history_innerbox" style="text-align: left;">
 				<div>
-				<i class="bi bi-building-add"></i>
-				주소
-				<button type="button" style="float: right;  transform: translate(-100%, -50%);">수정</button>
-				</div>
-				<hr>
-				<div>
-				<i class="bi bi-key"></i>
-				비밀번호 변경
-				</div>
+				
+				</div>		
+			</div>
+			<!-- 즐겨찾기 표시 여행지 정렬 코드 작성 필요 -->
 		</div>
-		<br><br><br><br>
-		<button type="button" class="btn btn-warning user_withdraw" style="width: 10%;">회원탈퇴</button>
+		<br><br><br>
+		<div class="historybox" style="text-align: left;">
+			<div>
+				<i class="bi bi-list-check"></i>
+				내 여행 코스
+				<span style="float: right; margin-left: 15px;">삭제</span>
+				<span style="float: right;">수정</span>
+			</div>
+			<hr>
+			<!-- 내 여행 코스 저장 코드 작성 필요 -->
+			<div class="history_innerbox" style="text-align: left;">
+				<div>
+				
+				</div>		
+			</div>
+			<!-- 내 여행 코스 저장 코드 작성 필요 -->
+		</div>
 	</div>
 </div>
 </body>
