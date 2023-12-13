@@ -266,7 +266,6 @@
 				});
 			}
 		});
-		
 	}); // end of $(function())
 </script>
 </head>

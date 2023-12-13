@@ -244,6 +244,14 @@
 	
 	const MAX_SPOTS_IN_COURSE = 5; // 하나의 코스에 들어갈 수 있는 여행지 최대 개수
 	
+	// 각 input의 최대 길이
+	const INPUT_MAX_LENGTH = {
+			"name": 100,
+			"briefcontent": 500,
+			"longdetail": 2000
+	};
+	
+	
 	$(function(){
 		displayCurrentRoute(); // 여행지 루트 렌더링
 		
@@ -340,6 +348,16 @@
 			
 			// 코스 다시 그리기
 			displayCurrentRoute();
+		})
+		
+		// 코스 이름, 짧은 소개, 상세 설명에 대해 입력 시 글자수를 출력하는 이벤트
+		$(".courseadd_explain").on("input", function(){
+			let inputType = $(this).attr("name"); // input 종류
+			let currentLength = $(this).val().length; // 현재 길이
+			let maxLength = INPUT_MAX_LENGTH[inputType]; // 현 input의 최대 길이
+			
+			// 글자 수 출력하기
+			$(this).next().text(`(\${currentLength} / \${maxLength}자)`);
 		})
 		
 	}); // end of $(function())
@@ -460,8 +478,9 @@
 					<tr>
 						<td width="160"><b>코스 이름 *</b></td>
 						<td>
-							<input type="text" name="name" class="courseadd_textinput" placeholder="코스 이름을 입력하세요" 
-							style="width: 800px;" required>
+							<input type="text" name="name" class="courseadd_textinput courseadd_explain" placeholder="코스 이름을 입력하세요" 
+							style="width: 800px;" maxlength="100" required>
+							<span>(0 / 100자)</span>
 						</td>
 					</tr>
 					<tr>
@@ -505,13 +524,15 @@
 					<tr>
 						<td><b>짧은 소개</b></td>
 						<td>
-							<textarea style="width: 80%; height: 60px;" name="briefcontent"></textarea>
+							<textarea style="width: 80%; height: 60px;" class="courseadd_explain" maxlength="500" name="briefcontent"></textarea>
+							<span>(0 / 500자)</span>
 						</td>
 					</tr>
 					<tr>
 						<td><b>상세 설명</b></td>
 						<td>
-							<textarea style="width: 80%; height: 200px;" name="longdetail"></textarea>
+							<textarea style="width: 80%; height: 200px;" class="courseadd_explain" maxlength="2000" name="longdetail"></textarea>
+							<span>(0 / 2000자)</span>
 						</td>
 					</tr>
 					<tr>
