@@ -25,8 +25,8 @@ public class ReviewTitleDao {
 
     public List<BoardReviewDto> searchTitles(String keyword) {
         Map<String, Object> params = new HashMap<>();
-        params.put("keyword", keyword);
-        return sqlSession.selectList("BoardTitleMapper.searchTitles", params);
+        params.put("keyword", "%" + keyword + "%"); // SQL wildcard를 사용한 검색
+        return sqlSession.selectList("ReviewTitleDao.searchTitles", params);
     }
 }
 

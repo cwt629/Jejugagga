@@ -135,7 +135,8 @@
             고객후기
         </h2>
 
-        <div class="container-write" style="position: absolute; margin-top: -53px; margin-left: 530px">
+        <div class="container-write" style="position: absolute; margin-top: -53px; margin-left: 530px"
+             data-logged-in="${not empty sessionScope.isLoggedIn && sessionScope.isLoggedIn}">
             <button class="learn-more" id="reviewButton">
                 <span class="circle" aria-hidden="true">
                   <span class="icon arrow"></span>
@@ -260,6 +261,27 @@
 <script>
     document.getElementById('reviewButton').addEventListener('click', function() {
         window.location.href = '${root}/community/review/write';
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var reviewButton = document.getElementById('reviewButton');
+        var containerWrite = document.querySelector('.container-write');
+
+        var isLoggedIn = containerWrite.getAttribute('data-logged-in') === 'true';
+
+        if (isLoggedIn) {
+            reviewButton.addEventListener('click', function() {
+                window.location.href = '${root}/community/review/write';
+            });
+        } else {
+            reviewButton.addEventListener('click', function() {
+                alert('Please log in to write a review.');
+                // 현재 페이지의 URL을 쿼리 파라미터로 추가하여 로그인 페이지로 이동
+                var currentUrl = window.location.href;
+                var loginUrl = '${root}/member/login?redirect=' + encodeURIComponent(currentUrl);
+                window.location.href = loginUrl;
+            });
+        }
     });
 </script>
 

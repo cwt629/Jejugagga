@@ -2,6 +2,7 @@ package jeju.service;
 
 import jeju.dao.ReviewTitleDao;
 import jeju.dto.BoardReviewDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -9,11 +10,16 @@ import java.util.List;
 public class ReviewTitleService {
     private final ReviewTitleDao reviewTitleDao;
 
+    @Autowired
     public ReviewTitleService(ReviewTitleDao reviewTitleDao) {
         this.reviewTitleDao = reviewTitleDao;
     }
 
-    public List<BoardReviewDto> getAllTitles() {
-        return reviewTitleDao.selectAllTitles(); // 메소드 이름을 일치시킴
+    public List<BoardReviewDto> selectAllTitles() {
+        return reviewTitleDao.selectAllTitles();
+    }
+
+    public List<BoardReviewDto> searchTitles(String keyword) {
+        return reviewTitleDao.searchTitles(keyword);
     }
 }

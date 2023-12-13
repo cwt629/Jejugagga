@@ -35,14 +35,17 @@
                         src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2772%27%20height=%2772%27/%3e"
                         style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"></span><img
                         alt="[오뚜기] 오뮤 가뿐한끼 현미밥 150g X 30입"
-                        src="${root}/res/photo/reviewboard.png"
+                        src="${root}/res/photo/jejuhome.png"
                         decoding="async" data-nimg="intrinsic" class="css-antbrd"
                         style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                        srcset="${root}/res/photo/reviewboard.png 1x,${root}/res/photo/reviewboard.png 2x"><noscript></noscript></span>
+                        srcset="${root}/res/photo/jejuhome.png 1x,${root}/res/photo/jejuhome.png 2x"><noscript></noscript></span>
 
-                    <select class="product-select" name="product" style="width: 200px;">
+                    <form>
+                        <label>장소명:</label>
+                        <select id="titleDropdown" name="title" style="width: 200px;">
 
-                    </select>
+                        </select>
+                    </form>
 
                 </div>
                 <div class="css-4ej2a1 e17kplex4"><h2 class="css-g752yr e17kplex3">후기는 이렇게 작성해 보세요</h2>
@@ -106,7 +109,7 @@
                                 class="css-1lxqnpp e13o839w1"><span class="css-0"></span>최대 8장</span></label>
                             <div class="css-mvvywf e13o839w0">
                                 <div class="css-1s4qubi e1gl36jm1">
-                                    <button type="button" class="css-zkol1g e1gl36jm0">
+                                    <button type="button" class="css-zkol1g e1gl36jm0" id="uploadButton">
                                         <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
                                             <g fill="none" fill-rule="evenodd">
                                                 <path d="M0 0h30v30H0z"></path>
@@ -119,7 +122,8 @@
                                         </svg>
                                     </button>
                                     <input type="file" accept="image/png, image/jpg, image/jpeg" multiple=""
-                                           class="css-bvqroo"></div>
+                                           class="css-bvqroo" id="fileInput"></div>
+                                <div id="imagePreviewContainer" class="image-preview-container"></div>
                             </div>
                         </div>
                         <div class="css-mevgy3 eko23d68"><label class="css-14ai4tl eko23d612"></label>
@@ -144,6 +148,12 @@
     </div>
 </div>
 <div tabindex="0" data-test="sentinelEnd"></div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+
 <script>
     document.getElementById('bttn1').addEventListener('click', function () {
         window.location.href = '${root}/community/review/list';
@@ -151,49 +161,60 @@
 </script>
 <script>
     $(document).ready(function () {
-        // Select2 플러그인을 초기화하고 ajax 옵션을 설정합니다.
-        $('.product-select').select2({
+        var $titleDropdown = $('#titleDropdown');
+
+        $titleDropdown.select2({
+            placeholder: '제목을 선택하거나 검색하세요',
             ajax: {
-                url: '경로/제품검색', // 백엔드 검색 API URL을 여기에 입력합니다.
-                dataType: 'json',
+                url: '<c:url value="/searchTitles"/>', // 서버 엔드포인트 URL
                 delay: 250,
+                dataType: 'json',
                 data: function (params) {
+                    if (!params.term || $.trim(params.term) === '') {
+                        return null;
+                    }
                     return {
-                        q: params.term // 검색어 'q'에 사용자 입력값 'term'을 전달합니다. 백엔드에서 이 파라미터를 기준으로 검색을 수행해야 합니다.
+                        q: params.term // "q" 파라미터에 검색어를 설정
                     };
                 },
                 processResults: function (data) {
-                    // 백엔드에서 반환된 데이터를 Select2가 처리할 수 있는 형식으로 변환합니다.
                     return {
-                        results: data.items // 백엔드 응답의 객체 구조에 따라 여기를 수정해야 할 수 있습니다.
+                        results: $.map(data, function (item) {
+                            return {
+                                id: item.tourcode,
+                                text: item.title
+                            };
+                        })
                     };
-                },
-                cache: true
+                }
             },
-            minimumInputLength: 1, // 사용자가 최소한 1개 이상의 문자를 입력해야 검색을 시작합니다.
-            templateResult: formatRepo, // 검색 결과 항목의 포맷을 정의하는 함수입니다. 필요에 따라 커스텀화할 수 있습니다.
-            templateSelection: formatRepoSelection // 선택된 항목의 포맷을 정의하는 함수입니다. 필요에 따라 커스텀화할 수 있습니다.
+            templateSelection: function (data) {
+                return data.text || '제목을 선택하거나 검색하세요'; // 선택된 항목의 텍스트를 반환
+            }
         });
     });
 
-    function formatRepo(repo) {
-        if (repo.loading) {
-            return repo.text;
+    document.getElementById('uploadButton').addEventListener('click', function() {
+        document.getElementById('fileInput').click(); // 파일 입력 필드 활성화
+    });
+
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+        var files = event.target.files;
+        var previewContainer = document.getElementById('imagePreviewContainer');
+
+        for (var i = 0; i < files.length; i++) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                // 이미지 미리보기를 위한 새 이미지 요소 생성
+                let img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.width = '50px';
+                img.style.height = '50px';
+                img.style.marginLeft = '5px';
+                previewContainer.appendChild(img);
+            };
+            reader.readAsDataURL(files[i]);
         }
-
-        // 검색 결과 항목을 표시하는 방법을 정의합니다. 필요에 따라 HTML 구조를 수정할 수 있습니다.
-        var $container = $("<div class='select2-result-repository clearfix'>" + repo.text + "</div>");
-
-        return $container;
-    }
-
-    function formatRepoSelection(repo) {
-        // 선택된 항목을 표시하는 방법을 정의합니다. 보통 검색 결과와 동일한 텍스트를 반환합니다.
-        return repo.text || repo.id;
-    }
+    });
 </script>
-
-</body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 </html>
