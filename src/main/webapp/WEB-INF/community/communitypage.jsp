@@ -200,7 +200,7 @@
                     </a>
                 </li>
                 <li class="cs1">
-                    <a href="${root}/community/faq/list;" class="bbx-a">
+                    <a href="${root}/community/faq/list" class="bbx-a">
                         <span class="tit">
                             자주하는 질문
                             <span class="icon-new">
@@ -213,7 +213,7 @@
                     </a>
                 </li>
                 <li class="cs1">
-                    <a href="${root}/community/review/list;" class="bbx-a">
+                    <a href="${root}/community/review/list" class="bbx-a">
                         <span class="tit">
                             후기게시판
                             <span class="icon-new">
@@ -226,7 +226,7 @@
                     </a>
                 </li>
                 <li class="cs1">
-                    <a href="${root}/community/free/list;" class="bbx-a">
+                    <a href="${root}/community/free/list" class="bbx-a">
                         <span class="tit">
                             자유게시판
                             <span class="icon-new">

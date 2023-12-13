@@ -136,14 +136,15 @@
         </h2>
 
         <div class="container-write" style="position: absolute; margin-top: -53px; margin-left: 530px"
-             data-logged-in="${not empty sessionScope.isLoggedIn && sessionScope.isLoggedIn}">
+             data-logged-in="${sessionScope.loginok == 'yes'}">
             <button class="learn-more" id="reviewButton">
-                <span class="circle" aria-hidden="true">
-                  <span class="icon arrow"></span>
-                </span>
+        <span class="circle" aria-hidden="true">
+            <span class="icon arrow"></span>
+        </span>
                 <span class="button-text">write a review</span>
             </button>
         </div>
+
 
         <div class="search-container" style="top: -50px; left: 750px; font-family: 'orbit';">
             <input type="text" class="search-input" placeholder="공간명으로 찾아보세요">
@@ -156,7 +157,7 @@
                     <img src="${root}/res/photo/course_dummy/dummy_tourphoto2.jpg" alt="방문 후기 이미지">
                     <div class="icon-and-nickname">
                         <i class="bi bi-person-circle"></i>
-                        <h4 class="review-nickname">김요한바보</h4>
+                        <h4 class="review-nickname">아이디이름</h4>
                     </div>
                 </div>
                 <div class="review-content">
@@ -165,93 +166,24 @@
                         <h4>한라산</h4>
                     </div>
                     <p>방문 후기 내용...</p>
-                    <span class="review-date">2023-11-18 11:59:28</span>
-                </div>
-            </div>
-
-            <div class="review-item">
-                <div class="image-container">
-                    <img src="${root}/res/photo/course_dummy/dummy_tourphoto4.jpg" alt="방문 후기 이미지">
-                    <div class="icon-and-nickname">
-                        <i class="bi bi-person-circle"></i>
-                        <h4 class="review-nickname">김요한바보</h4>
-                    </div>
-                </div>
-                <div class="review-content">
-                    <div class="title-container">
-                        <i class="bi bi-geo-alt-fill"></i>
-                        <h4>한라산</h4>
-                    </div>
-                    <p>방문 후기 내용...</p>
-                    <span class="review-date">2023-11-18 11:59:28</span>
-                </div>
-            </div>
-
-            <div class="review-item">
-                <div class="image-container">
-                    <img src="${root}/res/photo/course_dummy/dummy_tourphoto5.jpg" alt="방문 후기 이미지">
-                    <div class="icon-and-nickname">
-                        <i class="bi bi-person-circle"></i>
-                        <h4 class="review-nickname">김요한바보</h4>
-                    </div>
-                </div>
-                <div class="review-content">
-                    <div class="title-container">
-                        <i class="bi bi-geo-alt-fill"></i>
-                        <h4>한라산</h4>
-                    </div>
-                    <p>방문 후기 내용...</p>
-                    <span class="review-date">2023-11-18 11:59:28</span>
-                </div>
-            </div>
-
-            <div class="review-item">
-                <div class="image-container">
-                    <img src="${root}/res/photo/course_dummy/dummy_tourphoto3.jpg" alt="방문 후기 이미지">
-                    <div class="icon-and-nickname">
-                        <i class="bi bi-person-circle"></i>
-                        <h4 class="review-nickname">김요한바보</h4>
-                    </div>
-                </div>
-                <div class="review-content">
-                    <div class="title-container">
-                        <i class="bi bi-geo-alt-fill"></i>
-                        <h4>한라산</h4>
-                    </div>
-                    <p>방문 후기 내용...</p>
-                    <span class="review-date">2023-11-18 11:59:28</span>
-                </div>
-            </div>
-
-            <div class="review-item">
-                <div class="image-container">
-                    <img src="${root}/res/photo/course_dummy/dummy_tourphoto1.jpg" alt="방문 후기 이미지">
-                    <div class="icon-and-nickname">
-                        <i class="bi bi-person-circle"></i>
-                        <h4 class="review-nickname">김요한바보</h4>
-                    </div>
-                </div>
-                <div class="review-content">
-                    <div class="title-container">
-                        <i class="bi bi-geo-alt-fill"></i>
-                        <h4>한라산</h4>
-                    </div>
-                    <p>방문 후기 내용...</p>
-                    <span class="review-date">2023-11-18 11:59:28</span>
+                    <span class="review-date">글올린시간출력</span>
                 </div>
             </div>
         </div>
 
-        <div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s" style="margin-bottom: 20px">
+        <div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s"
+             style="margin-bottom: 20px">
             <ul class="pagination">
-                <li class="pagination-item--wide first"><a class="pagination-link--wide first" href="#">Previous</a>
+                <li class="pagination-item--wide first"><a class="pagination-link--wide first"
+                                                           href="#">Previous</a>
                 </li>
                 <li class="pagination-item is-active"><a class="pagination-link" href="#">1</a></li>
                 <li class="pagination-item"><a class="pagination-link" href="#">2</a></li>
                 <li class="pagination-item"><a class="pagination-link" href="#">3</a></li>
                 <li class="pagination-item"><a class="pagination-link" href="#">4</a></li>
                 <li class="pagination-item"><a class="pagination-link" href="#">5</a></li>
-                <li class="pagination-item--wide last"><a class="pagination-link--wide last" href="#">Next</a></li>
+                <li class="pagination-item--wide last"><a class="pagination-link--wide last" href="#">Next</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -259,30 +191,24 @@
 </body>
 
 <script>
-    document.getElementById('reviewButton').addEventListener('click', function() {
-        window.location.href = '${root}/community/review/write';
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var reviewButton = document.getElementById('reviewButton');
         var containerWrite = document.querySelector('.container-write');
 
         var isLoggedIn = containerWrite.getAttribute('data-logged-in') === 'true';
 
         if (isLoggedIn) {
-            reviewButton.addEventListener('click', function() {
+            reviewButton.addEventListener('click', function () {
                 window.location.href = '${root}/community/review/write';
             });
         } else {
-            reviewButton.addEventListener('click', function() {
+            reviewButton.addEventListener('click', function () {
                 alert('Please log in to write a review.');
-                // 현재 페이지의 URL을 쿼리 파라미터로 추가하여 로그인 페이지로 이동
-                var currentUrl = window.location.href;
-                var loginUrl = '${root}/member/login?redirect=' + encodeURIComponent(currentUrl);
-                window.location.href = loginUrl;
+                window.location.href = '${root}/member/login';
             });
         }
     });
 </script>
+
 
 </html>
