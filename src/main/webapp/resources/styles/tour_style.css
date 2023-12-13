@@ -421,7 +421,7 @@
 	margin-right: 1.2rem;
 }
 .map-info .info-bottom div.bul1::before {
-	background: #ff6888;
+	background: #EEB182;
 }
 .map-info .info-bottom div.bul2::before {
 	background: #ffc03a;
@@ -869,7 +869,7 @@
 	background: #fff;
 	letter-spacing: -0.04em;
 	overflow: hidden;
-	border-bottom: 1px solid #ff6888;
+	border-bottom: 1px solid #EEB182;
 }
 
 .main-space-section .item-space {
@@ -971,7 +971,7 @@
 }
 .main-space-section .item-space.space1 .btn-space span::before,
 .main-space-section .item-space.space1 .main-space-list a:hover::before {
-	background: #ff6888;
+	background: #EEB182;
 }
 
 /* 독립서점 */
@@ -3733,7 +3733,7 @@
 	margin-top: 1.5rem;
 	font-size: 1.4rem;
 	font-weight: 500;
-	color: #ff6888;
+	color: #EEB182;
 }
 
 .login-set .text-group {
@@ -3895,7 +3895,7 @@
  */
 /* 서브 비쥬얼 */
 #sub_visual {
-	height: 61rem;
+	height: 500px;
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -3933,12 +3933,12 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding-top: 13rem;
+	padding-top: 9rem;
 }
 
 .sub-title-box .title {
 	
-	font-size: 7rem;
+	font-size: 4rem;
 	font-weight: 700;
 	color: #fff;
 	text-shadow: 1px 1px 0px rgba(24, 29, 37, 1);
@@ -4414,7 +4414,7 @@
 
 .sub-tab .tab-item a {
 	display: block;
-	font-size: 2.4rem;
+	font-size: 1.8rem;
 	padding: 2.6rem 2.4rem;
 }
 
@@ -5092,7 +5092,7 @@
 
 .gift-text {
 	text-align: center;
-	color: #ff6888;
+	color: #EEB182;
 	font-size: 2rem;
 	font-weight: bold;
 	margin-top: 1rem;
@@ -5164,7 +5164,7 @@
 
 /* 공간 뱃지 */
 .space-badge {
-	font-size: 1.6rem;
+	font-size: 1.2rem;
 	font-weight: bold;
 	color: #fff;
 	text-align: center;
@@ -5181,13 +5181,13 @@
 	background: #ff6888;
 }
 .space-badge.badge-2 {
-	background: #fbad00;
+	background: #b964f7;
 }
 .space-badge.badge-3 {
 	background: #58a8ff;
 }
 .space-badge.badge-4 {
-	background: #b964f7;
+	background: #fbad00;
 }
 
 @media (max-width: 768px) {
@@ -5211,7 +5211,7 @@
 .chk-like-lbl,
 .grid-list .heart-btn {
 	color: #717171;
-	font-size: 1.8rem;
+	font-size: 15px;
 }
 
 .chk-like:checked + .chk-like-lbl {
@@ -5227,7 +5227,7 @@
 	.chk-scrap-lbl,
 	.chk-like-lbl,
 	.grid-list .heart-btn {
-		font-size: 1.5rem;
+		font-size: 15px;
 	}
 }
 
@@ -5341,12 +5341,15 @@
 	flex-grow: 0;
 	width: 25%;
 	position: relative;
-	padding: 3.5rem 1.6rem;
+	padding-top: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
 }
 
 .grid-list .item-image {
 	position: relative;
-	margin-bottom: 2rem;
+	margin-bottom: 1rem;
 	overflow: hidden;
 	border-radius: 2rem;
 	background-color: #ccc;
@@ -5462,7 +5465,7 @@
 }
 
 .grid-list .item-title {
-	font-size: 2rem;
+	font-size: 25px;
 	font-weight: bold;
 	letter-spacing: -0.025em;
 }
@@ -5694,7 +5697,7 @@
 	width: 140rem;
 	height: 55rem;
 	margin: 0 auto 6rem;
-	border: 0.1rem solid #ff6888;
+	border: 0.1rem solid #EEB182;
 	border-radius: 2rem;
 	position: relative;
 	background: #fff8fa;
@@ -6011,7 +6014,7 @@
 }
 .recommend-course-detail .course-image-wrap {
 	margin-top: 3rem;
-	border: 0.1rem solid #ff6888;
+	border: 0.1rem solid #EEB182;
 	border-radius: 2rem;
 	overflow: hidden;
 	position: relative;
@@ -6177,7 +6180,7 @@
 	font-size: 2.2rem;
 }
 .terms-wrap .text-important {
-	color: #ff6888;
+	color: #EEB182;
 }
 .terms-wrap u {
 	text-underline-offset: 0.3rem;
@@ -6273,7 +6276,7 @@
 	left: 0;
 }
 .terms-wrap .terms-link {
-	color: #ff6888;
+	color: #EEB182;
 }
 .terms-wrap .terms-link:hover,
 .terms-wrap .terms-link:focus {
@@ -7253,7 +7256,7 @@
 .calendar-box.fc .fc-toolbar .fc-toolbar-title strong {
 	font-size: 138%;
 	font-weight: bold;
-	color: #ff6888;
+	color: #EEB182;
 }
 
 .calendar-box.fc button.fc-button {
@@ -7335,8 +7338,8 @@
 	left: 0;
 	top: 0;
 	z-index: 1;
-	border-top: 1.6rem solid #ff6888;
-	border-left: 1.6rem solid #ff6888;
+	border-top: 1.6rem solid #EEB182;
+	border-left: 1.6rem solid #EEB182;
 	border-right: 1.6rem solid transparent;
 	border-bottom: 1.6rem solid transparent;
 }
@@ -7492,7 +7495,7 @@
 }
 .schedule-list .item-title strong {
 	font-weight: bold;
-	color: #ff6888;
+	color: #EEB182;
 }
 .schedule-list .item-list li + li {
 	margin-top: 0.8rem;
@@ -7510,7 +7513,7 @@
 	letter-spacing: -0.01em;
 }
 .schedule-list .item-list li:nth-child(3n-1) button {
-	background-color: #ff6888;
+	background-color: #EEB182;
 }
 .schedule-list .item-list li:nth-child(3n) button {
 	background-color: #e05a86;

@@ -193,13 +193,17 @@
    }
    
 </style>
+<script>
+	
+</script>
 </head>
 <body>
 	<div class="course_list_app">
 		<div class="course_innerheader">
 			<span class="course_title">추천코스</span>
 			<c:if test="${sessionScope.loginok != null}">
-				<button type="button" class="course_addbtn">코스추가</button>
+				<button type="button" class="course_addbtn"
+				onclick="location.href = './add'">코스추가</button>
 			</c:if>
 			<div class="course_search">
 				<div class="course_search_input">
@@ -211,191 +215,59 @@
 		</div>
 		
 		<div class="course_list_contents">
-			<!-- dummy data -->
-			
-			<div class="course_content">
-				<!-- dummy slide -->
+			<c:forEach var="dto" items="${courses}">
+				<div class="course_content">
 				<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto1.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto2.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto3.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto4.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto5.jpg"></swiper-slide>
+				    <c:forEach var="photo" items="${dto.routePhotos}">
+				    	<swiper-slide>
+				    		<img src="${photo == ''? '../res/photo/noimage.png' : photo}">
+				    	</swiper-slide>
+				    </c:forEach>
 		  		</swiper-container>
 		  		
 		  		<!-- 좋아요 버튼 -->
-		  		<div class="course_like_button">
-		  			<i class="bi bi-heart"></i>
-		  			<!-- <i class="bi bi-heart-fill"></i> -->
-		  		</div>
+		  		<c:if test="${sessionScope.loginok != null}">
+			  		<div class="course_like_button">
+			  			<c:if test="${dto.likedByCurrentUser}">
+			  				<i class="bi bi-heart-fill"></i>
+			  			</c:if>
+			  			<c:if test="${!dto.likedByCurrentUser}">
+			  				<i class="bi bi-heart"></i>
+			  			</c:if>
+			  		</div>
+		  		</c:if>
 		  		
 		  		<!-- 조회수와 좋아요 개수 -->
 		  		<div class="course_guest_info">
-		  			<i class="bi bi-eye">&nbsp;932</i><br>
-		  			<i class="bi bi-heart-fill">&nbsp;15</i>
+		  			<i class="bi bi-eye">&nbsp;${dto.readcount}</i><br>
+		  			<i class="bi bi-heart-fill">&nbsp;${dto.totalLikes}</i>
 		  		</div>
 		  		
-		  		<h4 style="text-align: center;">예술감성으로 여행갔다가 피방 ㄱ?</h4>
+		  		<h4 style="text-align: center;">${dto.name}</h4>
 		  		<div class="course_brief">
-대충 무슨 설명입니다.<br>
-알아서 돌아보세요.<br>
-아아아아아아아<br>
-피방 ㄱ?	
+		  			${dto.briefcontent}
 		  		</div>
 		  		<hr>
 		  		<div class="course_summary">
 		  			<figure>
-		  				<img src="../res/photo/Icon_MapMarker.png">
-		  				<figcaption>5개</figcaption>
+		  				<img src="../res/photo/course_icons/Icon_MapMarker.png">
+		  				<figcaption>${dto.totalSpots }개</figcaption>
 		  			</figure>
 		  			<figure>
-		  				<img src="../res/photo/Icon_Journey.png">
-		  				<figcaption>24km</figcaption>
+		  				<img src="../res/photo/course_icons/Icon_Journey.png">
+		  				<figcaption>${dto.distance}km</figcaption>
 		  			</figure>
 		  			<figure>
-		  				<img src="../res/photo/Icon_Timesheet.png">
-		  				<figcaption>4시간</figcaption>
+		  				<img src="../res/photo/course_icons/Icon_Timesheet.png">
+		  				<figcaption>${dto.spendingtime}${dto.timestandard}</figcaption>
 		  			</figure>
 		  			<figure>
-		  				<img src="../res/photo/noimage.png">
-		  				<figcaption>김동현</figcaption>
+		  				<img src="${dto.writersPhoto == null? '../res/photo/noimage.png' : dto.writersPhoto }">
+		  				<figcaption>${dto.writersNickname}</figcaption>
 		  			</figure>
 		  		</div>
 			</div>
-			
-			<div class="course_content">
-				<!-- dummy slide -->
-				<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto4.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto5.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto2.jpg"></swiper-slide>
-		  		</swiper-container>
-		  		
-		  		<!-- 좋아요 버튼 -->
-		  		<div class="course_like_button">
-		  			<i class="bi bi-heart"></i>
-		  			<!-- <i class="bi bi-heart-fill"></i> -->
-		  		</div>
-		  		
-		  		<!-- 조회수와 좋아요 개수 -->
-		  		<div class="course_guest_info">
-		  			<i class="bi bi-eye">&nbsp;612</i><br>
-		  			<i class="bi bi-heart-fill">&nbsp;8</i>
-		  		</div>
-		  		
-		  		<h4 style="text-align: center;">살며, 사랑하며, 배워서 남주냐?</h4>
-		  		<div class="course_brief">
-대충 무슨 설명입니다. 으아아	
-		  		</div>
-		  		<hr>
-		  		<div class="course_summary">
-		  			<figure>
-		  				<img src="../res/photo/Icon_MapMarker.png">
-		  				<figcaption>3개</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/Icon_Journey.png">
-		  				<figcaption>15km</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/Icon_Timesheet.png">
-		  				<figcaption>2시간</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/noimage.png">
-		  				<figcaption>장원태</figcaption>
-		  			</figure>
-		  		</div>
-			</div>
-			
-			<div class="course_content">
-				<!-- dummy slide -->
-				<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto3.jpg"></swiper-slide>
-		  		</swiper-container>
-		  		
-		  		<!-- 좋아요 버튼 -->
-		  		<div class="course_like_button">
-		  			<i class="bi bi-heart"></i>
-		  			<!-- <i class="bi bi-heart-fill"></i> -->
-		  		</div>
-		  		
-		  		<!-- 조회수와 좋아요 개수 -->
-		  		<div class="course_guest_info">
-		  			<i class="bi bi-eye">&nbsp;85</i><br>
-		  			<i class="bi bi-heart-fill">&nbsp;3</i>
-		  		</div>
-		  		
-		  		<h4 style="text-align: center;">나를 묶고 가둔다면 뱃길따라 이백리</h4>
-		  		<div class="course_brief">
-버터플 야도란 새들의 고향	
-		  		</div>
-		  		<hr>
-		  		<div class="course_summary">
-		  			<figure>
-		  				<img src="../res/photo/Icon_MapMarker.png">
-		  				<figcaption>1개</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/Icon_Journey.png">
-		  				<figcaption>0km</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/Icon_Timesheet.png">
-		  				<figcaption>30분</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/noimage.png">
-		  				<figcaption>루시퍼</figcaption>
-		  			</figure>
-		  		</div>
-			</div>
-			
-			<div class="course_content">
-				<!-- dummy slide -->
-				<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto2.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto3.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto5.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto4.jpg"></swiper-slide>
-		  		</swiper-container>
-		  		
-		  		<!-- 좋아요 버튼 -->
-		  		<div class="course_like_button">
-		  			<i class="bi bi-heart"></i>
-		  			<!-- <i class="bi bi-heart-fill"></i> -->
-		  		</div>
-		  		
-		  		<!-- 조회수와 좋아요 개수 -->
-		  		<div class="course_guest_info">
-		  			<i class="bi bi-eye">&nbsp;1423</i><br>
-		  			<i class="bi bi-heart-fill">&nbsp;128</i>
-		  		</div>
-		  		
-		  		<h4 style="text-align: center;">익숙함 속 반짝임을 만나면 뭐하냐</h4>
-		  		<div class="course_brief">
-반짝이더라도 어느순간 빛을 잃는 것이 인생이거늘...이리도 덧없는 인생...아아아아아아아아아아아아 나는 개똥벌레 친구가 없네
-		  		</div>
-		  		<hr>
-		  		<div class="course_summary">
-		  			<figure>
-		  				<img src="../res/photo/Icon_MapMarker.png">
-		  				<figcaption>4개</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/Icon_Journey.png">
-		  				<figcaption>23km</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/Icon_Timesheet.png">
-		  				<figcaption>2일</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/noimage.png">
-		  				<figcaption>설석현</figcaption>
-		  			</figure>
-		  		</div>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
