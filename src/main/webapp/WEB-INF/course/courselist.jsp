@@ -90,7 +90,7 @@
    
    div.course_list_contents div.course_content {
        width: 570px;
-       height: 450px;
+       height: 480px;
        border: 2px solid #ccc;
        border-radius: 10px;
        position: relative;
@@ -164,6 +164,11 @@
        color: hotpink;
    }
    
+   div.course_content div.course_name {
+       height: 66px;
+       overflow-y: auto;
+   }
+   
    div.course_list_contents div.course_content>div.course_brief {
        width: 100%;
        height: 64px;
@@ -216,13 +221,23 @@
 		
 		<div class="course_list_contents">
 			<c:forEach var="dto" items="${courses}">
+				<c:set var="photoFlag" value="0"/> <!-- 해당 코스에서 하나라도 사진이 있는지 여부 -->
 				<div class="course_content">
 				<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
 				    <c:forEach var="photo" items="${dto.routePhotos}">
-				    	<swiper-slide>
-				    		<img src="${photo == ''? '../res/photo/noimage.png' : photo}">
-				    	</swiper-slide>
+				    	<c:if test="${photo != ''}">
+				    		<c:set var="photoFlag" value="1"/> <!-- 해당 코스에서 하나라도 사진이 있음 표시 -->
+				    		<swiper-slide>
+				    			<img src="${photo}">
+				    		</swiper-slide>
+				    	</c:if>
 				    </c:forEach>
+				    <!-- 사진이 하나도 없었다면, noimage를 넣어준다 -->
+				    <c:if test="${photoFlag == 0}">
+				    	<swiper-slide>
+				    		<img src="../res/photo/noimage.png">
+				    	</swiper-slide>
+				    </c:if>
 		  		</swiper-container>
 		  		
 		  		<!-- 좋아요 버튼 -->
@@ -242,8 +257,9 @@
 		  			<i class="bi bi-eye">&nbsp;${dto.readcount}</i><br>
 		  			<i class="bi bi-heart-fill">&nbsp;${dto.totalLikes}</i>
 		  		</div>
-		  		
-		  		<h4 style="text-align: center;">${dto.name}</h4>
+		  		<div class="course_name">
+		  			<h4 style="text-align: center;">${dto.name}</h4>
+		  		</div>
 		  		<div class="course_brief">
 		  			${dto.briefcontent}
 		  		</div>
