@@ -2,18 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jeju.dao.TourDao">
 
-	<select id="totalCountOfTour" resultType="int">
-		select count(*) from tour
+	<!-- 토탈갯수 -->
+	<select id="totalCountOfTour" parameterType="Map" resultType="int">
+		select count(*) from tour where title like concat('%',#{searchword},'%')
+		<if test="contenttype != null and contenttype.size > 0">
+			and contenttype in
+			<foreach collection="contenttype" item="code" open="(" close=")" separator=",">
+				#{code}
+			</foreach>
+		</if>
+		<if test="sigungucode != 0">
+			and sigungucode = #{sigungucode}
+		</if>
 	</select>
-	<select id="selectAllTour" resultType="Map">
-		select * from tour order by title limit 8
-	</select><!-- 리스트 -->
-	<select id="selectPagingOfTour" resultType="Map">
-		select * from tour order by title limit #{start}, #{perpage}
-	</select><!-- 리스트 페이징 -->
-	<select id="selectOneTour" parameterType="int" resultType="TourDto">
-		select * from tour where tourcode=#{tourcode}
-	</select><!-- 하나만 -->
 	
+	<!-- 리스트 -->
+	<select id="selectListOfTour" parameterType="Map" resultType="Map">
+		select * from tour where title like concat('%',#{searchword},'%')
+		<if test="contenttype != null and contenttype.size > 0">
+			and contenttype in
+			<foreach collection="contenttype" item="code" open="(" close=")" separator=",">
+				#{code}
+			</foreach>
+		</if>
+		<if test="sigungucode != 0">
+			and sigungucode = #{sigungucode}
+		</if>
+		order by title
+		limit #{start}, 12
+	</select>
+	
+	<!-- 정보 -->
+	<select id="selectOneOfTour" parameterType="int" resultType="TourDto">
+		select * from tour where tourcode=#{tourcode}
+	</select>
+	
+	<!-- 선택된 카테고리들과 검색어에 해당하는 데이터 검색(by 장원태) -->
+	<!-- 
+		[Trouble-Shooting]
+		","으로 이어진 문자열로 받아와서 단순히 넘겨주면, 그걸 하나의 데이터로 취급해서
+		쿼리문에서 제대로 작동하지 않는 듯 하다.
+		그래서 아래와 같이 foreach 태그를 돌리고 그걸 ,로 이어주는
+		과정을 거쳐야 한다.
+	 -->
+	<select id="searchTourByQueries" parameterType="Map" resultType="TourDto">
+		select * from tour
+		where title like concat('%', #{searchingName} ,'%')
+		and contenttype in
+		<foreach collection="categories" item="typecode" open="(" close=")" separator=",">
+		    #{typecode}
+		</foreach>
+	</select>
 		
 </mapper>

@@ -11,9 +11,14 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="../res/course/style/paging.css">
 <style>
    body * {
        font-family: 'Orbit';
+   }
+   
+   div.course_list_app {
+       padding: 0 150px;
    }
    
    div.course_innerheader {
@@ -29,6 +34,7 @@
        display: flex;
        justify-content: center;
        align-items: center;
+       font-weight: bold;
    }
    
    div.course_innerheader button.course_addbtn {
@@ -83,18 +89,19 @@
    
    div.course_list_contents {
        width: 100%;
-       margin: 15px;
        display: flex;
        flex-wrap: wrap;
+       place-content: center;
    }
    
    div.course_list_contents div.course_content {
        width: 570px;
-       height: 450px;
+       height: 570px;
        border: 2px solid #ccc;
        border-radius: 10px;
        position: relative;
-       margin: 15px;
+       margin: 20px;
+       box-sizing: border-box;
    }
    
    /* slide show 관련 */
@@ -164,10 +171,24 @@
        color: hotpink;
    }
    
+   div.course_content div.course_name {
+       height: 99px;
+       overflow-y: auto;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+   
+   div.course_name>h4 {
+       text-align: center;
+       font-weight: bold;
+   }
+   
    div.course_list_contents div.course_content>div.course_brief {
        width: 100%;
-       height: 64px;
+       height: 120px;
        overflow: auto;
+       padding: 0 30px;
    }
    
    div.course_list_contents div.course_summary {
@@ -192,14 +213,85 @@
        font-weight: bold;
    }
    
+   div.course_pagination {
+       margin: 30px 0;
+       display: flex;
+       justify-content: center;
+   }
 </style>
+<script>
+	let clickingHeart= false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
+	const FULL_HEART_BUTTON = `<i class="bi bi-heart-fill course_heart"></i>`;
+	const EMPTY_HEART_BUTTON = `<i class="bi bi-heart course_heart"></i>`;
+	
+	$(function(){
+		// 하트 아이콘 클릭 시
+		$(document).on("click", "div.course_content div.course_like_button", function(){
+			// 이미 다른 좋아요 처리중인 경우
+			if (clickingHeart) {
+				alert("다른 좋아요 기능 처리중입니다. 잠시 후 시도해주세요.");
+				return;
+			}
+			
+			// 하트가 되어있는지 확인
+			let heartFilled = $(this).children("i.course_heart").hasClass("bi-heart-fill");
+			
+			clickingHeart = true;
+			let coursecode = $(this).parents("div.course_content").attr("coursecode"); // 클릭한 코스의 아이디
+			let currentButton = $(this); // 현재 버튼 요소
+			let likesInfoToUpdate = $(this).siblings("div.course_guest_info").children("i.course_totalLikes"); // 클릭한 코스의 총 좋아요 수 부분
+			
+			// 1. 하트가 이미 되어있는 경우: 좋아요 취소
+			if (heartFilled) {
+				$.ajax({
+					type: "post",
+					dataType: "json",
+					url: "./like/remove",
+					data: {
+						"coursecode": coursecode,
+						"usercode": "${sessionScope.usercode}"
+					},
+					success: function(res){
+						currentButton.html(EMPTY_HEART_BUTTON);
+						// 이 코스에 대한 좋아요 수 갱신
+						likesInfoToUpdate.html(`&nbsp;\${res.totalLikes}`);
+						
+						// 플래그 원상 복구
+						clickingHeart = false;
+					}
+				});
+			}
+			else {
+				// 2. 하트가 되어있지 않은 경우: 좋아요 추가
+				$.ajax({
+					type: "post",
+					dataType: "json",
+					url: "./like/grant",
+					data: {
+						"coursecode": coursecode,
+						"usercode": "${sessionScope.usercode}"
+					},
+					success: function(res){
+						currentButton.html(FULL_HEART_BUTTON);
+						// 이 코스에 대한 좋아요 수 갱신
+						likesInfoToUpdate.html(`&nbsp;\${res.totalLikes}`);
+						
+						// 플래그 원상 복구
+						clickingHeart = false;
+					}
+				});
+			}
+		});
+	}); // end of $(function())
+</script>
 </head>
 <body>
 	<div class="course_list_app">
 		<div class="course_innerheader">
 			<span class="course_title">추천코스</span>
 			<c:if test="${sessionScope.loginok != null}">
-				<button type="button" class="course_addbtn">코스추가</button>
+				<button type="button" class="course_addbtn"
+				onclick="location.href = './add'">코스추가</button>
 			</c:if>
 			<div class="course_search">
 				<div class="course_search_input">
@@ -211,191 +303,111 @@
 		</div>
 		
 		<div class="course_list_contents">
-			<!-- dummy data -->
-			
-			<div class="course_content">
-				<!-- dummy slide -->
-				<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto1.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto2.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto3.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto4.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto5.jpg"></swiper-slide>
-		  		</swiper-container>
-		  		
-		  		<!-- 좋아요 버튼 -->
-		  		<div class="course_like_button">
-		  			<i class="bi bi-heart"></i>
-		  			<!-- <i class="bi bi-heart-fill"></i> -->
-		  		</div>
-		  		
-		  		<!-- 조회수와 좋아요 개수 -->
-		  		<div class="course_guest_info">
-		  			<i class="bi bi-eye">&nbsp;932</i><br>
-		  			<i class="bi bi-heart-fill">&nbsp;15</i>
-		  		</div>
-		  		
-		  		<h4 style="text-align: center;">예술감성으로 여행갔다가 피방 ㄱ?</h4>
-		  		<div class="course_brief">
-대충 무슨 설명입니다.<br>
-알아서 돌아보세요.<br>
-아아아아아아아<br>
-피방 ㄱ?	
-		  		</div>
-		  		<hr>
-		  		<div class="course_summary">
-		  			<figure>
-		  				<img src="../res/photo/Icon_MapMarker.png">
-		  				<figcaption>5개</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/Icon_Journey.png">
-		  				<figcaption>24km</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/Icon_Timesheet.png">
-		  				<figcaption>4시간</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/noimage.png">
-		  				<figcaption>김동현</figcaption>
-		  			</figure>
-		  		</div>
-			</div>
-			
-			<div class="course_content">
-				<!-- dummy slide -->
-				<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto4.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto5.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto2.jpg"></swiper-slide>
-		  		</swiper-container>
-		  		
-		  		<!-- 좋아요 버튼 -->
-		  		<div class="course_like_button">
-		  			<i class="bi bi-heart"></i>
-		  			<!-- <i class="bi bi-heart-fill"></i> -->
-		  		</div>
-		  		
-		  		<!-- 조회수와 좋아요 개수 -->
-		  		<div class="course_guest_info">
-		  			<i class="bi bi-eye">&nbsp;612</i><br>
-		  			<i class="bi bi-heart-fill">&nbsp;8</i>
-		  		</div>
-		  		
-		  		<h4 style="text-align: center;">살며, 사랑하며, 배워서 남주냐?</h4>
-		  		<div class="course_brief">
-대충 무슨 설명입니다. 으아아	
-		  		</div>
-		  		<hr>
-		  		<div class="course_summary">
-		  			<figure>
-		  				<img src="../res/photo/Icon_MapMarker.png">
-		  				<figcaption>3개</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/Icon_Journey.png">
-		  				<figcaption>15km</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/Icon_Timesheet.png">
-		  				<figcaption>2시간</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/noimage.png">
-		  				<figcaption>장원태</figcaption>
-		  			</figure>
-		  		</div>
-			</div>
-			
-			<div class="course_content">
-				<!-- dummy slide -->
-				<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto3.jpg"></swiper-slide>
-		  		</swiper-container>
-		  		
-		  		<!-- 좋아요 버튼 -->
-		  		<div class="course_like_button">
-		  			<i class="bi bi-heart"></i>
-		  			<!-- <i class="bi bi-heart-fill"></i> -->
-		  		</div>
-		  		
-		  		<!-- 조회수와 좋아요 개수 -->
-		  		<div class="course_guest_info">
-		  			<i class="bi bi-eye">&nbsp;85</i><br>
-		  			<i class="bi bi-heart-fill">&nbsp;3</i>
-		  		</div>
-		  		
-		  		<h4 style="text-align: center;">나를 묶고 가둔다면 뱃길따라 이백리</h4>
-		  		<div class="course_brief">
-버터플 야도란 새들의 고향	
-		  		</div>
-		  		<hr>
-		  		<div class="course_summary">
-		  			<figure>
-		  				<img src="../res/photo/Icon_MapMarker.png">
-		  				<figcaption>1개</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/Icon_Journey.png">
-		  				<figcaption>0km</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/Icon_Timesheet.png">
-		  				<figcaption>30분</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/noimage.png">
-		  				<figcaption>루시퍼</figcaption>
-		  			</figure>
-		  		</div>
-			</div>
-			
-			<div class="course_content">
-				<!-- dummy slide -->
-				<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto2.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto3.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto5.jpg"></swiper-slide>
-				    <swiper-slide><img src="../res/photo/course_dummy/dummy_tourphoto4.jpg"></swiper-slide>
-		  		</swiper-container>
-		  		
-		  		<!-- 좋아요 버튼 -->
-		  		<div class="course_like_button">
-		  			<i class="bi bi-heart"></i>
-		  			<!-- <i class="bi bi-heart-fill"></i> -->
-		  		</div>
-		  		
-		  		<!-- 조회수와 좋아요 개수 -->
-		  		<div class="course_guest_info">
-		  			<i class="bi bi-eye">&nbsp;1423</i><br>
-		  			<i class="bi bi-heart-fill">&nbsp;128</i>
-		  		</div>
-		  		
-		  		<h4 style="text-align: center;">익숙함 속 반짝임을 만나면 뭐하냐</h4>
-		  		<div class="course_brief">
-반짝이더라도 어느순간 빛을 잃는 것이 인생이거늘...이리도 덧없는 인생...아아아아아아아아아아아아 나는 개똥벌레 친구가 없네
-		  		</div>
-		  		<hr>
-		  		<div class="course_summary">
-		  			<figure>
-		  				<img src="../res/photo/Icon_MapMarker.png">
-		  				<figcaption>4개</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/Icon_Journey.png">
-		  				<figcaption>23km</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/Icon_Timesheet.png">
-		  				<figcaption>2일</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/noimage.png">
-		  				<figcaption>설석현</figcaption>
-		  			</figure>
-		  		</div>
-			</div>
+			<c:forEach var="dto" items="${courses}">
+				<c:set var="photoFlag" value="0"/> <!-- 해당 코스에서 하나라도 사진이 있는지 여부 -->
+				<div class="course_content" coursecode="${dto.coursecode}">
+					<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
+					    <c:forEach var="photo" items="${dto.routePhotos}">
+					    	<c:if test="${photo != ''}">
+					    		<c:set var="photoFlag" value="1"/> <!-- 해당 코스에서 하나라도 사진이 있음 표시 -->
+					    		<swiper-slide>
+					    			<img src="${photo}">
+					    		</swiper-slide>
+					    	</c:if>
+					    </c:forEach>
+					    <!-- 사진이 하나도 없었다면, noimage를 넣어준다 -->
+					    <c:if test="${photoFlag == 0}">
+					    	<swiper-slide>
+					    		<img src="../res/photo/course_image/homeicon_incourse.png">
+					    	</swiper-slide>
+					    </c:if>
+			  		</swiper-container>
+			  		
+			  		<!-- 좋아요 버튼 -->
+			  		<c:if test="${sessionScope.loginok != null}">
+				  		<div class="course_like_button">
+				  			<c:if test="${dto.likedByCurrentUser}">
+				  				<i class="bi bi-heart-fill course_heart"></i>
+				  			</c:if>
+				  			<c:if test="${!dto.likedByCurrentUser}">
+				  				<i class="bi bi-heart course_heart"></i>
+				  			</c:if>
+				  		</div>
+			  		</c:if>
+			  		
+			  		<!-- 조회수와 좋아요 개수 -->
+			  		<div class="course_guest_info">
+			  			<i class="bi bi-eye">&nbsp;${dto.readcount}</i><br>
+			  			<i class="bi bi-heart-fill course_totalLikes">&nbsp;${dto.totalLikes}</i>
+			  		</div>
+			  		<div class="course_name">
+			  			<h4 style="text-align: center; font-weight: bold;">${dto.name}</h4>
+			  		</div>
+			  		<div class="course_brief">
+			  			${dto.briefcontent}
+			  		</div>
+			  		<hr>
+			  		<div class="course_summary">
+			  			<figure>
+			  				<img src="../res/photo/course_icons/Icon_MapMarker.png">
+			  				<figcaption>${dto.totalSpots }개</figcaption>
+			  			</figure>
+			  			<figure>
+			  				<img src="../res/photo/course_icons/Icon_Journey.png">
+			  				<figcaption>
+			  					<!-- 거리는 최대 소수점 둘째자리까지만 출력 -->
+			  					<fmt:formatNumber value="${dto.distance}" maxFractionDigits="2"/>
+			  					km
+			  				</figcaption>
+			  			</figure>
+			  			<figure>
+			  				<img src="../res/photo/course_icons/Icon_Timesheet.png">
+			  				<figcaption>${dto.spendingtime}${dto.timestandard}</figcaption>
+			  			</figure>
+			  			<figure>
+			  				<img src="${dto.writersPhoto == null? '../res/photo/noimage.png' : dto.writersPhoto }">
+			  				<figcaption>${dto.writersNickname}</figcaption>
+			  			</figure>
+			  		</div>
+				</div>
+			</c:forEach>
+		</div>
+		
+		<!-- pagination -->
+		<div class="pagination-container wow zoomIn mar-b-1x course_pagination" data-wow-duration="0.5s">
+
+			<ul class="pagination">
+				<!-- 이전 페이지 버튼 -->
+				<c:if test="${startPage > 1}">
+					<li class="pagination-item first"> <a class="pagination-link first" href="./list?currentPage=${startPage - 1}">Previous</a> </li>
+				</c:if>
+				
+				<!-- 페이지 번호 목록 -->
+				<c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
+					<!-- 현재 페이지와 같은 번호 -->
+					<c:if test="${pageNum == currentPage}">
+						<li class="pagination-item is-active"> 
+							<a class="pagination-link" href="#">
+								${pageNum}
+							</a> 
+						</li>
+					</c:if>
+					<!-- 그 외 번호 -->
+					<c:if test="${pageNum != currentPage}">
+						<li class="pagination-item">
+							<a class="pagination-link" href="./list?currentPage=${pageNum}">
+								${pageNum}
+							</a>
+						</li>
+					</c:if>
+				</c:forEach>
+				
+				<!-- 다음 페이지 버튼 -->
+				<c:if test="${endPage < totalPages}">
+					<li class="pagination-item last"> <a class="pagination-link last" href="./list?currentPage=${endPage + 1}">Next</a> </li>
+				</c:if>
+			</ul>
+		
 		</div>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>

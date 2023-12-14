@@ -17,7 +17,7 @@ public class NaverConfig {
 	
 	@Value("KBWbeoPeKDJhL2RLATtd") // access Key
 	private String accessKey;
-	
+
 	@Value("407hL347PDkJvmhw5olS0zH481ClFmArm2gKChPd") // secret Key
 	private String secretKey;
 }

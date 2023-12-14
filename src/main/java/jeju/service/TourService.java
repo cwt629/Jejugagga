@@ -16,5 +16,19 @@ public class TourService {
 	
 	private TourDao tourDao;
 	
+	public List<TourDto> getSearchedListByQueries(String searchingName, List<String> categories){
+		Map<String, Object> queryMap = new HashMap<String, Object>();
+		
+		queryMap.put("searchingName", searchingName);
+		queryMap.put("categories", categories);
+		System.out.println(categories);
+		
+		System.out.println(queryMap);
+		
+		return tourDao.getSearchedTourByQueries(queryMap);
+	}
 	
+	public TourDto getData(int tourcode) {
+		return tourDao.getTourData(tourcode);
+	}
 }

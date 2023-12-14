@@ -12,19 +12,90 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <style>
-   body * {
-       font-family: 'Orbit';
-   }
-  
+	body * {
+		font-family: 'Orbit';
+		font-size: 14px;
+	}
+	
+	.checkdiv {
+		width: 400px;
+		height: 350px;
+		padding: 40px;
+		position: absolute;
+	        margin: 0 auto;
+	        left: 0;
+	        right: 0px;
+	        TOP: 13%;
+	}
+	
+	.checkdiv > .login_logo_photo{
+		width: 200px;
+		height: 200px;
+	}
+	
+	
+	#findform > input {
+		width: 300px;
+		height: 48px;
+		padding: 0 10px;
+		margin-bottom: 16px;
+		border-radius: 6px;
+		background-color: #F8F8F8;
+	}
+	
+	#findform > input[type="submit"] {
+		color: #fff;
+		font-size: 16px;
+		background-color: #EEB182;
+		margin-top: 20px;
+	}
+	
+	#findform > input[type="checkbox"] {
+		display: none;
+	}
+	
+	#findform > label {
+		color: #999999;
+	}
+	
+	#findform input[type="checkbox"]+label {
+		cursor: pointer;
+		padding-left: 26px;
+		background-image: url("checkbox.png");
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
+	
+	#findform input[type="checkbox"]:checked+label {
+		background-image: url("checkbox-active.png");
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
+	
+	.findtext{
+		text-align: center;
+		color: 	#EEB182;	
+		}
 </style>
 </head>
+<c:set var="root" value="<%=request.getContextPath() %>"/>
 <body>
-해당 이메일로 임시코드를 보내드릴게요
-<form action="login/findpass" method="post" >
-	<input type="email" name="id">이메일<br>
-	<input type="id" name="pass">아이디<br>
-	<input type="submit" value="임시코드 보내기"> 
-</form>
-<input type="text"> <button type="button">임시코드 확인</button>
+	<div class="checkdiv">
+		<img alt="logo" src="${root }/res/photo/jejuhome.png" style="margin-left: 55px" class="login_logo_photo">
+		<div class="findtext" style="text-align: center;"><b>찾으시려는 계정의 회원정보를 입력해주세요</b></div>
+		<form action="${root }/member/login/findpass/check" method="post" id="findform">
+			<br>아이디<br>
+	        <input type="text" name="id" placeholder="ID" class="findname" autofocus="autofocus">
+			이름<br>
+			<input type="text" name="name" placeholder="이름" autofocus="autofocus">
+			생년월일<br>
+			<input type="date" name="birth" required><br>			
+			<input type="submit" value="회원정보 확인"> 
+		</form>
+	</div>
+<script type="text/javascript">
+
+</script>
+	
 </body>
 </html>

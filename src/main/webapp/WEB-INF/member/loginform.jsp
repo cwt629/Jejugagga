@@ -29,6 +29,11 @@
 		
 	}
 	
+	.logindiv > .login_logo_photo{
+		width: 200px;
+		height: 200px;
+	}
+	
 	
 	#loginform > input {
 		width: 300px;
@@ -69,10 +74,18 @@
 	}
 </style>
 </head>
+<script type="text/javascript">
+$(function num() {
+	if($("#num1").val()==2){
+		alert("아이디 및 비밀번호가 일치하지 않습니다")
+	}
+})
+</script>
 <c:set var="root" value="<%=request.getContextPath() %>"/>
 <body>
 	<div class="logindiv">
-		<img alt="logo" src="${root }/res/photo/jejuhome.png" style="margin-left: 55px">
+		<input type="hidden" id="num1" value="${num}" >
+		<img alt="logo" src="${root }/res/photo/jejuhome.png" style="margin-left: 55px" class="login_logo_photo">
 		<form action="login/check" method="post" id="loginform">
 			<c:if test="${sessionScope.saveid=='yes'}">
 	                <input type="text" name="id" placeholder="id" class="loginidsave" value="${sessionScope.id }">
@@ -95,8 +108,9 @@
 			</c:if>	
 			
 			<input type="hidden" name="saveidvalue" value="false"> <!-- 기본값은 false로 설정 체크박스해제할때는 값을 안주기 떄문 -->
-			<input type="submit" value="로그인"> 
-			<a href="./login/findpass">비밀번호 찾기</a>
+			<input type="submit" value="로그인">
+			<a href="${root}/member/signup" style="text-decoration: none; color: #999999; ">회원가입</a> 
+			<a href="${root}/member/login/findpass" style="float: right; text-decoration: none; margin-right: 20px; color: #999999;">비밀번호 찾기</a>
 		</form>
 	</div>
 

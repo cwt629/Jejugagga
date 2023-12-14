@@ -2,6 +2,8 @@ package jeju.dto;
 
 import java.sql.Timestamp;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -48,15 +50,16 @@ public class TourDto {
 	private String reservationfood;
 	private String sponsor1;
 	private String sponsor1tel;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Timestamp eventenddate;
 	private String playtime;
 	private String eventplace;
 	private String eventhomepage;
 	private String agelimit;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Timestamp eventstartdate;
 	private String usetimefestival;
 	private String spendtimefestival;
 
-	
 
 }
