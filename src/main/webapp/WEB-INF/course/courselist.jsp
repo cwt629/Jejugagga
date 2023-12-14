@@ -377,9 +377,12 @@
 		<div class="pagination-container wow zoomIn mar-b-1x course_pagination" data-wow-duration="0.5s">
 
 			<ul class="pagination">
+				<!-- 이전 페이지 버튼 -->
 				<c:if test="${startPage > 1}">
 					<li class="pagination-item first"> <a class="pagination-link first" href="./list?currentPage=${startPage - 1}">Previous</a> </li>
 				</c:if>
+				
+				<!-- 페이지 번호 목록 -->
 				<c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
 					<!-- 현재 페이지와 같은 번호 -->
 					<c:if test="${pageNum == currentPage}">
@@ -398,13 +401,8 @@
 						</li>
 					</c:if>
 				</c:forEach>
-				<!-- 
-				<li class="pagination-item"> <a class="pagination-link" href="#">1</a> </li>
-				<li class="pagination-item"> <a class="pagination-link" href="#">2</a> </li>
-				<li class="pagination-item is-active"> <a class="pagination-link" href="#">3</a> </li>
-				<li class="pagination-item"> <a class="pagination-link" href="#">4</a> </li>
-				<li class="pagination-item"> <a class="pagination-link" href="#">5</a> </li>
-				 -->
+				
+				<!-- 다음 페이지 버튼 -->
 				<c:if test="${endPage < totalPages}">
 					<li class="pagination-item last"> <a class="pagination-link last" href="./list?currentPage=${endPage + 1}">Next</a> </li>
 				</c:if>
