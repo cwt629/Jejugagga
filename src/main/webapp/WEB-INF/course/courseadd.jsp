@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<script src="../res/course/utils/validate.js" type="module"></script>
+
 <style>
    body * {
        font-family: 'Orbit';
@@ -360,6 +362,46 @@
 			$(this).next().text(`(\${currentLength} / \${maxLength}자)`);
 		})
 		
+		// 이동 시간에 대해 입력이 올바른지 출력하는 함수
+		$("input.courseadd_timeinput").on("input", function(){
+			let messageBlock = $(this).siblings("span.courseadd_timemessage");
+			
+			// 아무것도 입력하지 않은 경우
+			if ($(this).val().length === 0){
+				messageBlock.css("color", "black").text("예상 소요 시간을 입력해주세요.");
+				return;
+			}
+			
+			// 올바른 입력
+			if (validateTimeInput($(this).val())){
+				messageBlock.css("color", "blue").text("올바른 입력입니다.");
+				return;
+			}
+			
+			// 올바르지 않은 입력
+			messageBlock.css("color", "red").text("입력은 0 이상 정수여야 합니다.");
+		});
+		
+		// 이동 거리에 대해 입력이 올바른지 출력하는 함수
+		$("input.courseadd_distanceinput").on("input", function(){
+			let messageBlock = $(this).siblings("span.courseadd_distmessage");
+			
+			// 아무것도 입력하지 않은 경우
+			if ($(this).val().length === 0){
+				messageBlock.css("color", "black").text("이동 거리를 직접 입력할 수 있습니다.");
+				return;
+			}
+			
+			// 올바른 입력
+			if (validateDistanceInput($(this).val())){
+				messageBlock.css("color", "blue").text("올바른 입력입니다.");
+				return;
+			}
+			
+			// 올바르지 않은 입력
+			messageBlock.css("color", "red").text("입력은 0 이상 숫자여야 합니다.");
+		});
+		
 	}); // end of $(function())
 	
 	// 특정 contenttype에 대한 카테고리명을 출력하는 함수
@@ -458,7 +500,37 @@
 		$("table.courseadd_table div.courseadd_routes").html(result);
 	}
 	
-	
+	// int 입력을 체크하는 함수
+	function isValidIntegerInput(input){
+		let intRegex = new RegExp('^[0-9]*$');
+		
+		// 완전한 정수 형태인지 확인
+		return intRegex.test(input);
+	}
+
+	// double 입력을 체크하는 함수
+	function isValidDoubleInput(input){
+		// 정수 형태인 경우
+		if (isValidIntegerInput(input)) return true;
+		
+		// 소수 형태인 경우에 대한 정규표현식
+		let doubleRegex = new RegExp('^[0-9]+\.?[0-9]+$');
+		
+		// 올바른 소수 형태인지 확인
+		return doubleRegex.test(input);
+	}
+
+	// 예상 소요 시간 입력 검증 함수
+	function validateTimeInput(input){
+		// 0 이상인 정수
+		return isValidIntegerInput(input) && parseInt(input) >= 0;
+	}
+
+	// 이동거리 검증 함수
+	function validateDistanceInput(input){
+		// 소수여야 한다
+		return isValidDoubleInput(input);
+	}
 	
 </script>
 <body>
@@ -502,20 +574,21 @@
 					<tr>
 						<td><b>예상 소요 시간 *</b></td>
 						<td>
-							<input type="text" name="spendingtime" class="courseadd_textinput" placeholder="소요 시간" 
-							style="width: 100px;" required>
+							<input type="text" name="spendingtime" class="courseadd_textinput courseadd_timeinput" placeholder="소요 시간" 
+							style="width: 100px;" maxlength="9" required>
 							<!-- 소요 시간의 단위를 넘겨받을 input -->
 							<input type="hidden" name="timestandard" value="시간" id="courseadd_timestd"> 
 							<button type="button" class="courseadd_timebtn courseadd_selectablebtn">일</button>
 							<button type="button" class="courseadd_timebtn courseadd_selectablebtn courseadd_selected">시간</button>
 							<button type="button" class="courseadd_timebtn courseadd_selectablebtn">분</button>
+							<span class="courseadd_timemessage">시간은 숫자로 입력해주세요.</span>
 						</td>
 					</tr>
 					<tr>
 						<td><b>이동 거리 *</b></td>
 						<td>
-							<input type="text" name="distance" class="courseadd_textinput" placeholder="이동 거리" 
-							style="width: 100px;" required>
+							<input type="text" name="distance" class="courseadd_textinput courseadd_distanceinput" placeholder="이동 거리" 
+							style="width: 100px;" maxlength="9" required>
 							km
 							<button type="button" class="courseadd_distcalbtn">자동 계산</button>
 							<span class="courseadd_distmessage">이동 거리를 직접 입력할 수 있습니다.</span>
