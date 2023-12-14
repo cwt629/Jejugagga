@@ -13,4 +13,12 @@
 	<select id="selectAllCourses" resultType="CourseDto">
 		select * from course order by coursecode desc
 	</select>
+	<select id="getTotalCount" resultType="int">
+		select count(*) from course
+	</select>
+	<select id="selectAllCoursesInPage" parameterType="Map" resultType="CourseDto">
+		select * from course
+		order by coursecode desc
+		limit #{coursePerPage} offset #{startIndex}
+	</select>
 </mapper>

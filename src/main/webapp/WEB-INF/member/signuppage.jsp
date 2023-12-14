@@ -187,8 +187,10 @@
 			    		<option value="남자">남자</option>
 			    		<option value="여자">여자</option>
 			  		</select>
-			  <br>
-			    이메일<br><input type="email" name="email" required><br>
+			  <br><br>
+			    이메일
+			    <b class="emailcomment" style="color: red; font-size: 13px;">*비밀번호를 찾을 때 사용됩니다.</b>
+			    <br><input type="email" name="email" required><br>
 			    닉네임<br><input type="text" name="nickname" required><br>
 			    핸드폰번호 <br><input type="text" name="phone" maxlength="13" oninput="hypen(this)" required><br>
 			    <input type="submit" value="회원가입"> 

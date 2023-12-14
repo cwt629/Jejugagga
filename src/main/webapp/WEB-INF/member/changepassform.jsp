@@ -145,7 +145,6 @@
 			    <input type="submit" value="비밀번호 변경"> 
 			</form>
 		</div>
-		<h1>${id }</h1>
 	</div>
 </body>
 </html>

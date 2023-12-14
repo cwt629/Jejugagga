@@ -11,127 +11,73 @@
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="${root}/res/styles/mypage_style.css">
+
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
 <style>
 	body * {
 		font-family: 'Orbit';
 	}
-	
-	#mypageBox {
-		position: relative;
-		height: 100%;
-		width: 100%;
-	}
-	
-	#mypageContext {
-		position: absolute;
-		width: 85%;
-		top: 150px;
-		left: 22%;
-		text-align: center;
-		display: flex;
-		flex-direction: column;
-	}
-	
-	#sideNav {
-		text-align: center;
-		position: fixed;
-		top: 80px;
-		width: 15%;
-		height: 92%;
-		background-color: #F0D0C1;
-		align-items: start;
-		border-top-right-radius: 50px;
-		border-bottom-right-radius: 50px;
-	}
 
-	#profilePhoto {
-		width: 70%;
-		margin-top: 80px;
-		border-radius: 60px;
-	}
-	
-	.navmenu_line {
-		border-top: 5px double darkgoldenrod;
-		position: absolute;
-		bottom: 120px;
-		width: 80%;
-	}
-	
-	.navmenu {
-		width: 100%;
-		position: absolute;
-		bottom: 200px;
-		left: 42%;
-		transform: translate(-50%);
-	}
-	
-	.navmenu2 {
-		width: 100%;
-		position: absolute;
-		bottom: 40px;
-		left: 10px;
-		text-align: left;
-	}
-	
-	.profilebox {
-		width: 80%;
-		border-radius: 30px;
-		box-shadow: 5px 5px 10px;
-		padding: 30px 30px 30px 30px;
-	}
-	
-	.navmenu_list {
-		list-style: none;
-	}
-	
-	ul.navmenu li a {
-		text-decoration : none;
-		color: black;
-	}
-	
-	.navmenu_list:hover {
-		cursor: pointer;
-	}
-	
-	.profile_text {
-		margin-left: 10px;
-		display: flex;
-		flex-direction: column;
-	}
-	
-	.profilebox {
-		text-align: left;
-	}
-	
-	hr {
-		width: 100%;
-	}
-	
 </style>
 <script type="text/javascript">
 	$(function(){
-		let navmenu=localStorage.navmenu;
-		if(navmenu==null || navmenu=='one')
+		let navmenu = localStorage.navmenu;
+		if(navmenu == null || navmenu == 'one')
 			  $(".navmenu_list>a").eq(0).css("color","red");
-		else if(navmenu=='two')
+		else if(navmenu == 'two')
 			  $(".navmenu_list").eq(1).css("color","red");
-		else if(navmenu=='three')
+		else if(navmenu == 'three')
 			  $(".navmenu_list").eq(2).css("color","red");
+		
+		// 프로필 수정 아이콘 클릭 시 파일 업로드 버튼 실행
+		$(".changephoto").click(function(){
+			$("#profileUpdate").trigger("click");
+		});
+		
+		// 사진 업로드
+		$("#profileUpdate").change(function(){		
+			let formData = new FormData();
+			formData.append("upload",$("#profileUpdate")[0].files[0]);
+			
+			$.ajax({
+				type: "post",
+				dataType: "json",
+				url: "${root}/mypage/photochange",
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function(res) {
+				   $("#profilePhoto").attr("src", `${root}/res/photo/profile_photo/\${res.photo}`);
+				   location.reload();
+			    }
+			});		
+		});
 	});
 </script>
 </head>
 <body>
+<c:if test="${sessionScope.loginok == null}">
+	<h3>로그인을 한후 글을 써주세요</h3>
+</c:if>
+<c:if test="${sessionScope.loginok != null}">
 <div id="mypageBox">
 	<nav class="navbar navbar-expand-lg" id="sideNav">
-		<div>
-			<img src="../res/photo/noimage.png" id="profilePhoto">
-			<br>
-			<span>${sessionScope.nickname }</span>
-			<br>
-			<span>${sessionScope.myemail }</span>
-			
+		<div style="position: relative;">
+			<c:if test="${sessionScope.myphoto != 'no' || sessionScope.myphoto != null}">
+				<img src="${root}/res/photo/profile_photo/${sessionScope.myphoto}"
+					id="profilePhoto" onerror="this.src='${root}/res/photo/noimage.png'">
+				<input type="file" id="profileUpdate" style="display: none;">
+				<i class="bi bi-pencil-square changephoto"
+					style="font-size: 1.5em; cursor: pointer; position: absolute; bottom: 20%; right: 20%;"></i>
+			</c:if>
+				<br>
+				<span>${sessionScope.nickname }</span>
+				<br>
+				<span>${sessionScope.myemail }</span>
 		</div>
 		<ul class="navmenu">
 			<li class="navmenu_list" id="myProfile"><a href="${root}/mypage/user">내 프로필</a></li>
@@ -160,12 +106,16 @@
 		<div class="profilebox" style="text-align: left;">
 			<div>
 				<h4>기본정보</h4>
-				<img src="../res/photo/noimage.png" style="width: 50px; height: 50px; border: 2px solid black; float: left;">
+					<c:if test="${sessionScope.myphoto != 'no' || sessionScope.myphoto != null}">
+						<img src="${root}/res/photo/profile_photo/${sessionScope.myphoto}"
+							onerror="this.src='${root}/res/photo/noimage.png'"
+							style="margin-right: 30px; width: 50px; height: 50px; border: 2px solid black; float: left;">
+					</c:if>
 				<div class="profile_text">
 					<span>${sessionScope.nickname }</span>
 					<span>${sessionScope.myemail }</span>
 				</div>
-				<button type="button" style="float: right;  transform: translate(-100%, -50%);">수정</button>
+				<button type="button" style="float: right;  transform: translate(-100%, -100%);">수정</button>
 			</div>
 			<hr>
 			<div>
@@ -196,5 +146,6 @@
 		<button type="button" class="btn btn-warning user_withdraw" style="width: 10%;">회원탈퇴</button>
 	</div>
 </div>
+</c:if>
 </body>
 </html>

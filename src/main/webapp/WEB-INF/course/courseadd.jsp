@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<script src="../res/course/utils/validate.js" type="module"></script>
+
 <style>
    body * {
        font-family: 'Orbit';
@@ -20,10 +22,12 @@
    
    div.courseadd_app {
        margin: 15px;
+       padding: 0 200px;
    }
    
    div.courseadd_innerheader span.courseadd_title {
        font-size: 30px;
+       font-weight: bold;
    }
    
    div.courseadd_innerheader button.courseadd_prevbtn {
@@ -44,7 +48,7 @@
    
    div.courseadd_formdiv form.courseadd_form table.courseadd_table {
        margin: 35px 0px;
-       width: 1800px;
+       width: 100%;
    }
    
    table.courseadd_table td {
@@ -244,6 +248,14 @@
 	
 	const MAX_SPOTS_IN_COURSE = 5; // 하나의 코스에 들어갈 수 있는 여행지 최대 개수
 	
+	// 각 input의 최대 길이
+	const INPUT_MAX_LENGTH = {
+			"name": 100,
+			"briefcontent": 500,
+			"longdetail": 2000
+	};
+	
+	
 	$(function(){
 		displayCurrentRoute(); // 여행지 루트 렌더링
 		
@@ -341,6 +353,56 @@
 			// 코스 다시 그리기
 			displayCurrentRoute();
 		})
+		
+		// 코스 이름, 짧은 소개, 상세 설명에 대해 입력 시 글자수를 출력하는 이벤트
+		$(".courseadd_explain").on("input", function(){
+			let inputType = $(this).attr("name"); // input 종류
+			let currentLength = $(this).val().length; // 현재 길이
+			let maxLength = INPUT_MAX_LENGTH[inputType]; // 현 input의 최대 길이
+			
+			// 글자 수 출력하기
+			$(this).next().text(`(\${currentLength} / \${maxLength}자)`);
+		})
+		
+		// 이동 시간에 대해 입력이 올바른지 출력하는 함수
+		$("input.courseadd_timeinput").on("input", function(){
+			let messageBlock = $(this).siblings("span.courseadd_timemessage");
+			
+			// 아무것도 입력하지 않은 경우
+			if ($(this).val().length === 0){
+				messageBlock.css("color", "black").text("예상 소요 시간을 입력해주세요.");
+				return;
+			}
+			
+			// 올바른 입력
+			if (validateTimeInput($(this).val())){
+				messageBlock.css("color", "blue").text("올바른 입력입니다.");
+				return;
+			}
+			
+			// 올바르지 않은 입력
+			messageBlock.css("color", "red").text("입력은 0 이상 정수여야 합니다.");
+		});
+		
+		// 이동 거리에 대해 입력이 올바른지 출력하는 함수
+		$("input.courseadd_distanceinput").on("input", function(){
+			let messageBlock = $(this).siblings("span.courseadd_distmessage");
+			
+			// 아무것도 입력하지 않은 경우
+			if ($(this).val().length === 0){
+				messageBlock.css("color", "black").text("이동 거리를 직접 입력할 수 있습니다.");
+				return;
+			}
+			
+			// 올바른 입력
+			if (validateDistanceInput($(this).val())){
+				messageBlock.css("color", "blue").text("올바른 입력입니다.");
+				return;
+			}
+			
+			// 올바르지 않은 입력
+			messageBlock.css("color", "red").text("입력은 0 이상 숫자여야 합니다.");
+		});
 		
 	}); // end of $(function())
 	
@@ -440,7 +502,37 @@
 		$("table.courseadd_table div.courseadd_routes").html(result);
 	}
 	
-	
+	// int 입력을 체크하는 함수
+	function isValidIntegerInput(input){
+		let intRegex = new RegExp('^[0-9]*$');
+		
+		// 완전한 정수 형태인지 확인
+		return intRegex.test(input);
+	}
+
+	// double 입력을 체크하는 함수
+	function isValidDoubleInput(input){
+		// 정수 형태인 경우
+		if (isValidIntegerInput(input)) return true;
+		
+		// 소수 형태인 경우에 대한 정규표현식
+		let doubleRegex = new RegExp('^[0-9]+\.?[0-9]+$');
+		
+		// 올바른 소수 형태인지 확인
+		return doubleRegex.test(input);
+	}
+
+	// 예상 소요 시간 입력 검증 함수
+	function validateTimeInput(input){
+		// 0 이상인 정수
+		return isValidIntegerInput(input) && parseInt(input) >= 0;
+	}
+
+	// 이동거리 검증 함수
+	function validateDistanceInput(input){
+		// 소수여야 한다
+		return isValidDoubleInput(input);
+	}
 	
 </script>
 <body>
@@ -460,8 +552,9 @@
 					<tr>
 						<td width="160"><b>코스 이름 *</b></td>
 						<td>
-							<input type="text" name="name" class="courseadd_textinput" placeholder="코스 이름을 입력하세요" 
-							style="width: 800px;" required>
+							<input type="text" name="name" class="courseadd_textinput courseadd_explain" placeholder="코스 이름을 입력하세요" 
+							style="width: 800px;" maxlength="100" required>
+							<span>(0 / 100자)</span>
 						</td>
 					</tr>
 					<tr>
@@ -483,20 +576,21 @@
 					<tr>
 						<td><b>예상 소요 시간 *</b></td>
 						<td>
-							<input type="text" name="spendingtime" class="courseadd_textinput" placeholder="소요 시간" 
-							style="width: 100px;" required>
+							<input type="text" name="spendingtime" class="courseadd_textinput courseadd_timeinput" placeholder="소요 시간" 
+							style="width: 100px;" maxlength="9" required>
 							<!-- 소요 시간의 단위를 넘겨받을 input -->
 							<input type="hidden" name="timestandard" value="시간" id="courseadd_timestd"> 
 							<button type="button" class="courseadd_timebtn courseadd_selectablebtn">일</button>
 							<button type="button" class="courseadd_timebtn courseadd_selectablebtn courseadd_selected">시간</button>
 							<button type="button" class="courseadd_timebtn courseadd_selectablebtn">분</button>
+							<span class="courseadd_timemessage">시간은 숫자로 입력해주세요.</span>
 						</td>
 					</tr>
 					<tr>
 						<td><b>이동 거리 *</b></td>
 						<td>
-							<input type="text" name="distance" class="courseadd_textinput" placeholder="이동 거리" 
-							style="width: 100px;" required>
+							<input type="text" name="distance" class="courseadd_textinput courseadd_distanceinput" placeholder="이동 거리" 
+							style="width: 100px;" maxlength="9" required>
 							km
 							<button type="button" class="courseadd_distcalbtn">자동 계산</button>
 							<span class="courseadd_distmessage">이동 거리를 직접 입력할 수 있습니다.</span>
@@ -505,13 +599,15 @@
 					<tr>
 						<td><b>짧은 소개</b></td>
 						<td>
-							<textarea style="width: 80%; height: 60px;" name="briefcontent"></textarea>
+							<textarea style="width: 80%; height: 60px;" class="courseadd_explain" maxlength="500" name="briefcontent"></textarea>
+							<span>(0 / 500자)</span>
 						</td>
 					</tr>
 					<tr>
 						<td><b>상세 설명</b></td>
 						<td>
-							<textarea style="width: 80%; height: 200px;" name="longdetail"></textarea>
+							<textarea style="width: 80%; height: 200px;" class="courseadd_explain" maxlength="2000" name="longdetail"></textarea>
+							<span>(0 / 2000자)</span>
 						</td>
 					</tr>
 					<tr>
@@ -587,6 +683,20 @@
 			// 여행지를 하나도 선택하지 않은 경우
 			if (routes.length === 0){
 				alert("여행지를 하나 이상 선택해주세요.");
+				return false;
+			}
+			
+			// 소요 시간 입력이 올바르지 않은 경우
+			if (!validateTimeInput($("input.courseadd_timeinput").val())){
+				alert("예상 소요 시간을 올바르게 입력해주세요.");
+				$("input.courseadd_timeinput").focus(); // 자동 포커스
+				return false;
+			}
+			
+			// 이동 거리 입력이 올바르지 않은 경우
+			if (!validateDistanceInput($("input.courseadd_distanceinput").val())){
+				alert("이동 거리를 올바르게 입력해주세요.");
+				$("input.courseadd_distanceinput").focus(); // 자동 포커스
 				return false;
 			}
 			
