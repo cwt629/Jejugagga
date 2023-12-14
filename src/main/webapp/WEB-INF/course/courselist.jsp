@@ -338,7 +338,11 @@
 			  			</figure>
 			  			<figure>
 			  				<img src="../res/photo/course_icons/Icon_Journey.png">
-			  				<figcaption>${dto.distance}km</figcaption>
+			  				<figcaption>
+			  					<!-- 거리는 최대 소수점 둘째자리까지만 출력 -->
+			  					<fmt:formatNumber value="${dto.distance}" maxFractionDigits="2"/>
+			  					km
+			  				</figcaption>
 			  			</figure>
 			  			<figure>
 			  				<img src="../res/photo/course_icons/Icon_Timesheet.png">
