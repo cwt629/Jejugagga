@@ -15,9 +15,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="${root}/res/board_free/board_free.css">
     <link rel="stylesheet" type="text/css" href="${root}/res/board_page/board_page.css">
-
-
-
 </head>
 <body>
 
@@ -55,14 +52,13 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>3</td>
+                    <td>1</td>
                     <th>
                         <a href="${root}">자유게시판1</a>
                         <p></p>
                     </th>
                     <td>2023.12.07</td>
                 </tr>
-
                 <tr>
                     <td>2</td>
                     <th><a href="${root}">자유글 2</a></th>
@@ -70,7 +66,7 @@
                 </tr>
 
                 <tr>
-                    <td>1</td>
+                    <td>3</td>
                     <th><a href="${root}">자유게시판3</a></th>
                     <td>2023.12.07</td>
                 </tr>
@@ -79,15 +75,16 @@
         </div>
     </div>
     <div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s">
-        <ul class="pagination">
-            <li class="pagination-item--wide first"> <a class="pagination-link--wide first" href="#">Previous</a> </li>
-            <li class="pagination-item">  <a class="pagination-link" href="#">1</a> </li>
-            <li class="pagination-item"> <a class="pagination-link" href="#">2</a> </li>
-            <li class="pagination-item is-active"> <a class="pagination-link" href="#">3</a> </li>
-            <li class="pagination-item"> <a class="pagination-link" href="#">4</a> </li>
-            <li class="pagination-item"> <a class="pagination-link" href="#">5</a> </li>
-            <li class="pagination-item--wide last"> <a class="pagination-link--wide last" href="#">Next</a> </li>
-        </ul>
+        <div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s">
+            <ul class="pagination">
+                <li class="pagination-item--wide first"> <a class="pagination-link--wide first" href="#">Previous</a> </li>
+                <li class="pagination-item">  <a class="pagination-link" href="#">1</a> </li>
+                <li class="pagination-item"> <a class="pagination-link" href="#">2</a> </li>
+                <li class="pagination-item is-active"> <a class="pagination-link" href="#">3</a> </li>
+                <li class="pagination-item"> <a class="pagination-link" href="#">4</a> </li>
+                <li class="pagination-item"> <a class="pagination-link" href="#">5</a> </li>
+                <li class="pagination-item--wide last"> <a class="pagination-link--wide last" href="#">Next</a> </li>
+            </ul>
 
     </div>
 </section>
