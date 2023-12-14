@@ -684,6 +684,20 @@
 				return false;
 			}
 			
+			// 소요 시간 입력이 올바르지 않은 경우
+			if (!validateTimeInput($("input.courseadd_timeinput").val())){
+				alert("예상 소요 시간을 올바르게 입력해주세요.");
+				$("input.courseadd_timeinput").focus(); // 자동 포커스
+				return false;
+			}
+			
+			// 이동 거리 입력이 올바르지 않은 경우
+			if (!validateDistanceInput($("input.courseadd_distanceinput").val())){
+				alert("이동 거리를 올바르게 입력해주세요.");
+				$("input.courseadd_distanceinput").focus(); // 자동 포커스
+				return false;
+			}
+			
 			// 각 여행지의 코드를 input에 넣어준다
 			$("div.courseadd_routeinputs input").each(function(idx){
 				if (idx < routes.length)
