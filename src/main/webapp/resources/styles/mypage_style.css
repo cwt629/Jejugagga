@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+	#mypageBox {
+		position: relative;
+		height: 100%;
+		width: 100%;
+	}
+	
+	#mypageContext {
+		position: absolute;
+		width: 85%;
+		top: 150px;
+		left: 22%;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	#sideNav {
+		text-align: center;
+		position: fixed;
+		top: 80px;
+		width: 15%;
+		height: 85%;
+		background-color: #F0D0C1;
+		align-items: start;
+		border-top-right-radius: 50px;
+		border-bottom-right-radius: 50px;
+	}
+
+	#profilePhoto {
+		width: 70%;
+		margin-top: 80px;
+		border-radius: 60px;
+	}
+	
+	.navmenu_line {
+		border-top: 5px double darkgoldenrod;
+		position: absolute;
+		bottom: 120px;
+		width: 80%;
+	}
+	
+	.navmenu {
+		width: 100%;
+		position: absolute;
+		bottom: 200px;
+		left: 42%;
+		transform: translate(-50%);
+	}
+	
+	.navmenu2 {
+		width: 100%;
+		position: absolute;
+		bottom: 40px;
+		left: 10px;
+		text-align: left;
+	}
+	
+	.profilebox {
+		width: 80%;
+		border-radius: 30px;
+		box-shadow: 5px 5px 10px;
+		padding: 30px 30px 30px 30px;
+	}
+	
+	.navmenu_list {
+		list-style: none;
+	}
+	
+	ul.navmenu li a {
+		text-decoration : none;
+		color: black;
+	}
+	
+	.navmenu_list:hover {
+		cursor: pointer;
+	}
+	
+	.profile_text {
+		margin-left: 10px;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.profilebox {
+		text-align: left;
+	}
+	
+	hr {
+		width: 100%;
+	}
+	
+	h4 {
+		margin-bottom: 30px;
+	}
