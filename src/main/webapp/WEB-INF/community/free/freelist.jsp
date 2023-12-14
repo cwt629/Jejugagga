@@ -29,11 +29,14 @@
         <div class="container">
             <div class="search-window">
                 <form action="">
-                    <div class="search-wrap">
+                    <div class="search-wrap search-wrap--with-write">
                         <label for="search" class="blind">자유게시판 검색</label>
                         <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
                         <button type="submit" class="board_free_btn board_free_btn-dark">검색</button>
                     </div>
+                    <a href="${root}/community/free/write" class="board_free_btn board_free_btn-write">
+                        <i class="bi bi-pencil-fill" style="font-size: 20px; color: #151414;"></i>
+                    </a>
                 </form>
             </div>
         </div>
@@ -75,7 +78,6 @@
         </div>
     </div>
     <div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s">
-        <div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s">
             <ul class="pagination">
                 <li class="pagination-item--wide first"> <a class="pagination-link--wide first" href="#">Previous</a> </li>
                 <li class="pagination-item">  <a class="pagination-link" href="#">1</a> </li>
@@ -85,7 +87,6 @@
                 <li class="pagination-item"> <a class="pagination-link" href="#">5</a> </li>
                 <li class="pagination-item--wide last"> <a class="pagination-link--wide last" href="#">Next</a> </li>
             </ul>
-
     </div>
 </section>
 
