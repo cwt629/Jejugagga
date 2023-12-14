@@ -121,7 +121,7 @@ public class CourseController {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("currentPage", currentPage);
-		
+		model.addAttribute("totalPages", totalPages);
 		
 		return "course/courselist";
 	}

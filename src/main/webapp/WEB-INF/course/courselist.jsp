@@ -11,6 +11,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="../res/course/style/paging.css">
 <style>
    body * {
        font-family: 'Orbit';
@@ -212,6 +213,11 @@
        font-weight: bold;
    }
    
+   div.course_pagination {
+       margin: 30px 0;
+       display: flex;
+       justify-content: center;
+   }
 </style>
 <script>
 	/*
@@ -370,6 +376,45 @@
 			  		</div>
 				</div>
 			</c:forEach>
+		</div>
+		
+		<!-- pagination -->
+		<div class="pagination-container wow zoomIn mar-b-1x course_pagination" data-wow-duration="0.5s">
+
+			<ul class="pagination">
+				<c:if test="${startPage > 1}">
+					<li class="pagination-item first"> <a class="pagination-link first" href="./list?currentPage=${startPage - 1}">Previous</a> </li>
+				</c:if>
+				<c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
+					<!-- 현재 페이지와 같은 번호 -->
+					<c:if test="${pageNum == currentPage}">
+						<li class="pagination-item is-active"> 
+							<a class="pagination-link" href="#">
+								${pageNum}
+							</a> 
+						</li>
+					</c:if>
+					<!-- 그 외 번호 -->
+					<c:if test="${pageNum != currentPage}">
+						<li class="pagination-item">
+							<a class="pagination-link" href="./list?currentPage=${pageNum}">
+								${pageNum}
+							</a>
+						</li>
+					</c:if>
+				</c:forEach>
+				<!-- 
+				<li class="pagination-item"> <a class="pagination-link" href="#">1</a> </li>
+				<li class="pagination-item"> <a class="pagination-link" href="#">2</a> </li>
+				<li class="pagination-item is-active"> <a class="pagination-link" href="#">3</a> </li>
+				<li class="pagination-item"> <a class="pagination-link" href="#">4</a> </li>
+				<li class="pagination-item"> <a class="pagination-link" href="#">5</a> </li>
+				 -->
+				<c:if test="${endPage < totalPages}">
+					<li class="pagination-item last"> <a class="pagination-link last" href="./list?currentPage=${endPage + 1}">Next</a> </li>
+				</c:if>
+			</ul>
+		
 		</div>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>

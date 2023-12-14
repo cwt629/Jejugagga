@@ -48,7 +48,7 @@
    
    div.courseadd_formdiv form.courseadd_form table.courseadd_table {
        margin: 35px 0px;
-       width: 1800px;
+       width: 100%;
    }
    
    table.courseadd_table td {
@@ -599,14 +599,14 @@
 					<tr>
 						<td><b>짧은 소개</b></td>
 						<td>
-							<textarea style="width: 71.5%; height: 60px;" class="courseadd_explain" maxlength="500" name="briefcontent"></textarea>
+							<textarea style="width: 80%; height: 60px;" class="courseadd_explain" maxlength="500" name="briefcontent"></textarea>
 							<span>(0 / 500자)</span>
 						</td>
 					</tr>
 					<tr>
 						<td><b>상세 설명</b></td>
 						<td>
-							<textarea style="width: 71.5%; height: 200px;" class="courseadd_explain" maxlength="2000" name="longdetail"></textarea>
+							<textarea style="width: 80%; height: 200px;" class="courseadd_explain" maxlength="2000" name="longdetail"></textarea>
 							<span>(0 / 2000자)</span>
 						</td>
 					</tr>
