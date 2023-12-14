@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReviewBoardDao">
+
+    <insert id="insertReview" parameterType="BoardReviewDto" useGeneratedKeys="true" keyProperty="reviewcode">
+        INSERT INTO board_review (usercode, title, tourcode, content, registereddate)
+        VALUES (#{usercode}, #{title}, #{tourcode}, #{content}, NOW())
+    </insert>
+
+    <insert id="insertReviewPhoto" parameterType="BoardReviewPhotoDto">
+        INSERT INTO board_review_photo (reviewcode, photo, tourcode)
+        VALUES (#{reviewcode}, #{photo}, #{tourcode})
+    </insert>
+
+    <select id="selectTourcodeByReviewcode" resultType="int" parameterType="int">
+        SELECT tourcode FROM board_review WHERE reviewcode = #{reviewcode}
+    </select>
+
+    <select id="selectAllReviews" resultType="BoardReviewDto">
+        SELECT * FROM board_review
+    </select>
+
+    <select id="selectPhotoByReviewcode" resultType="String" parameterType="int">
+        SELECT photo FROM board_review_photo WHERE reviewcode = #{reviewcode}
+    </select>
+
+    <select id="selectNicknameByUsercode" resultType="String" parameterType="int">
+        SELECT nickname FROM member_table WHERE usercode = #{usercode}
+    </select>
+</mapper>

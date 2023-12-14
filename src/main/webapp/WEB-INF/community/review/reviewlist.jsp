@@ -152,23 +152,25 @@
         </div>
 
         <div class="reviews-container" style="font-family: Orbit; ">
-            <div class="review-item">
-                <div class="image-container">
-                    <img src="${root}/res/photo/course_dummy/dummy_tourphoto2.jpg" alt="방문 후기 이미지">
-                    <div class="icon-and-nickname">
-                        <i class="bi bi-person-circle"></i>
-                        <h4 class="review-nickname">아이디이름</h4>
+            <c:forEach var="review" items="${reviews}">
+                <div class="review-item">
+                    <div class="image-container">
+                        <img src="${photos[review.reviewcode]}" alt="리뷰 사진">
+                        <div class="icon-and-nickname">
+                            <i class="bi bi-person-circle"></i>
+                            <h4 class="review-nickname">${nicknames[review.usercode]}</h4>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <div class="title-container">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <h4>${review.title}</h4>
+                        </div>
+                        <p>${review.content}</p>
+                        <span class="review-date">${review.registereddate}</span>
                     </div>
                 </div>
-                <div class="review-content">
-                    <div class="title-container">
-                        <i class="bi bi-geo-alt-fill"></i>
-                        <h4>한라산</h4>
-                    </div>
-                    <p>방문 후기 내용...</p>
-                    <span class="review-date">글올린시간출력</span>
-                </div>
-            </div>
+            </c:forEach>
         </div>
 
         <div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s"

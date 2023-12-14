@@ -139,7 +139,7 @@
                     </div>
                     <div class="css-3exdeo eko23d66">
                         <button type="button" class="css-cyv420 eko23d65" id="bttn1" style="cursor: pointer">이전</button>
-                        <button type="button" disabled="" class="css-6j45ao eko23d62" style="cursor: pointer">등록
+                        <button type="button" class="css-6j45ao eko23d62" id="submitReviewButton" style="cursor: pointer">등록
                         </button>
                     </div>
                 </form>
@@ -155,18 +155,13 @@
 
 
 <script>
-    document.getElementById('bttn1').addEventListener('click', function () {
-        window.location.href = '${root}/community/review/list';
-    });
-</script>
-<script>
     $(document).ready(function () {
         var $titleDropdown = $('#titleDropdown');
 
         $titleDropdown.select2({
             placeholder: '제목을 선택하거나 검색하세요',
             ajax: {
-                url: '<c:url value="/searchTitles"/>', // 서버 엔드포인트 URL
+                url: '/searchTitles', // 서버 엔드포인트 URL
                 delay: 250,
                 dataType: 'json',
                 data: function (params) {
@@ -189,13 +184,14 @@
                 }
             },
             templateSelection: function (data) {
-                return data.text || '제목을 선택하거나 검색하세요'; // 선택된 항목의 텍스트를 반환
+                return data.text || '제목을 선택하거나 검색하세요';
             }
         });
     });
 
+
     document.getElementById('uploadButton').addEventListener('click', function() {
-        document.getElementById('fileInput').click(); // 파일 입력 필드 활성화
+        document.getElementById('fileInput').click();
     });
 
     document.getElementById('fileInput').addEventListener('change', function(event) {
@@ -216,5 +212,57 @@
             reader.readAsDataURL(files[i]);
         }
     });
+
+    $(document).ready(function() {
+        $(document).on('click', '#submitReviewButton', function() {
+            var selectedTitle = $('#titleDropdown').select2('data')[0].text;
+            var tourCode = $('#titleDropdown').select2('data')[0].id;
+            var content = $('#contents').val();
+
+            // 첫 번째 AJAX 요청 (리뷰 내용 전송)
+            $.ajax({
+                type: 'POST',
+                url: '/submitReview',
+                contentType: 'application/json',
+                data: JSON.stringify({ title: selectedTitle, tourcode: tourCode, content: content }),
+                success: function(response) {
+                    var reviewcode = response.reviewcode; // 첫 번째 요청에서 반환된 reviewcode 받기
+
+                    // 두 번째 AJAX 요청 (사진 업로드)
+                    var photoFormData = new FormData();
+                    var files = $('#fileInput')[0].files;
+                    var filenames = [];
+                    for (var i = 0; i < files.length; i++) {
+                        photoFormData.append('photo', files[i]);
+                    }
+                    photoFormData.append('tourcode', tourCode);
+                    photoFormData.append('reviewcode', reviewcode);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/submitReviewPhotos',
+                        data: photoFormData,
+                        processData: false,
+                        contentType: false,
+                        success: function(response) {
+                            alert('리뷰 및 사진이 성공적으로 업로드되었습니다.');
+                            window.location.href = '/community/review/list';
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error:', xhr.responseText);
+                            alert('사진 업로드에 실패했습니다.');
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    alert('리뷰 제출에 실패했습니다.');
+                }
+            });
+        });
+    });
+
+
+
 </script>
 </html>
