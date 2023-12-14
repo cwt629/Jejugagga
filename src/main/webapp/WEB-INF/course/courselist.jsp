@@ -90,7 +90,7 @@
    
    div.course_list_contents div.course_content {
        width: 570px;
-       height: 450px;
+       height: 480px;
        border: 2px solid #ccc;
        border-radius: 10px;
        position: relative;
@@ -164,6 +164,11 @@
        color: hotpink;
    }
    
+   div.course_content div.course_name {
+       height: 66px;
+       overflow-y: auto;
+   }
+   
    div.course_list_contents div.course_content>div.course_brief {
        width: 100%;
        height: 64px;
@@ -194,7 +199,75 @@
    
 </style>
 <script>
+	/*
+	하트가 생각보다 빠르게 반영되어서 그런지
+	플래그 설정에 따른 효과를 확인할 수 없었다.
+	clickingHeart 플래그는 일단 구성은 해놓았지만, 실제 적용 여부 확인은 이후에 해야 할 듯 함.
+	*/
+	let clickingHeart= false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
+	const FULL_HEART_BUTTON = `<i class="bi bi-heart-fill course_heart"></i>`;
+	const EMPTY_HEART_BUTTON = `<i class="bi bi-heart course_heart"></i>`;
 	
+	$(function(){
+		// 하트 아이콘 클릭 시
+		$(document).on("click", "div.course_content div.course_like_button", function(){
+			// 이미 다른 좋아요 처리중인 경우
+			if (clickingHeart) {
+				alert("다른 좋아요 기능 처리중입니다. 잠시 후 시도해주세요.");
+				return;
+			}
+			
+			// 하트가 되어있는지 확인
+			let heartFilled = $(this).children("i.course_heart").hasClass("bi-heart-fill");
+			
+			clickingHeart = true;
+			let coursecode = $(this).parents("div.course_content").attr("coursecode"); // 클릭한 코스의 아이디
+			let currentButton = $(this); // 현재 버튼 요소
+			let likesInfoToUpdate = $(this).siblings("div.course_guest_info").children("i.course_totalLikes"); // 클릭한 코스의 총 좋아요 수 부분
+			
+			// 1. 하트가 이미 되어있는 경우: 좋아요 취소
+			if (heartFilled) {
+				$.ajax({
+					type: "post",
+					dataType: "json",
+					url: "./like/remove",
+					data: {
+						"coursecode": coursecode,
+						"usercode": "${sessionScope.usercode}"
+					},
+					success: function(res){
+						currentButton.html(EMPTY_HEART_BUTTON);
+						// 이 코스에 대한 좋아요 수 갱신
+						likesInfoToUpdate.html(`&nbsp;\${res.totalLikes}`);
+						
+						// 플래그 원상 복구
+						clickingHeart = false;
+					}
+				});
+			}
+			else {
+				// 2. 하트가 되어있지 않은 경우: 좋아요 추가
+				$.ajax({
+					type: "post",
+					dataType: "json",
+					url: "./like/grant",
+					data: {
+						"coursecode": coursecode,
+						"usercode": "${sessionScope.usercode}"
+					},
+					success: function(res){
+						currentButton.html(FULL_HEART_BUTTON);
+						// 이 코스에 대한 좋아요 수 갱신
+						likesInfoToUpdate.html(`&nbsp;\${res.totalLikes}`);
+						
+						// 플래그 원상 복구
+						clickingHeart = false;
+					}
+				});
+			}
+		});
+		
+	}); // end of $(function())
 </script>
 </head>
 <body>
@@ -216,57 +289,68 @@
 		
 		<div class="course_list_contents">
 			<c:forEach var="dto" items="${courses}">
-				<div class="course_content">
-				<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
-				    <c:forEach var="photo" items="${dto.routePhotos}">
-				    	<swiper-slide>
-				    		<img src="${photo == ''? '../res/photo/noimage.png' : photo}">
-				    	</swiper-slide>
-				    </c:forEach>
-		  		</swiper-container>
-		  		
-		  		<!-- 좋아요 버튼 -->
-		  		<c:if test="${sessionScope.loginok != null}">
-			  		<div class="course_like_button">
-			  			<c:if test="${dto.likedByCurrentUser}">
-			  				<i class="bi bi-heart-fill"></i>
-			  			</c:if>
-			  			<c:if test="${!dto.likedByCurrentUser}">
-			  				<i class="bi bi-heart"></i>
-			  			</c:if>
+				<c:set var="photoFlag" value="0"/> <!-- 해당 코스에서 하나라도 사진이 있는지 여부 -->
+				<div class="course_content" coursecode="${dto.coursecode}">
+					<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
+					    <c:forEach var="photo" items="${dto.routePhotos}">
+					    	<c:if test="${photo != ''}">
+					    		<c:set var="photoFlag" value="1"/> <!-- 해당 코스에서 하나라도 사진이 있음 표시 -->
+					    		<swiper-slide>
+					    			<img src="${photo}">
+					    		</swiper-slide>
+					    	</c:if>
+					    </c:forEach>
+					    <!-- 사진이 하나도 없었다면, noimage를 넣어준다 -->
+					    <c:if test="${photoFlag == 0}">
+					    	<swiper-slide>
+					    		<img src="../res/photo/course_image/homeicon_incourse.png">
+					    	</swiper-slide>
+					    </c:if>
+			  		</swiper-container>
+			  		
+			  		<!-- 좋아요 버튼 -->
+			  		<c:if test="${sessionScope.loginok != null}">
+				  		<div class="course_like_button">
+				  			<c:if test="${dto.likedByCurrentUser}">
+				  				<i class="bi bi-heart-fill course_heart"></i>
+				  			</c:if>
+				  			<c:if test="${!dto.likedByCurrentUser}">
+				  				<i class="bi bi-heart course_heart"></i>
+				  			</c:if>
+				  		</div>
+			  		</c:if>
+			  		
+			  		<!-- 조회수와 좋아요 개수 -->
+			  		<div class="course_guest_info">
+			  			<i class="bi bi-eye">&nbsp;${dto.readcount}</i><br>
+			  			<i class="bi bi-heart-fill course_totalLikes">&nbsp;${dto.totalLikes}</i>
 			  		</div>
-		  		</c:if>
-		  		
-		  		<!-- 조회수와 좋아요 개수 -->
-		  		<div class="course_guest_info">
-		  			<i class="bi bi-eye">&nbsp;${dto.readcount}</i><br>
-		  			<i class="bi bi-heart-fill">&nbsp;${dto.totalLikes}</i>
-		  		</div>
-		  		
-		  		<h4 style="text-align: center;">${dto.name}</h4>
-		  		<div class="course_brief">
-		  			${dto.briefcontent}
-		  		</div>
-		  		<hr>
-		  		<div class="course_summary">
-		  			<figure>
-		  				<img src="../res/photo/course_icons/Icon_MapMarker.png">
-		  				<figcaption>${dto.totalSpots }개</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/course_icons/Icon_Journey.png">
-		  				<figcaption>${dto.distance}km</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="../res/photo/course_icons/Icon_Timesheet.png">
-		  				<figcaption>${dto.spendingtime}${dto.timestandard}</figcaption>
-		  			</figure>
-		  			<figure>
-		  				<img src="${dto.writersPhoto == null? '../res/photo/noimage.png' : dto.writersPhoto }">
-		  				<figcaption>${dto.writersNickname}</figcaption>
-		  			</figure>
-		  		</div>
-			</div>
+			  		<div class="course_name">
+			  			<h4 style="text-align: center;">${dto.name}</h4>
+			  		</div>
+			  		<div class="course_brief">
+			  			${dto.briefcontent}
+			  		</div>
+			  		<hr>
+			  		<div class="course_summary">
+			  			<figure>
+			  				<img src="../res/photo/course_icons/Icon_MapMarker.png">
+			  				<figcaption>${dto.totalSpots }개</figcaption>
+			  			</figure>
+			  			<figure>
+			  				<img src="../res/photo/course_icons/Icon_Journey.png">
+			  				<figcaption>${dto.distance}km</figcaption>
+			  			</figure>
+			  			<figure>
+			  				<img src="../res/photo/course_icons/Icon_Timesheet.png">
+			  				<figcaption>${dto.spendingtime}${dto.timestandard}</figcaption>
+			  			</figure>
+			  			<figure>
+			  				<img src="${dto.writersPhoto == null? '../res/photo/noimage.png' : dto.writersPhoto }">
+			  				<figcaption>${dto.writersNickname}</figcaption>
+			  			</figure>
+			  		</div>
+				</div>
 			</c:forEach>
 		</div>
 	</div>

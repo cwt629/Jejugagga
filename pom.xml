@@ -205,7 +205,19 @@
 		      <artifactId>json</artifactId>
 		      <version>20210307</version> <!-- 최신 버전 확인 -->
 		    </dependency>
-		
+		    
+			<!-- 이메일 관련 -->
+		    <dependency>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-context-support</artifactId>
+			    <version>5.2.5.RELEASE</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>com.sun.mail</groupId>
+			    <artifactId>javax.mail</artifactId>
+			    <version>1.6.2</version>
+			</dependency>		
 
 <!--  여기 까지 -->		  
 	</dependencies>

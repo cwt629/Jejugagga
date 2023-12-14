@@ -7,4 +7,11 @@
 	<select id="countLikes" parameterType="int" resultType="int">
 		select count(*) from course_likes where coursecode = #{coursecode}
 	</select>
+	<insert id="addLike" parameterType="Map">
+		insert into course_likes (usercode, coursecode, registereddate)
+		values (#{usercode}, #{coursecode}, now())
+	</insert>
+	<delete id="removeLike" parameterType="Map">
+		delete from course_likes where coursecode = #{coursecode} and usercode = #{usercode}
+	</delete>
 </mapper>

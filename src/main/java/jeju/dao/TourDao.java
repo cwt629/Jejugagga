@@ -1,5 +1,6 @@
 package jeju.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,37 +19,41 @@ public class TourDao {
 	private String nameSpace="jeju.dao.TourDao.";
 	
 	//전체갯수
-	public int getTotalCount(String word)
+	public int getTourTotalCount(String word, String sigungucode, List<String> contenttype)
 	{
-		//word에 검색단어가 안들어 있을 경우 null값을 보내야 where문이 실행안된다
-		word=word==null || word.length()==0?null:word;
+		//word에 검색단어가 안들어 있을 경우
+		word = word == null || word.length() == 0 ? "" : word;
 		
 		Map<String, Object>map=new HashMap<String, Object>();
 		map.put("searchword", word);
+		map.put("sigungucode", sigungucode);
+		map.put("contenttype", contenttype);
 		
-		return session.selectOne(nameSpace+"totalCountOfTour",word);
+		return session.selectOne(nameSpace+"totalCountOfTour", map);
 	}
 	
 	//리스트
-	public List<TourDto> getAllTour(String word, int start)
+	public List<TourDto> getTourList(String word, int start,  List<String> contenttype, String sigungucode)
 	{
-		//word에 검색단어가 안들어 있을 경우 null값을 보내야 where문이 실행안된다
-		word=word==null || word.length()==0?null:word;
-		
+		//word에 검색단어가 안들어 있을 경우
+		word=word==null || word.length()==0 ? "" :word;
 		
 		Map<String, Object>map=new HashMap<String, Object>();
 		map.put("searchword", word);
 		map.put("start", start);
+		map.put("contenttype", (contenttype == null || contenttype.size() == 0) ? null : contenttype);
+		map.put("sigungucode", sigungucode);
 		
-		return session.selectList(nameSpace+"selectPagingOfTour", map);
+		//System.out.println(" ================ contenttype : " + contenttype);
+		//System.out.println(" ================ getAllTour : " + map);
+		
+		return session.selectList(nameSpace+"selectListOfTour", map);
 	}
 	
-	
-	
 	//내용
-	public TourDto getData(int tourcode)
+	public TourDto getTourData(int tourcode)
 	{
-		return session.selectOne(nameSpace+"selectOneTour", tourcode);
+		return session.selectOne(nameSpace+"selectOneOfTour", tourcode);
 	}
 	
 	// 검색어와 카테고리에 대해 검색하기(by 장원태)
