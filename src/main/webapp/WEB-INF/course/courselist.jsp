@@ -220,11 +220,6 @@
    }
 </style>
 <script>
-	/*
-	하트가 생각보다 빠르게 반영되어서 그런지
-	플래그 설정에 따른 효과를 확인할 수 없었다.
-	clickingHeart 플래그는 일단 구성은 해놓았지만, 실제 적용 여부 확인은 이후에 해야 할 듯 함.
-	*/
 	let clickingHeart= false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
 	const FULL_HEART_BUTTON = `<i class="bi bi-heart-fill course_heart"></i>`;
 	const EMPTY_HEART_BUTTON = `<i class="bi bi-heart course_heart"></i>`;
