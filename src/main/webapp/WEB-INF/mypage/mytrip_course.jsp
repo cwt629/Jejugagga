@@ -11,102 +11,18 @@
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="${root}/res/styles/mypage_style.css">
+
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
 <style>
 	body * {
 		font-family: 'Orbit';
 	}
-	
-	#mypageBox {
-		position: relative;
-		height: 100%;
-		width: 100%;
-	}
-	
-	#historyContext {
-		position: absolute;
-		width: 85%;
-		top: 100px;
-		left: 22%;
-		text-align: center;
-		display: flex;
-		flex-direction: column;
-	}
-	
-	#sideNav {
-		text-align: center;
-		position: fixed;
-		top: 80px;
-		width: 15%;
-		height: 92%;
-		background-color: #F0D0C1;
-		align-items: start;
-		border-top-right-radius: 50px;
-		border-bottom-right-radius: 50px;
-	}
-
-	#profilePhoto {
-		width: 70%;
-		margin-top: 80px;
-		border-radius: 60px;
-	}
-	
-	.navmenu_line {
-		border-top: 5px double darkgoldenrod;
-		position: absolute;
-		bottom: 120px;
-		width: 80%;
-	}
-	
-	.navmenu {
-		width: 100%;
-		position: absolute;
-		bottom: 200px;
-		left: 42%;
-		transform: translate(-50%);
-	}
-	
-	.navmenu2 {
-		width: 100%;
-		position: absolute;
-		bottom: 40px;
-		left: 10px;
-		text-align: left;
-	}
-	
-	.historybox {
-		width: 80%;
-		border-radius: 30px;
-		box-shadow: 5px 5px 10px;
-		padding: 30px 30px 30px 30px;
-		text-align: left;
-	}
-	
-	.navmenu_list {
-		list-style: none;
-	}
-	
-	ul.navmenu li a {
-		text-decoration : none;
-		color: black;
-	}
-	
-	.navmenu_list:hover {
-		cursor: pointer;
-	}
-	
-	.profile_text {
-		margin-left: 10px;
-		display: flex;
-		flex-direction: column;
-	}
-	
-	hr {
-		width: 100%;
-	}
-	
 </style>
+
 <script type="text/javascript">
 	$(function(){
 		let navmenu=localStorage.navmenu;
