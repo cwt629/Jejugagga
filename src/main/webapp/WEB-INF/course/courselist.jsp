@@ -83,9 +83,9 @@
    
    div.course_list_contents {
        width: 100%;
-       margin: 15px;
        display: flex;
        flex-wrap: wrap;
+       place-content: center;
    }
    
    div.course_list_contents div.course_content {
@@ -325,7 +325,7 @@
 			  			<i class="bi bi-heart-fill course_totalLikes">&nbsp;${dto.totalLikes}</i>
 			  		</div>
 			  		<div class="course_name">
-			  			<h4 style="text-align: center;">${dto.name}</h4>
+			  			<h4 style="text-align: center; font-weight: bold;">${dto.name}</h4>
 			  		</div>
 			  		<div class="course_brief">
 			  			${dto.briefcontent}
