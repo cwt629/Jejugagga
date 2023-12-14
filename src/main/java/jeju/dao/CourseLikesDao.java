@@ -24,4 +24,14 @@ public class CourseLikesDao {
 	{
 		return session.selectOne(nameSpace + "countLikes", coursecode);
 	}
+	
+	public void addLike(Map<String, Integer> map)
+	{
+		session.insert(nameSpace + "addLike", map);
+	}
+	
+	public void removeLike(Map<String, Integer> map)
+	{
+		session.delete(nameSpace + "removeLike", map);
+	}
 }

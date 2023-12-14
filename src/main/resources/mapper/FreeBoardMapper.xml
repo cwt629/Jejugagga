@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jeju.dao.BoardFreeDao">
-    <select id="totalCountOfBoard" resultType="int">
+    <select id="totalCountOfBoardFree" resultType="int">
       select count(*) from board_free
     </select>
-    <select id="selectPagingOfBoardFreeCriteria" parameterType="jeju.common.PagingCriteria" resultType="BoardFreeDto">
+    <select id="selectPagingOfBoardFreeCriteria" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">
         select * from board_free
         LIMIT #{pageStart}, #{perPageNum}
     </select>
@@ -21,7 +21,7 @@
 
     </select>
     <update id="updateReadCountOfBoardFree" parameterType="int">
-      update board_free set viewcount = viewcount + 1 where title=#{title}
+      update board_free set viewcount = viewcount + 1 where freeboardcode=#{freeboardcode}
     </update>
     <update id="updateBoardFree" parameterType="BoardFreeDto">
       update board_free set title = #{title}, content = #{content} where usercode=#{usercode}

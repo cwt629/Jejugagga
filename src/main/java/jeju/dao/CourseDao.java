@@ -23,4 +23,5 @@ public class CourseDao {
 	public List<CourseDto> selectAllCourses() {
 		return session.selectList(nameSpace + "selectAllCourses");
 	}
+	
 }

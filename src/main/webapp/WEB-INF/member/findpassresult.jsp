@@ -14,7 +14,7 @@
 <style>
 	body * {
 		font-family: 'Orbit';
-		font-size: 14px;
+		font-size: 18px;
 	}
 	
 	.checkdiv {
@@ -35,9 +35,8 @@
 	}
 	
 	.findtext{
-		text-align: center;
+		text-align: left;
 		color: 	#EEB182;	
-		font-size: 30px;
 	}
 		
 	.backbutton {
@@ -113,8 +112,8 @@
 		</c:if>
 		<c:if test="${tempcode!=null}">
 			<div class="findtext" style="text-align: center;">
-				<b>인증 코드가 ${email} 주소로 발급되었습니다 : ${tempcode}</b><br>
-				<div class="pluscomment">* 보안을 위해 비밀번호를 변경해주세요</div>
+				<div>인증 코드가 <br><b>${email} </b> <br>주소로 발급되었습니다</div><br>
+				<div class="pluscomment">* 제한 시간 내에 <br>인증코드를 입력해주세요</div>
 				<div id="timer"></div>
 				<input class="tempcode" type="hidden" value="${tempcode}">
 				<input class="submittempcode" type="text">

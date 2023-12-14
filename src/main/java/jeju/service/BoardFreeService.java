@@ -1,6 +1,6 @@
 package jeju.service;
 
-import jeju.common.PagingCriteria;
+import jeju.boardfree_utils.BoardFreePagingCriteria;
 import jeju.dao.BoardFreeDao;
 import jeju.dto.BoardFreeDto;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ public class BoardFreeService {
 	
 	private BoardFreeDao boardFreeDao;
 
-	public List<BoardFreeDto> getList(PagingCriteria criteria) {
+	public List<BoardFreeDto> getList(BoardFreePagingCriteria criteria) {
 		// criteria에 페이징 정보를 설정한다
 		int start = criteria.getPageStart();
 		int perPageNum = criteria.getPerPageNum();
@@ -39,9 +39,11 @@ public class BoardFreeService {
 	}
 
 	public void updateBoardFree(BoardFreeDto dto) {
-
 		boardFreeDao.updateBoardFree(dto);
 	}
 
+	public int getTotalCount() {
+		return boardFreeDao.getTotalCount();
+	}
 }
 
