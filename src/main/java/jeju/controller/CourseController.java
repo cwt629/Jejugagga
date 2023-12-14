@@ -173,4 +173,12 @@ public class CourseController {
 		
 		return "redirect:./list";
 	}
+	
+	@GetMapping("/course/detail")
+	public String detail(Model model, @RequestParam int coursecode) {
+		
+		
+		return "course/coursedetail";
+	}
+	
 }

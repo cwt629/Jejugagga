@@ -184,6 +184,15 @@
        font-weight: bold;
    }
    
+   div.course_name>h4>a {
+       text-decoration: none;
+       color: black;
+   }
+   
+   div.course_name>h4>a:hover {
+       color: #EEB182;
+   }
+   
    div.course_list_contents div.course_content>div.course_brief {
        width: 100%;
        height: 120px;
@@ -341,7 +350,9 @@
 			  			<i class="bi bi-heart-fill course_totalLikes">&nbsp;${dto.totalLikes}</i>
 			  		</div>
 			  		<div class="course_name">
-			  			<h4 style="text-align: center; font-weight: bold;">${dto.name}</h4>
+			  			<h4>
+			  				<a href="./detail?coursecode=${dto.coursecode}">${dto.name}</a>
+			  			</h4>
 			  		</div>
 			  		<div class="course_brief">
 			  			${dto.briefcontent}
