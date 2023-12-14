@@ -19,7 +19,7 @@ public class TourController {
 	
 	private TourService tourService;
 	
-	
+	//첫화면
 	@GetMapping("/tour/list")
 	public String list(Model model, @RequestParam (defaultValue = "1") int currentPage) {
 		model.addAttribute("currentPage",currentPage);
@@ -31,41 +31,12 @@ public class TourController {
 	public String content(Model model, @RequestParam int tourcode)
 	{
 		TourDto tourDto = new TourDto();
-		tourDto = tourDao.getData(tourcode);
+		tourDto = tourDao.getTourData(tourcode);
 		
 		model.addAttribute("tourDto", tourDto);
 		return "tour/content";
 	}
 	
-	@GetMapping("/tour/photo")
-	public String photo(Model model, @RequestParam int tourcode)
-	{
-		TourDto tourDto = new TourDto();
-		tourDto = tourDao.getData(tourcode);
-		
-		model.addAttribute("tourDto", tourDto);
-		return "tour/photo";
-	}
-	
-	@GetMapping("/tour/info")
-	public String info(Model model, @RequestParam int tourcode)
-	{
-		TourDto tourDto = new TourDto();
-		tourDto = tourDao.getData(tourcode);
-		
-		model.addAttribute("tourDto", tourDto);
-		return "tour/info";
-	}
-	
-	@GetMapping("/tour/review")
-	public String review(Model model, @RequestParam int tourcode)
-	{
-		TourDto tourDto = new TourDto();
-		tourDto = tourDao.getData(tourcode);
-		
-		model.addAttribute("tourDto", tourDto);
-		return "tour/review";
-	}
 	
 }
 

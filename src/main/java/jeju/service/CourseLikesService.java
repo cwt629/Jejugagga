@@ -26,4 +26,22 @@ public class CourseLikesService {
 	{
 		return courseLikesDao.getLikesCount(coursecode);
 	}
+	
+	public void addLike(int usercode, int coursecode)
+	{
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("usercode", usercode);
+		map.put("coursecode", coursecode);
+		
+		courseLikesDao.addLike(map);
+	}
+	
+	public void removeLike(int usercode, int coursecode)
+	{
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("usercode", usercode);
+		map.put("coursecode", coursecode);
+		
+		courseLikesDao.removeLike(map);
+	}
 }
