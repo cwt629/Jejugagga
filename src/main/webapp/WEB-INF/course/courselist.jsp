@@ -16,6 +16,10 @@
        font-family: 'Orbit';
    }
    
+   div.course_list_app {
+       padding: 0 150px;
+   }
+   
    div.course_innerheader {
        box-sizing: border-box;
        margin: 15px;
@@ -29,6 +33,7 @@
        display: flex;
        justify-content: center;
        align-items: center;
+       font-weight: bold;
    }
    
    div.course_innerheader button.course_addbtn {
@@ -90,11 +95,12 @@
    
    div.course_list_contents div.course_content {
        width: 570px;
-       height: 480px;
+       height: 570px;
        border: 2px solid #ccc;
        border-radius: 10px;
        position: relative;
-       margin: 15px;
+       margin: 20px;
+       box-sizing: border-box;
    }
    
    /* slide show 관련 */
@@ -165,14 +171,23 @@
    }
    
    div.course_content div.course_name {
-       height: 66px;
+       height: 99px;
        overflow-y: auto;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+   
+   div.course_name>h4 {
+       text-align: center;
+       font-weight: bold;
    }
    
    div.course_list_contents div.course_content>div.course_brief {
        width: 100%;
-       height: 64px;
+       height: 120px;
        overflow: auto;
+       padding: 0 30px;
    }
    
    div.course_list_contents div.course_summary {

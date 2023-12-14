@@ -42,7 +42,7 @@ public class CourseController {
 	@Autowired
 	private MemberTableService memberTableService;
 	
-	private final int COURSES_PER_PAGE = 6; // 페이지당 보여줄 코스 개수
+	private final int COURSES_PER_PAGE = 4; // 페이지당 보여줄 코스 개수
 	private final int PAGES_PER_BLOCK = 5; // 블록당 보여질 최대 페이지 개수
 	
 	@GetMapping("/course/list")
