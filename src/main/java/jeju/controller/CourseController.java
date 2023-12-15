@@ -187,16 +187,16 @@ public class CourseController {
 		boolean liked = courseLikesService.isLikedByUser(currentUserCode, coursecode);
 		dto.setLikedByCurrentUser(liked);
 		
-		// 2. 현재 코스에 든 이미지들 저장
-		List<String> thumbnails = new ArrayList<String>();
+		// 2. 현재 코스에 든 여행지의 정보들 저장
+		List<TourDto> tourInfos = new ArrayList<TourDto>();
 		List<CourseRouteDto> route = courseRouteService.selectOneRoute(coursecode); // 코스 데이터
 		for (CourseRouteDto routeDto: route) {
 			int tourcode = routeDto.getTourcode(); // 루트의 각 여행지의 코드
-			String photo = tourService.getData(tourcode).getFirstimage(); // 사진
-				
-			thumbnails.add(photo);
+			TourDto tourDto = tourService.getData(tourcode); // 해당 여행지의 정보
+			
+			tourInfos.add(tourDto);
 		}
-		dto.setRoutePhotos(thumbnails); // dto에 저장
+		dto.setTourInfos(tourInfos); // dto에 저장
 		
 		// 3. 현재 코스에 대한 좋아요 개수 저장
 		int likesCount = courseLikesService.getLikesCount(coursecode);
@@ -211,7 +211,7 @@ public class CourseController {
 		dto.setWritersNickname(nickname);
 		
 		// 5. 이 코스의 여행지 개수 저장
-		dto.setTotalSpots(thumbnails.size());
+		dto.setTotalSpots(tourInfos.size());
 		
 		// 기타: briefcontent와 longdetail에서 띄어쓰기를 <br>로 바꿔주기
 		String briefContent = dto.getBriefcontent();

@@ -33,10 +33,11 @@
    button.coursedetail_generalbtn {
        color: white;
        padding: 5px;
+       margin: 0 10px;
        border: none;
    }
    
-   div.coursedetail_header button.coursedetail_prevbtn {
+   button.coursedetail_prevbtn {
        background-color: #ccc;
    }
    
@@ -44,13 +45,16 @@
        position: absolute;
        top: 5px;
        left: 5px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
    }
    
-   div.coursedetail_header button.coursedetail_revisebtn {
+   button.coursedetail_revisebtn {
        background-color: #c8957e;
    }
    
-   div.coursedetail_header button.coursedetail_deletebtn {
+   button.coursedetail_deletebtn {
        background-color: #bf5b4b;
    }
    
@@ -123,7 +127,34 @@
        left: 5px;
    }
    
+   div.coursedetail_explain {
+       margin: 30px 0;
+   }
+   
+   div.coursedetail_footer {
+       margin: 50px 0;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
 </style>
+<script>
+	$(function(){
+		$("div.coursedetail_tag").each(function(idx, item){
+			// 카테고리명
+			let category = getCategory(parseInt($(this).attr("contenttype")));
+			$(this).css("background-color", "skyblue").text(category);
+		})
+	}); // end of $(function())
+	
+	// contenttype을 카테고리명으로 치환하는 함수
+	function getCategory(contenttype){
+		return (contenttype === 12)? '관광지' :
+				(contenttype === 14)? '문화시설' :
+				(contenttype === 15)? '축제행사' :
+				(contenttype === 39)? '음식점' : '기타';
+	}
+</script>
 </head>
 <body>
 	<div class="coursedetail_app">
@@ -138,10 +169,9 @@
 					</c:if>
 				</c:if>
 			</div>
-			<h2>대충 제목입니다</h2>
+			<h2>${dto.name}</h2>
 			<div class="coursedetail_briefcontent">
-				이것은 짧은 설명입니다 짧습니다 짧아요<br>
-				피방 ㄱ?
+				${dto.briefcontent}
 			</div>
 		</div>
 		
@@ -151,25 +181,25 @@
 			<div>
 				<div>
 					<img src="../res/photo/course_icons/Icon_MapMarker.png">
-					&nbsp;4개
+					&nbsp;${dto.totalSpots}개
 				</div>
 			</div>
 			<div>
 				<div>
 					<img src="../res/photo/course_icons/Icon_Journey.png">
-					&nbsp;19km
+					&nbsp;${dto.distance}km
 				</div>
 			</div>
 			<div>
 				<div>
 					<img src="../res/photo/course_icons/Icon_Timesheet.png">
-					&nbsp;2시간
+					&nbsp;${dto.spendingtime}${dto.timestandard}
 				</div>
 			</div>
 			<div>
 				<div>
-					<img src="../res/photo/noimage.png">
-					&nbsp;김동현
+					<img src="${dto.writersPhoto != null? dto.writersPhoto : '../res/photo/noimage.png' }">
+					&nbsp;${dto.writersNickname}
 				</div>
 			</div>
 		</div>
@@ -181,27 +211,25 @@
 		<div class="coursedetail_routeinfo">
 			<h4 style="text-align: center;">코스 구성</h4>
 			<div class="coursedetail_routes">
-				<!-- forEach로 돌려야 하는 부분 start -->
-				<div class="coursedetail_routeplace">
-					<div class="coursedetail_routephoto">
-						<img src="../res/photo/course_dummy/dummy_tourphoto1.jpg">
+				<c:set var="spotindex" value="0"/> <!-- 각 여행지의 인덱스 -->
+				<c:forEach var="tourdto" items="${dto.tourInfos}">
+					<!-- 2번째 여행지부터는 앞에 화살표를 붙여준다 -->
+					<c:if test="${spotindex > 0}">
+						<img class="coursedetail_arrow" src="../res/photo/course_icons/next_enabled.png">
+					</c:if>
+					<!-- 여행지 정보 -->
+					<div class="coursedetail_routeplace">
+						<div class="coursedetail_routephoto">
+							<img src="${tourdto.firstimage != ''? tourdto.firstimage : '../res/photo/noimage.png'}">
+						</div>
+						<h5>${tourdto.title}</h5>
+						<div class="coursedetail_tag" contenttype="${tourdto.contenttype}">
+							<!-- script에서 태그 색깔과 카테고리명을 지정해 넣어준다 -->
+						</div>
 					</div>
-					<h5>피시방</h5>
-					<div class="coursedetail_tag">
-						카테고리
-					</div>
-				</div>
-				<img class="coursedetail_arrow" src="../res/photo/course_icons/next_enabled.png">
-				<div class="coursedetail_routeplace">
-					<div class="coursedetail_routephoto">
-						<img src="../res/photo/course_dummy/dummy_tourphoto2.jpg">
-					</div>
-					<h5>피시방</h5>
-					<div class="coursedetail_tag">
-						카테고리
-					</div>
-				</div>
-				<!-- forEach로 돌려야 하는 부분 end -->
+					<!-- 인덱스 1 증가 -->
+					<c:set var="spotindex" value="${spotindex + 1}"/>
+				</c:forEach>
 			</div>
 		</div>
 		
@@ -210,23 +238,19 @@
 			<h4 style="text-align: center;">코스 설명</h4>
 			<br><br>
 			<div class="coursedetail_longdetail">
-				대충 긴 설명<br>
-				대충 긴 설명<br>
-				대충 긴 설명<br>
-				대충 긴 설명<br>
-				대충 긴 설명<br>
-				대충 긴 설명<br>
-				대충 긴 설명<br>
-				대충 긴 설명<br>
-				대충 긴 설명<br>
-				대충 긴 설명<br>
-				대충 긴 설명<br>
-				대충 긴 설명<br>
-				대충 긴 설명<br>
-				대충 긴 설명<br>
-				대충 긴 설명<br>
-				대충 긴 설명<br>
+				${dto.longdetail}
 			</div>
+		</div>
+		<hr>
+		<div class="coursedetail_footer">
+			<button type="button" class="coursedetail_prevbtn coursedetail_generalbtn"
+				onclick="history.back()">이전으로</button>
+			<c:if test="${sessionScope.loginok != null}">
+				<c:if test="${sessionScope.usercode == dto.usercode || sessionScope.loginok == 'admin' }">
+					<button type="button" class="coursedetail_revisebtn coursedetail_generalbtn">코스수정</button>
+					<button type="button" class="coursedetail_deletebtn coursedetail_generalbtn">코스삭제</button>
+				</c:if>
+			</c:if>
 		</div>
 	</div>
 </body>
