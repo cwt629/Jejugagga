@@ -9,8 +9,8 @@
         LIMIT #{pageStart}, #{perPageNum}
     </select>
     <insert id="insertBoardFree" parameterType="BoardFreeDto">
-        insert into board_free (usercode, title, content, registereddate)
-        values (#{usercode}, #{title}, #{content},  now())
+        insert into board_free (usercode, title, content, photo, registereddate)
+        values (#{usercode}, #{title}, #{content},  #{photo}, now())
     </insert>
     <select id="selectMaxNumOfBoardFree" resultType="int">
       select ifnull(max(title), 0) from board_free

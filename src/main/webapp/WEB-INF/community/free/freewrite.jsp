@@ -11,11 +11,11 @@
 </head>
 <body>
 <h1>자유게시판 글쓰기</h1>
-<form action="${root}/community/free/save" method="post">
+<form action="${root}/community/free/save" method="post" enctype="multipart/form-data">
     <input type="hidden" name="usercode" value="${sessionScope.usercode}">
     <input type="text" name="title" placeholder="제목">
     <textarea name="content" placeholder="내용"></textarea>
-    <input type="File" name="photo" placeholder="사진">
+    <input type="File" name="uploadFile" placeholder="사진" >
     <input type="submit" value="글쓰기">
 </form>
 </body>

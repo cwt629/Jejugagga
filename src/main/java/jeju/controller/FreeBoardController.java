@@ -3,8 +3,9 @@ package jeju.controller;
 import jeju.boardfree_utils.BoardFreePagingCriteria;
 import jeju.dto.BoardFreeDto;
 import jeju.service.BoardFreeService;
+import jeju.storage.NcpObjectStorageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,18 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class FreeBoardController {
-    @Autowired
-    private  BoardFreeService boardFreeService;
+
+    private final BoardFreeService boardFreeService;
+    private final NcpObjectStorageService storageService;
 
     @GetMapping("/community/free/list")
     public String list(Model model,
@@ -58,26 +56,18 @@ public class FreeBoardController {
 
     @PostMapping("/community/free/save")
     public String save(@ModelAttribute BoardFreeDto boardFreeDto ,
-                       @RequestParam int currentPage,
-                       @RequestParam("photo") MultipartFile file,
-                       HttpServletRequest request,
-                       HttpSession session
-    ) {
-        // 파일 업로드 폴더 경로 설정
-        String path = request.getSession().getServletContext().getRealPath("/res/photo/board_free");
-        // 파일 이름 설정 (여기서는 UUID 사용)
-        String fileName = UUID.randomUUID().toString();
+                       @RequestParam("uploadFile") MultipartFile file) {
+        // 버킷 이름과 폴더 이름을 설정합니다.
+        String bucketName = "jejugagga-cwt";
+        String bucketFolder = "freeBoard";
 
-        // 파일 저장 경로 설정
-        try {
-            file.transferTo(new File(path+"/"+fileName));
-        } catch (IOException e) {
-            e.printStackTrace(); // 혹은 다른 오류 처리 로직을 추가하세요.
-        }
-        // 파일 저장
-        boardFreeDto.setPhoto(file);
+        // 네이버 클라우드 스토리지에 이미지를 업로드하고 URL을 받습니다.
+        String imageUrl = storageService.reviewUploadFile(bucketName, bucketFolder, file);
 
+        // 이미지 정보를 데이터베이스에 저장합니다.
+        boardFreeDto.setPhoto(imageUrl);
         boardFreeService.insertBoardFree(boardFreeDto);
+
         return "redirect:/community/free/list";
     }
 
@@ -93,6 +83,4 @@ public class FreeBoardController {
         boardFreeService.deleteBoardFree(num);
         return "redirect:/community/free/list";
     }
-
-
 }
