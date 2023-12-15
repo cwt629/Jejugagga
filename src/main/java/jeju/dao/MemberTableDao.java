@@ -1,12 +1,14 @@
 package jeju.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import jeju.dto.CourseDto;
 import jeju.dto.MemberTableDto;
 
 @Repository
@@ -53,6 +55,10 @@ public class MemberTableDao {
 	public int pwdCheck(MemberTableDto dto)
 	{
 		return session.selectOne(nameSpace+"pwdCheck",dto);
+	}
+	
+	public List<MemberTableDto> selectAllmemBydesc() {
+		return session.selectList(nameSpace + "selectAllmemBydesc");
 	}
 	
 	public String selectGetMail(MemberTableDto dto)

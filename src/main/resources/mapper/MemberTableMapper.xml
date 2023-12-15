@@ -13,6 +13,9 @@
 	</select>
 	<select id="selectDataByNum" parameterType="int" resultType="MemberTableDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
 		select * from member_table where usercode=#{usercode}
+	</select>
+	<select id="selectAllmemBydesc" resultType="MemberTableDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select * from member_table order by registereddate desc
 	</select>	
 	<select id="searchIdCount" parameterType="String" resultType="int">
 		select count(*) from member_table where id=#{id}
