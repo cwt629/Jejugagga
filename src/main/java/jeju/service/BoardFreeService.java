@@ -4,6 +4,7 @@ import jeju.boardfree_utils.BoardFreePagingCriteria;
 import jeju.dao.BoardFreeDao;
 import jeju.dto.BoardFreeDto;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class BoardFreeService {
-	
+	@Autowired
 	private BoardFreeDao boardFreeDao;
 
 	public List<BoardFreeDto> getList(BoardFreePagingCriteria criteria) {
@@ -28,7 +29,6 @@ public class BoardFreeService {
 	}
 
 	public void insertBoardFree(BoardFreeDto dto) {
-		int num = dto.getFreeboardcode();
 
 		boardFreeDao.insertBoardFree(dto);
 	}
@@ -44,6 +44,11 @@ public class BoardFreeService {
 
 	public int getTotalCount() {
 		return boardFreeDao.getTotalCount();
+	}
+
+	public void deleteBoardFree(int num) {
+
+		boardFreeDao.deleteBoardFree(num);
 	}
 }
 

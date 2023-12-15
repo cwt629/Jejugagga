@@ -11,11 +11,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle&family=Noto+Sans+KR&family=Orbit&display=swap"
           rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <link rel="stylesheet" type="text/css" href="${root}/res/board_free/board_free.css">
     <link rel="stylesheet" type="text/css" href="${root}/res/board_page/board_page.css">
 </head>
+
+<script>
+    <!--
+    function showNotLoggedInModal() {
+        // 모달창을 표시합니다.
+        $("#agreeModal").modal("show");
+    }
+    -->
+    $(document).ready(function() {
+        $(".loginCheck").click(function () {
+            // 버튼에서 로그인 상태 정보 가져오기
+            var loginStatus = $(this).find("input[name='loginStatus']").val();
+
+            if (loginStatus == "0") {
+                // 로
+                // 그인하지 않았을 경우 알림
+                alert("로그인해라")
+            } else {
+                const formData = new FormData(document.getElementById('boardFreeForm'));
+                document.getElementById('boardFreeForm').action = '/community/free/write';
+                document.getElementById('boardFreeForm').method = 'GET';
+                // 폼을 제출
+                document.getElementById('boardFreeForm').submit();
+            }
+        });
+    })
+
+</script>
+
 <body>
 
 <section class="notice">
@@ -28,20 +57,33 @@
     <div id="board-search">
         <div class="container">
             <div class="search-window">
-                <form action="" style="display: flex; justify-content: space-between; align-items: center;">
+                <form action="${root}/community/free/write" id="boardFreeForm" style="display: flex; justify-content: space-between; align-items: center;">
                     <div class="search-wrap search-wrap--with-write">
                         <label for="search" class="blind">자유게시판 검색</label>
                         <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
                         <button type="submit" class="board_free_btn board_free_btn-dark">검색</button>
                     </div>
                     <!-- '글쓰기' 아이콘 링크를 form 안으로 이동 -->
-                    <a href="${root}/community/free/write" class="board_free_btn board_free_btn-write" style="margin-left: 10px;">
-                        <i class="bi bi-pencil-fill"></i>
-                    </a>
+
+                        <c:if test="${sessionScope.loginok==null }">
+                            <button type="button" class="board_free_btn board_free_btn-write loginCheck" style="margin-left: 10px;">
+                                 <i class="bi bi-pencil-fill" ></i>
+                                 <input type="hidden" name="loginStatus" value="0" />
+                            </button>
+                        </c:if>
+                        <c:if test="${sessionScope.loginok!=null }">
+                            <button type="button" class="board_free_btn board_free_btn-write loginCheck" style="margin-left: 10px;">
+                                <i class="bi bi-pencil-fill" ></i>
+                                <input type="hidden" name="loginStatus" value="1" />
+                            </button>
+                        </c:if>
+
                 </form>
             </div>
         </div>
     </div>
+
+
     <!-- board list area -->
     <div id="board-list">
         <div class="container">
@@ -79,17 +121,42 @@
         </div>
     </div>
     <div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s">
-            <ul class="pagination">
-                <li class="pagination-item--wide first"> <a class="pagination-link--wide first" href="#">Previous</a> </li>
-                <li class="pagination-item">  <a class="pagination-link" href="#">1</a> </li>
-                <li class="pagination-item"> <a class="pagination-link" href="#">2</a> </li>
-                <li class="pagination-item is-active"> <a class="pagination-link" href="#">3</a> </li>
-                <li class="pagination-item"> <a class="pagination-link" href="#">4</a> </li>
-                <li class="pagination-item"> <a class="pagination-link" href="#">5</a> </li>
-                <li class="pagination-item--wide last"> <a class="pagination-link--wide last" href="#">Next</a> </li>
-            </ul>
+        <ul class="pagination">
+            <li class="pagination-item--wide first">
+                <a class="pagination-link--wide first" href="${currentPage > 1 ? '${root}/community/free/list?page=${currentPage - 1}' : '#'}">Previous</a>
+            </li>
+            <c:forEach var="i" begin="1" end="${totalPage}">
+                <li class="pagination-item ${currentPage == i ? 'is-active' : ''}">
+                    <a class="pagination-link" href="${root}/community/free/list?page=${i}">${i}</a>
+                </li>
+            </c:forEach>
+            <li class="pagination-item--wide last">
+                <a class="pagination-link--wide last" href="${currentPage < totalPage ? '${root}/community/free/list?page=${currentPage + 1}' : '#'}">Next</a>
+            </li>
+        </ul>
     </div>
 </section>
+
+
+
+<!-- 필수 항목 미동의 모달 창 -->
+<div class="modal" id="agreeModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">* 필수 항목 중 입력(선택)하지 않거나 잘못 입력하신 항목이
+                    있어요.</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="okButton1" class="btn btn-primary">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 </body>
 </html>

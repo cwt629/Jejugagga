@@ -9,16 +9,11 @@
         LIMIT #{pageStart}, #{perPageNum}
     </select>
     <insert id="insertBoardFree" parameterType="BoardFreeDto">
-        insert into board_free (freeboardcode, usercode, title, content, viewcount, registereddate)
-        values (#{freeboardcode}, #{usercode}, #{title}, #{content}, #{viewcount}, now())
+        insert into board_free (usercode, title, content, registereddate)
+        values (#{usercode}, #{title}, #{content},  now())
     </insert>
-
     <select id="selectMaxNumOfBoardFree" resultType="int">
-<!--        <selectKey keyProperty="num" resultType="int" order="AFTER">-->
-<!--            SELECT LAST_INSERT_ID()-->
-<!--        </selectKey>-->
       select ifnull(max(title), 0) from board_free
-
     </select>
     <update id="updateReadCountOfBoardFree" parameterType="int">
       update board_free set viewcount = viewcount + 1 where freeboardcode=#{freeboardcode}
@@ -27,6 +22,6 @@
       update board_free set title = #{title}, content = #{content} where usercode=#{usercode}
     </update>
     <delete id="deleteBoardFree" parameterType="int">
-      delete from board_free where usercode=#{usercode}
+      delete from board_free where freeboardcode=#{freeboardcode}
     </delete>
 </mapper>

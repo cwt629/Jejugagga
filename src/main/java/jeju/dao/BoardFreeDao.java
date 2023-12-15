@@ -33,7 +33,7 @@ public class BoardFreeDao {
 	}
 
 	public void insertBoardFree(BoardFreeDto dto) {
-		session.insert(nameSpace + "insertBoard", dto);
+		session.insert(nameSpace + "insertBoardFree", dto);
 	}
 
 	public void updateReadCount(int num) {
