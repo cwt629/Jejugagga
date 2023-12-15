@@ -176,6 +176,9 @@ public class CourseController {
 	
 	@GetMapping("/course/detail")
 	public String detail(Model model, @RequestParam int coursecode, HttpSession session) {
+		// 조회수 1 증가
+		courseService.incrementReadcount(coursecode);
+		
 		CourseDto dto = courseService.selectOneCourse(coursecode); // 코스 기본 정보들
 		
 		// 현재 로그인한 유저 코드

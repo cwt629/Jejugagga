@@ -36,4 +36,8 @@ public class CourseDao {
 	public CourseDto selectOneCourse(int coursecode) {
 		return session.selectOne(nameSpace + "selectOneCourse", coursecode);
 	}
+	
+	public void incrementReadcount(int coursecode) {
+		session.update(nameSpace + "incrementReadcount", coursecode);
+	}
 }

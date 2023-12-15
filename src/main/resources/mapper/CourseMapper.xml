@@ -10,18 +10,26 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
+	
 	<select id="selectAllCourses" resultType="CourseDto">
 		select * from course order by coursecode desc
 	</select>
+	
 	<select id="getTotalCount" resultType="int">
 		select count(*) from course
 	</select>
+	
 	<select id="selectAllCoursesInPage" parameterType="Map" resultType="CourseDto">
 		select * from course
 		order by coursecode desc
 		limit #{coursePerPage} offset #{startIndex}
 	</select>
+	
 	<select id="selectOneCourse" parameterType="int" resultType="CourseDto">
 		select * from course where coursecode = #{coursecode}
 	</select>
+	
+	<update id="incrementReadcount" parameterType="int">
+		update course set readcount = readcount + 1 where coursecode = #{coursecode}
+	</update>
 </mapper>

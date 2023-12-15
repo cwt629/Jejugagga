@@ -44,4 +44,9 @@ public class CourseService {
 	{
 		return courseDao.selectOneCourse(coursecode);
 	}
+	
+	public void incrementReadcount(int coursecode)
+	{
+		courseDao.incrementReadcount(coursecode);
+	}
 }
