@@ -366,8 +366,8 @@
 			  			<figure>
 			  				<img src="../res/photo/course_icons/Icon_Journey.png">
 			  				<figcaption>
-			  					<!-- 거리는 최대 소수점 둘째자리까지만 출력 -->
-			  					<fmt:formatNumber value="${dto.distance}" maxFractionDigits="2"/>
+			  					<!-- 거리는 최대 소수점 첫째자리까지만 출력 -->
+			  					<fmt:formatNumber value="${dto.distance}" maxFractionDigits="1"/>
 			  					km
 			  				</figcaption>
 			  			</figure>
