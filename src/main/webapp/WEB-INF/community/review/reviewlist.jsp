@@ -76,8 +76,8 @@
         .reviews-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between; /* 항목 사이에 공간을 균등하게 분배 */
-            gap: 1rem; /* 항목 사이의 간격 */
+            gap: 1rem;
+            justify-content: start;
         }
 
         .title-container {
@@ -87,35 +87,39 @@
 
         .review-item {
             flex: 0 0 22%; /* flex-grow: 0, flex-shrink: 0, flex-basis: 22% */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-            margin-bottom: 1rem; /* 아래쪽 여백 */
-            border-radius: 5px; /* 모서리 둥글게 */
-            overflow: hidden; /* 이미지가 박스를 넘치지 않게 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            overflow: hidden;
         }
 
         .review-item img {
-            width: 100%; /* 이미지가 항목 너비에 맞게 */
-            height: 200px; /* 고정 높이 설정 */
-            object-fit: cover; /* 이미지를 덮어씌워 비율을 유지하면서 컨테이너에 맞춤 */
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
         }
 
         .review-content {
-            padding: 0.5rem; /* 내용 주변 여백 */
+            padding: 0.5rem;
         }
 
         .review-content h4 {
-            margin-top: 0.5rem; /* 제목 위 여백 */
-            font-size: 1rem; /* 제목 크기 */
+            margin-top: 0.5rem;
+            font-size: 1rem;
         }
 
         .review-content p {
-            font-size: 0.9rem; /* 내용 크기 */
+            font-size: 0.9rem;
         }
 
         .review-date {
-            display: block; /* 줄 바꿈 효과 */
-            font-size: 0.8rem; /* 날짜 크기 */
-            color: #777; /* 날짜 색상 */
+            display: block;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .reviewInputImg {
+            width: 100%;
         }
 
     </style>
@@ -154,8 +158,8 @@
         <div class="reviews-container" style="font-family: Orbit; ">
             <c:forEach var="review" items="${reviews}">
                 <div class="review-item">
-                    <div class="image-container">
-                        <img src="${photos[review.reviewcode]}" alt="리뷰 사진">
+                    <div class="image-container" style="width: 100%">
+                        <img src="${photos[review.reviewcode]}" alt="리뷰 사진" class="reviewInputImg">
                         <div class="icon-and-nickname">
                             <i class="bi bi-person-circle"></i>
                             <h4 class="review-nickname">${nicknames[review.usercode]}</h4>

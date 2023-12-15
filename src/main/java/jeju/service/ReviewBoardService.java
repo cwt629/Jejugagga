@@ -42,11 +42,16 @@ public class ReviewBoardService {
         return reviewBoardDao.selectAllReviews();
     }
 
-    public String getPhotoByReviewcode(int reviewcode) {
-        return reviewBoardDao.selectPhotoByReviewcode(reviewcode);
+    public String getLatestPhotoByReviewcode(int reviewcode) {
+        return reviewBoardDao.selectLatestPhotoByReviewcode(reviewcode);
     }
+
 
     public String getNicknameByUsercode(int usercode) {
         return reviewBoardDao.selectNicknameByUsercode(usercode);
+    }
+
+    public void saveReviewPhoto(BoardReviewPhotoDto boardReviewPhotoDto) {
+        reviewBoardDao.insertReviewPhoto(boardReviewPhotoDto);
     }
 }

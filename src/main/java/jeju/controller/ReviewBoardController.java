@@ -3,6 +3,7 @@ package jeju.controller;
 import jeju.dto.BoardReviewDto;
 import jeju.dto.BoardReviewPhotoDto;
 import jeju.service.ReviewBoardService;
+import jeju.storage.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,10 +22,12 @@ import java.util.Map;
 @Controller
 public class ReviewBoardController {
 	private final ReviewBoardService reviewBoardService;
+	private final NcpObjectStorageService storageService;
 
 	@Autowired
-	public ReviewBoardController(ReviewBoardService reviewBoardService) {
+	public ReviewBoardController(ReviewBoardService reviewBoardService, NcpObjectStorageService storageService) {
 		this.reviewBoardService = reviewBoardService;
+		this.storageService = storageService; // 스토리지 서비스 초기화
 	}
 
 	@GetMapping("/community/review/write")
@@ -39,7 +42,7 @@ public class ReviewBoardController {
 		Map<Integer, String> nicknames = new HashMap<>();
 
 		for (BoardReviewDto review : reviews) {
-			photos.put(review.getReviewcode(), reviewBoardService.getPhotoByReviewcode(review.getReviewcode()));
+			photos.put(review.getReviewcode(), reviewBoardService.getLatestPhotoByReviewcode(review.getReviewcode()));
 			nicknames.put(review.getUsercode(), reviewBoardService.getNicknameByUsercode(review.getUsercode()));
 		}
 
@@ -83,28 +86,31 @@ public class ReviewBoardController {
 			@RequestParam("photo") List<MultipartFile> photoFiles,
 			@RequestParam("reviewcode") int reviewcode) {
 		try {
+			// 버킷 이름과 폴더 이름을 설정합니다.
+			String bucketName = "jejugagga-cwt";
+			String bucketFolder = "review";
+
+			// reviewcode를 사용하여 tourcode를 조회합니다.
 			int tourcode = reviewBoardService.getTourcodeByReviewcode(reviewcode);
 
 			for (MultipartFile file : photoFiles) {
-				String filename = file.getOriginalFilename();
-				BoardReviewPhotoDto boardReviewPhotoDto = new BoardReviewPhotoDto();
-				boardReviewPhotoDto.setPhoto(filename);
-				boardReviewPhotoDto.setReviewcode(reviewcode);
-				boardReviewPhotoDto.setTourcode(tourcode);
+				// 네이버 클라우드 스토리지에 이미지를 업로드하고 URL을 받습니다.
+				String imageUrl = storageService.reviewUploadFile(bucketName, bucketFolder, file);
 
-				reviewBoardService.submitReviewPhotos(boardReviewPhotoDto);
+				// 이미지 정보를 데이터베이스에 저장합니다.
+				BoardReviewPhotoDto boardReviewPhotoDto = new BoardReviewPhotoDto();
+				boardReviewPhotoDto.setReviewcode(reviewcode);
+				boardReviewPhotoDto.setTourcode(tourcode); // tourcode를 다시 포함합니다.
+				boardReviewPhotoDto.setPhoto(imageUrl); // 이미 메서드에서 반환된 완전한 URL 저장
+				reviewBoardService.saveReviewPhoto(boardReviewPhotoDto);
 			}
 
 			return ResponseEntity.ok("사진이 성공적으로 업로드되었습니다.");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity
-					.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("사진 업로드에 실패했습니다.");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("사진 업로드에 실패했습니다.");
 		}
 	}
-
-
 
 }
 

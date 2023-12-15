@@ -36,7 +36,9 @@ public class ReviewBoardDao {
         return sqlSession.selectList("ReviewBoardDao.selectAllReviews");
     }
 
-    public String selectPhotoByReviewcode(int reviewcode) {
-        return sqlSession.selectOne("ReviewBoardDao.selectPhotoByReviewcode", reviewcode);
+    public String selectLatestPhotoByReviewcode(int reviewcode) {
+        return sqlSession.selectOne("ReviewBoardDao.selectLatestPhotoByReviewcode", reviewcode);
     }
+
+
 }

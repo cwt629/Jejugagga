@@ -20,8 +20,8 @@
         SELECT * FROM board_review
     </select>
 
-    <select id="selectPhotoByReviewcode" resultType="String" parameterType="int">
-        SELECT photo FROM board_review_photo WHERE reviewcode = #{reviewcode}
+    <select id="selectLatestPhotoByReviewcode" resultType="String" parameterType="int">
+        SELECT photo FROM board_review_photo WHERE reviewcode = #{reviewcode} ORDER BY reviewphotocode DESC LIMIT 1
     </select>
 
     <select id="selectNicknameByUsercode" resultType="String" parameterType="int">
