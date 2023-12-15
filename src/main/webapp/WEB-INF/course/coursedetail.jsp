@@ -26,6 +26,30 @@
        text-align: center;
    }
    
+   div.coursedetail_header div.coursedetail_guest_info {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+   
+   div.coursedetail_header div.coursedetail_guest_info>div {
+       width: 500px;
+       height: 60px;
+       border-radius: 60px;
+       margin: 20px 0;
+       font-size: 32px;
+       background-color: #eee;
+       opacity: 0.9;
+       display: flex;
+       justify-content: space-around;
+       align-items: center;
+   }
+   
+   div.coursedetail_header div.coursedetail_guest_info>div i.coursedetail_heart {
+       color: hotpink;
+       cursor: pointer;
+   }
+   
    div.coursedetail_header div.coursedetail_briefcontent {
        margin: 20px 0;
    }
@@ -37,10 +61,6 @@
        border: none;
    }
    
-   button.coursedetail_prevbtn {
-       background-color: #ccc;
-   }
-   
    div.coursedetail_header div.coursedetail_headerbtns {
        position: absolute;
        top: 5px;
@@ -48,6 +68,10 @@
        display: flex;
        justify-content: center;
        align-items: center;
+   }
+   
+   button.coursedetail_prevbtn {
+       background-color: #ccc;
    }
    
    button.coursedetail_revisebtn {
@@ -170,6 +194,17 @@
 				</c:if>
 			</div>
 			<h2>${dto.name}</h2>
+			<div class="coursedetail_guest_info">
+				<div>
+					<i class="bi bi-eye">&nbsp;${dto.readcount}</i>
+					<c:if test="${dto.likedByCurrentUser}">
+						<i class="bi bi-heart-fill coursedetail_heart" title="클릭시 좋아요 취소">&nbsp;${dto.totalLikes}</i>
+					</c:if>
+					<c:if test="${!dto.likedByCurrentUser}">
+						<i class="bi bi-heart coursedetail_heart" title="클릭시 좋아요">&nbsp;${dto.totalLikes}</i>
+					</c:if>
+			  	</div>
+			</div>
 			<div class="coursedetail_briefcontent">
 				${dto.briefcontent}
 			</div>
