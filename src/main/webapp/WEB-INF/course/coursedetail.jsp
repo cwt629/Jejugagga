@@ -131,8 +131,12 @@
 			<div class="coursedetail_headerbtns">
 				<button type="button" class="coursedetail_prevbtn coursedetail_generalbtn"
 				onclick="history.back()">이전으로</button>
-				<button type="button" class="coursedetail_revisebtn coursedetail_generalbtn">코스수정</button>
-				<button type="button" class="coursedetail_deletebtn coursedetail_generalbtn">코스삭제</button>
+				<c:if test="${sessionScope.loginok != null}">
+					<c:if test="${sessionScope.usercode == dto.usercode || sessionScope.loginok == 'admin' }">
+						<button type="button" class="coursedetail_revisebtn coursedetail_generalbtn">코스수정</button>
+						<button type="button" class="coursedetail_deletebtn coursedetail_generalbtn">코스삭제</button>
+					</c:if>
+				</c:if>
 			</div>
 			<h2>대충 제목입니다</h2>
 			<div class="coursedetail_briefcontent">

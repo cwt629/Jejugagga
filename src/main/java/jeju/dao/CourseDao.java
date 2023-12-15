@@ -32,4 +32,8 @@ public class CourseDao {
 	public List<CourseDto> selectCoursesInPage(Map<String, Integer> map) {
 		return session.selectList(nameSpace + "selectAllCoursesInPage", map);
 	}
+	
+	public CourseDto selectOneCourse(int coursecode) {
+		return session.selectOne(nameSpace + "selectOneCourse", coursecode);
+	}
 }

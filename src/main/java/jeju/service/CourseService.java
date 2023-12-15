@@ -39,4 +39,9 @@ public class CourseService {
 		
 		return courseDao.selectCoursesInPage(map);
 	}
+	
+	public CourseDto selectOneCourse(int coursecode)
+	{
+		return courseDao.selectOneCourse(coursecode);
+	}
 }

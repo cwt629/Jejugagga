@@ -21,4 +21,7 @@
 		order by coursecode desc
 		limit #{coursePerPage} offset #{startIndex}
 	</select>
+	<select id="selectOneCourse" parameterType="int" resultType="CourseDto">
+		select * from course where coursecode = #{coursecode}
+	</select>
 </mapper>

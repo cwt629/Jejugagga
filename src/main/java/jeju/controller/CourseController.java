@@ -175,8 +175,54 @@ public class CourseController {
 	}
 	
 	@GetMapping("/course/detail")
-	public String detail(Model model, @RequestParam int coursecode) {
+	public String detail(Model model, @RequestParam int coursecode, HttpSession session) {
+		CourseDto dto = courseService.selectOneCourse(coursecode); // 코스 기본 정보들
 		
+		// 현재 로그인한 유저 코드
+		int currentUserCode = -1; // 로그인 상태가 아니라면 -1이 됨
+		if (session.getAttribute("usercode") != null)
+			currentUserCode = (int)session.getAttribute("usercode");
+		
+		// 1. 현재 로그인한 유저가 이 코스를 좋아요했는지 여부 저장
+		boolean liked = courseLikesService.isLikedByUser(currentUserCode, coursecode);
+		dto.setLikedByCurrentUser(liked);
+		
+		// 2. 현재 코스에 든 이미지들 저장
+		List<String> thumbnails = new ArrayList<String>();
+		List<CourseRouteDto> route = courseRouteService.selectOneRoute(coursecode); // 코스 데이터
+		for (CourseRouteDto routeDto: route) {
+			int tourcode = routeDto.getTourcode(); // 루트의 각 여행지의 코드
+			String photo = tourService.getData(tourcode).getFirstimage(); // 사진
+				
+			thumbnails.add(photo);
+		}
+		dto.setRoutePhotos(thumbnails); // dto에 저장
+		
+		// 3. 현재 코스에 대한 좋아요 개수 저장
+		int likesCount = courseLikesService.getLikesCount(coursecode);
+		dto.setTotalLikes(likesCount);
+		
+		// 4. 이 코스를 작성한 사람의 프로필 사진과 닉네임 저장
+		int usercode = dto.getUsercode();
+		MemberTableDto memberDto = memberTableService.getData(usercode);
+		String writersPhoto = memberDto.getPhoto();
+		String nickname = memberDto.getNickname();
+		dto.setWritersPhoto(writersPhoto);
+		dto.setWritersNickname(nickname);
+		
+		// 5. 이 코스의 여행지 개수 저장
+		dto.setTotalSpots(thumbnails.size());
+		
+		// 기타: briefcontent와 longdetail에서 띄어쓰기를 <br>로 바꿔주기
+		String briefContent = dto.getBriefcontent();
+		String replacedBrief = briefContent.replaceAll("\n", "<br>");
+		dto.setBriefcontent(replacedBrief);
+		
+		String longDetail = dto.getLongdetail();
+		String replacedLong = longDetail.replaceAll("\n", "<br>");
+		dto.setLongdetail(replacedLong);
+		
+		model.addAttribute("dto", dto);
 		
 		return "course/coursedetail";
 	}
