@@ -4,6 +4,8 @@ import jeju.dao.MemberTableDao;
 import jeju.dto.MemberTableDto;
 import jeju.service.HashService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import java.sql.Date;
@@ -23,6 +26,9 @@ import java.util.UUID;
 public class MemberController {
 	@Autowired
 	MemberTableDao dao;
+	
+	@Autowired
+	JavaMailSender mailSender;
 
 	@GetMapping("/member/login")
 	public String login(@RequestParam(defaultValue = "1") int num , Model model) {
@@ -64,7 +70,10 @@ public class MemberController {
 			// 받은 아이디에 대한 사진 URL 받아오기
 			String myphoto=dao.getData(id).getPhoto();
 			session.setAttribute("myphoto", myphoto);
-
+			
+			// 받은 아이디에 대한 이메일 받아오기
+			String myemail = dao.getData(id).getEmail();
+			session.setAttribute("myemail", myemail);
 
 		}else {
 			return 	"redirect:../login?num=2";
@@ -111,10 +120,35 @@ public class MemberController {
 		dto.setBirth(birth);
 		int search = dao.pwdCheck(dto);
 		String mail = dao.selectGetMail(dto);
+		String random = UUID.randomUUID().toString().replace("-", "");//"-"를 제거함
+		String tempcode = random.substring(0,5);
+		//mail 관련
+        StringBuilder sb = new StringBuilder();
+		String setFrom = "kd0947@naver.com";//발신자 이메일
+        String tomail = mail;//수신자 이메일
+        String title = "[제주가까] 비밀번호 변경 인증 이메일입니다.";
+        sb.append(String.format("안녕하세요 %s님\n", dto.getId()));
+        sb.append(String.format("제주가까 비밀번호 찾기(변경) 인증번호는 %s입니다.", tempcode));
+        String content = sb.toString();
+	
 		if(search==1)
 		{
-			String random = UUID.randomUUID().toString().replace("-", "");//"-"를 제거함
-			String tempcode = random.substring(0,5);
+			 try {
+	                MimeMessage msg = mailSender.createMimeMessage();
+	                MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "utf-8");
+	                
+	                msgHelper.setFrom(setFrom);
+	                msgHelper.setTo(tomail);
+	                msgHelper.setSubject(title);
+	                msgHelper.setText(content);
+	                
+	                //메일 전송
+	                mailSender.send(msg);
+	                
+	            }catch (Exception e) {
+	                // TODO: handle exception
+	                System.out.println(e.getMessage());
+	            }
 			model.addAttribute("tempcode", tempcode);
 			model.addAttribute("id", dto.getId()); //비번 변경에 쓰일 ID 넘겨줌
 			model.addAttribute("email", mail); //이메일
@@ -124,6 +158,7 @@ public class MemberController {
 			model.addAttribute("tempcode",null);
 			return "member/findpassresult";
 		}
+		
 	}
 
 	@PostMapping("/member/changepass")

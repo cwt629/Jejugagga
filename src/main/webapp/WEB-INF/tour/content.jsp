@@ -43,6 +43,17 @@
 	    cursor: pointer;
    }
    
+   button.tour_back {
+       color: white;
+	    background-color: #b7a89f;
+	    border: none;
+	    padding: 10px;
+	    border-radius: 2px;
+	    box-shadow: 3px 3px 3px;
+	    position: absolute;
+    	top: 30px;
+   }
+   
 </style>
 
 
@@ -50,11 +61,12 @@
 <script>
 	$(function() {
 		
+		//개요만 남기기
 		$('.section-story2').hide();
 		$('.section-story3').hide();
 		$('.section-story4').hide();
 	    
-		
+		//미니 메뉴 클릭시 화면바꾸기
 		$('.tab-item').click(function() {
 			$('.tab-item.active').removeClass('active');
 			$(this).addClass('active');
@@ -67,17 +79,15 @@
 	        $('.section-story' + tabId).show();
 		});
 		
-		
 	});
 </script>
 <body>
-
 	<div id="container">
 		<div id="sub_visual"
 			style="background-image: linear-gradient(rgba(0, 0, 0, 0.7),
         		rgba(255, 255, 255, 0.1)), url(${tourDto.firstimage});">
 			<div class="container">
-				<button onclick="history.back()">Back</button>
+				<button onclick="history.back()" class="tour_back">Back</button>
 				<div class="sub-title-box">
 					<h2 class="title aos-init aos-animate" data-aos="fade-up"
 						data-aos-duration="180" data-aos-delay="100">${tourDto.title}</h2>
@@ -116,35 +126,37 @@
 				</div>
 			</div>
 		</div>
+		
 		<div id="contents">
 			<div class="sub-content">
 				<div class="container">
-					<ul class="sub-tab">
+					<!-- 미니메뉴 -->
+					<ul class="sub-tab"  style="cursor: pointer;">
 						<li class="tab-item active" val="1"><a class="text-small">이야기</a></li>
 						<li class="tab-item" val="2"><a class="text-small">갤러리</a></li>
 						<li class="tab-item" val="3"><a class="text-small">오시는길</a></li>
 						<li class="tab-item" val="4"><a class="text-small">후기</a></li>
 					</ul>
+					
+					<!-- 개요 -->
 					<div class="section-story1">
 						<strong>
 							<span style="font-size: 18px;">${tourDto.overview}</span>
 						</strong>
 					</div>
 					
-					<div class="section-story2">
+					<!-- 갤러리 -->
+					<div class="section-story2" style="text-align: -webkit-center;">
 						<strong>
 							<img src="${tourDto.firstimage}" alt="등록된 사진이 없습니다.">
-							
-							
 							
 						</strong>
 					</div>
 					
+					<!-- 오시는길 -->
 					<div class="section-story3" style="text-align: -webkit-center;">
-						<strong>
-							<span style="font-size: 18px;"></span>
-						</strong>
 						<div style="padding-left : 30px">
+							<!-- 지도 -->
 							<div id="map" style="width:700px; height:400px; border:1px;">
 								<script>							
 								var mapOptions = {
@@ -161,26 +173,33 @@
 								var market= new naver.maps.Marker(markerOptions);
 								</script>
 							</div>
+							
+							<!-- 정보 -->
 							<div id="tableContainer" class="tableContainer" style="width:700px; font-size : 20px;">
 								<table border="1" cellpadding="1" cellspacing="1" class="table table-bordered">
 								<thead class="fixedHeader">
 								</thead>
 								<tbody class="scrollContent">
-								  <tr>
-								    <td width="30%" style="text-align: center;">우편번호</td>
-								    <td>${tourDto.zipcode}</td>
-								  </tr>
-								  <tr>
-								    <td width="30%" style="text-align: center;">주소</td>
-								    <td>${tourDto.addr1}</td>
-								  </tr>
+								
+								<!-- 공통정보 -->
+								<c:if test="${tourDto.zipcode!='0'}">
+									  <tr>
+									    <td width="30%" style="text-align: center;">우편번호</td>
+									    <td>${tourDto.zipcode}</td>
+									  </tr>
+								</c:if>
+									  <tr>
+									    <td width="30%" style="text-align: center;">주소</td>
+									    <td>${tourDto.addr1}</td>
+									  </tr>
 							  	<c:if test="${tourDto.homepage!=''}">
-								  <tr>
-							    	<td width="30%" style="text-align: center;">홈페이지</td>
-							    	<td>${tourDto.homepage}</td>
-								  </tr>
+									  <tr>
+								    	<td width="30%" style="text-align: center;">홈페이지</td>
+								    	<td style="color : blue;">${tourDto.homepage}</td>
+									  </tr>
 								</c:if>
 								
+								<!-- 관광지 -->
 								<c:if test="${tourDto.contenttype==12}">
 									<c:if test="${tourDto.infocenter!=''}">
 									  <tr>
@@ -232,6 +251,7 @@
 									</c:if>
 								</c:if>
 								
+								<!-- 문화시설 -->
 								<c:if test="${tourDto.contenttype==14}">
 								  <c:if test="${tourDto.infocenterculture!=''}">
 									  <tr>
@@ -281,6 +301,7 @@
 									</c:if>
 								</c:if>
 								
+								<!-- 행사 -->
 								<c:if test="${tourDto.contenttype==15}">
 								  <c:if test="${tourDto.eventhomepage!=''}">
 									  <tr>
@@ -344,6 +365,7 @@
 									</c:if>
 								</c:if>
 								
+								<!-- 음식점 -->
 								<c:if test="${tourDto.contenttype==39}">
 								  <c:if test="${tourDto.infocenterfood!=''}">
 									  <tr>
@@ -414,6 +436,7 @@
 						</div>
 					</div>
 					
+					<!-- 리뷰 -->
 					<div class="section-story4">
 						<strong>
 							<span style="font-size: 18px;">후기</span>
