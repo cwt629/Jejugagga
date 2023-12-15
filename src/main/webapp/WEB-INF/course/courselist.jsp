@@ -295,10 +295,22 @@
 		// 검색 버튼 클릭 시
 		$("div.course_search_input>i.coursesearch").click(function(){
 			let query = $(this).prev().val(); // 입력칸의 value
+			// 유효하지 않은 검색어인 경우
+			if (!isValidSearchInput(query)){
+				alert("검색어는 한글, 영어, 숫자로만 입력 가능합니다.");
+				return;
+			}
+			
 			location.href = "./list?query=" + query;
 		});
 		
 	}); // end of $(function())
+	
+	// 한글, 영어, 숫자와 띄어쓰기로만 이루어진 문자인지 판단하는 함수
+	function isValidSearchInput(input){
+		let regex = new RegExp('^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9 ]*$');
+		return regex.test(input);
+	}
 	
 </script>
 </head>
