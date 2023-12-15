@@ -259,7 +259,7 @@
 			<h2>${dto.name}</h2>
 			<div class="coursedetail_guest_info">
 				<div>
-					<i class="bi bi-eye">&nbsp;${dto.readcount}</i>
+					<i class="bi bi-eye" title="조회수">&nbsp;${dto.readcount}</i>
 					<c:if test="${dto.likedByCurrentUser}">
 						<i class="bi bi-heart-fill coursedetail_heart" title="클릭시 좋아요 취소">&nbsp;${dto.totalLikes}</i>
 					</c:if>

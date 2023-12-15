@@ -334,7 +334,7 @@
 			  		
 			  		<!-- 좋아요 버튼 -->
 			  		<c:if test="${sessionScope.loginok != null}">
-				  		<div class="course_like_button">
+				  		<div class="course_like_button" title="좋아요 버튼">
 				  			<c:if test="${dto.likedByCurrentUser}">
 				  				<i class="bi bi-heart-fill course_heart"></i>
 				  			</c:if>
@@ -346,8 +346,8 @@
 			  		
 			  		<!-- 조회수와 좋아요 개수 -->
 			  		<div class="course_guest_info">
-			  			<i class="bi bi-eye">&nbsp;${dto.readcount}</i><br>
-			  			<i class="bi bi-heart-fill course_totalLikes">&nbsp;${dto.totalLikes}</i>
+			  			<i class="bi bi-eye" title="조회수">&nbsp;${dto.readcount}</i><br>
+			  			<i class="bi bi-heart-fill course_totalLikes" title="좋아요">&nbsp;${dto.totalLikes}</i>
 			  		</div>
 			  		<div class="course_name">
 			  			<h4>
