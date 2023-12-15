@@ -22,8 +22,15 @@
             <li class="li-menu-bar">
                 <a href="${root}/community/nav" class="main-menu-item">커뮤니티</a>
             </li>
-            <li class="li-menu-bar"><a href="${root}/mypage/user" class="signupbtn">마이페이지</a></li>
-              <c:if test="${sessionScope.loginok==null }">
+            <c:choose>
+                <c:when test="${sessionScope.loginok=='admin' }">
+                    <li class="li-menu-bar"><a href="${root}/mypage/admin" class="signupbtn">관리자페이지</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li class="li-menu-bar"><a href="${root}/mypage/user" class="signupbtn">마이페이지</a></li>
+                </c:otherwise>
+            </c:choose>
+            <c:if test="${sessionScope.loginok==null }">
                <li class="li-menu-bar"><a href="${root}/member/login" class="main-menu-item">로그인</a></li>
             </c:if>
             <c:if test="${sessionScope.loginok!=null }"> <!-- header menu가 안밀리고 00님 환영합니다! 라고 나오게 해주세요 -->
