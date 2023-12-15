@@ -32,4 +32,8 @@
 	<update id="incrementReadcount" parameterType="int">
 		update course set readcount = readcount + 1 where coursecode = #{coursecode}
 	</update>
+	
+	<delete id="deleteCourse" parameterType="int">
+		delete from course where coursecode = #{coursecode}
+	</delete>
 </mapper>

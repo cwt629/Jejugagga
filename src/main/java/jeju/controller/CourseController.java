@@ -230,4 +230,12 @@ public class CourseController {
 		return "course/coursedetail";
 	}
 	
+	@GetMapping("/course/delete")
+	public String delete(@RequestParam int coursecode) {
+		// 삭제 진행
+		courseService.deleteCourse(coursecode);
+		
+		return "redirect:./list";
+	}
+	
 }

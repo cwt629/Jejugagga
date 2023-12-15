@@ -40,4 +40,8 @@ public class CourseDao {
 	public void incrementReadcount(int coursecode) {
 		session.update(nameSpace + "incrementReadcount", coursecode);
 	}
+	
+	public void deleteCourse(int coursecode) {
+		session.delete(nameSpace + "deleteCourse", coursecode);
+	}
 }

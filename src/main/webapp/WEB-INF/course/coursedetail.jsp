@@ -232,6 +232,16 @@
 			}
 		})
 		
+		// 코스 삭제 버튼
+		$("button.coursedetail_deletebtn").click(function(){
+			if (!confirm("정말로 해당 코스를 삭제하시겠습니까?\n삭제된 코스는 복구할 수 없습니다.")){
+				return;
+			}
+			
+			// 삭제 진행
+			location.href = "./delete?coursecode=${dto.coursecode}";
+		})
+		
 	}); // end of $(function())
 	
 	// contenttype을 카테고리명으로 치환하는 함수

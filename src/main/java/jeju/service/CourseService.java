@@ -49,4 +49,9 @@ public class CourseService {
 	{
 		courseDao.incrementReadcount(coursecode);
 	}
+	
+	public void deleteCourse(int coursecode)
+	{
+		courseDao.deleteCourse(coursecode);
+	}
 }
