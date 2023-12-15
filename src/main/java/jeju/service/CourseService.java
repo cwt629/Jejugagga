@@ -1,6 +1,8 @@
 package jeju.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -22,5 +24,19 @@ public class CourseService {
 	public List<CourseDto> selectAllCourses()
 	{
 		return courseDao.selectAllCourses();
+	}
+	
+	public int getTotalCount()
+	{
+		return courseDao.getTotalCount();
+	}
+	
+	public List<CourseDto> selectCoursesInPage(int coursePerPage, int startIndex)
+	{
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("coursePerPage", coursePerPage);
+		map.put("startIndex", startIndex);
+		
+		return courseDao.selectCoursesInPage(map);
 	}
 }

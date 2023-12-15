@@ -42,9 +42,32 @@ public class CourseController {
 	@Autowired
 	private MemberTableService memberTableService;
 	
+	private final int COURSES_PER_PAGE = 4; // 페이지당 보여줄 코스 개수
+	private final int PAGES_PER_BLOCK = 5; // 블록당 보여질 최대 페이지 개수
+	
 	@GetMapping("/course/list")
-	public String list(Model model, HttpSession session) {
-		List<CourseDto> courses = courseService.selectAllCourses();
+	public String list(Model model, HttpSession session,
+			@RequestParam(defaultValue = "1") int currentPage) {
+		
+		// Paging
+		int totalPages, startPage, endPage, startIndex;
+		int totalCount = courseService.getTotalCount(); // 전체 코스 개수
+		
+		// 총 페이지 수: 전체 코스 수를 페이지 당 코스 수로 나누고, 올림 
+		totalPages = (int)Math.ceil(totalCount / COURSES_PER_PAGE);
+		
+		// 해당 블럭의 시작 페이지와 끝 페이지
+		startPage = (currentPage - 1) / PAGES_PER_BLOCK * PAGES_PER_BLOCK + 1;
+		endPage = startPage + PAGES_PER_BLOCK - 1;
+		// 마지막 블록에서는 endPage가 totalPages를 넘어가는 경우가 있어, 이 경우 마지막 페이지로 고정
+		if (endPage > totalPages)
+			endPage = totalPages;
+		
+		// 해당 블럭에서 보여줄 시작 인덱스
+		startIndex = (currentPage - 1) * COURSES_PER_PAGE;
+		
+		// 해당 페이지에 보여줄 코스 목록
+		List<CourseDto> courses = courseService.selectCoursesInPage(COURSES_PER_PAGE, startIndex);
 		
 		// 현재 로그인한 유저 코드
 		int currentUserCode = -1;
@@ -92,7 +115,13 @@ public class CourseController {
 			
 		}
 		
+		// model에 페이지 관련 정보와 코스 정보들 넘겨주기
 		model.addAttribute("courses", courses);
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalPages", totalPages);
 		
 		return "course/courselist";
 	}

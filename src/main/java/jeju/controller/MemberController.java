@@ -72,7 +72,7 @@ public class MemberController {
 			// 받은 아이디에 대한 사진 URL 받아오기
 			String myphoto=dao.getData(id).getPhoto();
 			session.setAttribute("myphoto", myphoto);
-      
+			
 			// 받은 아이디에 대한 이메일 받아오기
 			String myemail = dao.getData(id).getEmail();
 			session.setAttribute("myemail", myemail);

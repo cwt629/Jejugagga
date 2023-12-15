@@ -65,4 +65,12 @@ public class MemberTableDao {
 	{
 		return session.selectOne(nameSpace+"selectGetMail",dto);
 	}
+	
+	public void updateMemberPhoto(String photo, String myid) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("photo", photo);
+		map.put("id", myid);
+		session.update(nameSpace + "updatePhotoByNum", map);
+	}
 }
