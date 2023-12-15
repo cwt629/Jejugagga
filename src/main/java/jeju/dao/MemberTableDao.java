@@ -57,7 +57,7 @@ public class MemberTableDao {
 		return session.selectOne(nameSpace+"pwdCheck",dto);
 	}
 	
-	public List<MemberTableDto> selectAllmemBydesc() {
+	public List<MemberTableDto> selectAllmem10Bydesc() {
 		return session.selectList(nameSpace + "selectAllmemBydesc");
 	}
 	
@@ -72,5 +72,9 @@ public class MemberTableDao {
 		map.put("photo", photo);
 		map.put("id", myid);
 		session.update(nameSpace + "updatePhotoByNum", map);
+	}
+	public void deleteMemberbyID(String id)
+	{
+		session.delete(nameSpace + "deleteMemberbyID", id);
 	}
 }

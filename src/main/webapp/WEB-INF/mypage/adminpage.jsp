@@ -20,8 +20,7 @@
 	   	grid-template-columns : 1fr 1fr;
 	   	padding: 30px;
 	   	gap : 20px;
-	   	grid-auto-rows : minmax(250px, auto);
-	   	grid-auto-columns : minmax(150px);
+	   	grid-auto-rows : minmax(100px, auto);
    }
    
    .color1{
@@ -34,39 +33,91 @@
    		justify-content: center;
    		align-content: center;
    		border: 1px solid; #181818;
-   		border-radius: 5%;
+   		border-radius: 10px;
    }
   
 </style>
 </head>
+<script type="text/javascript">
+$(function(){
+	$(".kickmemberbtn").click(function(){
+		let id = $(this).val();
+		let checkkick = confirm(id+'님을 정말 추방하실거 ㅋㅋ?');
+		if(checkkick){
+			let num=$(this).attr("num");
+			$.ajax({
+				type:"get",
+				dataType:"text",
+				url:"./delete",
+				data:{"id":id},
+				success:function(res){
+					word=""; //전역변수라 마지막 검색단어를 갖고 있으므로 초기화 해준다
+					location.reload();
+				}
+			});	
+			
+		}
+		
+	});
+});
+
+</script>
 <body>
 <div class="container">
-	<div class="item color1">회원관리<br>
+	<div class="item color1">
 	   <table class="admin_board_wrap table-border" id="user-admin">
 	          <thead class="admin_boardList">
-	            <th class="admin_board_head">이름</th>
 	            <th class="admin_board_head">아이디</th>
+	            <th class="admin_board_head">이름</th>
 	            <th class="admin_board_head">닉네임</th>
 	            <th class="admin_board_head">가입일</th>
 	          </thead>
 	          <tbody>
-	          <c:forEach var="member" items="${memberlist }">
+	          <c:forEach var="member" items="${memberlist10 }">
 	          <tr>
-	          	<td>${member.name }</td>
 	          	<td>${member.id }</td>
+	          	<td>${member.name }</td>
 	          	<td>${member.nickname }</td>
-	          	<td>${member.registereddate }</td>
+	          	<td>
+	          	<fmt:formatDate value="${member.registereddate}" pattern="yyyy-MM-dd"/>
+	          	</td>
+	          	<td><button class="kickmemberbtn" value="${member.id }">추방</button></td>
 	          </tr>
 	          </c:forEach>
 	          </tbody>
 	    </table>
 	</div>
-	<div class="item color2">여행지 관리
-	</div>
-	<div class="item color3">코스 관리</div>
-	<div class="item color4">자유게시판 관리</div>
-	<div class="item color5">후기 게시판</div>
 	<div class="item color1">1:1 문의</div>
+	<div class="item color4">
+		 <table class="admin_board_wrap table-border" id="user-admin">
+	          <thead class="admin_boardList">
+	            <th class="admin_board_head">작성자</th>
+	            <th class="admin_board_head">제목</th>
+	            <th class="admin_board_head">내용</th>
+	            <th class="admin_board_head">작성일</th>
+	          </thead>
+	          <tbody>
+	          <c:forEach var="freeboard" items="${freeboardlist }">
+	          <tr>
+	          	<td>작성자</td>
+	          	<td>${freeboard.title }</td>
+	          	<td>${freeboard.content }</td>
+	          	<td>${freeboard.registereddate }</td>
+	          	<td>
+	          	<fmt:formatDate value="${freeboard.registereddate}" pattern="yyyy-MM-dd"/>
+	          	</td>
+	          	<!-- 
+	          	<td><button class="kickmemberbtn" value="${member.id }">추방</button></td>
+	          	 -->
+	          </tr>
+	          </c:forEach>
+	          </tbody>
+	    </table>
+	</div>
+	
+	<div class="item color5">후기 게시판</div>
+	<div class="item color2">여행지 관리</div>
+	<div class="item color3">코스 관리</div>
 
 </div>
 </body>

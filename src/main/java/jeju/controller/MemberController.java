@@ -178,6 +178,12 @@ public class MemberController {
 		dao.pwdUpdate(dto);
 		return "redirect:/member/login";
 	}
+	
+	@GetMapping("/mypage/delete")
+	@ResponseBody public void deleteMember(@RequestParam String id)
+	{
+		dao.deleteMemberbyID(id);
+	}
 
 
 

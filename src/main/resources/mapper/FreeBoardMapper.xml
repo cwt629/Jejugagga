@@ -29,4 +29,7 @@
     <delete id="deleteBoardFree" parameterType="int">
       delete from board_free where usercode=#{usercode}
     </delete>
+    <select id="selectAllfreeboardlist10Bydesc" resultType="BoardFreeDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select * from board_free order by registereddate desc limit 0,10
+	</select>
 </mapper>
