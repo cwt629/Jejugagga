@@ -30,14 +30,28 @@
        margin: 20px 0;
    }
    
-   div.coursedetail_header button.coursedetail_prevbtn {
-       background-color: #ccc;
+   button.coursedetail_generalbtn {
        color: white;
        padding: 5px;
        border: none;
+   }
+   
+   div.coursedetail_header button.coursedetail_prevbtn {
+       background-color: #ccc;
+   }
+   
+   div.coursedetail_header div.coursedetail_headerbtns {
        position: absolute;
-       left: 5px;
        top: 5px;
+       left: 5px;
+   }
+   
+   div.coursedetail_header button.coursedetail_revisebtn {
+       background-color: #c8957e;
+   }
+   
+   div.coursedetail_header button.coursedetail_deletebtn {
+       background-color: #bf5b4b;
    }
    
    div.coursedetail_summary {
@@ -114,13 +128,17 @@
 <body>
 	<div class="coursedetail_app">
 		<div class="coursedetail_header">
+			<div class="coursedetail_headerbtns">
+				<button type="button" class="coursedetail_prevbtn coursedetail_generalbtn"
+				onclick="history.back()">이전으로</button>
+				<button type="button" class="coursedetail_revisebtn coursedetail_generalbtn">코스수정</button>
+				<button type="button" class="coursedetail_deletebtn coursedetail_generalbtn">코스삭제</button>
+			</div>
 			<h2>대충 제목입니다</h2>
 			<div class="coursedetail_briefcontent">
 				이것은 짧은 설명입니다 짧습니다 짧아요<br>
 				피방 ㄱ?
 			</div>
-			<button type="button" class="coursedetail_prevbtn"
-			onclick="history.back()">이전으로</button>
 		</div>
 		
 		<hr>
