@@ -229,7 +229,7 @@
    }
 </style>
 <script>
-	let clickingHeart= false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
+	let clickingHeart = false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
 	const FULL_HEART_BUTTON = `<i class="bi bi-heart-fill course_heart"></i>`;
 	const EMPTY_HEART_BUTTON = `<i class="bi bi-heart course_heart"></i>`;
 	
@@ -270,8 +270,8 @@
 					}
 				});
 			}
+			// 2. 하트가 되어있지 않은 경우: 좋아요 추가
 			else {
-				// 2. 하트가 되어있지 않은 경우: 좋아요 추가
 				$.ajax({
 					type: "post",
 					dataType: "json",
