@@ -28,14 +28,15 @@
     <div id="board-search">
         <div class="container">
             <div class="search-window">
-                <form action="">
+                <form action="" style="display: flex; justify-content: space-between; align-items: center;">
                     <div class="search-wrap search-wrap--with-write">
                         <label for="search" class="blind">자유게시판 검색</label>
                         <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
                         <button type="submit" class="board_free_btn board_free_btn-dark">검색</button>
                     </div>
-                    <a href="${root}/community/free/write" class="board_free_btn board_free_btn-write">
-                        <i class="bi bi-pencil-fill" style="font-size: 20px; color: #151414;"></i>
+                    <!-- '글쓰기' 아이콘 링크를 form 안으로 이동 -->
+                    <a href="${root}/community/free/write" class="board_free_btn board_free_btn-write" style="margin-left: 10px;">
+                        <i class="bi bi-pencil-fill"></i>
                     </a>
                 </form>
             </div>

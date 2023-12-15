@@ -39,4 +39,11 @@ public class FreeBoardController {
 
 		return "community/free/freelist";
 	}
+
+	@GetMapping("/community/free/write")
+	public String write() {
+		// 글쓰기 페이지의 뷰 이름을 반환합니다.
+		// 'freewrite'는 글쓰기 페이지의 뷰 이름이며 실제 뷰 파일의 경로를 나타냅니다.
+		return "community/free/freewrite";
+	}
 }
