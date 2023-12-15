@@ -50,6 +50,9 @@ section.notice {
     font-size: 16px;
 }
 
+#board-search .search-wrap .bi-pencil-fill {
+    margin-left: 100px; /* 또는 필요에 따라 조절 */
+}
 .board-table {
     font-size: 13px;
     width: 100%;
@@ -161,6 +164,32 @@ section.notice {
     margin: 0;
     box-sizing: border-box;
 }
+
+#board-search .search-window form {
+    display: flex; /* Flexbox를 사용합니다 */
+    justify-content: space-between; /* 요소들을 양쪽 끝으로 정렬합니다 */
+    align-items: center; /* 요소들을 수직 중앙에 정렬합니다 */
+    width: 100%; /* 폼의 너비를 컨테이너의 전체 너비로 설정합니다 */
+}
+
+#board-search .search-wrap--with-write {
+    flex-grow: 1; /* 검색창을 확장하여 가능한 많은 공간을 차지하도록 합니다 */
+    display: flex; /* 검색창 내부도 flex로 설정하여 버튼과 아이콘이 나란히 있도록 합니다 */
+    justify-content: space-between; /* 내부 요소들을 양쪽 끝으로 정렬합니다 */
+}
+
+.board_free_btn-write {
+    /* margin-left를 줄여 아이콘을 검색 버튼에 더 가깝게 위치시킵니다 */
+    margin-left: 4px; /* 또는 필요에 따라 조절 */
+    order: 2; /* flexbox 내에서 순서를 변경할 수 있습니다 */
+}
+
+.bi-pencil-fill {
+    font-size: 20px; /* 아이콘 크기 조절 */
+    color: #151414; /* 아이콘 색상 조절 */
+    /* 필요하다면 여기에 추가 스타일을 적용 */
+}
+
 .clearfix:after {
     content: '';
     display: block;

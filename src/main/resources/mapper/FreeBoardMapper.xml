@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jeju.dao.BoardFreeDao">
-    <select id="totalCountOfBoard" resultType="int">
+    <select id="totalCountOfBoardFree" resultType="int">
       select count(*) from board_free
     </select>
     <select id="selectPagingOfBoardFreeCriteria" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">
@@ -9,24 +9,19 @@
         LIMIT #{pageStart}, #{perPageNum}
     </select>
     <insert id="insertBoardFree" parameterType="BoardFreeDto">
-        insert into board_free (freeboardcode, usercode, title, content, viewcount, registereddate)
-        values (#{freeboardcode}, #{usercode}, #{title}, #{content}, #{viewcount}, now())
+        insert into board_free (usercode, title, content, photo, registereddate)
+        values (#{usercode}, #{title}, #{content},  #{photo}, now())
     </insert>
-
     <select id="selectMaxNumOfBoardFree" resultType="int">
-<!--        <selectKey keyProperty="num" resultType="int" order="AFTER">-->
-<!--            SELECT LAST_INSERT_ID()-->
-<!--        </selectKey>-->
       select ifnull(max(title), 0) from board_free
-
     </select>
     <update id="updateReadCountOfBoardFree" parameterType="int">
-      update board_free set viewcount = viewcount + 1 where title=#{title}
+      update board_free set viewcount = viewcount + 1 where freeboardcode=#{freeboardcode}
     </update>
     <update id="updateBoardFree" parameterType="BoardFreeDto">
       update board_free set title = #{title}, content = #{content} where usercode=#{usercode}
     </update>
     <delete id="deleteBoardFree" parameterType="int">
-      delete from board_free where usercode=#{usercode}
+      delete from board_free where freeboardcode=#{freeboardcode}
     </delete>
 </mapper>
