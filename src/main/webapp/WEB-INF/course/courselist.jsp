@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="../res/course/style/paging.css">
@@ -227,6 +228,61 @@
        display: flex;
        justify-content: center;
    }
+   
+   div.course_spotnum_filter {
+       display: flex;
+       align-items: center;
+       position: relative;
+       top: -9px;
+       left: -8px;
+   }
+   
+   div.course_counter {
+       width: 120px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       position: relative;
+       top: -1px;
+   }
+   
+   div.course_counter>i {
+       font-size: 30px;
+       color: #d7897e;
+       cursor: pointer;
+   }
+   
+   div.course_counter>div.course_counter_num {
+       width: 40px;
+       height: 30px;
+       box-sizing: border-box;
+       border: 2px solid #d7897e;
+       border-left: none;
+       border-right: none;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       font-size: 22px;
+       position: relative;
+       top: 1px;
+       margin: 0 -3px;
+   }
+   
+   button.course_general_graybtn {
+       border: 2px solid #d9d9d9;
+       background-color: transparent;
+       padding: 0px 20px;
+       border-radius: 30px;
+       font-weight: bold;
+       height: 30px;
+       box-sizing: border-box;
+       margin: 0 5px;
+   }
+   
+   button.course_general_graybtn.course_selected {
+       border: 2px solid #d7897e;
+   }
+   
 </style>
 <script>
 	let clickingHeart = false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
@@ -304,6 +360,23 @@
 			location.href = "./list?query=" + query;
 		});
 		
+		// 화살표 버튼을 클릭하고 있는 동안에 대한 이벤트
+		$("i.course_counter_down").on("mousedown", function(){
+			$(this).removeClass("bi-caret-down-square");
+			$(this).addClass("bi-caret-down-square-fill");
+		}).on("mouseup", function(){
+			$(this).removeClass("bi-caret-down-square-fill");
+			$(this).addClass("bi-caret-down-square");
+		})
+		
+		$("i.course_counter_up").on("mousedown", function(){
+			$(this).removeClass("bi-caret-up-square");
+			$(this).addClass("bi-caret-up-square-fill");
+		}).on("mouseup", function(){
+			$(this).removeClass("bi-caret-up-square-fill");
+			$(this).addClass("bi-caret-up-square");
+		})
+		
 	}); // end of $(function())
 	
 	// 한글, 영어, 숫자와 띄어쓰기로만 이루어진 문자인지 판단하는 함수
@@ -327,7 +400,7 @@
 					<input type="text" placeholder="코스명으로 찾아보세요" value="${query}">
 					<i class="bi bi-search coursesearch"></i>
 				</div>
-				<i class="bi bi-sliders coursefilter"></i>
+				<i class="bi bi-sliders coursefilter" data-bs-toggle="modal" data-bs-target="#course_filterModal"></i>
 			</div>
 		</div>
 		
@@ -451,6 +524,56 @@
 		
 		</div>
 	</div>
+	
+	<!-- 필터 모달 -->
+	<div class="modal fade" id="course_filterModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">
+	        <b>검색 기준 선택</b>
+	        </h4>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        <table class="table table-borderless course_filtertable">
+	        	<tr>
+	        		<td width="120" class="course_categoryrow"><b>여행지 개수</b></td>
+	        		<td>
+	        			<div class="course_spotnum_filter">
+		        			<div class="course_counter">
+		        				<i class="bi bi-caret-down-square course_counter_down"></i>
+		        				<div class="course_counter_num">3</div>
+		        				<i class="bi bi-caret-up-square course_counter_up"></i>
+		        			</div>
+		        			<button type="button" class="course_general_graybtn course_numstd">이상</button>
+		        			<button type="button" class="course_general_graybtn course_numstd">이하</button>
+		        		</div>
+	        		</td>
+	        	</tr>
+	        	<tr>
+	        		<td class="course_categoryrow"><b>정렬 기준</b></td>
+	        		<td>
+	           			<button type="button" class="course_general_graybtn course_sortstd">조회수</button>
+	           			<button type="button" class="course_general_graybtn course_sortstd">좋아요</button>
+	        		</td>
+	        	</tr>
+	        </table>
+	      </div>
+	
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
+	
 	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 </body>
 </html>
