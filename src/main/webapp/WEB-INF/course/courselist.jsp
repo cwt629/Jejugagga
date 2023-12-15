@@ -291,20 +291,28 @@
 				});
 			}
 		});
+		
+		// 검색 버튼 클릭 시
+		$("div.course_search_input>i.coursesearch").click(function(){
+			let query = $(this).prev().val(); // 입력칸의 value
+			location.href = "./list?query=" + query;
+		});
+		
 	}); // end of $(function())
+	
 </script>
 </head>
 <body>
 	<div class="course_list_app">
 		<div class="course_innerheader">
-			<span class="course_title">추천코스</span>
+			<span class="course_title">추천코스(${totalCount})</span>
 			<c:if test="${sessionScope.loginok != null}">
 				<button type="button" class="course_addbtn"
 				onclick="location.href = './add'">코스추가</button>
 			</c:if>
 			<div class="course_search">
 				<div class="course_search_input">
-					<input type="text" placeholder="코스명으로 찾아보세요">
+					<input type="text" placeholder="코스명으로 찾아보세요" value="${query}">
 					<i class="bi bi-search coursesearch"></i>
 				</div>
 				<i class="bi bi-sliders coursefilter"></i>
@@ -312,6 +320,9 @@
 		</div>
 		
 		<div class="course_list_contents">
+			<c:if test="${totalCount == 0}">
+				<h2 style="text-align: center;">검색된 코스가 없습니다.</h2>
+			</c:if>
 			<c:forEach var="dto" items="${courses}">
 				<c:set var="photoFlag" value="0"/> <!-- 해당 코스에서 하나라도 사진이 있는지 여부 -->
 				<div class="course_content" coursecode="${dto.coursecode}">
@@ -406,9 +417,16 @@
 					<!-- 그 외 번호 -->
 					<c:if test="${pageNum != currentPage}">
 						<li class="pagination-item">
-							<a class="pagination-link" href="./list?currentPage=${pageNum}">
-								${pageNum}
-							</a>
+							<c:if test="${query == ''}">
+								<a class="pagination-link" href="./list?currentPage=${pageNum}">
+									${pageNum}
+								</a>
+							</c:if>
+							<c:if test="${query != ''}">
+								<a class="pagination-link" href="./list?currentPage=${pageNum}&query=${query}">
+									${pageNum}
+								</a>
+							</c:if>
 						</li>
 					</c:if>
 				</c:forEach>

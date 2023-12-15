@@ -44,4 +44,12 @@ public class CourseDao {
 	public void deleteCourse(int coursecode) {
 		session.delete(nameSpace + "deleteCourse", coursecode);
 	}
+	
+	public int getSearchedCount(String query) {
+		return session.selectOne(nameSpace + "getSearchedCount", query);
+	}
+	
+	public List<CourseDto> selectSearchedCoursesInPage(Map<String, Object> map) {
+		return session.selectList(nameSpace + "selectSearchedCoursesInPage", map);
+	}
 }

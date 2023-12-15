@@ -47,14 +47,15 @@ public class CourseController {
 	
 	@GetMapping("/course/list")
 	public String list(Model model, HttpSession session,
-			@RequestParam(defaultValue = "1") int currentPage) {
+			@RequestParam(defaultValue = "1") int currentPage,
+			@RequestParam(defaultValue = "") String query) {
 		
 		// Paging
 		int totalPages, startPage, endPage, startIndex;
-		int totalCount = courseService.getTotalCount(); // 전체 코스 개수
+		int totalCount = courseService.getSearchedCount(query); // 전체 코스 개수
 		
 		// 총 페이지 수: 전체 코스 수를 페이지 당 코스 수로 나누고, 올림 
-		totalPages = (int)Math.ceil(totalCount / COURSES_PER_PAGE);
+		totalPages = (int)Math.ceil((double)totalCount / (double)COURSES_PER_PAGE);
 		
 		// 해당 블럭의 시작 페이지와 끝 페이지
 		startPage = (currentPage - 1) / PAGES_PER_BLOCK * PAGES_PER_BLOCK + 1;
@@ -67,7 +68,7 @@ public class CourseController {
 		startIndex = (currentPage - 1) * COURSES_PER_PAGE;
 		
 		// 해당 페이지에 보여줄 코스 목록
-		List<CourseDto> courses = courseService.selectCoursesInPage(COURSES_PER_PAGE, startIndex);
+		List<CourseDto> courses = courseService.selectSearchedCoursesInPage(query, COURSES_PER_PAGE, startIndex);
 		
 		// 현재 로그인한 유저 코드
 		int currentUserCode = -1;
@@ -122,6 +123,7 @@ public class CourseController {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("query", query);
 		
 		return "course/courselist";
 	}

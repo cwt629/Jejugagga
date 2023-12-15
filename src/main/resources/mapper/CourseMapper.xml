@@ -36,4 +36,15 @@
 	<delete id="deleteCourse" parameterType="int">
 		delete from course where coursecode = #{coursecode}
 	</delete>
+	
+	<select id="getSearchedCount" parameterType="String" resultType="int">
+		select count(*) from course where name like concat('%', #{query}, '%')
+	</select>
+	
+	<select id="selectSearchedCoursesInPage" parameterType="Map" resultType="CourseDto">
+		select * from course
+		where name like concat('%', #{query}, '%')
+		order by coursecode desc
+		limit #{coursePerPage} offset #{startIndex}
+	</select>
 </mapper>

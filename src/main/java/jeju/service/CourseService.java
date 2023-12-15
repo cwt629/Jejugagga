@@ -54,4 +54,17 @@ public class CourseService {
 	{
 		courseDao.deleteCourse(coursecode);
 	}
+	
+	public int getSearchedCount(String query) {
+		return courseDao.getSearchedCount(query);
+	}
+	
+	public List<CourseDto> selectSearchedCoursesInPage(String query, int coursePerPage, int startIndex) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("query", query);
+		map.put("coursePerPage", coursePerPage);
+		map.put("startIndex", startIndex);
+		
+		return courseDao.selectSearchedCoursesInPage(map);
+	}
 }
