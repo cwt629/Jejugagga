@@ -18,12 +18,13 @@
 </head>
 
 <script>
-    <!--
     function showNotLoggedInModal() {
         // 모달창을 표시합니다.
-        $("#agreeModal").modal("show");
+        $("#agreeModal").show();
     }
-    -->
+    function hideModal() {
+        $("#agreeModal").hide();
+    }
     $(document).ready(function() {
         $(".loginCheck").click(function () {
             // 버튼에서 로그인 상태 정보 가져오기
@@ -32,7 +33,8 @@
             if (loginStatus == "0") {
                 // 로
                 // 그인하지 않았을 경우 알림
-                alert("로그인해라")
+/*                alert("로그인해라")*/
+                showNotLoggedInModal();
             } else {
                 const formData = new FormData(document.getElementById('boardFreeForm'));
                 document.getElementById('boardFreeForm').action = '/community/free/write';
@@ -153,7 +155,7 @@
                     있어요.</h5>
             </div>
             <div class="modal-footer">
-                <button type="button" id="okButton1" class="btn btn-primary">OK</button>
+                <button type="button" id="okButton1" class="btn btn-primary" onclick="hideModal()">OK</button>
             </div>
         </div>
     </div>
