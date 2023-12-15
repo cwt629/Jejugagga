@@ -65,19 +65,18 @@
                     </div>
                     <!-- '글쓰기' 아이콘 링크를 form 안으로 이동 -->
 
-                        <c:if test="${sessionScope.loginok==null }">
-                            <button type="button" class="board_free_btn board_free_btn-write loginCheck" style="margin-left: 10px;">
-                                 <i class="bi bi-pencil-fill" ></i>
-                                 <input type="hidden" name="loginStatus" value="0" />
-                            </button>
-                        </c:if>
-                        <c:if test="${sessionScope.loginok!=null }">
-                            <button type="button" class="board_free_btn board_free_btn-write loginCheck" style="margin-left: 10px;">
-                                <i class="bi bi-pencil-fill" ></i>
-                                <input type="hidden" name="loginStatus" value="1" />
-                            </button>
-                        </c:if>
-
+                    <c:if test="${sessionScope.loginok==null }">
+                        <button type="button" class="board_free_btn board_free_btn-write loginCheck" style="margin-left: 10px;">
+                            <i class="bi bi-pencil-fill" ></i>
+                            <input type="hidden" name="loginStatus" value="0" />
+                        </button>
+                    </c:if>
+                    <c:if test="${sessionScope.loginok!=null }">
+                        <button type="button" class="board_free_btn board_free_btn-write loginCheck" style="margin-left: 10px;">
+                            <i class="bi bi-pencil-fill" ></i>
+                            <input type="hidden" name="loginStatus" value="1" />
+                        </button>
+                    </c:if>
                 </form>
             </div>
         </div>
@@ -123,15 +122,21 @@
     <div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s">
         <ul class="pagination">
             <li class="pagination-item--wide first">
-                <a class="pagination-link--wide first" href="${currentPage > 1 ? '${root}/community/free/list?page=${currentPage - 1}' : '#'}">Previous</a>
+                <c:if test="${currentPage > 1}">
+                    <a class="pagination-link--wide first"
+                       href="${'/community/free/list?currentPage=' += currentPage - 1}">Previous</a>
+                </c:if>
             </li>
             <c:forEach var="i" begin="1" end="${totalPage}">
                 <li class="pagination-item ${currentPage == i ? 'is-active' : ''}">
-                    <a class="pagination-link" href="${root}/community/free/list?page=${i}">${i}</a>
+                    <a class="pagination-link" href="/community/free/list?currentPage=${i}">${i}</a>
                 </li>
             </c:forEach>
             <li class="pagination-item--wide last">
-                <a class="pagination-link--wide last" href="${currentPage < totalPage ? '${root}/community/free/list?page=${currentPage + 1}' : '#'}">Next</a>
+                <c:if test="${currentPage < totalPage}">
+                    <a class="pagination-link--wide first"
+                       href="${'/community/free/list?currentPage=' += currentPage + 1}">Next</a>
+                </c:if>
             </li>
         </ul>
     </div>
