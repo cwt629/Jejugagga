@@ -11,9 +11,14 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="../res/course/style/paging.css">
 <style>
    body * {
        font-family: 'Orbit';
+   }
+   
+   div.course_list_app {
+       padding: 0 150px;
    }
    
    div.course_innerheader {
@@ -29,6 +34,7 @@
        display: flex;
        justify-content: center;
        align-items: center;
+       font-weight: bold;
    }
    
    div.course_innerheader button.course_addbtn {
@@ -83,18 +89,19 @@
    
    div.course_list_contents {
        width: 100%;
-       margin: 15px;
        display: flex;
        flex-wrap: wrap;
+       place-content: center;
    }
    
    div.course_list_contents div.course_content {
        width: 570px;
-       height: 480px;
+       height: 570px;
        border: 2px solid #ccc;
        border-radius: 10px;
        position: relative;
-       margin: 15px;
+       margin: 20px;
+       box-sizing: border-box;
    }
    
    /* slide show 관련 */
@@ -165,14 +172,23 @@
    }
    
    div.course_content div.course_name {
-       height: 66px;
+       height: 99px;
        overflow-y: auto;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+   
+   div.course_name>h4 {
+       text-align: center;
+       font-weight: bold;
    }
    
    div.course_list_contents div.course_content>div.course_brief {
        width: 100%;
-       height: 64px;
+       height: 120px;
        overflow: auto;
+       padding: 0 30px;
    }
    
    div.course_list_contents div.course_summary {
@@ -197,13 +213,13 @@
        font-weight: bold;
    }
    
+   div.course_pagination {
+       margin: 30px 0;
+       display: flex;
+       justify-content: center;
+   }
 </style>
 <script>
-	/*
-	하트가 생각보다 빠르게 반영되어서 그런지
-	플래그 설정에 따른 효과를 확인할 수 없었다.
-	clickingHeart 플래그는 일단 구성은 해놓았지만, 실제 적용 여부 확인은 이후에 해야 할 듯 함.
-	*/
 	let clickingHeart= false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
 	const FULL_HEART_BUTTON = `<i class="bi bi-heart-fill course_heart"></i>`;
 	const EMPTY_HEART_BUTTON = `<i class="bi bi-heart course_heart"></i>`;
@@ -266,7 +282,6 @@
 				});
 			}
 		});
-		
 	}); // end of $(function())
 </script>
 </head>
@@ -326,7 +341,7 @@
 			  			<i class="bi bi-heart-fill course_totalLikes">&nbsp;${dto.totalLikes}</i>
 			  		</div>
 			  		<div class="course_name">
-			  			<h4 style="text-align: center;">${dto.name}</h4>
+			  			<h4 style="text-align: center; font-weight: bold;">${dto.name}</h4>
 			  		</div>
 			  		<div class="course_brief">
 			  			${dto.briefcontent}
@@ -339,7 +354,11 @@
 			  			</figure>
 			  			<figure>
 			  				<img src="../res/photo/course_icons/Icon_Journey.png">
-			  				<figcaption>${dto.distance}km</figcaption>
+			  				<figcaption>
+			  					<!-- 거리는 최대 소수점 둘째자리까지만 출력 -->
+			  					<fmt:formatNumber value="${dto.distance}" maxFractionDigits="2"/>
+			  					km
+			  				</figcaption>
 			  			</figure>
 			  			<figure>
 			  				<img src="../res/photo/course_icons/Icon_Timesheet.png">
@@ -352,6 +371,43 @@
 			  		</div>
 				</div>
 			</c:forEach>
+		</div>
+		
+		<!-- pagination -->
+		<div class="pagination-container wow zoomIn mar-b-1x course_pagination" data-wow-duration="0.5s">
+
+			<ul class="pagination">
+				<!-- 이전 페이지 버튼 -->
+				<c:if test="${startPage > 1}">
+					<li class="pagination-item first"> <a class="pagination-link first" href="./list?currentPage=${startPage - 1}">Previous</a> </li>
+				</c:if>
+				
+				<!-- 페이지 번호 목록 -->
+				<c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
+					<!-- 현재 페이지와 같은 번호 -->
+					<c:if test="${pageNum == currentPage}">
+						<li class="pagination-item is-active"> 
+							<a class="pagination-link" href="#">
+								${pageNum}
+							</a> 
+						</li>
+					</c:if>
+					<!-- 그 외 번호 -->
+					<c:if test="${pageNum != currentPage}">
+						<li class="pagination-item">
+							<a class="pagination-link" href="./list?currentPage=${pageNum}">
+								${pageNum}
+							</a>
+						</li>
+					</c:if>
+				</c:forEach>
+				
+				<!-- 다음 페이지 버튼 -->
+				<c:if test="${endPage < totalPages}">
+					<li class="pagination-item last"> <a class="pagination-link last" href="./list?currentPage=${endPage + 1}">Next</a> </li>
+				</c:if>
+			</ul>
+		
 		</div>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>

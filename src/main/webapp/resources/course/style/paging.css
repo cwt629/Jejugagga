@@ -1,0 +1,89 @@
+// Import icon font, I've used Entypo (http://entypo.com/)
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+
+// Import Roboto font
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.pagination-container {
+	margin-top: 1em;
+	padding-top: 2em;
+	border-top: 1px solid #d7dadb;
+	text-align: center;
+}
+
+.pagination-item {
+	list-style-type: none;
+	display: inline-block;
+	border-right: 1px solid #d7dadb;
+
+	transform: scale(1) rotate(19deg) translateX(0px) translateY(0px) skewX(-10deg) skewY(-20deg);
+}
+
+.pagination-item.first, .pagination-item.last {
+	border-right: none;
+}
+
+.pagination-item:hover,
+.pagination-item.is-active {
+	background-color: #eeb182;
+	border-right: 1px solid #fff;
+		.pagination-link {
+		color: #fff;
+	}
+}
+
+.pagination-item.first:hover, .pagination-item.last:hover {
+	border-right: none;
+}
+	
+.pagination-item.first-number {
+  border-left: 1px solid #d7dadb;
+}
+
+.pagination-link {
+	padding: 1.1em 1.6em;
+	display: inline-block;
+	text-decoration: none;
+	color: #8b969c;
+
+	transform: scale(1) rotate(0deg) translateX(0px) translateY(0px) skewX(20deg) skewY(0deg);
+}
+
+.pagination-item--wide {
+	//@extend .pagination-item;
+	list-style-type: none;
+	display: inline-block;
+}
+
+.pagination-item--wide.first {
+	margin: 0 1em 0 0;
+}
+
+.pagination-item--wide.last {
+	margin: 0 0 0 1em;
+}
+
+.pagination-link--wide {
+	text-decoration: none;
+	color: #8b969c;
+	padding: 1.1em 1.6em;
+}
+
+.pagination-link--wide:hover {
+	color: #eeb182;
+}
+
+.pagination-link--wide.first:before,
+.pagination-link--wide.last:after {
+  font-family: 'Orbit';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  // Better Font Rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

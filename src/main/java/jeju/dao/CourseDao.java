@@ -1,6 +1,7 @@
 package jeju.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +25,11 @@ public class CourseDao {
 		return session.selectList(nameSpace + "selectAllCourses");
 	}
 	
+	public int getTotalCount() {
+		return session.selectOne(nameSpace + "getTotalCount");
+	}
+	
+	public List<CourseDto> selectCoursesInPage(Map<String, Integer> map) {
+		return session.selectList(nameSpace + "selectAllCoursesInPage", map);
+	}
 }
