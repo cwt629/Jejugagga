@@ -24,4 +24,12 @@
     <delete id="deleteBoardFree" parameterType="int">
       delete from board_free where freeboardcode=#{freeboardcode}
     </delete>
+    <select id="detailBoardFreePage" parameterType="int" resultType="BoardFreeDto">
+        select * from board_free where freeboardcode=#{freeboardcode}
+    </select>
+    <update id="updateViewCountOfBoardFree" parameterType="int">
+        UPDATE board_free
+        SET viewcount = viewcount + 1
+        WHERE freeboardcode = #{freeboardcode}
+    </update>
 </mapper>

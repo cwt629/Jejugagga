@@ -52,4 +52,11 @@ public class BoardFreeDao {
 		session.delete(nameSpace + "deleteBoardFree", num);
 	}
 
+	public BoardFreeDto detailBoardFreePage(int freeboardcode) {
+		return session.selectOne(nameSpace + "detailBoardFreePage", freeboardcode);
+	}
+
+	public void updateViewCount(int freeboardcode) {
+		session.update(nameSpace + "updateViewCountOfBoardFree", freeboardcode);
+	}
 }

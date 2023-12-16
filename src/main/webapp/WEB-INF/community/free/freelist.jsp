@@ -94,29 +94,18 @@
                     <th scope="col" class="th-num">번호</th>
                     <th scope="col" class="th-title">제목</th>
                     <th scope="col" class="th-date">등록일</th>
-                    <th scope="col" class="th-date">수정일</th>
+                    <th scope="col" class="th-viewcont">조회수</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <th>
-                        <a href="${root}">자유게시판1</a>
-                        <p></p>
-                    </th>
-                    <td>2023.12.07</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <th><a href="${root}">자유글 2</a></th>
-                    <td>2023.12.07</td>
-                </tr>
-
-                <tr>
-                    <td>3</td>
-                    <th><a href="${root}">자유게시판3</a></th>
-                    <td>2023.12.07</td>
-                </tr>
+                <c:forEach var="item" items="${list}">
+                    <tr>
+                        <td>${item.freeboardcode}</td>
+                        <th><a href="${root}/community/free/detail?usercode=${item.usercode}&freeboardcode=${item.freeboardcode}">${item.title}</a></th>
+                        <th><fmt:formatDate pattern="yyyy-MM-dd" value="${item.registereddate}"/></th>
+                        <td>${item.viewcount}</td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -151,8 +140,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">* 필수 항목 중 입력(선택)하지 않거나 잘못 입력하신 항목이
-                    있어요.</h5>
+                <h5 class="modal-title">글작성을 하려면 로그인이 필요합니다.</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" id="okButton1" class="btn btn-primary" onclick="hideModal()">OK</button>

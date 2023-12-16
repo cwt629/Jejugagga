@@ -79,8 +79,16 @@ public class FreeBoardController {
 
     @PostMapping("/community/free/delete")
     public String delete(@ModelAttribute BoardFreeDto boardFreeDto) {
-        int num= boardFreeDto.getFreeboardcode();
+        int num = boardFreeDto.getFreeboardcode();
         boardFreeService.deleteBoardFree(num);
         return "redirect:/community/free/list";
+    }
+
+    @GetMapping("/community/free/detail")
+    public String detail(@RequestParam int usercode, @RequestParam int freeboardcode, Model model) {
+        BoardFreeDto boardFreeDto = boardFreeService.detailBoardFreePage(freeboardcode);
+        model.addAttribute("boardFreeDto", boardFreeDto);
+        boardFreeService.updateViewCount(freeboardcode);
+        return "community/free/freeboarddetail";
     }
 }

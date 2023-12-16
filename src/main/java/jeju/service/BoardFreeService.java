@@ -50,5 +50,13 @@ public class BoardFreeService {
 
 		boardFreeDao.deleteBoardFree(num);
 	}
+
+    public BoardFreeDto detailBoardFreePage(int freeboardcode) {
+		return boardFreeDao.detailBoardFreePage(freeboardcode);
+    }
+
+	public void updateViewCount(int freeboardcode) {
+		boardFreeDao.updateViewCount(freeboardcode);
+	}
 }
 
