@@ -14,7 +14,7 @@
 <div>
     <th>${boardFreeDto.title}</th>
     <th>${boardFreeDto.content}</th>
-    <th>${boardFreeDto.photo}</th>
+    <th><img src="${boardFreeDto.photo}"></th>
 </div>
 </body>
 </html>
