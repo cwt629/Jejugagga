@@ -372,7 +372,7 @@
 			$(this).addClass("bi-caret-down-square");
 			// 마우스가 올라갈 때 1 감소시키기
 			decrementCounter("div.course_counter_num", MINIMUM_COUNTER);
-		})
+		});
 		
 		$("i.course_counter_up").on("mousedown", function(){
 			$(this).removeClass("bi-caret-up-square");
@@ -382,7 +382,15 @@
 			$(this).addClass("bi-caret-up-square");
 			// 마우스가 올라갈 때 1 증가시키기
 			incrementCounter("div.course_counter_num", MAXIMUM_COUNTER);
-		})
+		});
+		
+		// 버튼들에 대한 클릭 이벤트
+		$("#course_filterModal button.course_general_graybtn").click(function(){
+			// 다른 sibling들의 selected 클래스를 지워준다
+			$(this).siblings("button.course_general_graybtn").removeClass("course_selected");
+			// 이 버튼에 selected 클래스를 toggle시킨다(필터링 취소 대비)
+			$(this).toggleClass("course_selected");
+		});
 		
 	}); // end of $(function())
 	
