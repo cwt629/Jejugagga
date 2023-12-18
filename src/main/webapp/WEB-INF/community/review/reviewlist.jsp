@@ -122,6 +122,102 @@
             width: 100%;
         }
 
+        /* 모달 스타일링 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 1000px;
+            height: 800px;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: 0;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #modalImg {
+            width: 550px;
+            height: 550px;
+            object-fit: cover;
+        }
+
+        .nickname-container {
+            position: absolute;
+            top: 30px; /* 혹은 원하는 위치 */
+            left: 30px; /* 혹은 원하는 위치 */
+            display: flex;
+            align-items: center;
+        }
+
+        .nickname-overlay {
+            margin-left: 5px; /* 아이콘과의 간격 */
+        }
+
+        .modalTitle-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        #reviewModal {
+            font-size: 24px;
+        }
+
+        #modalTitle {
+            position: relative;
+            margin-top: 25px;
+        }
+
+        .bi-person-circle {
+            font-size: 30px;
+        }
+
+        #modalbibi {
+            margin-top: 25px;
+        }
+
+        #modalTitle {
+            margin-left: 10px;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: rgba(128, 128, 128, 0.8);
+            padding: 5px;
+            cursor: pointer;
+            font-size: 25px;
+        }
     </style>
 </head>
 <body>
@@ -155,11 +251,33 @@
             <i class="fas fa-search search-icon"></i>
         </div>
 
+        <div id="reviewModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modalImage-container">
+                    <img id="modalImg" src="" alt="리뷰 이미지" style="width:100%">
+                    <div class="nickname-container">
+                        <i class="bi bi-person-circle"></i>
+                        <div id="modalNickname" class="nickname-overlay"></div>
+                    </div>
+                </div>
+                <div class="modalTitle-container">
+                    <i class="bi bi-geo-alt-fill" id="modalbibi"></i>
+                    <div id="modalTitle"></div>
+                </div>
+                <p id="modalContent"></p>
+                <div id="modalDate"></div>
+            </div>
+        </div>
+
         <div class="reviews-container" style="font-family: Orbit; ">
             <c:forEach var="review" items="${reviews}">
-                <div class="review-item">
+                <div class="review-item" onclick="openModal(this)">
                     <div class="image-container" style="width: 100%">
                         <img src="${photos[review.reviewcode]}" alt="리뷰 사진" class="reviewInputImg">
+                        <c:if test="${isRootUser}">
+                            <div class="delete-btn" onclick="deleteReview(${review.reviewcode}); event.stopPropagation();">X</div>
+                        </c:if>
                         <div class="icon-and-nickname">
                             <i class="bi bi-person-circle"></i>
                             <h4 class="review-nickname">${nicknames[review.usercode]}</h4>
@@ -214,7 +332,67 @@
             });
         }
     });
+
+    function openModal(element) {
+        var modal = document.getElementById("reviewModal");
+        var modalImg = document.getElementById("modalImg");
+        var modalNickname = document.getElementById("modalNickname");
+        var modalTitle = document.getElementById("modalTitle");
+        var modalContent = document.getElementById("modalContent");
+        var modalDate = document.getElementById("modalDate");
+
+        modalImg.src = element.querySelector(".reviewInputImg").src;
+        modalNickname.innerHTML = element.querySelector(".review-nickname").innerHTML;
+        modalTitle.innerHTML = element.querySelector(".title-container h4").innerHTML;
+        modalContent.innerHTML = element.querySelector(".review-content p").innerHTML;
+        modalDate.innerHTML = element.querySelector(".review-date").innerHTML;
+
+        modal.style.display = "block";
+        var span = document.getElementsByClassName("close")[0];
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var searchInput = document.querySelector('.search-input');
+
+        searchInput.addEventListener('input', function() {
+            filterReviews(searchInput.value);
+        });
+    });
+
+    function filterReviews(query) {
+        var reviews = document.querySelectorAll('.review-item');
+        reviews.forEach(function(review) {
+            var title = review.querySelector('.title-container h4').innerText;
+            if (query === '' || title.toLowerCase().includes(query.toLowerCase())) {
+                review.style.display = '';
+            } else {
+                review.style.display = 'none';
+            }
+        });
+    }
+
 </script>
 
+<c:if test="${isRootUser}">
+    <script>
+        function deleteReview(reviewId) {
+            $.ajax({
+                url: '/community/review/delete',
+                type: 'POST',
+                data: { reviewId: reviewId },
+                success: function(response) {
+                    // 삭제 성공 후 페이지 새로고침 또는 해당 리뷰 항목 제거
+                    location.reload();
+                },
+                error: function() {
+                    alert('Error deleting review.');
+                }
+            });
+        }
+    </script>
+</c:if>
 
 </html>

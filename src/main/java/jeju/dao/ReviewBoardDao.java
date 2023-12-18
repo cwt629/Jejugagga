@@ -40,5 +40,8 @@ public class ReviewBoardDao {
         return sqlSession.selectOne("ReviewBoardDao.selectLatestPhotoByReviewcode", reviewcode);
     }
 
+    public void deleteReview(int reviewId) {
+        sqlSession.delete("ReviewBoardDao.deleteReview", reviewId);
+    }
 
 }

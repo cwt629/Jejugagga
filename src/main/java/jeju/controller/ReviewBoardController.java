@@ -1,5 +1,6 @@
 package jeju.controller;
 
+import javax.servlet.http.HttpSession;
 import jeju.dto.BoardReviewDto;
 import jeju.dto.BoardReviewPhotoDto;
 import jeju.service.ReviewBoardService;
@@ -36,7 +37,8 @@ public class ReviewBoardController {
 	}
 
 	@GetMapping("/community/review/list")
-	public String reviewList(Model model) {
+	public String reviewList(Model model, HttpSession session) {
+		// 리뷰 목록과 관련 정보를 가져옵니다.
 		List<BoardReviewDto> reviews = reviewBoardService.getAllReviews();
 		Map<Integer, String> photos = new HashMap<>();
 		Map<Integer, String> nicknames = new HashMap<>();
@@ -46,12 +48,19 @@ public class ReviewBoardController {
 			nicknames.put(review.getUsercode(), reviewBoardService.getNicknameByUsercode(review.getUsercode()));
 		}
 
+		// 현재 로그인한 사용자가 'root'인지 확인합니다.
+		String currentUserId = (String) session.getAttribute("id");
+		boolean isRootUser = "root".equals(currentUserId);
+
+		// 모델에 속성을 추가합니다.
+		model.addAttribute("isRootUser", isRootUser);
 		model.addAttribute("reviews", reviews);
 		model.addAttribute("photos", photos);
 		model.addAttribute("nicknames", nicknames);
 
 		return "community/review/reviewlist";
 	}
+
 
 	@PostMapping("/submitReview")
 	@ResponseBody
@@ -111,6 +120,26 @@ public class ReviewBoardController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("사진 업로드에 실패했습니다.");
 		}
 	}
+
+	@PostMapping("/community/review/delete")
+	@ResponseBody
+	public ResponseEntity<?> deleteReview(@RequestParam("reviewId") int reviewId, HttpSession session) {
+		String currentUserId = (String) session.getAttribute("id");
+		if (!"root".equals(currentUserId)) {
+			return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
+		}
+
+		try {
+			reviewBoardService.deleteReview(reviewId);
+			return new ResponseEntity<>("Review deleted successfully", HttpStatus.OK);
+		} catch (Exception e) {
+			// 오류 로그 출력
+			// ...
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
 
 }
 

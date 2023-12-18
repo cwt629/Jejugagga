@@ -6,7 +6,9 @@ import jeju.dto.BoardReviewPhotoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.apache.ibatis.session.SqlSession;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 @Service
@@ -53,5 +55,9 @@ public class ReviewBoardService {
 
     public void saveReviewPhoto(BoardReviewPhotoDto boardReviewPhotoDto) {
         reviewBoardDao.insertReviewPhoto(boardReviewPhotoDto);
+    }
+
+    public void deleteReview(int reviewId) {
+        reviewBoardDao.deleteReview(reviewId);
     }
 }

@@ -161,7 +161,7 @@
         $titleDropdown.select2({
             placeholder: '제목을 선택하거나 검색하세요',
             ajax: {
-                url: '/searchTitles', // 서버 엔드포인트 URL
+                url: '../../searchTitles', // 서버 엔드포인트 URL
                 delay: 250,
                 dataType: 'json',
                 data: function (params) {
@@ -222,7 +222,7 @@
             // 첫 번째 AJAX 요청 (리뷰 내용 전송)
             $.ajax({
                 type: 'POST',
-                url: '/submitReview',
+                url: '../../submitReview',
                 contentType: 'application/json',
                 data: JSON.stringify({ title: selectedTitle, tourcode: tourCode, content: content }),
                 success: function(response) {
@@ -236,17 +236,17 @@
                         photoFormData.append('photo', files[i]);
                     }
                     photoFormData.append('tourcode', tourCode);
-                    photoFormData.append('reviewcode', reviewcode);
+                    photoFormData.append('reviewcode', reviewcode);₩
 
                     $.ajax({
                         type: 'POST',
-                        url: '/submitReviewPhotos',
+                        url: '../../submitReviewPhotos',
                         data: photoFormData,
                         processData: false,
                         contentType: false,
                         success: function(response) {
                             alert('리뷰 및 사진이 성공적으로 업로드되었습니다.');
-                            window.location.href = '/community/review/list';
+                            window.location.href = './list';
                         },
                         error: function(xhr, status, error) {
                             console.error('Error:', xhr.responseText);

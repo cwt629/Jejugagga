@@ -27,4 +27,8 @@
     <select id="selectNicknameByUsercode" resultType="String" parameterType="int">
         SELECT nickname FROM member_table WHERE usercode = #{usercode}
     </select>
+
+    <delete id="deleteReview" parameterType="int">
+        DELETE FROM board_review WHERE reviewcode = #{reviewId}
+    </delete>
 </mapper>
