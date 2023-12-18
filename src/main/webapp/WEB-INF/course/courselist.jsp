@@ -551,7 +551,7 @@
 			</div>
 		
 			<c:if test="${totalCount == 0}">
-				<h2 style="text-align: center;">검색된 코스가 없습니다.</h2>
+				<h2 style="text-align: center; width: 100%;"><br><br>검색된 코스가 없습니다.</h2>
 			</c:if>
 			<c:forEach var="dto" items="${courses}">
 				<c:set var="photoFlag" value="0"/> <!-- 해당 코스에서 하나라도 사진이 있는지 여부 -->
