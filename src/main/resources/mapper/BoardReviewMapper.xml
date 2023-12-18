@@ -27,4 +27,12 @@
     <select id="selectNicknameByUsercode" resultType="String" parameterType="int">
         SELECT nickname FROM member_table WHERE usercode = #{usercode}
     </select>
+    
+	<select id="selectReview10Bydesc" resultType="BoardReviewDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select * from board_review order by registereddate desc limit 0,10
+	</select>
+	
+	<delete id="deleteReviewbyReviewcode" parameterType="int">
+		delete from board_review where reviewcode= #{reviewcode}
+	</delete>
 </mapper>
