@@ -128,6 +128,9 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 10px 10px 0 0;
    }
    
    div.course_list_contents div.course_content div.course_like_button {
