@@ -289,6 +289,9 @@
 	const FULL_HEART_BUTTON = `<i class="bi bi-heart-fill course_heart"></i>`;
 	const EMPTY_HEART_BUTTON = `<i class="bi bi-heart course_heart"></i>`;
 	
+	const MINIMUM_COUNTER = 1;
+	const MAXIMUM_COUNTER = 5;
+	
 	$(function(){
 		// 하트 아이콘 클릭 시
 		$(document).on("click", "div.course_content div.course_like_button", function(){
@@ -367,6 +370,8 @@
 		}).on("mouseup", function(){
 			$(this).removeClass("bi-caret-down-square-fill");
 			$(this).addClass("bi-caret-down-square");
+			// 마우스가 올라갈 때 1 감소시키기
+			decrementCounter("div.course_counter_num", MINIMUM_COUNTER);
 		})
 		
 		$("i.course_counter_up").on("mousedown", function(){
@@ -375,6 +380,8 @@
 		}).on("mouseup", function(){
 			$(this).removeClass("bi-caret-up-square-fill");
 			$(this).addClass("bi-caret-up-square");
+			// 마우스가 올라갈 때 1 증가시키기
+			incrementCounter("div.course_counter_num", MAXIMUM_COUNTER);
 		})
 		
 	}); // end of $(function())
@@ -383,6 +390,26 @@
 	function isValidSearchInput(input){
 		let regex = new RegExp('^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9 ]*$');
 		return regex.test(input);
+	}
+	
+	// 특정 선택자의 카운터값을 1 증가시키는 함수
+	function incrementCounter(selector, maxNumber){
+		let currentCount = parseInt($(selector).text()); // 현재 카운트
+		// 이미 최대치에 도달한 경우
+		if (currentCount >= maxNumber) return;
+		
+		// 1 증가시킨 카운터를 넘겨준다
+		$(selector).text(currentCount + 1);
+	}
+	
+	// 특정 선택자의 카운터값을 1 감소시키는 함수
+	function decrementCounter(selector, minNumber){
+		let currentCount = parseInt($(selector).text()); // 현재 카운트
+		// 이미 최소치에 도달한 경우
+		if (currentCount <= minNumber) return;
+		
+		// 1 감소시킨 카운터를 넘겨준다
+		$(selector).text(currentCount - 1);
 	}
 	
 </script>
