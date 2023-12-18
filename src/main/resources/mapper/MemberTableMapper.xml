@@ -13,7 +13,7 @@
 	</select>
 	<select id="selectDataByNum" parameterType="int" resultType="MemberTableDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
 		select * from member_table where usercode=#{usercode}
-	</select>	
+	</select>
 	<select id="searchIdCount" parameterType="String" resultType="int">
 		select count(*) from member_table where id=#{id}
 	</select>
@@ -31,4 +31,13 @@
 	<update id="updatePhotoByNum" parameterType="Map">
 		update member_table set photo = #{photo} where id = #{id}
 	</update>
+	<select id="selectAllmem10Bydesc" resultType="MemberTableDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select * from member_table order by registereddate desc limit 0,10
+	</select>	
+	<select id="selectAllmemBydesc" resultType="MemberTableDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select * from member_table order by registereddate desc
+	</select>	
+	<delete id="deleteMemberbyID" parameterType="String">
+		delete from member_table where id= #{id}
+	</delete>
 </mapper>

@@ -54,10 +54,12 @@ public class MemberController {
 		boolean bLogin=dao.isLoginCheck(id, password);
 		if(bLogin)
 		{
+			//멤버 등급 식별
+			String membertype = dao.getData(id).getType();
 			// 세션의 저장 기한 설정
 			session.setMaxInactiveInterval(60*60*6);
 			// 세션에 정보 저장
-			session.setAttribute("loginok","yes");
+			session.setAttribute("loginok",(membertype.equals("admin"))?"admin":"yes"); //admin이면 loginok를 admin이라는 이름으로 세션을 줌
 			session.setAttribute("saveid",saveidvalue?"yes":"no");
 			session.setAttribute("id",id);
 
@@ -175,6 +177,12 @@ public class MemberController {
 		dto.setPassword(pass);
 		dao.pwdUpdate(dto);
 		return "redirect:/member/login";
+	}
+	
+	@GetMapping("/mypage/member/delete")
+	@ResponseBody public void deleteMember(@RequestParam String id)
+	{
+		dao.deleteMemberbyID(id);
 	}
 
 
