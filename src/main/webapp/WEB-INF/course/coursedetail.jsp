@@ -92,6 +92,10 @@
        height: 68px;
    }
    
+   div.coursedetail_summary img.coursedetail_profilephoto {
+       border-radius: 68px;
+   }
+   
    div.coursedetail_summary>div {
        width: 20%;
        font-size: 20px;
@@ -306,7 +310,7 @@
 			</div>
 			<div>
 				<div>
-					<img src="${dto.writersPhoto != null? dto.writersPhoto : '../res/photo/noimage.png' }">
+					<img class="coursedetail_profilephoto" src="${dto.writersPhoto != null? dto.writersPhoto : '../res/photo/noimage.png' }">
 					&nbsp;${dto.writersNickname}
 				</div>
 			</div>

@@ -46,6 +46,9 @@ public class CourseController {
 	private final int COURSES_PER_PAGE = 4; // 페이지당 보여줄 코스 개수
 	private final int PAGES_PER_BLOCK = 5; // 블록당 보여질 최대 페이지 개수
 	
+	// 프로필 사진 파일명 바로 앞에 붙는 링크
+	private final String PROFILE_PHOTO_PREFIX = "https://kr.object.ncloudstorage.com/jejugagga-cwt/profile_photo/";
+	
 	@GetMapping("/course/list")
 	public String list(Model model, HttpSession session,
 			@RequestParam(defaultValue = "1") int currentPage,
@@ -106,6 +109,9 @@ public class CourseController {
 			int usercode = dto.getUsercode();
 			MemberTableDto memberDto = memberTableService.getData(usercode);
 			String writersPhoto = memberDto.getPhoto();
+			// 빈 문자열이 아니라면, 앞에 prefix를 붙여준다
+			if (writersPhoto != null)
+				writersPhoto = PROFILE_PHOTO_PREFIX + writersPhoto;
 			String nickname = memberDto.getNickname();
 			dto.setWritersPhoto(writersPhoto);
 			dto.setWritersNickname(nickname);
@@ -231,6 +237,9 @@ public class CourseController {
 		int usercode = dto.getUsercode();
 		MemberTableDto memberDto = memberTableService.getData(usercode);
 		String writersPhoto = memberDto.getPhoto();
+		// 빈 문자열이 아니라면, 앞에 prefix를 붙여준다
+		if (writersPhoto != null)
+			writersPhoto = PROFILE_PHOTO_PREFIX + writersPhoto;
 		String nickname = memberDto.getNickname();
 		dto.setWritersPhoto(writersPhoto);
 		dto.setWritersNickname(nickname);

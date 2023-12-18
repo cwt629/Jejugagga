@@ -246,6 +246,10 @@
        height: 68px;
    }
    
+   div.course_list_contents div.course_summary>figure>img.course_profilephoto {
+       border-radius: 68px;
+   }
+   
    div.course_list_contents div.course_summary>figure>figcaption {
        font-size: 20px;
        color: #dd6969;
@@ -613,7 +617,7 @@
 			  				<figcaption>${dto.spendingtime}${dto.timestandard}</figcaption>
 			  			</figure>
 			  			<figure>
-			  				<img src="${dto.writersPhoto == null? '../res/photo/noimage.png' : dto.writersPhoto }">
+			  				<img class="course_profilephoto" src="${dto.writersPhoto == null? '../res/photo/noimage.png' : dto.writersPhoto }">
 			  				<figcaption>${dto.writersNickname}</figcaption>
 			  			</figure>
 			  		</div>
