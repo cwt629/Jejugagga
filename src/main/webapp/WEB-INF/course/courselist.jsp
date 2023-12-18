@@ -466,7 +466,7 @@
 					    		</swiper-slide>
 					    	</c:if>
 					    </c:forEach>
-					    <!-- 사진이 하나도 없었다면, noimage를 넣어준다 -->
+					    <!-- 사진이 하나도 없었다면, 제주가까 로고를 넣어준다 -->
 					    <c:if test="${photoFlag == 0}">
 					    	<swiper-slide>
 					    		<img src="../res/photo/course_image/homeicon_incourse.png">
