@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jeju.dao.AdminDao">
+	<select id="selectAllmem10Bydesc" resultType="MemberTableDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select * from member_table order by registereddate desc limit 0,10
+	</select>	
+	<select id="selectFreeboardAndNickname" resultType="Map"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select board_free.*, member_table.nickname 
+		from board_free join member_table on board_free.usercode = member_table.usercode 
+		order by registereddate desc limit 0,10
+	</select>	
+	<select id="selectReviewboardAndNickname" resultType="Map"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select board_review.*, member_table.nickname 
+		from board_review join member_table on board_review.usercode = member_table.usercode 
+		order by registereddate desc limit 0,10
+	</select>	
+	<select id="selectInquiryisanswer" resultType="Map"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select * from board_inquiry q order by (select count(*) from board_inquiry_answer where questioncode = q.questioncode) asc, registereddate desc
+	</select>	
+	<delete id="deleteMemberbyID" parameterType="String">
+		delete from member_table where id= #{id}
+	</delete>
+	<delete id="deleteFreebyReviewcode" parameterType="int">
+		delete from board_free where freeboardcode= #{freeboardcode}
+	</delete>
+	<delete id="deleteReviewbyReviewcode" parameterType="int">
+		delete from board_review where reviewcode= #{reviewcode}
+	</delete>
+</mapper>

@@ -52,8 +52,26 @@ $(function(){
 			$.ajax({
 				type:"get",
 				dataType:"text",
-				url:"./memeber/delete",
+				url:"./member/delete",
 				data:{"id":id},
+				success:function(res){
+					location.reload();
+				}
+			});	
+			
+		}
+		
+	});
+	
+	$(".kickfreeboardbtn").click(function(){
+		let freeboardcode = $(this).val();
+		let checkkick = confirm('자유게시판 글을 삭제하시겠습니까??');
+		if(checkkick){
+			$.ajax({
+				type:"get",
+				dataType:"text",
+				url:"./freeboard/delete",
+				data:{"freeboardcode":freeboardcode},
 				success:function(res){
 					location.reload();
 				}
@@ -108,7 +126,26 @@ $(function(){
 			</table>
 		</div>
 		<div class="item color2">
-1:1문의
+			<table class="admin_board_wrap table-border" id="user-admin">
+				<thead class="admin_boardList">
+					<th class="admin_board_head">유저코드</th>
+					<th class="admin_board_head">제목</th>
+					<th class="admin_board_head">내용</th>
+					<th class="admin_board_head">등록일</th>
+				</thead>
+				<tbody>
+					<c:forEach var="inquiry" items="${inquiryisanswer }">
+						<tr>
+							<td>${inquiry.usercode }</td>
+							<td>${inquiry.title }</td>
+							<td>${inquiry.content }</td>
+							<td><fmt:formatDate value="${inquiry.registereddate}"
+									pattern="yyyy-MM-dd" /></td>
+							<!-- <td><button class="kickmemberbtn" value="${inquiry.id }">추방</button></td> -->
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 		<div class="item color4">
 			<table class="admin_board_wrap table-border" id="user-admin">
@@ -119,16 +156,14 @@ $(function(){
 					<th class="admin_board_head">작성일</th>
 				</thead>
 				<tbody>
-					<c:forEach var="freeboard" items="${freeboardlist }">
+					<c:forEach var="freeboard" items="${freeBoardandNickname }">
 						<tr>
-							<td>작성자</td>
+							<td>${freeboard.nickname }</td>
 							<td>${freeboard.title }</td>
 							<td>${freeboard.content }</td>
 							<td><fmt:formatDate value="${freeboard.registereddate}"
 									pattern="yyyy-MM-dd" /></td>
-							<!-- 
-	          	<td><button class="kickmemberbtn" value="${member.id }">추방</button></td>
-	          	 -->
+	          				<td><button class="kickfreeboardbtn" value="${freeboard.freeboardcode }">삭제</button></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -144,9 +179,9 @@ $(function(){
 					<th class="admin_board_head">작성일</th>
 				</thead>
 				<tbody>
-					<c:forEach var="reviewboard" items="${reviewboardlist }">
+					<c:forEach var="reviewboard" items="${reviewBoardandNickname }">
 						<tr>
-							<td>작성자</td>
+							<td>${reviewboard.nickname }</td>
 							<td>${reviewboard.title }</td>
 							<td>${reviewboard.content }</td>
 							<td><fmt:formatDate value="${reviewboard.registereddate}"
