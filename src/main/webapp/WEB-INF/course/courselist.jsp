@@ -122,7 +122,7 @@
       justify-content: center;
       align-items: center;
     }
-
+    
    div.course_content swiper-slide img {
       display: block;
       width: 100%;
@@ -297,6 +297,20 @@
        margin: 15px 0px;
    }
    
+   button.course_filter_reset {
+       border: 2px solid #bf5b4b;
+       background-color: transparent;
+       padding: 0px 20px;
+       border-radius: 30px;
+       font-weight: bold;
+       height: 30px;
+       box-sizing: border-box;
+       margin: 0 5px;
+       position: relative;
+       left: 30px;
+       top: 2px;
+   }
+   
 </style>
 <script>
 	let clickingHeart = false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
@@ -435,7 +449,12 @@
 			
 			// 검색 컨트롤러 이동
 			location.href = "./list" + urlQuery;
-		})
+		});
+		
+		// 필터에서 "전체 출력" 버튼 클릭 이벤트
+		$("button.course_filter_reset").click(function(){
+			location.href = "./list"; // 모든 쿼리를 초기화함
+		});
 		
 	}); // end of $(function())
 	
@@ -623,6 +642,9 @@
 	        <h4 class="modal-title">
 	        <b>검색 기준 선택</b>
 	        </h4>
+	        <c:if test="${urlParams != ''}">
+	        	<button type="button" class="course_filter_reset">전체 검색</button>
+	        </c:if>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 	      </div>
 	
