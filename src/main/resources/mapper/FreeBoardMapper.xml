@@ -6,7 +6,7 @@
     </select>
     <select id="selectPagingOfBoardFreeCriteria" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">
         select * from board_free
-        LIMIT #{pageStart}, #{perPageNum}
+        ORDER BY registereddate desc LIMIT #{pageStart}, #{perPageNum}
     </select>
     <insert id="insertBoardFree" parameterType="BoardFreeDto">
         insert into board_free (usercode, title, content, photo, registereddate)
@@ -38,4 +38,7 @@
         WHERE usercode = #{userCode}
         ORDER BY freeboardcode DESC
     </select>
+    <select id="selectAllfreeboardlist10Bydesc" resultType="BoardFreeDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select * from board_free order by registereddate desc limit 0,10
+	</select>
 </mapper>
