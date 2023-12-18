@@ -2,6 +2,7 @@ package jeju.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 import javax.servlet.http.HttpSession;
 
@@ -130,6 +131,19 @@ public class CourseController {
 		model.addAttribute("count", count);
 		model.addAttribute("numstd", numstd);
 		model.addAttribute("sortstd", sortstd);
+		
+		// url 뒤에 붙을 쿼리문을 currentPage를 제외하고 만들어주자
+		StringJoiner params = new StringJoiner("&"); // 문자열 여러개를 &로 이어주는 클래스
+		if (query.length() > 0) params.add("query=" + query);
+		if (count > 0) params.add("count=" + count);
+		if (numstd.length() > 0) params.add("numstd=" + numstd);
+		if (sortstd.length() > 0) params.add("sortstd=" + sortstd);
+		
+		// 쿼리문 생성
+		String urlParams = params.toString();
+		if (urlParams.length() > 0) urlParams = "&" + urlParams;
+		
+		model.addAttribute("urlParams", urlParams);
 		
 		return "course/courselist";
 	}

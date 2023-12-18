@@ -594,16 +594,9 @@
 					<!-- 그 외 번호 -->
 					<c:if test="${pageNum != currentPage}">
 						<li class="pagination-item">
-							<c:if test="${query == ''}">
-								<a class="pagination-link" href="./list?currentPage=${pageNum}">
-									${pageNum}
-								</a>
-							</c:if>
-							<c:if test="${query != ''}">
-								<a class="pagination-link" href="./list?currentPage=${pageNum}&query=${query}">
-									${pageNum}
-								</a>
-							</c:if>
+							<a class="pagination-link" href="./list?currentPage=${pageNum}${urlParams}">
+								${pageNum}
+							</a>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -639,19 +632,23 @@
 	        			<div class="course_spotnum_filter">
 		        			<div class="course_counter">
 		        				<i class="bi bi-caret-down-square course_counter_down"></i>
-		        				<div class="course_counter_num">3</div>
+		        				<div class="course_counter_num">${count > 0? count : 3}</div>
 		        				<i class="bi bi-caret-up-square course_counter_up"></i>
 		        			</div>
-		        			<button type="button" class="course_general_graybtn course_numstd">이상</button>
-		        			<button type="button" class="course_general_graybtn course_numstd">이하</button>
+		        			<button type="button" class="course_general_graybtn course_numstd
+		        			${numstd == '이상'? 'course_selected' : ''}">이상</button>
+		        			<button type="button" class="course_general_graybtn course_numstd
+		        			${numstd == '이하'? 'course_selected' : ''}">이하</button>
 		        		</div>
 	        		</td>
 	        	</tr>
 	        	<tr>
 	        		<td class="course_categoryrow"><b>정렬 기준</b></td>
 	        		<td>
-	           			<button type="button" class="course_general_graybtn course_sortstd">조회수</button>
-	           			<button type="button" class="course_general_graybtn course_sortstd">좋아요</button>
+	           			<button type="button" class="course_general_graybtn course_sortstd
+	           			${sortstd == '조회수'? 'course_selected' : '' }">조회수</button>
+	           			<button type="button" class="course_general_graybtn course_sortstd
+	           			${sortstd == '좋아요'? 'course_selected' : '' }">좋아요</button>
 	        		</td>
 	        	</tr>
 	        </table>
