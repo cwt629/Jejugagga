@@ -19,7 +19,7 @@
    }
    
    div.course_list_app {
-       padding: 0 150px;
+       padding: 30px 150px;
    }
    
    div.course_innerheader {
@@ -28,10 +28,11 @@
        height: 50px;
        display: flex;
        align-items: center;
+       width: 73.5%;
    }
    
    div.course_innerheader span.course_title {
-       font-size: 30px;
+       font-size: 42px;
        display: flex;
        justify-content: center;
        align-items: center;
@@ -44,28 +45,53 @@
        background-color: #ab6749;
        border: none;
        padding: 5px;
+       position: relative;
+       top: 4px;
+       left: 2px;
    }
    
    div.course_innerheader div.course_search {
        margin-left: auto;
-       margin-right: 30px;
        display: flex;
        align-items: center;
+       margin-top: 20px;
    }
+   
    
    div.course_innerheader div.course_search div.course_search_input {
-       border: 3px solid #cfa38f;
+       /*border: 3px solid #cfa38f;
        width: 300px;
        height: 36px;
-       border-radius: 30px;
+       border-radius: 30px;*/
+       display: flex;
+	   justify-content: center;
+	   align-items: center;
+	   background: white;
+	   border-radius: 25px;
+	   /* Simulate an outset border with box-shadow */
+	   box-shadow:
+	           0 0 0 2px #fff, /* Inner white border */
+	           0 0 0 4px #ff8d73; /* Second gradient color */
+	   max-width: 250px;
+	   position: relative;
+	   right: 0px;
    }
    
+   
    div.course_innerheader div.course_search div.course_search_input>input[type="text"] {
+       /*
        border: none;
        width: 230px;
        height: 30px;
        font-size: 18px;
        margin-left: 15px;
+       */
+       border: none;
+	   outline: none;
+	   font-size: 16px;
+	   width: 100%;
+	   padding: 8px 16px;
+	   background: transparent;
    }  
    
    div.course_innerheader div.course_search div.course_search_input>input[type="text"]:focus {
@@ -74,14 +100,14 @@
    
    div.course_innerheader div.course_search div.course_search_input>i.coursesearch {
        cursor: pointer;
-       color: #cfa38f;
+       color: #eeb182;
        margin: 5px;
        font-size: 20px;
    }
    
    div.course_innerheader div.course_search i.coursefilter {
-       font-size: 30px;
-       color: #cfa38f;
+       font-size: 32px;
+       color: #eeb182;
        margin: 0 20px;
        position: relative;
        bottom: 2px;
@@ -503,22 +529,23 @@
 </head>
 <body>
 	<div class="course_list_app">
-		<div class="course_innerheader">
-			<span class="course_title">추천코스(${totalCount})</span>
-			<c:if test="${sessionScope.loginok != null}">
-				<button type="button" class="course_addbtn"
-				onclick="location.href = './add'">코스추가</button>
-			</c:if>
-			<div class="course_search">
-				<div class="course_search_input">
-					<input type="text" placeholder="코스명으로 찾아보세요" value="${query}">
-					<i class="bi bi-search coursesearch"></i>
-				</div>
-				<i class="bi bi-sliders coursefilter" data-bs-toggle="modal" data-bs-target="#course_filterModal"></i>
-			</div>
-		</div>
 		
 		<div class="course_list_contents">
+			<div class="course_innerheader">
+				<span class="course_title">추천코스(${totalCount})</span>
+				<c:if test="${sessionScope.loginok != null}">
+					<button type="button" class="course_addbtn"
+					onclick="location.href = './add'">코스추가</button>
+				</c:if>
+				<div class="course_search">
+					<div class="course_search_input">
+						<input type="text" placeholder="코스명으로 찾아보세요" value="${query}">
+						<i class="bi bi-search coursesearch"></i>
+					</div>
+					<i class="bi bi-sliders coursefilter" data-bs-toggle="modal" data-bs-target="#course_filterModal"></i>
+				</div>
+			</div>
+		
 			<c:if test="${totalCount == 0}">
 				<h2 style="text-align: center;">검색된 코스가 없습니다.</h2>
 			</c:if>
