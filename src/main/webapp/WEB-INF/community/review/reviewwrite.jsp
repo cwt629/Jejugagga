@@ -10,6 +10,7 @@
     <title>이미지 업로드 버튼</title>
     <link rel="stylesheet" href="${root}/res/review/reviewwriteform.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
     <style>
 
     </style>
@@ -26,7 +27,7 @@
                 class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root effbbsc3 css-3bav5k" id="mui-6">후기
             작성</h2>
         </header>
-        <div class="MuiDialogContent-root effbbsc5 css-4lpgzu">
+        <div class="MuiDialogContent-root effbbsc5 css-4lpgzu" style="font-family: Orbit">
             <div>
                 <div class="css-1qln2j0 e1sj32154"><span
                         style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"><span
@@ -34,7 +35,7 @@
                         alt="" aria-hidden="true"
                         src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2772%27%20height=%2772%27/%3e"
                         style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"></span><img
-                        alt="[오뚜기] 오뮤 가뿐한끼 현미밥 150g X 30입"
+                        alt=""
                         src="${root}/res/photo/jejuhome.png"
                         decoding="async" data-nimg="intrinsic" class="css-antbrd"
                         style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
@@ -161,7 +162,7 @@
         $titleDropdown.select2({
             placeholder: '제목을 선택하거나 검색하세요',
             ajax: {
-                url: '../../searchTitles', // 서버 엔드포인트 URL
+                url: '/searchTitles', // 서버 엔드포인트 URL
                 delay: 250,
                 dataType: 'json',
                 data: function (params) {
@@ -222,7 +223,7 @@
             // 첫 번째 AJAX 요청 (리뷰 내용 전송)
             $.ajax({
                 type: 'POST',
-                url: '../../submitReview',
+                url: '/submitReview',
                 contentType: 'application/json',
                 data: JSON.stringify({ title: selectedTitle, tourcode: tourCode, content: content }),
                 success: function(response) {
@@ -236,17 +237,17 @@
                         photoFormData.append('photo', files[i]);
                     }
                     photoFormData.append('tourcode', tourCode);
-                    photoFormData.append('reviewcode', reviewcode);₩
+                    photoFormData.append('reviewcode', reviewcode);
 
                     $.ajax({
                         type: 'POST',
-                        url: '../../submitReviewPhotos',
+                        url: '/submitReviewPhotos',
                         data: photoFormData,
                         processData: false,
                         contentType: false,
                         success: function(response) {
                             alert('리뷰 및 사진이 성공적으로 업로드되었습니다.');
-                            window.location.href = './list';
+                            window.location.href = '/community/review/list';
                         },
                         error: function(xhr, status, error) {
                             console.error('Error:', xhr.responseText);

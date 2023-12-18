@@ -15,7 +15,7 @@
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-DVMBJVCWZ8"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${root}/res/review/reviewlist.css">
     <link rel="stylesheet" href="${root}/res/review/reviewpaging.css">
     <link rel="stylesheet" href="${root}/res/review/reviewwritebutton.css">
@@ -221,7 +221,7 @@
     </style>
 </head>
 <body>
-<div class="review-container" style="margin-top:-30px;">
+<div class="review-container" style="margin-top:-30px; font-family: Orbit">
     <div class="no-pd-bm" id="content">
         <ul id="location">
             <li><a href="${root}/main">Home</a></li>
@@ -231,11 +231,11 @@
     </div>
 
     <div class="contents-head">
-        <h2 style="font-size: 45px; font-family: Orbit">
+        <h2 style="font-size: 45px; color: #402F21; font-family: Orbit;">
             고객후기
         </h2>
 
-        <div class="container-write" style="position: absolute; margin-top: -53px; margin-left: 530px"
+        <div class="container-write" style="position: absolute; margin-top: -53px; margin-left: 200px"
              data-logged-in="${sessionScope.loginok == 'yes'}">
             <button class="learn-more" id="reviewButton">
         <span class="circle" aria-hidden="true">
@@ -246,12 +246,12 @@
         </div>
 
 
-        <div class="search-container" style="top: -50px; left: 750px; font-family: 'orbit';">
+        <div class="search-container" style="top: -50px; left: 680px; font-family: 'orbit';">
             <input type="text" class="search-input" placeholder="공간명으로 찾아보세요">
             <i class="fas fa-search search-icon"></i>
         </div>
 
-        <div id="reviewModal" class="modal">
+        <div id="reviewModal" class="modal" style="font-family: Orbit">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <div class="modalImage-container">
@@ -286,7 +286,7 @@
                     <div class="review-content">
                         <div class="title-container">
                             <i class="bi bi-geo-alt-fill"></i>
-                            <h4>${review.title}</h4>
+                            <h4 style="margin-left: 5px;">${review.title}</h4>
                         </div>
                         <p>${review.content}</p>
                         <span class="review-date">${review.registereddate}</span>
@@ -296,7 +296,7 @@
         </div>
 
         <div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s"
-             style="margin-bottom: 20px">
+             style="margin-bottom: 20px; font-family: Orbit;">
             <ul class="pagination">
                 <li class="pagination-item--wide first"><a class="pagination-link--wide first"
                                                            href="#">Previous</a>

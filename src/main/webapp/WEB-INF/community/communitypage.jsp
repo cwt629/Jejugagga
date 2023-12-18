@@ -8,6 +8,7 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="${root}/res/community/community.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
     <style>
         #location {
             list-style: none;
@@ -84,7 +85,7 @@
             display: block;
             padding: 30px;
             height: 100%;
-            border: 1px solid #d8d8d8;
+            border: 1px solid #a69580;
             border-radius: 15px;
         }
 
@@ -172,10 +173,11 @@
         .cs1 {
             height: 238px;
         }
+
     </style>
 </head>
 <body>
-<div class="community-container" style="margin-top: -60px;" >
+<div class="community-container" style="margin-top: -60px; font-family: Orbit" >
     <div class="no-pd-bm" id="content">
         <ul id="location">
             <li><a href="${root}/main">Home</a></li>
@@ -183,11 +185,11 @@
         </ul>
     </div>
 
-    <div class="inner customer-main" style="margin-top: 15px">
+    <div class="inner customer-main" style="margin-top: 15px; font-family: Orbit;">
         <div class="border-box-btn">
             <ul style="display: flex; gap: 7px;" class="com-ul">
                 <li class="cs1">
-                    <a href="${root}/community/inquiry/list" style="cursor: pointer" class="bbx-a">
+                    <a href="${root}/community/inquiry/list" style="cursor: pointer;" class="bbx-a">
                         <span class="tit">
                             1대1 문의
                             <span class="icon-new">
@@ -242,9 +244,9 @@
         </div>
     </div>
 
-    <h2 style="font-size: 35px; padding-top: 70px">자주하는 질문 TOP 5</h2>
+    <h2 style="font-size: 35px; padding-top: 70px; font-family: Orbit;">자주하는 질문 TOP 5</h2>
 
-    <div class="tab-content" style="margin-top: 20px">
+    <div class="tab-content" style="margin-top: 20px; font-family: Orbit;">
         <div class="accordion">
             <div class="accordion-item">
                 <button id="accordion-button-18" aria-expanded="false">
