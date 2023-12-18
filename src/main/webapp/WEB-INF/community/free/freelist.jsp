@@ -31,9 +31,8 @@
             var loginStatus = $(this).find("input[name='loginStatus']").val();
 
             if (loginStatus == "0") {
-                // 로
-                // 그인하지 않았을 경우 알림
-/*                alert("로그인해라")*/
+                // 로그인하지 않았을 경우 알림
+                /*                alert("로그인해라")*/
                 showNotLoggedInModal();
             } else {
                 const formData = new FormData(document.getElementById('boardFreeForm'));
@@ -44,6 +43,7 @@
             }
         });
     })
+
 
 </script>
 
@@ -59,28 +59,28 @@
     <div id="board-search">
         <div class="container">
             <div class="search-window">
-                <form action="${root}/community/free/write" id="boardFreeForm" style="display: flex; justify-content: space-between; align-items: center;">
+                <form action="${root}/community/free/search" id="boardFreeForm" style="margin-left: 20%; /*justify-content: space-between; align-items: center;*/">
                     <!-- 검색 범위 선택 드롭다운 추가 -->
-                    <select id="searchType">
+                    <select id="searchType" name="searchType">
                         <option value="title">제목</option>
                         <option value="author">작성자</option>
                         <option value="content">내용</option>
                     </select>
                     <div class="search-wrap search-wrap--with-write">
                         <label for="search" class="blind">자유게시판 검색</label>
-                        <input id="search" type="search" name="board_free_search" placeholder="검색어를 입력해주세요." value="">
-                        <button type="button" id="searchButton" class="board_free_btn board_free_btn-dark">검색</button>
+                        <input id="search" type="search" name="word" placeholder="검색어를 입력해주세요." value="">
+                        <button type="submit" id="searchButton" class="board_free_btn board_free_btn-dark">검색</button>
                     </div>
                     <!-- '글쓰기' 아이콘 링크를 form 안으로 이동 -->
 
                     <c:if test="${sessionScope.loginok==null }">
-                        <button type="button" class="board_free_btn board_free_btn-write loginCheck" style="margin-left: 10px;">
+                        <button type="button" class="board_free_btn board_free_btn-write loginCheck" style="margin-right: 10%;">
                             <i class="bi bi-pencil-fill" ></i>
                             <input type="hidden" name="loginStatus" value="0" />
                         </button>
                     </c:if>
                     <c:if test="${sessionScope.loginok!=null }">
-                        <button type="button" class="board_free_btn board_free_btn-write loginCheck" style="margin-left: 10px;">
+                        <button type="button" class="board_free_btn board_free_btn-write loginCheck" style="margin-right: 10%;">
                             <i class="bi bi-pencil-fill" ></i>
                             <input type="hidden" name="loginStatus" value="1" />
                         </button>
@@ -155,10 +155,5 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 </body>
 </html>

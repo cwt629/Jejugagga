@@ -24,6 +24,7 @@ public class FreeBoardController {
     private final BoardFreeService boardFreeService;
     private final NcpObjectStorageService storageService;
 
+
     @GetMapping("/community/free/list")
     public String list(Model model,
                        @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "5") int perPageNum)  {
@@ -46,6 +47,30 @@ public class FreeBoardController {
 
         return "community/free/freelist";
     }
+
+
+    @PostMapping("/community/free/search")
+    public String search(Model model,
+                         @RequestParam String searchType,
+                         @RequestParam String word,
+                         @RequestParam(defaultValue = "1") int currentPage,
+                         @RequestParam(defaultValue = "5") int perPageNum) {
+
+        // 검색 로직 처리
+        BoardFreePagingCriteria criteria = new BoardFreePagingCriteria();
+        criteria.setSearchType(searchType);
+        criteria.setSearchWord(word);
+        criteria.setPage(currentPage);
+        criteria.setPerPageNum(perPageNum);
+
+        List<BoardFreeDto> result = boardFreeService.getList(criteria);
+
+        // 검색 결과만을 모델에 추가
+        model.addAttribute("list", result);
+
+        return "community/free/freelist";
+    }
+
 
     @GetMapping("/community/free/write")
     public String write() {

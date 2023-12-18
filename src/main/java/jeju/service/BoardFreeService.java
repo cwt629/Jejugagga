@@ -25,7 +25,7 @@ public class BoardFreeService {
 	}
 
 	public void updateReadCount(int num) {
-	  boardFreeDao.updateReadCount(num);
+		boardFreeDao.updateReadCount(num);
 	}
 
 	public void insertBoardFree(BoardFreeDto dto) {
@@ -51,12 +51,11 @@ public class BoardFreeService {
 		boardFreeDao.deleteBoardFree(num);
 	}
 
-    public BoardFreeDto detailBoardFreePage(int freeboardcode) {
+	public BoardFreeDto detailBoardFreePage(int freeboardcode) {
 		return boardFreeDao.detailBoardFreePage(freeboardcode);
-    }
+	}
 
 	public void updateViewCount(int freeboardcode) {
 		boardFreeDao.updateViewCount(freeboardcode);
 	}
 }
-
