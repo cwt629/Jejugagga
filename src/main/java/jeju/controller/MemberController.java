@@ -179,7 +179,7 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 	
-	@GetMapping("/mypage/delete")
+	@GetMapping("/mypage/member/delete")
 	@ResponseBody public void deleteMember(@RequestParam String id)
 	{
 		dao.deleteMemberbyID(id);

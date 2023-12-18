@@ -39,6 +39,14 @@ public class ReviewBoardDao {
     public String selectLatestPhotoByReviewcode(int reviewcode) {
         return sqlSession.selectOne("ReviewBoardDao.selectLatestPhotoByReviewcode", reviewcode);
     }
+    
+    public List<BoardReviewDto> selectReview10Bydesc() {
+    	return sqlSession.selectList("selectReview10Bydesc");
+    }
+    
+    public void deleteReviewbyReviewcode(int reviewcode) {
+    	sqlSession.delete("deleteReviewbyReviewcode", reviewcode);
+    }
 
 
 }
