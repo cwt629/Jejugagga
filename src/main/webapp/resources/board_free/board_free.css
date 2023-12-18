@@ -208,3 +208,26 @@ section.notice {
     height: 1px;
 }
 
+/* 검색 셀렉창 css */
+.search-type-select {
+    position: absolute;
+    /* 검색창의 왼쪽에 위치시킵니다 */
+    left: 0;
+    /* 검색창의 높이와 너비를 사용합니다 */
+    height: 100%;
+    width: 100%;
+    /* 검색창과 같은 배경색을 사용합니다 */
+    background-color: #f9f7f9;
+    /* 검색창과 같은 색상으로 글자를 표시합니다 */
+    color: #333;
+    /* 검색창과 같은 크기의 글자를 사용합니다 */
+    font-size: 14px;
+    /* 검색창과 같은 패딩을 사용합니다 */
+    padding: 7px 14px;
+    /* 검색창과 같은 테두리를 사용합니다 */
+    border: 1px solid #ccc;
+}
+
+.search-type-select {
+    border-radius: 8px;
+}

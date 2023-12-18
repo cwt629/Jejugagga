@@ -32,4 +32,10 @@
         SET viewcount = viewcount + 1
         WHERE freeboardcode = #{freeboardcode}
     </update>
+    <select id="selectUserCodeWrite" parameterType="int">
+        SELECT *
+        FROM board_free
+        WHERE usercode = #{userCode}
+        ORDER BY freeboardcode DESC
+    </select>
 </mapper>

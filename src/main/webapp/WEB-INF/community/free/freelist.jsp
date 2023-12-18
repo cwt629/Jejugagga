@@ -60,10 +60,16 @@
         <div class="container">
             <div class="search-window">
                 <form action="${root}/community/free/write" id="boardFreeForm" style="display: flex; justify-content: space-between; align-items: center;">
+                    <!-- 검색 범위 선택 드롭다운 추가 -->
+                    <select id="searchType">
+                        <option value="title">제목</option>
+                        <option value="author">작성자</option>
+                        <option value="content">내용</option>
+                    </select>
                     <div class="search-wrap search-wrap--with-write">
                         <label for="search" class="blind">자유게시판 검색</label>
-                        <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
-                        <button type="submit" class="board_free_btn board_free_btn-dark">검색</button>
+                        <input id="search" type="search" name="board_free_search" placeholder="검색어를 입력해주세요." value="">
+                        <button type="button" id="searchButton" class="board_free_btn board_free_btn-dark">검색</button>
                     </div>
                     <!-- '글쓰기' 아이콘 링크를 form 안으로 이동 -->
 
@@ -84,7 +90,6 @@
         </div>
     </div>
 
-
     <!-- board list area -->
     <div id="board-list">
         <div class="container">
@@ -94,6 +99,7 @@
                     <th scope="col" class="th-num">번호</th>
                     <th scope="col" class="th-title">제목</th>
                     <th scope="col" class="th-date">등록일</th>
+                    <th scope="col" class="th-usercode">작성자</th>
                     <th scope="col" class="th-viewcont">조회수</th>
                 </tr>
                 </thead>
@@ -103,6 +109,7 @@
                         <td>${item.freeboardcode}</td>
                         <th><a href="${root}/community/free/detail?usercode=${item.usercode}&freeboardcode=${item.freeboardcode}">${item.title}</a></th>
                         <th><fmt:formatDate pattern="yyyy-MM-dd" value="${item.registereddate}"/></th>
+                        <th>${item.usercode}</th>
                         <td>${item.viewcount}</td>
                     </tr>
                 </c:forEach>
