@@ -283,6 +283,17 @@
        border: 2px solid #d7897e;
    }
    
+   button.course_general_brownbtn {
+       border: none;
+       background-color: #bf5b4b;
+       color: white;
+       width: 240px;
+       height: 40px;
+       border-radius: 40px;
+       font-size: 20px;
+       margin: 15px 0px;
+   }
+   
 </style>
 <script>
 	let clickingHeart = false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
@@ -602,7 +613,7 @@
 	
 	      <!-- Modal footer -->
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+	        <button type="button" class="course_general_brownbtn">검색 기준 적용</button>
 	      </div>
 	
 	    </div>
