@@ -37,14 +37,32 @@
 		delete from course where coursecode = #{coursecode}
 	</delete>
 	
-	<select id="getSearchedCount" parameterType="String" resultType="int">
-		select count(*) from course where name like concat('%', #{query}, '%')
+	<select id="getSearchedCount" parameterType="Map" resultType="int">
+		select count(*) from course c
+		where name like concat('%', #{query}, '%')
+		<if test="numstd != ''">
+			and
+			(select count(*) from course_route where coursecode = c.coursecode)
+			<if test="numstd == '이상'">&gt;=</if><if test="numstd == '이하'">&lt;=</if>#{count}
+		</if>
 	</select>
 	
 	<select id="selectSearchedCoursesInPage" parameterType="Map" resultType="CourseDto">
-		select * from course
+		select * from course c
 		where name like concat('%', #{query}, '%')
-		order by coursecode desc
+		<if test="numstd != ''">
+			and
+			(select count(*) from course_route where coursecode = c.coursecode)
+			<if test="numstd == '이상'">&gt;=</if><if test="numstd == '이하'">&lt;=</if>#{count}
+		</if>
+		order by 
+		<if test="sortstd == '조회수'">
+		readcount desc,
+		</if>
+		<if test="sortstd == '좋아요'">
+		(select count(*) from course_likes where coursecode = c.coursecode) desc,
+		</if>
+		coursecode desc
 		limit #{coursePerPage} offset #{startIndex}
 	</select>
 </mapper>

@@ -371,7 +371,13 @@
 				return;
 			}
 			
-			location.href = "./list?query=" + query;
+			// 쿼리를 담은 딕셔너리(함수에 적용 위함)
+			let dict = {};
+			if (query.length > 0) dict["query"] = query;
+			
+			// 쿼리문
+			let urlQuery = generateGetURLQuery(dict);
+			location.href = "./list" + urlQuery;
 		});
 		
 		// 화살표 버튼을 클릭하고 있는 동안에 대한 이벤트
@@ -403,6 +409,31 @@
 			$(this).toggleClass("course_selected");
 		});
 		
+		// 필터에서 검색 기준 적용 버튼 클릭 이벤트
+		$("#course_filterModal button.course_filter_submit").click(function(){
+			let dict = {};
+			// 검색어가 있었다면, 그 검색어를 기준으로 같이 검색한다
+			let searchQuery = "${query}";
+			if (searchQuery.length > 0) dict["query"] = searchQuery;
+			// 카운터 정보
+			let count = $("div.course_counter_num").text();
+			let numStd = $("button.course_numstd.course_selected").text();
+			if (numStd.length > 0){
+				// 카운터 검색 기준(이상/이하)이 있으면 카운터도 같이 넘겨준다
+				dict["count"] = count;
+				dict["numstd"] = numStd;
+			}
+			// 정렬 기준
+			let sortStd = $("button.course_sortstd.course_selected").text();
+			if (sortStd.length > 0) dict["sortstd"] = sortStd;
+			
+			// 쿼리문 작성
+			let urlQuery = generateGetURLQuery(dict);
+			
+			// 검색 컨트롤러 이동
+			location.href = "./list" + urlQuery;
+		})
+		
 	}); // end of $(function())
 	
 	// 한글, 영어, 숫자와 띄어쓰기로만 이루어진 문자인지 판단하는 함수
@@ -429,6 +460,21 @@
 		
 		// 1 감소시킨 카운터를 넘겨준다
 		$(selector).text(currentCount - 1);
+	}
+	
+	// 주어진 dictionary를 바탕으로 url 뒤에 붙는 쿼리문을 작성해주는 함수
+	function generateGetURLQuery(dict){
+		let queries = []; // 각 쿼리를 저장한 배열
+		for (let key in dict){
+			let query = key + "=" + dict[key];
+			queries.push(query);
+		}
+		
+		let result = queries.join("&"); // 쿼리들을 &로 이어붙여준다
+		// 하나라도 쿼리문이 있으면 "?"를 앞에 붙여준다
+		if (result.length > 0) result = "?" + result;
+		
+		return result;
 	}
 	
 </script>
@@ -613,7 +659,7 @@
 	
 	      <!-- Modal footer -->
 	      <div class="modal-footer">
-	        <button type="button" class="course_general_brownbtn">검색 기준 적용</button>
+	        <button type="button" class="course_general_brownbtn course_filter_submit">검색 기준 적용</button>
 	      </div>
 	
 	    </div>
