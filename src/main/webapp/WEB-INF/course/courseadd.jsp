@@ -37,6 +37,8 @@
        border: none;
        float: right;
        margin-right: 30px;
+       position: relative;
+       top: 6px;
    }
    
    div.courseadd_formdiv {
@@ -548,10 +550,10 @@
 			onsubmit="return handleCourseFormSubmit()">
 				<!-- usercode는 hidden으로 받는다 -->
 				<input type="hidden" name="usercode" value="${sessionScope.usercode}">
-				<table class="courseadd_table">
+				<table class="courseadd_table" style="width: 1360px;">
 					<tr>
 						<td width="160"><b>코스 이름 *</b></td>
-						<td>
+						<td width="1200">
 							<input type="text" name="name" class="courseadd_textinput courseadd_explain" placeholder="코스 이름을 입력하세요" 
 							style="width: 800px;" maxlength="100" required>
 							<span>(0 / 100자)</span>
