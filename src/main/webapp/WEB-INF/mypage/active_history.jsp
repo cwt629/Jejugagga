@@ -36,15 +36,21 @@
 </script>
 </head>
 <body>
+<c:if test="${sessionScope.loginok == null}">
+	<h3>로그인을 한후 글을 써주세요</h3>
+</c:if>
+<c:if test="${sessionScope.loginok != null}">
 <div id="mypageBox">
 	<nav class="navbar navbar-expand-lg" id="sideNav">
 		<div>
-			<img src="../res/photo/noimage.png" id="profilePhoto">
+			<c:if test="${sessionScope.myphoto != 'no' || sessionScope.myphoto != null}">
+				<img src="${sessionScope.profile_photo }"
+					id="profilePhoto" onerror="this.src='${root}/res/photo/noimage.png'">
+			</c:if>
 			<br>
 			<span>${sessionScope.nickname }</span>
 			<br>
 			<span>${sessionScope.myemail }</span>
-			
 		</div>
 		<ul class="navmenu">
 			<li class="navmenu_list" id="myProfile"><a href="${root}/mypage/user">내 프로필</a></li>
@@ -122,5 +128,6 @@
 		</div>
 	</div>
 </div>
+</c:if>
 </body>
 </html>

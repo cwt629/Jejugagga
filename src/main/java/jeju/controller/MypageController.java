@@ -5,11 +5,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import jeju.dao.MemberTableDao;
 import jeju.dto.MemberTableDto;
+import jeju.storage.NcpObjectStorageService;
 
 @Controller
 public class MypageController {
@@ -19,9 +23,7 @@ public class MypageController {
 	
 	@GetMapping("/mypage/user")
 	public String userpage() {
-//		String profile_photo = memberTableDto.get
-//		model.addAttribute("profile_photo", profile_photo);
-
+		
 		return "mypage/userpage";
 	}
 	
@@ -34,10 +36,4 @@ public class MypageController {
 	public String myTripCourse() {
 		return "mypage/mytrip_course";
 	}
-	
-	@GetMapping("/mypage/admin")
-	public String signup() {
-		return "mypage/adminpage";
-	}
-	
 }
