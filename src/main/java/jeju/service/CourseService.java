@@ -39,4 +39,40 @@ public class CourseService {
 		
 		return courseDao.selectCoursesInPage(map);
 	}
+	
+	public CourseDto selectOneCourse(int coursecode)
+	{
+		return courseDao.selectOneCourse(coursecode);
+	}
+	
+	public void incrementReadcount(int coursecode)
+	{
+		courseDao.incrementReadcount(coursecode);
+	}
+	
+	public void deleteCourse(int coursecode)
+	{
+		courseDao.deleteCourse(coursecode);
+	}
+	
+	public int getSearchedCount(String query, int count, String numstd) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("query", query);
+		map.put("count", count);
+		map.put("numstd", numstd);
+		
+		return courseDao.getSearchedCount(map);
+	}
+	
+	public List<CourseDto> selectSearchedCoursesInPage(String query, int count, String numstd, String sortstd, int coursePerPage, int startIndex) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("query", query);
+		map.put("count", count);
+		map.put("numstd", numstd);
+		map.put("sortstd", sortstd);
+		map.put("coursePerPage", coursePerPage);
+		map.put("startIndex", startIndex);
+		
+		return courseDao.selectSearchedCoursesInPage(map);
+	}
 }
