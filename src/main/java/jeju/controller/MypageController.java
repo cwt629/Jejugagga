@@ -35,9 +35,4 @@ public class MypageController {
 		return "mypage/mytrip_course";
 	}
 	
-	@GetMapping("/mypage/admin")
-	public String signup() {
-		return "mypage/adminpage";
-	}
-	
 }
