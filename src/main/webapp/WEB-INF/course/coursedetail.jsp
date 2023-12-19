@@ -334,7 +334,8 @@
 						<img class="coursedetail_arrow" src="../res/photo/course_icons/next_enabled.png">
 					</c:if>
 					<!-- 여행지 정보 -->
-					<div class="coursedetail_routeplace">
+					<div class="coursedetail_routeplace" data-mapx="${tourdto.mapx}" data-mapy="${tourdto.mapy}"
+					data-title="${tourdto.title}">
 						<div class="coursedetail_routephoto">
 							<img src="${tourdto.firstimage != ''? tourdto.firstimage : '../res/photo/noimage.png'}">
 						</div>
