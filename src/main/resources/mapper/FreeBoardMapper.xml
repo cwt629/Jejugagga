@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jeju.dao.BoardFreeDao">
     <select id="totalCountOfBoardFree" resultType="int">
-      select count(*) from board_free
+        select count(*) from board_free
     </select>
     <select id="selectPagingOfBoardFreeCriteria" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">
         select * from board_free
@@ -13,16 +13,16 @@
         values (#{usercode}, #{title}, #{content},  #{photo}, now())
     </insert>
     <select id="selectMaxNumOfBoardFree" resultType="int">
-      select ifnull(max(title), 0) from board_free
+        select ifnull(max(title), 0) from board_free
     </select>
     <update id="updateReadCountOfBoardFree" parameterType="int">
-      update board_free set viewcount = viewcount + 1 where freeboardcode=#{freeboardcode}
+        update board_free set viewcount = viewcount + 1 where freeboardcode=#{freeboardcode}
     </update>
     <update id="updateBoardFree" parameterType="BoardFreeDto">
-      update board_free set title = #{title}, content = #{content} where usercode=#{usercode}
+        update board_free set title = #{title}, content = #{content} where usercode=#{usercode}
     </update>
     <delete id="deleteBoardFree" parameterType="int">
-      delete from board_free where freeboardcode=#{freeboardcode}
+        delete from board_free where freeboardcode=#{freeboardcode}
     </delete>
     <select id="detailBoardFreePage" parameterType="int" resultType="BoardFreeDto">
         select * from board_free where freeboardcode=#{freeboardcode}
@@ -39,6 +39,47 @@
         ORDER BY freeboardcode DESC
     </select>
     <select id="selectAllfreeboardlist10Bydesc" resultType="BoardFreeDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
-		select * from board_free order by registereddate desc limit 0,10
-	</select>
+        select * from board_free order by registereddate desc limit 0,10
+    </select>
+    <!-- 게시물 총 갯수 + 검색기능 추가-->
+    <select id="searchCount" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM board_free
+        <where>
+            <if test='searchType.equals("title")'>
+                AND title LIKE CONCAT('%', #{searchWord}, '%')
+            </if>
+            <if test='searchType.equals("author")'>
+                AND usercode IN (SELECT usercode FROM board_free WHERE username LIKE CONCAT('%', #{searchWord}, '%'))
+            </if>
+            <if test='searchType.equals("content")'>
+                AND content LIKE CONCAT('%', #{searchWord}, '%')
+            </if>
+        </where>
+    </select>
+    <!-- 게시물 목록을 검색하는 쿼리 추가 -->
+    <select id="getSearchList" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">
+            SELECT * FROM board_free
+        <if test='searchType != null and searchWord != null'>
+            WHERE
+            title LIKE CONCAT('%', #{searchWord}, '%')
+            OR content LIKE CONCAT('%', #{searchWord}, '%')
+        </if>
+            ORDER BY registereddate DESC
+            LIMIT #{pageStart}, #{perPageNum}
+    </select>
+    <!-- 게시물 총 갯수 조회 쿼리 추가 -->
+    <select id="searchTotalCount" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM board_free
+        <where>
+            <if test='searchType.equals("title")'>
+                AND title LIKE CONCAT('%', #{searchWord}, '%')
+            </if>
+            <if test='searchType.equals("author")'>
+                AND usercode IN (SELECT usercode FROM board_free WHERE username LIKE CONCAT('%', #{searchWord}, '%'))
+            </if>
+            <if test='searchType.equals("content")'>
+                AND content LIKE CONCAT('%', #{searchWord}, '%')
+            </if>
+        </where>
+    </select>
 </mapper>

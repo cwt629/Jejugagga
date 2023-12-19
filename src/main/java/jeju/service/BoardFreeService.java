@@ -19,9 +19,10 @@ public class BoardFreeService {
 		// criteria에 페이징 정보를 설정한다
 		int start = criteria.getPageStart();
 		int perPageNum = criteria.getPerPageNum();
+		String searchType = criteria.getSearchType();
+		String searchWord = criteria.getSearchWord();
 
-		// DAO에 페이징 정보를 전달하여 페이징된 데이터를 받아온다..
-		return boardFreeDao.getList(start, perPageNum);
+		return boardFreeDao.getList(criteria);
 	}
 
 	public void updateReadCount(int num) {
@@ -58,4 +59,9 @@ public class BoardFreeService {
 	public void updateViewCount(int freeboardcode) {
 		boardFreeDao.updateViewCount(freeboardcode);
 	}
+
+	public int searchTotalCount(String searchType, String searchWord) throws Exception {
+		return boardFreeDao.searchTotalCount(searchType, searchWord);
+	}
+
 }

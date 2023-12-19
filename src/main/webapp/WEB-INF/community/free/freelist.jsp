@@ -43,8 +43,6 @@
             }
         });
     })
-
-
 </script>
 
 <body>
@@ -68,7 +66,7 @@
                     </select>
                     <div class="search-wrap search-wrap--with-write">
                         <label for="search" class="blind">자유게시판 검색</label>
-                        <input id="search" type="search" name="word" placeholder="검색어를 입력해주세요." value="">
+                        <input id="search" type="search" name="searchWord" placeholder="검색어를 입력해주세요." value="">
                         <button type="submit" id="searchButton" class="board_free_btn board_free_btn-dark">검색</button>
                     </div>
                     <!-- '글쓰기' 아이콘 링크를 form 안으로 이동 -->

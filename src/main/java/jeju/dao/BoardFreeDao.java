@@ -1,5 +1,6 @@
 package jeju.dao;
 
+import jeju.boardfree_utils.BoardFreePagingCriteria;
 import jeju.dto.BoardFreeDto;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,8 +15,8 @@ import java.util.Map;
 public class BoardFreeDao {
 	@Autowired
 	private SqlSession session;
-	
-	private String nameSpace="jeju.dao.BoardFreeDao.";
+
+	private String nameSpace = "jeju.dao.BoardFreeDao.";
 
 	public int getTotalCount() {
 		return session.selectOne(nameSpace + "totalCountOfBoardFree");
@@ -52,7 +53,7 @@ public class BoardFreeDao {
 	public void deleteBoardFree(int num) {
 		session.delete(nameSpace + "deleteBoardFree", num);
 	}
-	
+
 	public List<BoardFreeDto> selectAllfreeboardlist10Bydesc() {
 		return session.selectList(nameSpace + "selectAllfreeboardlist10Bydesc");
 	}
@@ -64,4 +65,36 @@ public class BoardFreeDao {
 	public void updateViewCount(int freeboardcode) {
 		session.update(nameSpace + "updateViewCountOfBoardFree", freeboardcode);
 	}
+
+	public int searchCount(String searchType, String searchWord) throws Exception {
+		Map<String, String> paramMap = new HashMap<>();
+		paramMap.put("searchType", searchType);
+		paramMap.put("searchWord", searchWord);
+
+		return session.selectOne(nameSpace + "searchCount", paramMap);
+	}
+
+	public List<BoardFreeDto> getSearchList(BoardFreePagingCriteria criteria) {
+		return session.selectList(nameSpace + "getSearchList", criteria);
+	}
+
+	public List<BoardFreeDto> getList(BoardFreePagingCriteria criteria) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("pageStart", criteria.getPageStart());
+		paramMap.put("perPageNum", criteria.getPerPageNum());
+		paramMap.put("searchType", criteria.getSearchType());
+		paramMap.put("searchWord", criteria.getSearchWord());
+
+		return session.selectList(nameSpace + "getSearchList", paramMap);
+	}
+
+	public int searchTotalCount(String searchType, String searchWord) throws Exception {
+		Map<String, String> paramMap = new HashMap<>();
+		paramMap.put("searchType", searchType);
+		paramMap.put("searchWord", searchWord);
+
+		return session.selectOne(nameSpace + "searchTotalCount", paramMap);
+	}
+
 }
+

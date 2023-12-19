@@ -49,17 +49,22 @@ public class FreeBoardController {
     }
 
 
-    @PostMapping("/community/free/search")
+    @GetMapping("/community/free/search")
     public String search(Model model,
-                         @RequestParam String searchType,
-                         @RequestParam String word,
+                         @RequestParam(name = "searchType", required = false, defaultValue = "") String searchType,
+                         @RequestParam(name = "searchWord", required = false, defaultValue = "") String searchWord,
                          @RequestParam(defaultValue = "1") int currentPage,
-                         @RequestParam(defaultValue = "5") int perPageNum) {
+                         @RequestParam(defaultValue = "5") int perPageNum) throws Exception {
 
         // 검색 로직 처리
         BoardFreePagingCriteria criteria = new BoardFreePagingCriteria();
         criteria.setSearchType(searchType);
-        criteria.setSearchWord(word);
+        criteria.setSearchWord(searchWord);
+
+        // 검색 결과에 따른 총 게시물 수 구하기
+        int totalRowCount = boardFreeService.searchTotalCount(searchType, searchWord); // 검색된 게시물 총 갯수 조회
+
+        // 페이징 처리
         criteria.setPage(currentPage);
         criteria.setPerPageNum(perPageNum);
 
@@ -67,10 +72,19 @@ public class FreeBoardController {
 
         // 검색 결과만을 모델에 추가
         model.addAttribute("list", result);
+        model.addAttribute("searchType", searchType);
+        model.addAttribute("searchWord", searchWord);
+
+        // 총 페이지 수 계산
+        int totalPage = (int) Math.ceil((double) totalRowCount / perPageNum);
+        model.addAttribute("totalPage", totalPage);
+
+        // 현재 페이지와 시작 페이지 추가
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("startPage", criteria.getPageStart());
 
         return "community/free/freelist";
     }
-
 
     @GetMapping("/community/free/write")
     public String write() {
