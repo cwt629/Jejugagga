@@ -269,4 +269,23 @@ public class CourseController {
 		return "redirect:./list";
 	}
 	
+	@GetMapping("/course/revise")
+	public String revise(Model model, @RequestParam int coursecode) {
+		// 해당 코스의 정보들
+		CourseDto dto = courseService.selectOneCourse(coursecode);
+		// 각 코스의 여행지 정보들
+		List<CourseRouteDto> routeDto = courseRouteService.selectOneRoute(coursecode);
+		List<TourDto> tourDtos = new ArrayList<TourDto>();
+		for (CourseRouteDto rdto: routeDto) {
+			int tourcode = rdto.getTourcode();
+			TourDto tdto = tourService.getData(tourcode);
+			tourDtos.add(tdto);
+		}
+		dto.setTourInfos(tourDtos);
+		
+		model.addAttribute("dto", dto);
+		
+		return "course/courserevise";
+	}
+	
 }

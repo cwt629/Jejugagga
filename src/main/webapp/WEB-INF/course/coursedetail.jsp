@@ -246,6 +246,11 @@
 			location.href = "./delete?coursecode=${dto.coursecode}";
 		})
 		
+		// 코스 수정 버튼
+		$("button.coursedetail_revisebtn").click(function(){
+			location.href = "./revise?coursecode=${dto.coursecode}";
+		});
+		
 	}); // end of $(function())
 	
 	// contenttype을 카테고리명으로 치환하는 함수
