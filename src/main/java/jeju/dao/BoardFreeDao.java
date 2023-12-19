@@ -56,5 +56,5 @@ public class BoardFreeDao {
 	public List<BoardFreeDto> selectAllfreeboardlist10Bydesc() {
 		return session.selectList(nameSpace + "selectAllfreeboardlist10Bydesc");
 	}
-
+	
 }

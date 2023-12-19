@@ -20,9 +20,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jeju.dao.MemberTableDao;
 import jeju.dto.MemberTableDto;
+import jeju.storage.NcpObjectStorageService;
 
 @Controller
 public class PhotoController {
+	
+	@Autowired
+	private NcpObjectStorageService storageService;
+	
+	private String bucketName="jejugagga-cwt";
+	private String bucketFolder="profile_photo";
 	
 	@Autowired
 	private MemberTableDao memberTableDao;
@@ -38,32 +45,24 @@ public class PhotoController {
 		String id=(String)session.getAttribute("id");
 		System.out.println(id);
 		
-		//사진을 업로드할 폴더
-		String path = request.getSession().getServletContext().getRealPath("/resources/photo/profile_photo");
+		// 버켓에 업로드후 랜덤 파일명 리턴받기
+		String fileName=storageService.uploadFile(bucketName, bucketFolder, upload);
+		System.out.println(fileName);
+		// 원본사진경로
+		String path="https://kr.object.ncloudstorage.com/jejugagga-cwt/profile_photo/" + fileName;
 		System.out.println(path);
 		
-		//파일명을 랜덤하게 구해서 dto 에 저장
-		String photo = UUID.randomUUID().toString();
-		
-		//업로드
-		try {
-			upload.transferTo(new File(path + "/" + photo));
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		// db 수정
-		memberTableDao.updateMemberPhoto(photo, id);
+		memberTableDao.updateMemberPhoto(fileName, id);
 		
 		// session 에서도 사진 변경
-		session.setAttribute("myphoto", photo);
+		session.setAttribute("myphoto", fileName);
+		session.setAttribute("profile_photo", path);
+		
 		
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("photo", photo);
+		map.put("photo", fileName);
+		map.put("path", path);
 		return map;
-	}
+	}	
 }
