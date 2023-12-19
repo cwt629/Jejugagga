@@ -85,7 +85,18 @@ public class BoardFreeDao {
 		paramMap.put("searchType", criteria.getSearchType());
 		paramMap.put("searchWord", criteria.getSearchWord());
 
-		return session.selectList(nameSpace + "getSearchList", paramMap);
+		if ("title".equals(criteria.getSearchType())) {
+			return session.selectList(nameSpace + "getSearchListByTitle", paramMap);
+		} else if ("content".equals(criteria.getSearchType())) {
+			return session.selectList(nameSpace + "getSearchListByContent", paramMap);
+		} else if ("usercode".equals(criteria.getSearchType())) {
+			return session.selectList(nameSpace + "getSearchListByUserCode", paramMap);
+		} else {
+			// 기본적으로 title 검색을 수행
+			return session.selectList(nameSpace + "getSearchListByTitle", paramMap);
+		}
+
+//		return session.selectList(nameSpace + "getSearchList", paramMap);
 	}
 
 	public int searchTotalCount(String searchType, String searchWord) throws Exception {

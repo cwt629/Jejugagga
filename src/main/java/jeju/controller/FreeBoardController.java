@@ -51,8 +51,8 @@ public class FreeBoardController {
 
     @GetMapping("/community/free/search")
     public String search(Model model,
-                         @RequestParam(name = "searchType", required = false, defaultValue = "") String searchType,
-                         @RequestParam(name = "searchWord", required = false, defaultValue = "") String searchWord,
+                         @RequestParam(name = "searchType", required = false) String searchType,
+                         @RequestParam(name = "searchWord", required = false) String searchWord,
                          @RequestParam(defaultValue = "1") int currentPage,
                          @RequestParam(defaultValue = "5") int perPageNum) throws Exception {
 
@@ -68,12 +68,15 @@ public class FreeBoardController {
         criteria.setPage(currentPage);
         criteria.setPerPageNum(perPageNum);
 
+
         List<BoardFreeDto> result = boardFreeService.getList(criteria);
 
         // 검색 결과만을 모델에 추가
         model.addAttribute("list", result);
         model.addAttribute("searchType", searchType);
         model.addAttribute("searchWord", searchWord);
+        model.addAttribute("totalRowCount", totalRowCount); // 검색 결과에 따른 총 게시물 수 추가
+
 
         // 총 페이지 수 계산
         int totalPage = (int) Math.ceil((double) totalRowCount / perPageNum);

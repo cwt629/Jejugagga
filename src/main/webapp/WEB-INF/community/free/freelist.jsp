@@ -115,7 +115,7 @@
             </table>
         </div>
     </div>
-    <div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s">
+    <div class="pagination-container" data-wow-duration="0.5s">
         <ul class="pagination">
             <li class="pagination-item--wide first">
                 <c:if test="${currentPage > 1}">

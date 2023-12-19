@@ -57,16 +57,35 @@
         </where>
     </select>
     <!-- 게시물 목록을 검색하는 쿼리 추가 -->
-    <select id="getSearchList" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">
-            SELECT * FROM board_free
-        <if test='searchType != null and searchWord != null'>
-            WHERE
-            title LIKE CONCAT('%', #{searchWord}, '%')
-            OR content LIKE CONCAT('%', #{searchWord}, '%')
-        </if>
-            ORDER BY registereddate DESC
-            LIMIT #{pageStart}, #{perPageNum}
+    <select id="getSearchListByTitle" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">
+        SELECT * FROM board_free
+        WHERE title LIKE CONCAT('%', #{searchWord}, '%')
+        ORDER BY registereddate DESC
+        LIMIT #{pageStart}, #{perPageNum}
     </select>
+    <select id="getSearchListByContent" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">
+        SELECT * FROM board_free
+        WHERE content LIKE CONCAT('%', #{searchWord}, '%')
+        ORDER BY registereddate DESC
+        LIMIT #{pageStart}, #{perPageNum}
+    </select>
+    <select id="getSearchListByUserCode" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">
+        SELECT * FROM board_free
+        WHERE usercode = #{searchWord}  <!-- 외래 키의 실제 ID 값으로 검색 -->
+        ORDER BY registereddate DESC
+        LIMIT #{pageStart}, #{perPageNum}
+    </select>
+
+<!--    <select id="getSearchList" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">-->
+<!--            SELECT * FROM board_free-->
+<!--        <if test='searchType != null and searchWord != null'>-->
+<!--            WHERE-->
+<!--            title LIKE CONCAT('%', #{searchWord}, '%')-->
+<!--            OR content LIKE CONCAT('%', #{searchWord}, '%')-->
+<!--        </if>-->
+<!--            ORDER BY registereddate DESC-->
+<!--            LIMIT #{pageStart}, #{perPageNum}-->
+<!--    </select>-->
     <!-- 게시물 총 갯수 조회 쿼리 추가 -->
     <select id="searchTotalCount" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM board_free
