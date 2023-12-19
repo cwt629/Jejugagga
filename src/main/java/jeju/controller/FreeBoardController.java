@@ -32,6 +32,8 @@ public class FreeBoardController {
         BoardFreePagingCriteria criteria = new BoardFreePagingCriteria();
         criteria.setPage(currentPage);
         criteria.setPerPageNum(perPageNum);
+
+        criteria.setSearchType("");
         List<BoardFreeDto> result = boardFreeService.getList(criteria);
 
         // 페이징 정보를 모델에 추가
