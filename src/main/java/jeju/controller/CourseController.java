@@ -300,6 +300,17 @@ public class CourseController {
 		// course의 다른 정보들 먼저 update
 		courseService.updateCourse(dto);
 		
+		// 루트를 담은 배열
+		List<String> newTour = new ArrayList<String>();
+		if (!route1.equals("")) newTour.add(route1);
+		if (!route2.equals("")) newTour.add(route2);
+		if (!route3.equals("")) newTour.add(route3);
+		if (!route4.equals("")) newTour.add(route4);
+		if (!route5.equals("")) newTour.add(route5);
+		
+		// 여행지 루트 업데이트
+		this.updateCourseRoute(newTour, dto.getCoursecode());
+		
 		return "redirect:./detail?coursecode=" + dto.getCoursecode();
 	}
 	
@@ -334,14 +345,13 @@ public class CourseController {
 			}
 			
 			// 2. 요소가 불일치 -> 기존 요소 삭제 후, p1만 이동
-			
 			courseRouteService.deleteOneSpot(rdto);
 			originIdx++;
 		}
 		
 		// 순회하지 못한 기존 여행지가 남아있음 -> 나머지는 삭제한다
 		for (int i = originIdx; i < originalTourDtos.size(); i++) {
-			int originalCode = originalTourDtos.get(originIdx).getTourcode();
+			int originalCode = originalTourDtos.get(i).getTourcode();
 			
 			CourseRouteDto rdto = new CourseRouteDto();
 			rdto.setCoursecode(coursecode);
@@ -353,7 +363,7 @@ public class CourseController {
 		
 		// 순회하지 못한 새 여행지가 남아있음 -> 나머지는 삽입한다
 		for (int i = newIdx; i < newTourcodes.size(); i++) {
-			int newCode = Integer.parseInt(newTourcodes.get(newIdx));
+			int newCode = Integer.parseInt(newTourcodes.get(i));
 			
 			CourseRouteDto rdto = new CourseRouteDto();
 			rdto.setCoursecode(coursecode);
