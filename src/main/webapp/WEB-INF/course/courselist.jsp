@@ -19,7 +19,7 @@
    }
    
    div.course_list_app {
-       padding: 30px 150px;
+       padding: 30px 100px;
    }
    
    div.course_innerheader {
@@ -59,10 +59,6 @@
    
    
    div.course_innerheader div.course_search div.course_search_input {
-       /*border: 3px solid #cfa38f;
-       width: 300px;
-       height: 36px;
-       border-radius: 30px;*/
        display: flex;
 	   justify-content: center;
 	   align-items: center;
@@ -79,20 +75,13 @@
    
    
    div.course_innerheader div.course_search div.course_search_input>input[type="text"] {
-       /*
-       border: none;
-       width: 230px;
-       height: 30px;
-       font-size: 18px;
-       margin-left: 15px;
-       */
        border: none;
 	   outline: none;
 	   font-size: 16px;
 	   width: 100%;
 	   padding: 8px 16px;
 	   background: transparent;
-   }  
+   }
    
    div.course_innerheader div.course_search div.course_search_input>input[type="text"]:focus {
        outline: none;
@@ -556,7 +545,8 @@
 			<c:forEach var="dto" items="${courses}">
 				<c:set var="photoFlag" value="0"/> <!-- 해당 코스에서 하나라도 사진이 있는지 여부 -->
 				<div class="course_content" coursecode="${dto.coursecode}">
-					<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
+					<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true"
+					style="--swiper-theme-color: honeydew;">
 					    <c:forEach var="photo" items="${dto.routePhotos}">
 					    	<c:if test="${photo != ''}">
 					    		<c:set var="photoFlag" value="1"/> <!-- 해당 코스에서 하나라도 사진이 있음 표시 -->

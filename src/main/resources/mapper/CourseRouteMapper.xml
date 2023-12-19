@@ -6,8 +6,23 @@
 		insert into course_route (coursecode, tourcode, routeorder, registereddate)
 		values (#{coursecode}, #{tourcode}, #{routeorder}, now())
 	</insert>
+	
 	<select id="selectOneRoute" parameterType="int" resultType="CourseRouteDto">
 		select * from course_route where coursecode = #{coursecode}
 		order by routeorder asc
 	</select>
+	
+	<delete id="deleteOneSpot" parameterType="CourseRouteDto">
+		delete from course_route
+		where coursecode = #{coursecode}
+		and tourcode = #{tourcode}
+		and routeorder = #{routeorder}
+	</delete>
+	
+	<update id="updateSingleOrder" parameterType="Map">
+		update course_route set routeorder = #{neworder}
+		where coursecode = #{coursecode}
+		and tourcode = #{tourcode}
+		and routeorder = #{routeorder}
+	</update>
 </mapper>

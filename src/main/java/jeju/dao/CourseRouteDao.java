@@ -1,6 +1,7 @@
 package jeju.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,13 @@ public class CourseRouteDao {
 	
 	public List<CourseRouteDto> selectOneRoute(int coursecode) {
 		return session.selectList(nameSpace + "selectOneRoute", coursecode);
+	}
+	
+	public void deleteOneSpot(CourseRouteDto dto) {
+		session.delete(nameSpace + "deleteOneSpot", dto);
+	}
+	
+	public void updateSingleOrder(Map<String, Integer> map) {
+		session.update(nameSpace + "updateSingleOrder", map);
 	}
 }

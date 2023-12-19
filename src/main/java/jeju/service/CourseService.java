@@ -75,4 +75,8 @@ public class CourseService {
 		
 		return courseDao.selectSearchedCoursesInPage(map);
 	}
+	
+	public void updateCourse(CourseDto dto) {
+		courseDao.updateCourse(dto);
+	}
 }
