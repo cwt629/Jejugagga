@@ -107,7 +107,6 @@
    }
    
    div.coursedetail_map {
-       border: 3px solid #cc9e89;
        width: 100%;
        height: 400px;
        margin: 30px 0;
@@ -322,7 +321,7 @@
 		</div>
 		
 		<div class="coursedetail_map">
-			<h3>대충 지도 나오는 부분</h3>
+			<!-- 지도가 나올 부분 -->
 		</div>
 		
 		<div class="coursedetail_routeinfo">
@@ -370,5 +369,8 @@
 			</c:if>
 		</div>
 	</div>
+	
+	<script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=59skrsifwh"></script>
+	<script src="../res/course/api/map.js"></script>
 </body>
 </html>
