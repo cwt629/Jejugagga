@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jeju.dao.BoardFreeDao">
+	<select id="selectOfFreeBoardByUsercode" parameterType="int" resultType="BoardFreeDto">
+		select * from board_free where usercode = #{usercode} order by modifieddate desc
+	</select>
+	<select id="selectOfReviewBoardByUsercode" parameterType="int" resultType="BoardFreeDto">
+		select * from board_review where usercode = #{usercode} order by registereddate desc
+	</select>
+	<select id="selectOfInquiryBoardByUsercode" parameterType="int" resultType="BoardFreeDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select * from board_inquiry where usercode = #{usercode} order by registereddate desc
+	</select>
+	<select id="selectOfInquiryAnswerByQuestioncode" parameterType="int" resultType="int"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select count(*) from board_inquiry_answer where questioncode = #{questioncode}
+	</select>
+</mapper>
