@@ -106,9 +106,9 @@
        align-items: center;
    }
    
-   div.coursedetail_map {
+   div.coursedetail_mapdiv {
        width: 100%;
-       height: 400px;
+       height: 60vh;
        margin: 30px 0;
    }
    
@@ -320,7 +320,7 @@
 			</div>
 		</div>
 		
-		<div class="coursedetail_map">
+		<div class="coursedetail_mapdiv">
 			<!-- 지도가 나올 부분 -->
 		</div>
 		
