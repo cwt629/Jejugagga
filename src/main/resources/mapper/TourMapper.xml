@@ -18,17 +18,41 @@
 	
 	<!-- 리스트 -->
 	<select id="selectListOfTour" parameterType="Map" resultType="Map">
-		select * from tour where title like concat('%',#{searchword},'%')
+		select t.*, COUNT(l.tourcode) as likes
+		from tour as t
+		LEFT JOIN tour_likes as l ON t.tourcode = l.tourcode
+		where t.title LIKE CONCAT('%',#{searchword},'%')
 		<if test="contenttype != null and contenttype.size > 0">
-			and contenttype in
+			and t.contenttype in
 			<foreach collection="contenttype" item="code" open="(" close=")" separator=",">
 				#{code}
 			</foreach>
 		</if>
 		<if test="sigungucode != 0">
-			and sigungucode = #{sigungucode}
+			and t.sigungucode = #{sigungucode}
 		</if>
-		order by title
+		group by t.tourcode
+		order by t.title
+		limit #{start}, 12
+	</select>
+	
+	<!-- 로그인 한 사용자가 타는 쿼리 -->
+	<select id="selectListOfTourForLogin" parameterType="Map" resultType="Map">
+		select t.*, COUNT(l.tourcode) as likes, (SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END FROM tour_likes tk WHERE tk.tourcode = t.tourcode AND tk.usercode = #{usercode}) AS likchk
+		from tour as t
+		LEFT JOIN tour_likes as l ON t.tourcode = l.tourcode
+		where t.title LIKE CONCAT('%',#{searchword},'%')
+		<if test="contenttype != null and contenttype.size > 0">
+			and t.contenttype in
+			<foreach collection="contenttype" item="code" open="(" close=")" separator=",">
+				#{code}
+			</foreach>
+		</if>
+		<if test="sigungucode != 0">
+			and t.sigungucode = #{sigungucode}
+		</if>
+		group by t.tourcode
+		order by t.title
 		limit #{start}, 12
 	</select>
 	
