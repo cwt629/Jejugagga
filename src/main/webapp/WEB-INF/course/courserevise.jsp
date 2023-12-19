@@ -632,7 +632,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" style="text-align: center;">
-							<button type="submit" class="courserevise_general_brownbtn">코스 등록하기</button>
+							<button type="submit" class="courserevise_general_brownbtn">코스 수정하기</button>
 						</td>
 					</tr>
 				</table>
