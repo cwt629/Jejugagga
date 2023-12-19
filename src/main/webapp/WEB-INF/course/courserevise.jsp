@@ -584,7 +584,7 @@
 										originalTourcode = "${tdto.tourcode}";	
 										originalTitle = "${tdto.title}";	
 										originalContenttype = "${tdto.contenttype}";	
-										originalImage = "${tdto.firstimage}";
+										originalImage = "${tdto.firstimage != ''? tdto.firstimage : '../res/photo/noimage.png'}";
 									
 										routes.push(new CourseSpot(originalTourcode, originalTitle, originalContenttype, originalImage));
 									</script>
