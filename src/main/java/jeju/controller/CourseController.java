@@ -288,4 +288,18 @@ public class CourseController {
 		return "course/courserevise";
 	}
 	
+	@PostMapping("/course/revisecourse")
+	public String reviseCourse(@ModelAttribute CourseDto dto, 
+			@RequestParam(defaultValue = "") String route1,
+			@RequestParam(defaultValue = "") String route2,
+			@RequestParam(defaultValue = "") String route3,
+			@RequestParam(defaultValue = "") String route4,
+			@RequestParam(defaultValue = "") String route5
+			) {
+		
+		// course의 다른 정보들 먼저 update
+		courseService.updateCourse(dto);
+		
+		return "redirect:./detail?coursecode=" + dto.getCoursecode();
+	}
 }

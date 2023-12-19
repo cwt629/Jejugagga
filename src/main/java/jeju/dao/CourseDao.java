@@ -52,4 +52,8 @@ public class CourseDao {
 	public List<CourseDto> selectSearchedCoursesInPage(Map<String, Object> map) {
 		return session.selectList(nameSpace + "selectSearchedCoursesInPage", map);
 	}
+	
+	public void updateCourse(CourseDto dto) {
+		session.update(nameSpace + "updateCourse", dto);
+	}
 }

@@ -555,8 +555,9 @@
 		<div class="courserevise_formdiv">
 			<form method="post" action="./revisecourse" class="courserevise_form"
 			onsubmit="return handleCourseFormSubmit()">
-				<!-- usercode는 hidden으로 받는다 -->
+				<!-- coursecode와 usercode는 hidden으로 받는다 -->
 				<input type="hidden" name="usercode" value="${sessionScope.usercode}">
+				<input type="hidden" name="coursecode" value="${dto.coursecode}">
 				<table class="courserevise_table" style="width: 1360px;">
 					<tr>
 						<td width="160"><b>코스 이름 *</b></td>
