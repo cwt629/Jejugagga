@@ -302,4 +302,66 @@ public class CourseController {
 		
 		return "redirect:./detail?coursecode=" + dto.getCoursecode();
 	}
+	
+	// 코스 내 여행지를 수정하는 함수
+	public void updateCourseRoute(List<String> newTourcodes, int coursecode) {
+		// 기존 여행지 코스를 가져온다
+		List<CourseRouteDto> originalTourDtos = courseRouteService.selectOneRoute(coursecode);
+		
+		int originIdx = 0; // 기존 여행지 배열을 순회하는 포인터(p1)
+		int newIdx = 0; // 새로운 여행지코드 배열을 순회하는 포인터(p2)
+		
+		while (originIdx < originalTourDtos.size() && newIdx < newTourcodes.size()) {
+			int originalCode = originalTourDtos.get(originIdx).getTourcode(),
+					newCode = Integer.parseInt(newTourcodes.get(newIdx));
+			
+			// 기존 코스 정보에 대한 CourseRouteDto 객체를 만들어준다
+			CourseRouteDto rdto = new CourseRouteDto();
+			rdto.setCoursecode(coursecode);
+			rdto.setTourcode(originalCode);
+			rdto.setRouteorder(originIdx);
+			
+			// 1. 요소 일치하는 경우: 두 포인터 모두 이동시킴
+			if (originalCode == newCode) {
+				// 요소는 일치하지만 인덱스가 다른 경우 -> order 갱신
+				if (originIdx != newIdx) {
+					courseRouteService.updateSingleOrder(rdto, newIdx);
+				}
+				
+				originIdx++;
+				newIdx++;
+				continue;
+			}
+			
+			// 2. 요소가 불일치 -> 기존 요소 삭제 후, p1만 이동
+			
+			courseRouteService.deleteOneSpot(rdto);
+			originIdx++;
+		}
+		
+		// 순회하지 못한 기존 여행지가 남아있음 -> 나머지는 삭제한다
+		for (int i = originIdx; i < originalTourDtos.size(); i++) {
+			int originalCode = originalTourDtos.get(originIdx).getTourcode();
+			
+			CourseRouteDto rdto = new CourseRouteDto();
+			rdto.setCoursecode(coursecode);
+			rdto.setTourcode(originalCode);
+			rdto.setRouteorder(i);
+			
+			courseRouteService.deleteOneSpot(rdto);
+		}
+		
+		// 순회하지 못한 새 여행지가 남아있음 -> 나머지는 삽입한다
+		for (int i = newIdx; i < newTourcodes.size(); i++) {
+			int newCode = Integer.parseInt(newTourcodes.get(newIdx));
+			
+			CourseRouteDto rdto = new CourseRouteDto();
+			rdto.setCoursecode(coursecode);
+			rdto.setTourcode(newCode);
+			rdto.setRouteorder(i);
+			
+			courseRouteService.insertCourseRoute(rdto);
+		}
+		
+	}
 }
