@@ -81,7 +81,7 @@
 	   width: 100%;
 	   padding: 8px 16px;
 	   background: transparent;
-   }  
+   }
    
    div.course_innerheader div.course_search div.course_search_input>input[type="text"]:focus {
        outline: none;
