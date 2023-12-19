@@ -117,6 +117,7 @@
    }
    
    div.coursedetail_routes {
+       height: 300px;
        display: flex;
        align-items: center;
        justify-content: center;
@@ -127,6 +128,7 @@
        height: 250px;
        position: relative;
        top: 22px;
+       cursor: pointer;
    }
    
    div.coursedetail_routes div.coursedetail_routeplace img {
@@ -348,6 +350,7 @@
 					<c:set var="spotindex" value="${spotindex + 1}"/>
 				</c:forEach>
 			</div>
+			<h6 style="text-align: center;">각 여행지를 클릭하면 지도 상으로 위치를 확인할 수 있습니다.</h6>
 		</div>
 		
 		<hr>

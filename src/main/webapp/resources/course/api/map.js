@@ -23,6 +23,13 @@ function initMap(){
     		map: map
     	});
     	marker.setTitle(item.dataset.title); // 마우스 갖다대면 이름 출력
+    	
+    	// 각 여행지 요소에 클릭 시 이벤트를 부여한다
+	    item.addEventListener("click", function(){
+	    	let latitude = parseFloat(this.dataset.mapy), longitude = parseFloat(this.dataset.mapx);
+	    	center = new naver.maps.LatLng(latitude, longitude);
+	    	map.setCenter(center);
+    	});
     });
     
     
