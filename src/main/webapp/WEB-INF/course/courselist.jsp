@@ -341,6 +341,7 @@
        top: 2px;
    }
    
+   
 </style>
 <script>
 	let clickingHeart = false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
@@ -556,7 +557,7 @@
 			<c:forEach var="dto" items="${courses}">
 				<c:set var="photoFlag" value="0"/> <!-- 해당 코스에서 하나라도 사진이 있는지 여부 -->
 				<div class="course_content" coursecode="${dto.coursecode}">
-					<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true">
+					<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true" style="--swiper-theme-color: honeydew;">
 					    <c:forEach var="photo" items="${dto.routePhotos}">
 					    	<c:if test="${photo != ''}">
 					    		<c:set var="photoFlag" value="1"/> <!-- 해당 코스에서 하나라도 사진이 있음 표시 -->
