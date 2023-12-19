@@ -29,6 +29,9 @@ function initMap(){
 	    	let latitude = parseFloat(this.dataset.mapy), longitude = parseFloat(this.dataset.mapx);
 	    	center = new naver.maps.LatLng(latitude, longitude);
 	    	map.setCenter(center);
+	    	
+	    	// 클릭 시 지도 쪽으로 자동 스크롤
+	    	document.querySelector("div.coursedetail_mapdiv").scrollIntoView({behavior: 'smooth'});
     	});
     });
     
