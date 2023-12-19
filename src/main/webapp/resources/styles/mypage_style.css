@@ -18,7 +18,7 @@
 	
 	#historyContext {
 		position: absolute;
-		width: 75%;
+		width: 80%;
 		top: 100px;
 		left: 25%;
 		text-align: center;
@@ -77,6 +77,7 @@
 	}
 	
 	.historybox {
+		text-align: left;
 		width: 80%;
 		border-radius: 30px;
 		box-shadow: 5px 5px 10px;

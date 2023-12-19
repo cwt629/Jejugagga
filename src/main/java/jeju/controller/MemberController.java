@@ -195,7 +195,13 @@ public class MemberController {
 	{
 		dao.deleteMemberbyID(id);
 	}
-
-
+	
+	
+	@PostMapping("/mypage/member/withdraw")
+	@ResponseBody public void userWithdraw(@RequestParam String id, HttpSession session)
+	{
+		dao.deleteMemberbyID(id);
+		session.removeAttribute("loginok");
+	}
 
 }

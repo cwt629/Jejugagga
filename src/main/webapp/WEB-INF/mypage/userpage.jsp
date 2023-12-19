@@ -58,14 +58,23 @@
 		});
 		
 		$(".user_withdraw").click(function() {
+			let id = $(this).val();
 			if (confirm("정말 탈퇴하시겠습니까?") == true) {
-				
-				//true는 확인버튼을 눌렀을 때 코드 작성
-				console.log("완료되었습니다.");
+				$.ajax({
+					type: "post",
+					dataType: "json",
+					data: {"id": id},
+					url: "${root}/mypage/member/withdraw",
+					success: function(res) {
+				    }
+				});
+				alert("회원 탈퇴가 완료되었습니다.");
+				window.location.href = "${root}/main";
 				} else {
 					alert("취소되었습니다");
 					location.reload();
 					}
+			
 			});
 	});
 </script>
@@ -164,7 +173,7 @@
 				</div>
 		</div>
 		<br><br><br><br>
-		<button type="button" class="btn btn-warning user_withdraw">회원탈퇴</button>
+		<button type="button" class="btn btn-warning user_withdraw" value="${sessionScope.id }">회원탈퇴</button>
 	</div>
 </div>
 </c:if>

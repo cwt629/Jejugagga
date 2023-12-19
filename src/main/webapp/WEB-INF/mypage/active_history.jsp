@@ -76,7 +76,7 @@
 		</div>
 	</nav>
 	<div id="historyContext">
-		<div class="historybox" style="text-align: left;">
+		<div class="historybox">
 			<div>
 				<i class="bi bi-chat-left-text"></i>
 				내가 쓴 자유게시판 글
@@ -84,16 +84,46 @@
 			</div>
 			<hr>
 			<!-- 내부 글 목록 코드 작성 필요 -->
-			<div class="history_innerbox" style="text-align: left;">
-				<div>
-				글 제목
-				<span style="float: right;">작성일</span>
-				</div>		
-			</div>
-			<!-- 내부 글 목록 코드 작성 필요 -->
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th width="350">제목</th>
+						<th width="80">작성일</th>
+						<th width="100">수정일</th>
+						<th width="60">조회</th>				
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="freeBoard" items="${freeBoardlist}">
+					<tr>
+						<!-- 제목 -->
+						<td>${freeBoard.title }
+						<c:if test="${freeBoard.photo != null}">
+							<i class="bi bi-image" style="color:gray;"></i>
+						</c:if>
+						<c:if test="${freeBoard.photo == null}">
+							&nbsp;
+						</c:if>
+		   			</td>
+		   			
+		   			<!-- 작성일 -->
+		   			<td>
+		   				<fmt:formatDate value="${freeBoard.registereddate}" pattern="yyyy.MM.dd."/>
+		   			</td>
+		   			
+		   			<!-- 수정일 -->
+		   			<td>
+		   				<fmt:formatDate value="${freeBoard.modifieddate}" pattern="yyyy.MM.dd."/>
+		   			</td>
+		   			<!-- 조회수 -->
+		   			<td>${freeBoard.viewcount }</td>
+		  	 	</tr>		
+				</c:forEach>
+				</tbody>
+			</table>
 		</div>
 		<br><br><br>
-		<div class="historybox" style="text-align: left;">
+		<div class="historybox">
 			<div>
 				<i class="bi bi-hand-thumbs-up"></i>
 				내가 쓴 후기
@@ -101,16 +131,38 @@
 			</div>
 			<hr>
 			<!-- 내부 글 목록 코드 작성 필요 -->
-			<div class="history_innerbox" style="text-align: left;">
-				<div>
-				글 제목
-				<span style="float: right;">작성일</span>
-				</div>		
-			</div>
-			<!-- 내부 글 목록 코드 작성 필요 -->
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th width="300">제목</th>
+						<th width="80">작성일</th>
+						<th width="100">tourcode</th>
+						<th width="100">조회</th>				
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="reviewBoard" items="${reviewBoardlist}">
+					<tr>
+						<!-- 제목 -->
+						<td>${reviewBoard.title }</td>
+		   			
+		   			<!-- 작성일 -->
+		   			<td>
+		   				<fmt:formatDate value="${reviewBoard.registereddate}" pattern="yyyy.MM.dd."/>
+		   			</td>
+		   			
+		   			<!-- tourcode -->
+		   			<td>tourcode</td>
+		   			
+		   			<!-- 조회수 -->
+		   			<td>컬럼 없음..</td>
+		  	 	</tr>		
+				</c:forEach>
+				</tbody>
+			</table>
 		</div>
 		<br><br><br>
-		<div class="historybox" style="text-align: left;">
+		<div class="historybox" style="margin-bottom: 5%;">
 			<div>
 				<i class="bi bi-question-circle"></i>
 				1:1 문의
@@ -118,13 +170,32 @@
 			</div>
 			<hr>
 			<!-- 내부 글 목록 코드 작성 필요 -->
-			<div class="history_innerbox" style="text-align: left;">
-				<div>
-				글 제목
-				<span style="float: right;">작성일</span>
-				</div>		
-			</div>
-			<!-- 내부 글 목록 코드 작성 필요 -->
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th width="350">제목</th>
+						<th width="100">작성일</th>
+						<th width="150">답변완료/답변대기</th>
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="inquiryBoard" items="${inquiryBoardlist}">
+					<tr>
+						<!-- 제목 -->
+						<td>${inquiryBoard.title }</td>
+		   			
+		   			<!-- 작성일 -->
+		   			<td>
+		   				<fmt:formatDate value="${inquiryBoard.registereddate}" pattern="yyyy.MM.dd."/>
+		   			</td>
+		   			
+		   			<!-- 답변 여부 -->
+		   			<td>답변여부</td>
+						
+		  	 	</tr>		
+				</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
