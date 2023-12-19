@@ -10,7 +10,7 @@ function initMap(){
     
     let center = new naver.maps.LatLng(centerLatitude, centerLongitude);
     map.setCenter(center);
-    map.setZoom(16, false);
+    map.setZoom(14, false);
     
     // 각 여행지의 위도, 경도를 가져와 핀을 찍는다
     document.querySelectorAll("div.coursedetail_routeplace").forEach(function(item){

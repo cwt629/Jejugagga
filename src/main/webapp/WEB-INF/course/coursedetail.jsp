@@ -107,9 +107,9 @@
    }
    
    div.coursedetail_mapdiv {
-       width: 100%;
+       width: 66%;
        height: 60vh;
-       margin: 30px 0;
+       margin: 30px auto;
    }
    
    div.coursedetail_routeinfo {
