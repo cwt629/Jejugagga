@@ -189,19 +189,21 @@ public class MemberController {
 		dao.pwdUpdate(dto);
 		return "redirect:/member/login";
 	}
+
 	
 	@GetMapping("/mypage/member/delete")
 	@ResponseBody public void deleteMember(@RequestParam String id)
 	{
-		dao.deleteMemberbyID(id);
+		//dao.deleteMemberbyID(id);
 	}
 	
 	
 	@PostMapping("/mypage/member/withdraw")
 	@ResponseBody public void userWithdraw(@RequestParam String id, HttpSession session)
 	{
-		dao.deleteMemberbyID(id);
+		//dao.deleteMemberbyID(id);
 		session.removeAttribute("loginok");
 	}
+
 
 }
