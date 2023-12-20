@@ -52,6 +52,8 @@
 	    box-shadow: 3px 3px 3px;
 	    position: absolute;
     	top: 30px;
+    	left : 40px;
+    	z-index: 1;
    }
    
 </style>
@@ -82,7 +84,7 @@
 	});
 </script>
 <body>
-	<div id="container">
+	<div id="container" style="padding:0 250px;">
 		<div id="sub_visual"
 			style="background-image: linear-gradient(rgba(0, 0, 0, 0.7),
         		rgba(255, 255, 255, 0.1)), url(${tourDto.firstimage});">
@@ -119,9 +121,8 @@
 				</div>
 				
 				<div class="sub-sharing">
-					
 					<button type="button" class="heart-btn">
-						<i class="bi-heart"></i> <span class="number">155</span>
+						<!-- <i class="bi-heart"></i> <span class="number">0</span> -->
 					</button>
 				</div>
 			</div>

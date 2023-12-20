@@ -20,17 +20,17 @@
        font-family: 'Orbit';
    }
    
-   div.courseadd_app {
+   div.courserevise_app {
        margin: 15px;
        padding: 0 200px;
    }
    
-   div.courseadd_innerheader span.courseadd_title {
+   div.courserevise_innerheader span.courserevise_title {
        font-size: 30px;
        font-weight: bold;
    }
    
-   div.courseadd_innerheader button.courseadd_prevbtn {
+   div.courserevise_innerheader button.courserevise_prevbtn {
        background-color: #ccc;
        color: white;
        padding: 5px;
@@ -41,63 +41,63 @@
        top: 6px;
    }
    
-   div.courseadd_formdiv {
+   div.courserevise_formdiv {
        /*
        display: flex;
        justify-content: center;
        */
    }
    
-   div.courseadd_formdiv form.courseadd_form table.courseadd_table {
+   div.courserevise_formdiv form.courserevise_form table.courserevise_table {
        margin: 35px 0px;
        width: 100%;
    }
    
-   table.courseadd_table td {
+   table.courserevise_table td {
        padding: 10px;
    }
    
-   input.courseadd_textinput, form.courseadd_form textarea {
+   input.courserevise_textinput, form.courserevise_form textarea {
        border: none;
        background-color: #d9d9d9;
    }
    
-   div.courseadd_routes {
+   div.courserevise_routes {
        display: flex;
        align-items: center;
        margin: 30px 0px;
    }
    
-   div.courseadd_routes div.courseadd_routeplace {
+   div.courserevise_routes div.courserevise_routeplace {
        width: 160px;
        height: 250px;
        position: relative;
        top: 22px;
    }
    
-   div.courseadd_routes div.courseadd_routeplace.courseadd_enabled {
+   div.courserevise_routes div.courserevise_routeplace.courserevise_enabled {
        cursor: pointer;
    }
    
-   div.courseadd_routes div.courseadd_routeplace div.courseadd_routephoto {
+   div.courserevise_routes div.courserevise_routeplace div.courserevise_routephoto {
        width: 150px;
        height: 150px;
        background-color: #d9d9d9;
        border-radius: 5px;
    }
    
-   div.courseadd_routes div.courseadd_routeplace div.courseadd_routephoto>img {
+   div.courserevise_routes div.courserevise_routeplace div.courserevise_routephoto>img {
        width: 100%;
        height: 100%;
        border-radius: 5px;
        object-fit: cover;
    }
    
-   div.courseadd_routes div.courseadd_routeplace>h5 {
+   div.courserevise_routes div.courserevise_routeplace>h5 {
        text-align: center;
    }
    
-   div.courseadd_routes div.courseadd_routeplace.courseadd_enabled>img.courseadd_remove {
+   div.courserevise_routes div.courserevise_routeplace.courserevise_enabled>img.courserevise_remove {
        width: 150px;
        height: 150px;
        border-radius: 5px;
@@ -107,12 +107,12 @@
 
    }
    
-   div.courseadd_routes>img.courseadd_arrow {
+   div.courserevise_routes>img.courserevise_arrow {
        position: relative;
        top: -25px;
    }
    
-   div.courseadd_routes div.courseadd_routeplace div.courseadd_tag {
+   div.courserevise_routes div.courserevise_routeplace div.courserevise_tag {
        color: white;
        height: 30px;
        padding: 5px;
@@ -126,20 +126,21 @@
    }
    
    /* 카테고리별 태그 색깔 */
-   div.courseadd_tag.course_tourspot {
+   div.courserevise_tag.course_tourspot {
        background-color: #ff6888;
    }
-   div.courseadd_tag.course_culture {
+   div.courserevise_tag.course_culture {
        background-color: #b964f7;
    }
-   div.courseadd_tag.course_festival {
+   div.courserevise_tag.course_festival {
        background-color: #58a8ff;
    }
-   div.courseadd_tag.course_cafeteria {
+   div.courserevise_tag.course_cafeteria {
        background-color: #fbad00;
    }
    
-   div.courseadd_app button.courseadd_general_brownbtn {
+   
+   div.courserevise_app button.courserevise_general_brownbtn {
        border: none;
        background-color: #bf5b4b;
        color: white;
@@ -150,7 +151,7 @@
        margin: 15px 0px;
    }
    
-   div.courseadd_app button.courseadd_selectablebtn {
+   div.courserevise_app button.courserevise_selectablebtn {
        border: 2px solid #d9d9d9;
        background-color: transparent;
        padding: 5px 25px;
@@ -158,11 +159,11 @@
        font-weight: bold;
    }
    
-   div.courseadd_app button.courseadd_selectablebtn.courseadd_selected {
+   div.courserevise_app button.courserevise_selectablebtn.courserevise_selected {
        border: 2px solid #d7897e;
    }
    
-   table.courseadd_table button.courseadd_distcalbtn {
+   table.courserevise_table button.courserevise_distcalbtn {
        border: 2px solid #ca8462;
        background-color: transparent;
        width: 120px;
@@ -172,58 +173,58 @@
        margin: 0px 24px;
    }
    
-   table.courseadd_searchquery td {
+   table.courserevise_searchquery td {
        padding: 15px;
    }
    
-   table.courseadd_searchquery {
+   table.courserevise_searchquery {
        width: 800px;
    }
    
-   div.courseadd_search div.courseadd_searchdiv {
+   div.courserevise_search div.courserevise_searchdiv {
        display: flex;
        justify-content: center;
    }
    
-   div.courseadd_searchresultdiv {
+   div.courserevise_searchresultdiv {
        height: 485px;
        display: flex;
        flex-wrap: wrap;
        overflow-y: auto;
    }
    
-   div.courseadd_searchresultdiv>figure {
+   div.courserevise_searchresultdiv>figure {
        margin: 15px;
        padding: 10px;
        width: 180px;
        cursor: pointer;
    }
    
-   div.courseadd_searchresultdiv>figure:hover {
+   div.courserevise_searchresultdiv>figure:hover {
        background-color: #d9d9d9;
    }
    
-   div.courseadd_searchresultdiv>figure.courseadd_selected {
+   div.courserevise_searchresultdiv>figure.courserevise_selected {
        background-color: #cc9e89;
    }
    
-   div.courseadd_searchresultdiv>figure>img {
+   div.courserevise_searchresultdiv>figure>img {
        width: 100%;
        height: 150px;
        border-radius: 5px;
    }
    
-   div.courseadd_searchresultdiv>figure>figcaption>h6 {
+   div.courserevise_searchresultdiv>figure>figcaption>h6 {
        color: #888;
    }
    
-   div.courseadd_searchresultdiv div.courseadd_searchmessage {
+   div.courserevise_searchresultdiv div.courserevise_searchmessage {
        font-size: 22px;
        text-align: center;
        width: 100%;
    }
    
-   div.courseadd_selectedspot {
+   div.courserevise_selectedspot {
        margin: 20px;
    }
    
@@ -269,6 +270,9 @@
 	let routes = []; // 루트에 포함되는 여행지 정보
 	let selectedCode = -1; // 현재 검색창에서 선택된 여행지 코드
 	
+	// 초기에 여행지를 넣어주기 위한 변수들
+	let originalTourcode, originalTitle, originalContentType, originalImage, originalMapx, originalMapy;
+	
 	const MAX_SPOTS_IN_COURSE = 5; // 하나의 코스에 들어갈 수 있는 여행지 최대 개수
 	
 	// 각 input의 최대 길이
@@ -287,29 +291,27 @@
 	};
 	
 	$(function(){
-		displayCurrentRoute(); // 여행지 루트 렌더링
-		
 		// 여행지 추가 모달 - 카테고리 버튼 클릭 이벤트
-		$(".courseadd_searchcategory").click(function(){
-			$(this).toggleClass("courseadd_selected");
+		$(".courserevise_searchcategory").click(function(){
+			$(this).toggleClass("courserevise_selected");
 		});
 		
 		// 소요 시간 단위 클릭 이벤트
-		$(".courseadd_timebtn").click(function(){
-			$(this).siblings(".courseadd_timebtn").removeClass("courseadd_selected");
-			$(this).addClass("courseadd_selected");
+		$(".courserevise_timebtn").click(function(){
+			$(this).siblings(".courserevise_timebtn").removeClass("courserevise_selected");
+			$(this).addClass("courserevise_selected");
 			// input에도 그 단위를 넣어준다
-			$("#courseadd_timestd").val($(this).text());
+			$("#courserevise_timestd").val($(this).text());
 		});
 		
 		// 여행지 검색 버튼 클릭 이벤트
-		$("#courseadd_searchbtn").click(function(){
-			let searchingName = $("#courseadd_searchname").val();
+		$("#courserevise_searchbtn").click(function(){
+			let searchingName = $("#courserevise_searchname").val();
 			let categories = []; // 선택된 카테고리 번호 배열
 			
 			// 선택된 카테고리를 담아준다.
-			$("button.courseadd_searchcategory").each(function(idx, item){
-				if ($(this).hasClass("courseadd_selected"))
+			$("button.courserevise_searchcategory").each(function(idx, item){
+				if ($(this).hasClass("courserevise_selected"))
 					categories.push($(this).attr("infocode"));
 			})
 			
@@ -323,15 +325,15 @@
 		})
 		
 		// 검색된 여행지 클릭 이벤트
-		$(document).on("click", "div.courseadd_searchresultdiv>figure", function(){
-			$(this).siblings().removeClass("courseadd_selected");
-			$(this).addClass("courseadd_selected");
-			$("div.courseadd_selectedspot").text("선택된 여행지: " + $(this).children("figcaption").children("h5").text());
+		$(document).on("click", "div.courserevise_searchresultdiv>figure", function(){
+			$(this).siblings().removeClass("courserevise_selected");
+			$(this).addClass("courserevise_selected");
+			$("div.courserevise_selectedspot").text("선택된 여행지: " + $(this).children("figcaption").children("h5").text());
 			selectedCode = $(this).attr("tourcode");
 		})
 		
 		// 여행지 추가 버튼 클릭 이벤트
-		$("button.courseadd_addroute").click(function(){
+		$("button.courserevise_addroute").click(function(){
 			// 추가한 여행지가 없는 경우
 			if (selectedCode === -1) {
 				alert("선택한 여행지가 없습니다.");
@@ -344,12 +346,12 @@
 				return;
 			}
 			
-			let tourcode = $("div.courseadd_searchresultdiv>figure.courseadd_selected").attr("tourcode");
-			let title = $("div.courseadd_searchresultdiv>figure.courseadd_selected").children("figcaption").children("h5").text();
-			let contenttype = $("div.courseadd_searchresultdiv>figure.courseadd_selected").attr("contenttype");
-			let image = $("div.courseadd_searchresultdiv>figure.courseadd_selected>img").attr("src");
-			let mapx = $("div.courseadd_searchresultdiv>figure.courseadd_selected").attr("data-mapx");
-			let mapy = $("div.courseadd_searchresultdiv>figure.courseadd_selected").attr("data-mapy");
+			let tourcode = $("div.courserevise_searchresultdiv>figure.courserevise_selected").attr("tourcode");
+			let title = $("div.courserevise_searchresultdiv>figure.courserevise_selected").children("figcaption").children("h5").text();
+			let contenttype = $("div.courserevise_searchresultdiv>figure.courserevise_selected").attr("contenttype");
+			let image = $("div.courserevise_searchresultdiv>figure.courserevise_selected>img").attr("src");
+			let mapx = $("div.courserevise_searchresultdiv>figure.courserevise_selected").attr("data-mapx");
+			let mapy = $("div.courserevise_searchresultdiv>figure.courserevise_selected").attr("data-mapy");
 			
 			// 여행지 추가해주기
 			routes.push(new CourseSpot(tourcode, title, contenttype, image, mapx, mapy));
@@ -359,18 +361,18 @@
 			
 			// 마무리
 			selectedCode = -1;
-			$("button.courseadd_modalclose").trigger("click"); // 모달창 닫기
+			$("button.courserevise_modalclose").trigger("click"); // 모달창 닫기
 		})
 		
 		// 코스 내 여행지 마우스 오버&아웃 이벤트
-		$(document).on("mouseover", "div.courseadd_routeplace.courseadd_enabled", function(){
-			$(this).children("img.courseadd_remove").css("display", "block");
-		}).on("mouseout", "div.courseadd_routeplace.courseadd_enabled", function(){
-			$(this).children("img.courseadd_remove").css("display", "none");
+		$(document).on("mouseover", "div.courserevise_routeplace.courserevise_enabled", function(){
+			$(this).children("img.courserevise_remove").css("display", "block");
+		}).on("mouseout", "div.courserevise_routeplace.courserevise_enabled", function(){
+			$(this).children("img.courserevise_remove").css("display", "none");
 		});
 		
 		// 코스 내 여행지 클릭 이벤트(삭제)
-		$(document).on("click", "div.courseadd_routeplace.courseadd_enabled", function(){
+		$(document).on("click", "div.courserevise_routeplace.courserevise_enabled", function(){
 			let title = $(this).children("h5").text();
 			// 삭제 여부 확인
 			if (!confirm(`정말로 해당 여행지를 코스에서 삭제하시겠습니까?\n삭제 여행지: \${title}`)){
@@ -387,7 +389,7 @@
 		})
 		
 		// 코스 이름, 짧은 소개, 상세 설명에 대해 입력 시 글자수를 출력하는 이벤트
-		$(".courseadd_explain").on("input", function(){
+		$(".courserevise_explain").on("input", function(){
 			let inputType = $(this).attr("name"); // input 종류
 			let currentLength = $(this).val().length; // 현재 길이
 			let maxLength = INPUT_MAX_LENGTH[inputType]; // 현 input의 최대 길이
@@ -397,8 +399,8 @@
 		})
 		
 		// 이동 시간에 대해 입력이 올바른지 출력하는 함수
-		$("input.courseadd_timeinput").on("input", function(){
-			let messageBlock = $(this).siblings("span.courseadd_timemessage");
+		$("input.courserevise_timeinput").on("input", function(){
+			let messageBlock = $(this).siblings("span.courserevise_timemessage");
 			
 			// 아무것도 입력하지 않은 경우
 			if ($(this).val().length === 0){
@@ -417,8 +419,8 @@
 		});
 		
 		// 이동 거리에 대해 입력이 올바른지 출력하는 함수
-		$("input.courseadd_distanceinput").on("input", function(){
-			let messageBlock = $(this).siblings("span.courseadd_distmessage");
+		$("input.courserevise_distanceinput").on("input", function(){
+			let messageBlock = $(this).siblings("span.courserevise_distmessage");
 			
 			// 아무것도 입력하지 않은 경우
 			if ($(this).val().length === 0){
@@ -437,9 +439,9 @@
 		});
 		
 		// 자동 계산 버튼 클릭 이벤트
-		$("button.courseadd_distcalbtn").click(function(){
-			let distanceInput = $("input.courseadd_distanceinput"); // 거리 입력창
-			let distanceMsg = $("span.courseadd_distmessage"); // 거리 관련 메세지창
+		$("button.courserevise_distcalbtn").click(function(){
+			let distanceInput = $("input.courserevise_distanceinput"); // 거리 입력창
+			let distanceMsg = $("span.courserevise_distmessage"); // 거리 관련 메세지창
 			
 			// 여행지가 없는 경우
 			if (routes.length === 0){
@@ -496,6 +498,7 @@
 			});
 		});
 		
+		init();
 	}); // end of $(function())
 	
 	// 특정 contenttype에 대한 카테고리명을 출력하는 함수
@@ -507,14 +510,9 @@
 	// 검색된 여행지 목록을 출력하는 함수
 	function displaySearchedTour(name = "", categories = []){
 		// 로딩 멘트
-		const LOADING_DISPLAY = "<div class='courseadd_searchmessage'>데이터 로딩중입니다...</div>";
-		$("div.courseadd_searchresultdiv").html(LOADING_DISPLAY);
+		const LOADING_DISPLAY = "<div class='courserevise_searchmessage'>데이터 로딩중입니다...</div>";
+		$("div.courserevise_searchresultdiv").html(LOADING_DISPLAY);
 		
-		/*
-		[Trouble-Shooting]
-		배열을 넘겨주려면, traditional: true 를 넘겨줘야 한다.
-		그리고 Controller에서는 List 형태로 받아오면 된다.
-		*/
 		$.ajax({
 			type: "get",
 			dataType: "json",
@@ -529,7 +527,7 @@
 					results += 
 						`
 						<figure tourcode="\${item.tourcode}" contenttype="\${item.contenttype}"
-						\${(item.tourcode == selectedCode)? 'class="courseadd_selected"' : ''}
+						\${(item.tourcode == selectedCode)? 'class="courserevise_selected"' : ''}
 						data-mapx="\${item.mapx}" data-mapy="\${item.mapy}">
 			        		<img src=\${(item.firstimage)? item.firstimage : '../res/photo/noimage.png'}>
 			        		<figcaption>
@@ -541,11 +539,11 @@
 				})
 				
 				if (results.length === 0){
-					results = "<div class='courseadd_searchmessage'>검색된 결과가 없습니다.</div>";
+					results = "<div class='courserevise_searchmessage'>검색된 결과가 없습니다.</div>";
 				}
 				
 				// 문서 반영
-				$("div.courseadd_searchresultdiv").html(results);
+				$("div.courserevise_searchresultdiv").html(results);
 			}
 		});
 	};
@@ -553,8 +551,8 @@
 	// 현재 추가된 여행지 리스트를 출력하는 함수
 	function displayCurrentRoute(){
 		let result = ``;
-		const ARROW_ENABLED = `<img class="courseadd_arrow" src="../res/photo/course_icons/next_enabled.png">`;
-		const ARROW_DISABLED = `<img class="courseadd_arrow" src="../res/photo/course_icons/next_disabled.png">`;
+		const ARROW_ENABLED = `<img class="courserevise_arrow" src="../res/photo/course_icons/next_enabled.png">`;
+		const ARROW_DISABLED = `<img class="courserevise_arrow" src="../res/photo/course_icons/next_disabled.png">`;
 		
 		for (let i = 0; i < MAX_SPOTS_IN_COURSE; i++){
 			// 첫 시작을 제외하고는 화살표부터 그려준다
@@ -568,13 +566,13 @@
 			if (i < routes.length) {
 				result += 
 					`
-					<div class="courseadd_routeplace courseadd_enabled" index=\${i}>
-						<img class="courseadd_remove" src="../res/photo/course_icons/Icon_remove.png">
-						<div class="courseadd_routephoto">
+					<div class="courserevise_routeplace courserevise_enabled" index=\${i}>
+						<img class="courserevise_remove" src="../res/photo/course_icons/Icon_remove.png">
+						<div class="courserevise_routephoto">
 							<img src="\${routes[i].getImage()}">
 						</div>
 						<h5>\${routes[i].getTitle()}</h5>
-						<div class="courseadd_tag \${CONTENT_TYPE_CLASS[routes[i].getContenttype()]}">
+						<div class="courserevise_tag \${CONTENT_TYPE_CLASS[routes[i].getContenttype()]}">
 							\${getCategory(routes[i].getContenttype())}
 						</div>
 					</div>
@@ -584,15 +582,15 @@
 			else {
 				result += 
 					`
-					<div class="courseadd_routeplace">
-						<div class="courseadd_routephoto">
+					<div class="courserevise_routeplace">
+						<div class="courserevise_routephoto">
 						</div>
 					</div>
 					`;
 			}
 		}
 		
-		$("table.courseadd_table div.courseadd_routes").html(result);
+		$("table.courserevise_table div.courserevise_routes").html(result);
 	}
 	
 	// int 입력을 체크하는 함수
@@ -627,85 +625,108 @@
 		return isValidDoubleInput(input);
 	}
 	
+	// 수정 폼으로 처음 들어왔을 때 불리는 함수
+	function init(){
+		// 여러 text input들의 글자 수 세기를 위해, input event를 촉발시킨다
+		$(".courserevise_explain").trigger("input");
+		$("input.courserevise_timeinput").trigger("input");
+		$("input.courserevise_distanceinput").trigger("input");
+		
+		displayCurrentRoute(); // 여행지 루트 렌더링
+	}
+	
 </script>
 <body>
-	<div class="courseadd_app">
-		<div class="courseadd_innerheader">
-			<span class="courseadd_title">나의 추천코스 추가</span>
-			<button type="button" class="courseadd_prevbtn"
+	<div class="courserevise_app">
+		<div class="courserevise_innerheader">
+			<span class="courserevise_title">나의 추천코스 수정</span>
+			<button type="button" class="courserevise_prevbtn"
 			onclick="history.back()">이전으로</button>
 		</div>
 		
-		<div class="courseadd_formdiv">
-			<form method="post" action="./addcourse" class="courseadd_form"
+		<div class="courserevise_formdiv">
+			<form method="post" action="./revisecourse" class="courserevise_form"
 			onsubmit="return handleCourseFormSubmit()">
-				<!-- usercode는 hidden으로 받는다 -->
+				<!-- coursecode와 usercode는 hidden으로 받는다 -->
 				<input type="hidden" name="usercode" value="${sessionScope.usercode}">
-				<table class="courseadd_table" style="width: 1360px;">
+				<input type="hidden" name="coursecode" value="${dto.coursecode}">
+				<table class="courserevise_table" style="width: 1360px;">
 					<tr>
 						<td width="160"><b>코스 이름 *</b></td>
 						<td width="1200">
-							<input type="text" name="name" class="courseadd_textinput courseadd_explain" placeholder="코스 이름을 입력하세요" 
-							style="width: 800px;" maxlength="100" required>
+							<input type="text" name="name" class="courserevise_textinput courserevise_explain" placeholder="코스 이름을 입력하세요" 
+							style="width: 800px;" maxlength="100" value="${dto.name}" required>
 							<span>(0 / 100자)</span>
 						</td>
 					</tr>
 					<tr>
 						<td><b>여행지 *</b></td>
 						<td>
-							<div class="courseadd_routeinputs">
+							<div class="courserevise_routeinputs">
 								<input type="hidden" name="route1" value="">
 								<input type="hidden" name="route2" value="">
 								<input type="hidden" name="route3" value="">
 								<input type="hidden" name="route4" value="">
 								<input type="hidden" name="route5" value="">
 							</div>
-							<div class="courseadd_routes">
+							<div class="courserevise_routes">
 								<!-- 여행지 코스 출력 부분 -->
+								<c:forEach var="tdto" items="${dto.tourInfos}">
+									<script>
+										originalTourcode = "${tdto.tourcode}";	
+										originalTitle = "${tdto.title}";	
+										originalContenttype = "${tdto.contenttype}";	
+										originalImage = "${tdto.firstimage != ''? tdto.firstimage : '../res/photo/noimage.png'}";
+										originalMapx = "${tdto.mapx}";
+										originalMapy = "${tdto.mapy}";
+									
+										routes.push(new CourseSpot(originalTourcode, originalTitle, originalContenttype, originalImage, originalMapx, originalMapy));
+									</script>
+								</c:forEach>
 							</div>
-							<button type="button" class="courseadd_general_brownbtn" data-bs-toggle="modal" data-bs-target="#courseAddModal">+ 여행지 추가</button>
+							<button type="button" class="courserevise_general_brownbtn" data-bs-toggle="modal" data-bs-target="#coursereviseModal">+ 여행지 추가</button>
 						</td>
 					</tr>
 					<tr>
 						<td><b>예상 소요 시간 *</b></td>
 						<td>
-							<input type="text" name="spendingtime" class="courseadd_textinput courseadd_timeinput" placeholder="소요 시간" 
-							style="width: 100px;" maxlength="9" required>
+							<input type="text" name="spendingtime" class="courserevise_textinput courserevise_timeinput" placeholder="소요 시간" 
+							style="width: 100px;" maxlength="9" value="${dto.spendingtime}" required>
 							<!-- 소요 시간의 단위를 넘겨받을 input -->
-							<input type="hidden" name="timestandard" value="시간" id="courseadd_timestd"> 
-							<button type="button" class="courseadd_timebtn courseadd_selectablebtn">일</button>
-							<button type="button" class="courseadd_timebtn courseadd_selectablebtn courseadd_selected">시간</button>
-							<button type="button" class="courseadd_timebtn courseadd_selectablebtn">분</button>
-							<span class="courseadd_timemessage">시간은 숫자로 입력해주세요.</span>
+							<input type="hidden" name="timestandard" value="${dto.timestandard}" id="courserevise_timestd"> 
+							<button type="button" class="courserevise_timebtn courserevise_selectablebtn ${dto.timestandard == '일'? 'courserevise_selected' : ''}">일</button>
+							<button type="button" class="courserevise_timebtn courserevise_selectablebtn ${dto.timestandard == '시간'? 'courserevise_selected' : ''}">시간</button>
+							<button type="button" class="courserevise_timebtn courserevise_selectablebtn ${dto.timestandard == '분'? 'courserevise_selected' : ''}">분</button>
+							<span class="courserevise_timemessage">시간은 숫자로 입력해주세요.</span>
 						</td>
 					</tr>
 					<tr>
 						<td><b>이동 거리 *</b></td>
 						<td>
-							<input type="text" name="distance" class="courseadd_textinput courseadd_distanceinput" placeholder="이동 거리" 
-							style="width: 100px;" maxlength="9" required>
+							<input type="text" name="distance" class="courserevise_textinput courserevise_distanceinput" placeholder="이동 거리" 
+							style="width: 100px;" maxlength="9" value="${dto.distance}" required>
 							km
-							<button type="button" class="courseadd_distcalbtn">자동 계산</button>
-							<span class="courseadd_distmessage">이동 거리를 직접 입력할 수 있습니다.</span>
+							<button type="button" class="courserevise_distcalbtn">자동 계산</button>
+							<span class="courserevise_distmessage">이동 거리를 직접 입력할 수 있습니다.</span>
 						</td>
 					</tr>
 					<tr>
 						<td><b>짧은 소개</b></td>
 						<td>
-							<textarea style="width: 80%; height: 60px;" class="courseadd_explain" maxlength="500" name="briefcontent"></textarea>
+							<textarea style="width: 80%; height: 60px;" class="courserevise_explain" maxlength="500" name="briefcontent">${dto.briefcontent}</textarea>
 							<span>(0 / 500자)</span>
 						</td>
 					</tr>
 					<tr>
 						<td><b>상세 설명</b></td>
 						<td>
-							<textarea style="width: 80%; height: 200px;" class="courseadd_explain" maxlength="2000" name="longdetail"></textarea>
+							<textarea style="width: 80%; height: 200px;" class="courserevise_explain" maxlength="2000" name="longdetail">${dto.longdetail}</textarea>
 							<span>(0 / 2000자)</span>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2" style="text-align: center;">
-							<button type="submit" class="courseadd_general_brownbtn">코스 등록하기</button>
+							<button type="submit" class="courserevise_general_brownbtn">코스 수정하기</button>
 						</td>
 					</tr>
 				</table>
@@ -713,55 +734,55 @@
 		</div>
 		
 		<!-- The Modal -->
-		<div class="modal fade" id="courseAddModal">
+		<div class="modal fade" id="coursereviseModal">
 		  <div class="modal-dialog modal-xl">
 		    <div class="modal-content">
 		
 		      <!-- Modal Header -->
 		      <div class="modal-header">
 		        <h4 class="modal-title">여행지 추가</h4>
-		        <button type="button" class="btn-close courseadd_modalclose" data-bs-dismiss="modal"></button>
+		        <button type="button" class="btn-close courserevise_modalclose" data-bs-dismiss="modal"></button>
 		      </div>
 		
 		      <!-- Modal body -->
 		      <div class="modal-body">
 		        <!-- 검색창 -->
-		        <div class="courseadd_search">
-		        	<table class="courseadd_searchquery">
+		        <div class="courserevise_search">
+		        	<table class="courserevise_searchquery">
 		        		<tr>
 		        			<td width="100">이름</td>
 		        			<td>
-		        				<input type="text" id="courseadd_searchname" class="courseadd_textinput"
+		        				<input type="text" id="courserevise_searchname" class="courserevise_textinput"
 		        				style="width: 500px;">
 		        			</td>
 		        		</tr>
 		        		<tr>
 		        			<td>카테고리</td>
 		        			<td>
-		        				<button type="button" class="courseadd_searchcategory courseadd_selectablebtn" infocode="12">관광지</button>
-		        				<button type="button" class="courseadd_searchcategory courseadd_selectablebtn" infocode="14">문화시설</button>
-		        				<button type="button" class="courseadd_searchcategory courseadd_selectablebtn" infocode="15">축제행사</button>
-		        				<button type="button" class="courseadd_searchcategory courseadd_selectablebtn" infocode="39">음식점</button>
+		        				<button type="button" class="courserevise_searchcategory courserevise_selectablebtn" infocode="12">관광지</button>
+		        				<button type="button" class="courserevise_searchcategory courserevise_selectablebtn" infocode="14">문화시설</button>
+		        				<button type="button" class="courserevise_searchcategory courserevise_selectablebtn" infocode="15">축제행사</button>
+		        				<button type="button" class="courserevise_searchcategory courserevise_selectablebtn" infocode="39">음식점</button>
 		        			</td>
 		        		</tr>
 		        	</table>
-		        	<div class="courseadd_searchdiv">
-		        		<button type="button" class="courseadd_general_brownbtn" id="courseadd_searchbtn">여행지 검색</button>
+		        	<div class="courserevise_searchdiv">
+		        		<button type="button" class="courserevise_general_brownbtn" id="courserevise_searchbtn">여행지 검색</button>
 		        	</div>
 		        </div>
 		        <hr>
 		        <!-- 검색 결과 출력 -->
-		        <div class="courseadd_searchresultdiv">
-		        	<div class="courseadd_searchmessage">이 곳에 검색 결과가 출력됩니다.</div>
+		        <div class="courserevise_searchresultdiv">
+		        	<div class="courserevise_searchmessage">이 곳에 검색 결과가 출력됩니다.</div>
 		        </div>
 		      </div>
 		      	
 		      <!-- Modal footer -->
 		      <div class="modal-footer">
-		      	<div class="courseadd_selectedspot">
+		      	<div class="courserevise_selectedspot">
 		      		선택된 여행지: 없음
 		      	</div>
-		        <button type="button" class="courseadd_general_brownbtn courseadd_addroute">추가</button>
+		        <button type="button" class="courserevise_general_brownbtn courserevise_addroute">추가</button>
 		      </div>
 		
 		    </div>
@@ -780,21 +801,21 @@
 			}
 			
 			// 소요 시간 입력이 올바르지 않은 경우
-			if (!validateTimeInput($("input.courseadd_timeinput").val())){
+			if (!validateTimeInput($("input.courserevise_timeinput").val())){
 				alert("예상 소요 시간을 올바르게 입력해주세요.");
-				$("input.courseadd_timeinput").focus(); // 자동 포커스
+				$("input.courserevise_timeinput").focus(); // 자동 포커스
 				return false;
 			}
 			
 			// 이동 거리 입력이 올바르지 않은 경우
-			if (!validateDistanceInput($("input.courseadd_distanceinput").val())){
+			if (!validateDistanceInput($("input.courserevise_distanceinput").val())){
 				alert("이동 거리를 올바르게 입력해주세요.");
-				$("input.courseadd_distanceinput").focus(); // 자동 포커스
+				$("input.courserevise_distanceinput").focus(); // 자동 포커스
 				return false;
 			}
 			
 			// 각 여행지의 코드를 input에 넣어준다
-			$("div.courseadd_routeinputs input").each(function(idx){
+			$("div.courserevise_routeinputs input").each(function(idx){
 				if (idx < routes.length)
 					$(this).val(routes[idx].getTourcode());
 				else
