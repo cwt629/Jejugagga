@@ -80,7 +80,7 @@
 			<div>
 				<i class="bi bi-chat-left-text"></i>
 				내가 쓴 자유게시판 글
-				<span style="float: right;">전체보기 ></span>
+				<span style="float: right;" onclick="location.href='${root}/community/free/list';">전체보기 ></span>
 			</div>
 			<hr>
 			<!-- 내부 글 목록 코드 작성 필요 -->
@@ -127,7 +127,7 @@
 			<div>
 				<i class="bi bi-hand-thumbs-up"></i>
 				내가 쓴 후기
-				<span style="float: right;">전체보기 ></span>
+				<span style="float: right;" onclick="location.href='${root}/community/review/list';">전체보기 ></span>
 			</div>
 			<hr>
 			<!-- 내부 글 목록 코드 작성 필요 -->
@@ -166,7 +166,7 @@
 			<div>
 				<i class="bi bi-question-circle"></i>
 				1:1 문의
-				<span style="float: right;">전체보기 ></span>
+				<span style="float: right;" onclick="location.href='${root}/community/inquiry/list';">전체보기 ></span>
 			</div>
 			<hr>
 			<!-- 내부 글 목록 코드 작성 필요 -->
@@ -175,7 +175,7 @@
 					<tr>
 						<th width="350">제목</th>
 						<th width="100">작성일</th>
-						<th width="150">답변완료/답변대기</th>
+						<th width="150">답변대기/답변완료</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -190,8 +190,14 @@
 		   			</td>
 		   			
 		   			<!-- 답변 여부 -->
-		   			<td>답변여부</td>
-						
+						<c:choose>
+							<c:when test="${inquiryBoard.hasAnswer eq 1}">
+								<td>답변완료</td>
+							</c:when>
+							<c:when test="${inquiryBoard.hasAnswer eq 0}">
+								<td>답변대기</td>
+							</c:when>
+						</c:choose>
 		  	 	</tr>		
 				</c:forEach>
 				</tbody>

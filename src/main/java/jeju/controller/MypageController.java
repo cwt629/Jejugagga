@@ -1,6 +1,7 @@
 package jeju.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +22,8 @@ import jeju.dto.BoardFreeDto;
 import jeju.dto.BoardInquiryAnswerDto;
 import jeju.dto.BoardInquiryDto;
 import jeju.dto.BoardReviewDto;
+import jeju.dto.MemberTableDto;
+import jeju.service.HashService;
 import jeju.storage.NcpObjectStorageService;
 
 @Controller
@@ -44,7 +48,7 @@ public class MypageController {
 		
 		List<BoardFreeDto> freeBoardlist = userPageDao.selectOfFreeBoardByUsercode(usercode);
 		List<BoardReviewDto> reviewBoardlist = userPageDao.selectOfReviewBoardByUsercode(usercode);
-		List<BoardInquiryDto> inquiryBoardlist = userPageDao.selectOfInquiryBoardByUsercode(usercode);
+		List<Map<String, String>> inquiryBoardlist = userPageDao.selectOfInquiryAnswerResultByUsercode(usercode);
 		
 		//request 에 담을 값들
 		model.addAttribute("freeBoardlist", freeBoardlist);
@@ -59,5 +63,25 @@ public class MypageController {
 	@GetMapping("/mypage/mycourse")
 	public String myTripCourse() {
 		return "mypage/mytrip_course";
+	}
+	
+	@PostMapping("/member/changeinfo")
+	public String changeinfo(Model model, HttpSession session) {
+		int usercode = (int)session.getAttribute("usercode");
+		
+		MemberTableDto memberList = userPageDao.getData(usercode);
+		
+		model.addAttribute("memberList", memberList);
+		
+		return "member/changeinfoform";
+	}
+	
+	@PostMapping("/member/changeinfo/change")
+	public String changeinfo(@ModelAttribute MemberTableDto dto, @RequestParam String id,
+			@RequestParam String password) {
+		String pass = HashService.hashPassword(password);
+		dto.setId(id);
+		dto.setPassword(pass);
+		return "redirect:/member/login";
 	}
 }

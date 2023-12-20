@@ -117,3 +117,8 @@
 		--bs-btn-hover-bg: #EEB182;
 		margin-bottom: 5%;
 	}
+	
+	.historybox span:hover {
+		color: #FF5500;
+		cursor: pointer;
+	}
