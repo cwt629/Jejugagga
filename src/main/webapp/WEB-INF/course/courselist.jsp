@@ -475,6 +475,15 @@
 			location.href = "./list"; // 모든 쿼리를 초기화함
 		});
 		
+		// 검색창에서 엔터를 누를 때의 이벤트
+		$("div.course_search_input>input[type='text']").on("keydown", function(e){
+			// 엔터키의 keyCode는 13
+			if (e.keyCode == 13){
+				// 엔터 누르면, 검색 처리해준다
+				$("i.coursesearch").trigger("click");
+			}
+		});
+		
 	}); // end of $(function())
 	
 	// 한글, 영어, 숫자와 띄어쓰기로만 이루어진 문자인지 판단하는 함수
