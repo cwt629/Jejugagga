@@ -114,7 +114,6 @@
    
    div.courseadd_routes div.courseadd_routeplace div.courseadd_tag {
        color: white;
-       background-color: skyblue; /* 임시 */
        height: 30px;
        padding: 5px;
        display: flex;
@@ -126,7 +125,19 @@
        left: 5px;
    }
    
-   
+   /* 카테고리별 태그 색깔 */
+   div.courseadd_tag.course_tourspot {
+       background-color: #ff6888;
+   }
+   div.courseadd_tag.course_culture {
+       background-color: #b964f7;
+   }
+   div.courseadd_tag.course_festival {
+       background-color: #58a8ff;
+   }
+   div.courseadd_tag.course_cafeteria {
+       background-color: #fbad00;
+   }
    
    div.courseadd_app button.courseadd_general_brownbtn {
        border: none;
@@ -220,11 +231,13 @@
 </head>
 <script>
 	class CourseSpot {
-		constructor(tourcode, title, contenttype, image){
+		constructor(tourcode, title, contenttype, image, mapx, mapy){
 			this.tourcode = tourcode;
 			this.title = title;
 			this.contenttype = contenttype;
 			this.image = image;
+			this.mapx = mapx;
+			this.mapy = mapy;
 		}
 		
 		getTourcode(){
@@ -242,6 +255,14 @@
 		getImage(){
 			return this.image;
 		}
+		
+		getMapx(){
+			return this.mapx;
+		}
+		
+		getMapy(){
+			return this.mapy;
+		}
 	}
 </script>
 <script>
@@ -257,6 +278,13 @@
 			"longdetail": 2000
 	};
 	
+	// contenttype별 클래스명
+	const CONTENT_TYPE_CLASS = {
+		"12": "course_tourspot",
+		"14": "course_culture",
+		"15": "course_festival",
+		"39": "course_cafeteria"
+	};
 	
 	$(function(){
 		displayCurrentRoute(); // 여행지 루트 렌더링
@@ -320,9 +348,11 @@
 			let title = $("div.courseadd_searchresultdiv>figure.courseadd_selected").children("figcaption").children("h5").text();
 			let contenttype = $("div.courseadd_searchresultdiv>figure.courseadd_selected").attr("contenttype");
 			let image = $("div.courseadd_searchresultdiv>figure.courseadd_selected>img").attr("src");
+			let mapx = $("div.courseadd_searchresultdiv>figure.courseadd_selected").attr("data-mapx");
+			let mapy = $("div.courseadd_searchresultdiv>figure.courseadd_selected").attr("data-mapy");
 			
 			// 여행지 추가해주기
-			routes.push(new CourseSpot(tourcode, title, contenttype, image));
+			routes.push(new CourseSpot(tourcode, title, contenttype, image, mapx, mapy));
 			
 			// 실제 루트 렌더링
 			displayCurrentRoute();
@@ -406,6 +436,66 @@
 			messageBlock.css("color", "red").text("입력은 0 이상 숫자여야 합니다.");
 		});
 		
+		// 자동 계산 버튼 클릭 이벤트
+		$("button.courseadd_distcalbtn").click(function(){
+			let distanceInput = $("input.courseadd_distanceinput"); // 거리 입력창
+			let distanceMsg = $("span.courseadd_distmessage"); // 거리 관련 메세지창
+			
+			// 여행지가 없는 경우
+			if (routes.length === 0){
+				alert("코스에 여행지를 1개 이상 추가해주세요.");
+				return;
+			}
+			
+			// 여행지가 1개인 경우
+			if (routes.length === 1){
+				distanceInput.val("0"); // 1개인 경우는 이동하지 않으므로, 자동으로 0 넣어주기
+				distanceMsg.text("여행지가 1개이므로 이동 거리가 없습니다.").css("color", "black");
+				return;
+			}
+			
+			if (!confirm("만들어진 코스를 바탕으로 거리를 자동 계산합니다.\n계산에는 시간이 수 초 정도 소요될 수 있습니다."))
+				return;
+			
+			distanceMsg.text("거리 자동 계산 중입니다...").css("color", "black"); // 로딩 표시
+			
+			// 시작점 쿼리: "mapx,mapy" 형태
+			let startQuery = routes[0].getMapx() + "," + routes[0].getMapy();
+			// 도착점 쿼리: "mapx,mapy" 형태
+			let goalQuery = routes[routes.length - 1].getMapx() + "," + routes[routes.length - 1].getMapy();
+			
+			// 경유지 쿼리: "mapx,mapy|mapx,mapy|mapx,mapy" 형태
+			let waypointElements = [];
+			for (let i = 1; i < routes.length - 1; i++){
+				// 앞에서 두번째 여행지부터, 뒤에서 두번째 여행지까지를 경유한다
+				waypointElements.push(routes[i].getMapx() + "," + routes[i].getMapy());
+			}
+			let waypointsQuery = waypointElements.join("|"); // | 캐릭터로 이어준다
+			
+			// 서버에 보낼 데이터 형태
+			let sendingData = {
+				start: startQuery,
+				goal: goalQuery,
+				waypoints: waypointsQuery
+			};
+			
+			$.ajax({
+				type: "get",
+				dataType: "text",
+				url: "./api/distance",
+				data: sendingData,
+				success: function(res){
+					alert("이동거리 자동 계산을 완료했습니다!");
+					distanceInput.val(res); // 계산된 거리를 입력창에 넣어준다
+					distanceMsg.text("거리 계산이 완료되었습니다!").css("color", "#ca8462");
+				},
+				error: function(request, status, error){
+					alert("다음 이유로 실패하였습니다.\n" + status + "\n" + error);
+					distanceMsg.text("거리 계산에 실패했습니다.").css("color", "red");
+				}
+			});
+		});
+		
 	}); // end of $(function())
 	
 	// 특정 contenttype에 대한 카테고리명을 출력하는 함수
@@ -439,7 +529,8 @@
 					results += 
 						`
 						<figure tourcode="\${item.tourcode}" contenttype="\${item.contenttype}"
-						\${(item.tourcode == selectedCode)? 'class="courseadd_selected"' : ''}>
+						\${(item.tourcode == selectedCode)? 'class="courseadd_selected"' : ''}
+						data-mapx="\${item.mapx}" data-mapy="\${item.mapy}">
 			        		<img src=\${(item.firstimage)? item.firstimage : '../res/photo/noimage.png'}>
 			        		<figcaption>
 			        			<h5>\${item.title}</h5>
@@ -483,7 +574,7 @@
 							<img src="\${routes[i].getImage()}">
 						</div>
 						<h5>\${routes[i].getTitle()}</h5>
-						<div class="courseadd_tag">
+						<div class="courseadd_tag \${CONTENT_TYPE_CLASS[routes[i].getContenttype()]}">
 							\${getCategory(routes[i].getContenttype())}
 						</div>
 					</div>

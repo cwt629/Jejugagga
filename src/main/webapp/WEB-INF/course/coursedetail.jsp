@@ -106,11 +106,10 @@
        align-items: center;
    }
    
-   div.coursedetail_map {
-       border: 3px solid #cc9e89;
-       width: 100%;
-       height: 400px;
-       margin: 30px 0;
+   div.coursedetail_mapdiv {
+       width: 66%;
+       height: 60vh;
+       margin: 30px auto;
    }
    
    div.coursedetail_routeinfo {
@@ -118,6 +117,7 @@
    }
    
    div.coursedetail_routes {
+       height: 300px;
        display: flex;
        align-items: center;
        justify-content: center;
@@ -128,6 +128,7 @@
        height: 250px;
        position: relative;
        top: 22px;
+       cursor: pointer;
    }
    
    div.coursedetail_routes div.coursedetail_routeplace img {
@@ -143,7 +144,6 @@
    
    div.coursedetail_routes div.coursedetail_routeplace div.coursedetail_tag {
        color: white;
-       background-color: skyblue; /* 임시 */
        height: 30px;
        padding: 5px;
        display: flex;
@@ -153,6 +153,20 @@
        position: absolute;
        top: 5px;
        left: 5px;
+   }
+   
+   /* 카테고리별 태그 색깔 지정 */
+   div.coursedetail_tag.course_tourspot {
+       background-color: #ff6888;
+   }
+   div.coursedetail_tag.course_culture {
+       background-color: #b964f7;
+   }
+   div.coursedetail_tag.course_festival {
+       background-color: #58a8ff;
+   }
+   div.coursedetail_tag.course_cafeteria {
+       background-color: #fbad00;
    }
    
    div.coursedetail_explain {
@@ -168,17 +182,33 @@
 </style>
 <script>
 	let clickingHeart = false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
+	// contenttype별 클래스명
+	const CONTENT_TYPE_CLASS = {
+		"12": "course_tourspot",
+		"14": "course_culture",
+		"15": "course_festival",
+		"39": "course_cafeteria"
+	};
 	
 	$(function(){
 		// 각 여행지에 카테고리 넣어주기
 		$("div.coursedetail_tag").each(function(idx, item){
+			let contenttype = $(this).attr("contenttype");
 			// 카테고리명
-			let category = getCategory(parseInt($(this).attr("contenttype")));
-			$(this).css("background-color", "skyblue").text(category);
+			let category = getCategory(parseInt(contenttype));
+			$(this).addClass(CONTENT_TYPE_CLASS[contenttype]);
+			$(this).text(category);
 		})
 		
 		// 하트 아이콘 클릭 시
 		$("div.coursedetail_guest_info i.coursedetail_heart").click(function(){
+			// 로그인되어 있지 않은 경우
+			if (${sessionScope.loginok == null}){
+				alert("좋아요를 추가하시려면 로그인해주세요.");
+				location.href = "../member/login";
+				return;
+			}
+			
 			// 이미 앞서 좋아요 처리중인 경우
 			if (clickingHeart) {
 				alert("좋아요 기능 처리중입니다. 잠시 후 시도해주세요.");
@@ -279,10 +309,10 @@
 			<div class="coursedetail_guest_info">
 				<div>
 					<i class="bi bi-eye" title="조회수">&nbsp;${dto.readcount}</i>
-					<c:if test="${dto.likedByCurrentUser}">
+					<c:if test="${sessionScope.loginok != null && dto.likedByCurrentUser}">
 						<i class="bi bi-heart-fill coursedetail_heart" title="클릭시 좋아요 취소">&nbsp;${dto.totalLikes}</i>
 					</c:if>
-					<c:if test="${!dto.likedByCurrentUser}">
+					<c:if test="${sessionScope.loginok == null || !dto.likedByCurrentUser}">
 						<i class="bi bi-heart coursedetail_heart" title="클릭시 좋아요">&nbsp;${dto.totalLikes}</i>
 					</c:if>
 			  	</div>
@@ -321,8 +351,8 @@
 			</div>
 		</div>
 		
-		<div class="coursedetail_map">
-			<h3>대충 지도 나오는 부분</h3>
+		<div class="coursedetail_mapdiv">
+			<!-- 지도가 나올 부분 -->
 		</div>
 		
 		<div class="coursedetail_routeinfo">
@@ -335,7 +365,8 @@
 						<img class="coursedetail_arrow" src="../res/photo/course_icons/next_enabled.png">
 					</c:if>
 					<!-- 여행지 정보 -->
-					<div class="coursedetail_routeplace">
+					<div class="coursedetail_routeplace" data-mapx="${tourdto.mapx}" data-mapy="${tourdto.mapy}"
+					data-title="${tourdto.title}">
 						<div class="coursedetail_routephoto">
 							<img src="${tourdto.firstimage != ''? tourdto.firstimage : '../res/photo/noimage.png'}">
 						</div>
@@ -348,6 +379,7 @@
 					<c:set var="spotindex" value="${spotindex + 1}"/>
 				</c:forEach>
 			</div>
+			<h6 style="text-align: center;">각 여행지를 클릭하면 지도 상으로 위치를 확인할 수 있습니다.</h6>
 		</div>
 		
 		<hr>
@@ -370,5 +402,8 @@
 			</c:if>
 		</div>
 	</div>
+	
+	<script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=59skrsifwh"></script>
+	<script src="../res/course/api/map.js"></script>
 </body>
 </html>

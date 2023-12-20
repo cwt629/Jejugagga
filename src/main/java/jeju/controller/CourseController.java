@@ -1,11 +1,17 @@
 package jeju.controller;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -373,5 +379,141 @@ public class CourseController {
 			courseRouteService.insertCourseRoute(rdto);
 		}
 		
+	}
+	
+	// direction 5 API를 활용하여 이동 거리를 반환하는 함수
+	@GetMapping("/course/api/distance")
+	@ResponseBody public double getDistanceAuto(@RequestParam String start, @RequestParam String goal,
+			@RequestParam(defaultValue = "") String waypoints) {
+		double distance = 0;
+		
+		try {
+            // API 요청 URL
+            String apiUrl = "https://naveropenapi.apigw.ntruss.com/map-direction/v1/driving";
+            apiUrl += "?start=" + start; // 시작점
+            apiUrl += "&goal=" + goal; // 목적지
+            // 경유지 쿼리가 있으면 넣어준다
+            if (!waypoints.equals(""))
+            	apiUrl += "&waypoints=" + waypoints;
+            // 옵션은 기본 옵션으로 넣어준다
+            apiUrl += "&option=trafast";
+            
+            // API 키 및 헤더 값
+            String clientId = "59skrsifwh";
+            String clientSecret = "lymk68nGbD76pQkjn3t6t36vXGiKU1NgCtpqFICi";
+
+            // HTTP 연결 설정
+            URL url = new URL(apiUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("X-NCP-APIGW-API-KEY-ID", clientId);
+            connection.setRequestProperty("X-NCP-APIGW-API-KEY", clientSecret);
+
+            // 응답 코드 확인
+            int responseCode = connection.getResponseCode();
+            //System.out.println("Response Code: " + responseCode);
+
+            // 응답 내용 읽기
+            BufferedReader reader;
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            } else {
+                reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+            }
+
+            String line;
+            StringBuilder response = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+            // 응답 내용 출력
+            //System.out.println("Response: " + response.toString());
+            
+            // JSON 형태로 뽑는다
+            JSONObject ob = new JSONObject(response.toString());
+            System.out.println(ob);
+            distance = ob.getJSONObject("route").getJSONArray("trafast")
+            		.getJSONObject(0).getJSONObject("summary")
+            		.getInt("distance");
+            
+            // m -> km로 환산하고, 소수점 둘째자리까지 나타나도록 반올림해준다
+            distance = distance / 1000.0;
+            distance = Math.round(distance * 100) / 100.0;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		
+		return distance;
+	}
+	
+	// direction 5 API를 활용하여 경로의 좌표들을 반환하는 함수
+	@GetMapping("/course/api/route")
+	@ResponseBody public List<List<Double>> getRouteByAPI(@RequestParam String start, @RequestParam String goal,
+			@RequestParam(defaultValue = "") String waypoints) {
+		List<List<Double>> coords = new ArrayList<List<Double>>();
+		
+		try {
+            // API 요청 URL
+            String apiUrl = "https://naveropenapi.apigw.ntruss.com/map-direction/v1/driving";
+            apiUrl += "?start=" + start; // 시작점
+            apiUrl += "&goal=" + goal; // 목적지
+            // 경유지 쿼리가 있으면 넣어준다
+            if (!waypoints.equals(""))
+            	apiUrl += "&waypoints=" + waypoints;
+            // 옵션은 기본 옵션으로 넣어준다
+            apiUrl += "&option=trafast";
+            
+            // API 키 및 헤더 값
+            String clientId = "59skrsifwh";
+            String clientSecret = "lymk68nGbD76pQkjn3t6t36vXGiKU1NgCtpqFICi";
+	            // HTTP 연결 설정
+            URL url = new URL(apiUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("X-NCP-APIGW-API-KEY-ID", clientId);
+            connection.setRequestProperty("X-NCP-APIGW-API-KEY", clientSecret);
+	            // 응답 코드 확인
+            int responseCode = connection.getResponseCode();
+            //System.out.println("Response Code: " + responseCode);
+	            // 응답 내용 읽기
+            BufferedReader reader;
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            } else {
+                reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+            }
+	            String line;
+            StringBuilder response = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+	            // 응답 내용 출력
+            //System.out.println("Response: " + response.toString());
+            
+            // JSON 형태로 뽑는다
+            JSONObject data = new JSONObject(response.toString());
+            // path를 뽑는다
+            JSONArray routePath = data.getJSONObject("route").getJSONArray("trafast").getJSONObject(0)
+            		.getJSONArray("path");
+            
+            // 각 path를 내 이차원 배열에 넣어준다
+            for (int i = 0; i < routePath.length(); i++) {
+            	List<Double> currentCoord = new ArrayList<Double>();
+            	double mapx = routePath.getJSONArray(i).getDouble(0);
+            	double mapy = routePath.getJSONArray(i).getDouble(1);
+            	currentCoord.add(mapx);
+            	currentCoord.add(mapy);
+            	
+            	coords.add(currentCoord);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		
+		return coords;
 	}
 }
