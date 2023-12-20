@@ -73,8 +73,5 @@ public class MemberTableDao {
 		map.put("id", myid);
 		session.update(nameSpace + "updatePhotoByNum", map);
 	}
-	public void deleteMemberbyID(String id)
-	{
-		session.delete(nameSpace + "deleteMemberbyID", id);
-	}
+	
 }
