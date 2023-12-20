@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jeju.dao.TourLikesDao">
+	<select id="checklike" parameterType="Map" resultType="int">
+		select count(*) from tour_likes where tourcode = #{tourcode} and usercode = #{usercode} 
+	</select>
+	<select id="countLikes" parameterType="int" resultType="int">
+		select count(*) from tour_likes where tourcode = #{tourcode}
+	</select>
+	<insert id="addLike" parameterType="Map">
+		insert into tour_likes (usercode, tourcode, registereddate)
+		values (#{usercode}, #{tourcode}, now())
+	</insert>
+	<delete id="removeLike" parameterType="Map">
+		delete from tour_likes where tourcode = #{tourcode} and usercode = #{usercode}
+	</delete>
+</mapper>

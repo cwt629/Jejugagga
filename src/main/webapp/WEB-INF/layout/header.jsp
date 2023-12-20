@@ -24,7 +24,7 @@
             </li>
             <c:choose>
                 <c:when test="${sessionScope.loginok=='admin' }">
-                    <li class="li-menu-bar"><a href="${root}/mypage/admin" class="signupbtn">관리자페이지</a></li>
+                    <li class="li-menu-bar"><a href="${root}/admin/adminpage" class="signupbtn">관리자페이지</a></li>
                 </c:when>
                 <c:otherwise>
                     <li class="li-menu-bar"><a href="${root}/mypage/user" class="signupbtn">마이페이지</a></li>
