@@ -15,7 +15,7 @@ function initMap(){
     let coords = []; // 위도, 경도를 순서대로 저장하는 2차원 배열
     
     // 각 여행지의 위도, 경도를 가져와 핀을 찍는다
-    document.querySelectorAll("div.coursedetail_routeplace").forEach(function(item){
+    document.querySelectorAll("div.coursedetail_routeplace").forEach(function(item, idx){
     	let latitude = parseFloat(item.dataset.mapy), longitude = parseFloat(item.dataset.mapx);
     	// 위도, 경도를 각각 저장해준다
     	coords.push([latitude, longitude]);
@@ -26,6 +26,17 @@ function initMap(){
     		position: pos,
     		map: map
     	});
+    	/*
+    	let labelOverlay = new naver.maps.CustomOverlay({
+    		position: pos,
+    		map: map,
+    		content: '<div class="label">' + String.fromCharCode(65 + idx) + '</div>',
+    		xAnchor: 0.5,
+    		yAnchor: 1.5,
+    		zIndex: 100
+    	});
+    	*/
+    	
     	marker.setTitle(item.dataset.title); // 마우스 갖다대면 이름 출력
     	
     	// 각 여행지 요소에 클릭 시 이벤트를 부여한다
