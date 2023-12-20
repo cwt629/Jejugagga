@@ -463,7 +463,7 @@
 			
 			$.ajax({
 				type: "get",
-				dataType: "json",
+				dataType: "text",
 				url: "./api/distance",
 				data: sendingData,
 				success: function(res){
