@@ -65,4 +65,11 @@
 		coursecode desc
 		limit #{coursePerPage} offset #{startIndex}
 	</select>
+	
+	<update id="updateCourse" parameterType="CourseDto">
+		update course set name = #{name}, spendingtime = #{spendingtime},
+		timestandard = #{timestandard}, distance = #{distance},
+		briefcontent = #{briefcontent}, longdetail = #{longdetail}
+		where coursecode = #{coursecode}
+	</update>
 </mapper>
