@@ -10,7 +10,7 @@ function initMap(){
     
     let center = new naver.maps.LatLng(centerLatitude, centerLongitude);
     map.setCenter(center);
-    map.setZoom(14, false);
+    map.setZoom(13, false);
     
     let coords = []; // 위도, 경도를 순서대로 저장하는 2차원 배열
     
@@ -33,6 +33,7 @@ function initMap(){
 	    	let latitude = parseFloat(this.dataset.mapy), longitude = parseFloat(this.dataset.mapx);
 	    	center = new naver.maps.LatLng(latitude, longitude);
 	    	map.setCenter(center);
+	    	map.setZoom(16, false); // 특정 여행지 클릭 시 그 여행지에 줌인
 	    	
 	    	// 클릭 시 지도 쪽으로 자동 스크롤
 	    	document.querySelector("div.coursedetail_mapdiv").scrollIntoView({behavior: 'smooth'});
