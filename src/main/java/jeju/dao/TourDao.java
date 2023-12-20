@@ -33,8 +33,9 @@ public class TourDao {
 	}
 	
 	//리스트
-	public List<TourDto> getTourList(String word, int start,  List<String> contenttype, String sigungucode)
+	public List<TourDto> getTourList(String word, int start,  List<String> contenttype, String sigungucode, int usercode)
 	{
+		List<TourDto> retDto = new ArrayList<TourDto>();
 		//word에 검색단어가 안들어 있을 경우
 		word=word==null || word.length()==0 ? "" :word;
 		
@@ -43,11 +44,17 @@ public class TourDao {
 		map.put("start", start);
 		map.put("contenttype", (contenttype == null || contenttype.size() == 0) ? null : contenttype);
 		map.put("sigungucode", sigungucode);
+		map.put("usercode", usercode);
 		
-		//System.out.println(" ================ contenttype : " + contenttype);
-		//System.out.println(" ================ getAllTour : " + map);
+		if(usercode > 0) {
+			retDto = session.selectList(nameSpace+"selectListOfTourForLogin", map);
+		} else {
+			retDto = session.selectList(nameSpace+"selectListOfTour", map);
+		}
 		
-		return session.selectList(nameSpace+"selectListOfTour", map);
+		System.out.println(retDto);
+		
+		return retDto;
 	}
 	
 	//내용
