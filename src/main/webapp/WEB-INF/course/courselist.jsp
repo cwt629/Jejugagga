@@ -19,7 +19,7 @@
    }
    
    div.course_list_app {
-       padding: 30px 150px;
+       padding: 30px 100px;
    }
    
    div.course_innerheader {
@@ -59,10 +59,6 @@
    
    
    div.course_innerheader div.course_search div.course_search_input {
-       /*border: 3px solid #cfa38f;
-       width: 300px;
-       height: 36px;
-       border-radius: 30px;*/
        display: flex;
 	   justify-content: center;
 	   align-items: center;
@@ -79,20 +75,13 @@
    
    
    div.course_innerheader div.course_search div.course_search_input>input[type="text"] {
-       /*
-       border: none;
-       width: 230px;
-       height: 30px;
-       font-size: 18px;
-       margin-left: 15px;
-       */
        border: none;
 	   outline: none;
 	   font-size: 16px;
 	   width: 100%;
 	   padding: 8px 16px;
 	   background: transparent;
-   }  
+   }
    
    div.course_innerheader div.course_search div.course_search_input>input[type="text"]:focus {
        outline: none;
@@ -341,7 +330,6 @@
        top: 2px;
    }
    
-   
 </style>
 <script>
 	let clickingHeart = false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
@@ -487,6 +475,15 @@
 			location.href = "./list"; // 모든 쿼리를 초기화함
 		});
 		
+		// 검색창에서 엔터를 누를 때의 이벤트
+		$("div.course_search_input>input[type='text']").on("keydown", function(e){
+			// 엔터키의 keyCode는 13
+			if (e.keyCode == 13){
+				// 엔터 누르면, 검색 처리해준다
+				$("i.coursesearch").trigger("click");
+			}
+		});
+		
 	}); // end of $(function())
 	
 	// 한글, 영어, 숫자와 띄어쓰기로만 이루어진 문자인지 판단하는 함수
@@ -557,7 +554,8 @@
 			<c:forEach var="dto" items="${courses}">
 				<c:set var="photoFlag" value="0"/> <!-- 해당 코스에서 하나라도 사진이 있는지 여부 -->
 				<div class="course_content" coursecode="${dto.coursecode}">
-					<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true" style="--swiper-theme-color: honeydew;">
+					<swiper-container class="mySwiper course_swiper" navigation="true" pagination="true" keyboard="true" mousewheel="true" css-mode="true"
+					style="--swiper-theme-color: honeydew;">
 					    <c:forEach var="photo" items="${dto.routePhotos}">
 					    	<c:if test="${photo != ''}">
 					    		<c:set var="photoFlag" value="1"/> <!-- 해당 코스에서 하나라도 사진이 있음 표시 -->
