@@ -180,6 +180,13 @@
 		
 		// 하트 아이콘 클릭 시
 		$("div.coursedetail_guest_info i.coursedetail_heart").click(function(){
+			// 로그인되어 있지 않은 경우
+			if (${sessionScope.loginok == null}){
+				alert("좋아요를 추가하시려면 로그인해주세요.");
+				location.href = "../member/login";
+				return;
+			}
+			
 			// 이미 앞서 좋아요 처리중인 경우
 			if (clickingHeart) {
 				alert("좋아요 기능 처리중입니다. 잠시 후 시도해주세요.");
@@ -280,10 +287,10 @@
 			<div class="coursedetail_guest_info">
 				<div>
 					<i class="bi bi-eye" title="조회수">&nbsp;${dto.readcount}</i>
-					<c:if test="${dto.likedByCurrentUser}">
+					<c:if test="${sessionScope.loginok != null && dto.likedByCurrentUser}">
 						<i class="bi bi-heart-fill coursedetail_heart" title="클릭시 좋아요 취소">&nbsp;${dto.totalLikes}</i>
 					</c:if>
-					<c:if test="${!dto.likedByCurrentUser}">
+					<c:if test="${sessionScope.loginok == null || !dto.likedByCurrentUser}">
 						<i class="bi bi-heart coursedetail_heart" title="클릭시 좋아요">&nbsp;${dto.totalLikes}</i>
 					</c:if>
 			  	</div>
