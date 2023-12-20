@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -33,7 +34,7 @@ public class AdminController {
 	@Autowired
 	AdminDao admindao;
 	
-	@GetMapping("/mypage/admin")
+	@GetMapping("/admin/adminpage")
 	public String admin(Model model, HttpSession session ) {
 		if(session.getAttribute("loginok")== null || session.getAttribute("loginok").equals("yes") ) ////비로그인이나 일반유저는 메인으로 보내버림
 			return "redirect:/main";
@@ -47,25 +48,41 @@ public class AdminController {
 		model.addAttribute("freeBoardandNickname", freeBoardandNickname);
 		model.addAttribute("reviewBoardandNickname", reviewBoardandNickname);
 		model.addAttribute("inquiryisanswer", inquiryisanswer);
-		return "mypage/adminpage";
+		return "admin/adminpage";
 	}
 	
-	@GetMapping("/mypage/member/delete")
+	@GetMapping("/admin/member/delete")
 	@ResponseBody public void deleteMember(@RequestParam String id)
 	{
 		admindao.deleteMemberbyID(id);
 	}
 	
-	@GetMapping("/mypage/freeboard/delete")
+	@GetMapping("/admin/freeboard/delete")
 	@ResponseBody public void deletefreeboard(@RequestParam int freeboardcode)
 	{
 		admindao.deleteFreebyReviewcode(freeboardcode);
 	}
 	
-	@GetMapping("/mypage/reviewboard/delete")
+	@GetMapping("/admin/reviewboard/delete")
 	@ResponseBody public void deletereviewboard(@RequestParam int reviewcode)
 	{
 		admindao.deleteReviewbyReviewcode(reviewcode);
+	}
+	
+	@GetMapping("/admin/membermanage")
+	public String membermanage(Model model)
+	{
+		List<MemberTableDto> memberlist = memberTableDao.selectAllmem10Bydesc();
+		model.addAttribute("memberlist", memberlist);
+		return "admin/membermanage";
+	}
+	
+	@ResponseBody
+	@PostMapping("admin/member/search")
+	public MemberTableDto searchmember(@RequestParam String id)
+	{
+		MemberTableDto dto = memberTableDao.getData(id);
+		return dto;
 	}
 	
 	
