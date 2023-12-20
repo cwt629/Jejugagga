@@ -156,8 +156,8 @@
 			<h4>부가 정보 관리</h4>
 				<div>
 				<i class="bi bi-gear"></i>
-				<form action="../member/changepass" method="post" enctype="multipart/form-data" style="display: inline-block;">
-					<input type="hidden" value="${sessionScope.id }" name="id">
+				<form action="../member/changeinfo" method="post" enctype="multipart/form-data" style="display: inline-block;">
+					<input type="hidden" value="${sessionScope.usercode }" name="usercode">
 					<br>
 					<button type="submit" style="border: none; background-color: #EEB182; border-radius: 10px;">기본 정보 변경</button>
 				</form>
