@@ -57,11 +57,11 @@
     <div id="board-search">
         <div class="container">
             <div class="search-window">
-                <form action="${root}/community/free/search" id="boardFreeForm" style="margin-left: 20%; /*justify-content: space-between; align-items: center;*/">
+                <form action="${root}/community/free/list" id="boardFreeForm" style="margin-left: 20%; /*justify-content: space-between; align-items: center;*/">
                     <!-- 검색 범위 선택 드롭다운 추가 -->
                     <select id="searchType" name="searchType">
                         <option value="title">제목</option>
-                        <option value="author">작성자</option>
+                        <option value="usercode">작성자</option>
                         <option value="content">내용</option>
                     </select>
                     <div class="search-wrap search-wrap--with-write">
@@ -107,7 +107,7 @@
                         <td>${item.freeboardcode}</td>
                         <th><a href="${root}/community/free/detail?usercode=${item.usercode}&freeboardcode=${item.freeboardcode}">${item.title}</a></th>
                         <th><fmt:formatDate pattern="yyyy-MM-dd" value="${item.registereddate}"/></th>
-                        <th>${item.usercode}</th>
+                        <th>${item.writersNickname}</th>
                         <td>${item.viewcount}</td>
                     </tr>
                 </c:forEach>
@@ -125,7 +125,7 @@
             </li>
             <c:forEach var="i" begin="1" end="${totalPage}">
                 <li class="pagination-item ${currentPage == i ? 'is-active' : ''}">
-                    <a class="pagination-link" href="/community/free/list?currentPage=${i}">${i}</a>
+                    <a class="pagination-link" href="/community/free/list?currentPage=${i}&searchType=${searchType}&searchWord=${searchWord}">${i}</a>
                 </li>
             </c:forEach>
             <li class="pagination-item--wide last">

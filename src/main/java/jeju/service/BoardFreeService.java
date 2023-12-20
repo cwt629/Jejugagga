@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -17,10 +19,6 @@ public class BoardFreeService {
 
 	public List<BoardFreeDto> getList(BoardFreePagingCriteria criteria) {
 		// criteria에 페이징 정보를 설정한다
-		int start = criteria.getPageStart();
-		int perPageNum = criteria.getPerPageNum();
-		String searchType = criteria.getSearchType();
-		String searchWord = criteria.getSearchWord();
 
 		return boardFreeDao.getList(criteria);
 	}
@@ -64,4 +62,10 @@ public class BoardFreeService {
 		return boardFreeDao.searchTotalCount(searchType, searchWord);
 	}
 
+	public List<BoardFreeDto> getBoardListWithUserNickname(String searchWord) {
+		Map<String, String> paramMap = new HashMap<>();
+		paramMap.put("searchWord", searchWord);
+
+		return boardFreeDao.getBoardListWithUserNickname(paramMap);
+	}
 }

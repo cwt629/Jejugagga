@@ -2,30 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jeju.dao.BoardFreeDao">
     <select id="totalCountOfBoardFree" resultType="int">
-        select count(*) from board_free
+        select count(*)
+        from board_free
     </select>
-    <select id="selectPagingOfBoardFreeCriteria" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">
-        select * from board_free
-        ORDER BY registereddate desc LIMIT #{pageStart}, #{perPageNum}
+    <select id="selectPagingOfBoardFreeCriteria" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria"
+            resultType="BoardFreeDto">
+        select *
+        from board_free
+        ORDER BY registereddate desc
+        LIMIT #{pageStart}, #{perPageNum}
     </select>
     <insert id="insertBoardFree" parameterType="BoardFreeDto">
         insert into board_free (usercode, title, content, photo, registereddate)
-        values (#{usercode}, #{title}, #{content},  #{photo}, now())
+        values (#{usercode}, #{title}, #{content}, #{photo}, now())
     </insert>
     <select id="selectMaxNumOfBoardFree" resultType="int">
-        select ifnull(max(title), 0) from board_free
+        select ifnull(max(title), 0)
+        from board_free
     </select>
     <update id="updateReadCountOfBoardFree" parameterType="int">
-        update board_free set viewcount = viewcount + 1 where freeboardcode=#{freeboardcode}
+        update board_free
+        set viewcount = viewcount + 1
+        where freeboardcode = #{freeboardcode}
     </update>
     <update id="updateBoardFree" parameterType="BoardFreeDto">
-        update board_free set title = #{title}, content = #{content} where usercode=#{usercode}
+        update board_free
+        set title   = #{title},
+            content = #{content}
+        where usercode = #{usercode}
     </update>
     <delete id="deleteBoardFree" parameterType="int">
-        delete from board_free where freeboardcode=#{freeboardcode}
+        delete
+        from board_free
+        where freeboardcode = #{freeboardcode}
     </delete>
     <select id="detailBoardFreePage" parameterType="int" resultType="BoardFreeDto">
-        select * from board_free where freeboardcode=#{freeboardcode}
+        select *
+        from board_free
+        where freeboardcode = #{freeboardcode}
     </select>
     <update id="updateViewCountOfBoardFree" parameterType="int">
         UPDATE board_free
@@ -42,63 +56,35 @@
         select * from board_free order by registereddate desc limit 0,10
     </select>
     <!-- 게시물 총 갯수 + 검색기능 추가-->
-    <select id="searchCount" parameterType="map" resultType="int">
+    <select id="searchCount" parameterType="Map" resultType="int">
         SELECT COUNT(*) FROM board_free
-        <where>
-            <if test='searchType.equals("title")'>
-                AND title LIKE CONCAT('%', #{searchWord}, '%')
-            </if>
-            <if test='searchType.equals("author")'>
-                AND usercode IN (SELECT usercode FROM board_free WHERE username LIKE CONCAT('%', #{searchWord}, '%'))
-            </if>
-            <if test='searchType.equals("content")'>
-                AND content LIKE CONCAT('%', #{searchWord}, '%')
-            </if>
-        </where>
+        <if test="searchWord!=null and searchWord!=''">
+            where ${searchType} like concat('%',#{searchWord},'%')
+        </if>
     </select>
-    <!-- 게시물 목록을 검색하는 쿼리 추가 -->
-    <select id="getSearchListByTitle" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">
+    <select id="getSearchList" parameterType="Map" resultType="BoardFreeDto">
         SELECT * FROM board_free
-        WHERE title LIKE CONCAT('%', #{searchWord}, '%')
+        <if test="searchWord!=null and searchWord!=''">
+            where ${searchType} like concat('%',#{searchWord},'%')
+        </if>
         ORDER BY registereddate DESC
         LIMIT #{pageStart}, #{perPageNum}
     </select>
-    <select id="getSearchListByContent" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">
-        SELECT * FROM board_free
-        WHERE content LIKE CONCAT('%', #{searchWord}, '%')
-        ORDER BY registereddate DESC
-        LIMIT #{pageStart}, #{perPageNum}
-    </select>
-    <select id="getSearchListByUserCode" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">
-        SELECT * FROM board_free
-        WHERE usercode = #{searchWord}  <!-- 외래 키의 실제 ID 값으로 검색 -->
-        ORDER BY registereddate DESC
-        LIMIT #{pageStart}, #{perPageNum}
+    <!--닉네임 중복값 검색을 방지하기 위한 명령어-->
+    <select id="getBoardListWithUserNickname" parameterType="Map"
+            resultType="BoardFreeDto">
+        SELECT b.*, m.nickname AS userNickname
+        FROM board_free b
+        JOIN member_table m ON b.usercode = m.usercode
+        WHERE m.nickname LIKE CONCAT('%', #{searchWord}, '%');
     </select>
 
-<!--    <select id="getSearchList" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">-->
-<!--            SELECT * FROM board_free-->
-<!--        <if test='searchType != null and searchWord != null'>-->
-<!--            WHERE-->
-<!--            title LIKE CONCAT('%', #{searchWord}, '%')-->
-<!--            OR content LIKE CONCAT('%', #{searchWord}, '%')-->
-<!--        </if>-->
-<!--            ORDER BY registereddate DESC-->
-<!--            LIMIT #{pageStart}, #{perPageNum}-->
-<!--    </select>-->
+
     <!-- 게시물 총 갯수 조회 쿼리 추가 -->
-    <select id="searchTotalCount" parameterType="map" resultType="int">
+    <select id="searchTotalCount" parameterType="Map" resultType="int">
         SELECT COUNT(*) FROM board_free
-        <where>
-            <if test='searchType.equals("title")'>
-                AND title LIKE CONCAT('%', #{searchWord}, '%')
-            </if>
-            <if test='searchType.equals("author")'>
-                AND usercode IN (SELECT usercode FROM board_free WHERE username LIKE CONCAT('%', #{searchWord}, '%'))
-            </if>
-            <if test='searchType.equals("content")'>
-                AND content LIKE CONCAT('%', #{searchWord}, '%')
-            </if>
-        </where>
+        <if test="searchWord!=null and searchWord!=''">
+            where ${searchType} like concat('%',#{searchWord},'%')
+        </if>
     </select>
 </mapper>

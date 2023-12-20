@@ -85,7 +85,6 @@
 
 .board_write .title dt,
 .board_write .info dt {
-    width: 100px;
     margin-right: 10px; /* 라벨과 입력 필드 사이 간격 조정 */
 }
 

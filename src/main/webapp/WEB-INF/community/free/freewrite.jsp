@@ -42,7 +42,7 @@
 
             <div class="bt_wrap">
                 <input type="submit" value="등록" class="on"/>
-                <a href="#">취소</a>
+                <a href="/community/free/list">취소</a>
             </div>
             <input type="hidden" name="usercode" value="${sessionScope.usercode}" />
         </form>

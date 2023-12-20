@@ -3,6 +3,7 @@ package jeju.controller;
 import jeju.boardfree_utils.BoardFreePagingCriteria;
 import jeju.dto.BoardFreeDto;
 import jeju.service.BoardFreeService;
+import jeju.service.MemberTableService;
 import jeju.storage.NcpObjectStorageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,35 +24,36 @@ public class FreeBoardController {
 
     private final BoardFreeService boardFreeService;
     private final NcpObjectStorageService storageService;
+    private final MemberTableService memberTableService;
+
+
+//    @GetMapping("/community/free/list")
+//    public String list(Model model,
+//                       @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "5") int perPageNum)  {
+//
+//        BoardFreePagingCriteria criteria = new BoardFreePagingCriteria();
+//        criteria.setPage(currentPage);
+//        criteria.setPerPageNum(perPageNum);
+//
+//        criteria.setSearchType("");
+//        List<BoardFreeDto> result = boardFreeService.getList(criteria);
+//
+//        // 페이징 정보를 모델에 추가
+//        int totalCount = boardFreeService.getTotalCount();
+//        int totalPage = (double) totalCount / criteria.getPerPageNum() > 0 ? (int) Math.ceil((double) totalCount / criteria.getPerPageNum()) : 1;
+//
+//
+//        model.addAttribute("list", result);
+//        model.addAttribute("totalCount", totalCount);
+//        model.addAttribute("totalPage", totalPage); // totalPage를 정확하게 계산하여 추가
+//        model.addAttribute("startPage", criteria.getPageStart()); // 시작페이지 정보를 추가
+//        model.addAttribute("currentPage", currentPage); // 현재 페이지 정보 추가
+//
+//        return "community/free/freelist";
+//    }
 
 
     @GetMapping("/community/free/list")
-    public String list(Model model,
-                       @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "5") int perPageNum)  {
-
-        BoardFreePagingCriteria criteria = new BoardFreePagingCriteria();
-        criteria.setPage(currentPage);
-        criteria.setPerPageNum(perPageNum);
-
-        criteria.setSearchType("");
-        List<BoardFreeDto> result = boardFreeService.getList(criteria);
-
-        // 페이징 정보를 모델에 추가
-        int totalCount = boardFreeService.getTotalCount();
-        int totalPage = (double) totalCount / criteria.getPerPageNum() > 0 ? (int) Math.ceil((double) totalCount / criteria.getPerPageNum()) : 1;
-
-
-        model.addAttribute("list", result);
-        model.addAttribute("totalCount", totalCount);
-        model.addAttribute("totalPage", totalPage); // totalPage를 정확하게 계산하여 추가
-        model.addAttribute("startPage", criteria.getPageStart()); // 시작페이지 정보를 추가
-        model.addAttribute("currentPage", currentPage); // 현재 페이지 정보 추가
-
-        return "community/free/freelist";
-    }
-
-
-    @GetMapping("/community/free/search")
     public String search(Model model,
                          @RequestParam(name = "searchType", required = false) String searchType,
                          @RequestParam(name = "searchWord", required = false) String searchWord,
@@ -72,13 +74,15 @@ public class FreeBoardController {
 
 
         List<BoardFreeDto> result = boardFreeService.getList(criteria);
+//        List<BoardFreeDto> result = boardFreeService.getBoardListWithUserNickname(searchWord);
 
-        // 검색 결과만을 모델에 추가
-        model.addAttribute("list", result);
-        model.addAttribute("searchType", searchType);
-        model.addAttribute("searchWord", searchWord);
-        model.addAttribute("totalRowCount", totalRowCount); // 검색 결과에 따른 총 게시물 수 추가
+        // 여기서 usercode를 사용하여 닉네임을 적용시킨다.
 
+        for (BoardFreeDto dto: result) {
+            int usercode = dto.getUsercode();
+            String nickname = memberTableService.getData(usercode).getNickname();
+            dto.setWritersNickname(nickname);
+        }
 
         // 총 페이지 수 계산
         int totalPage = (int) Math.ceil((double) totalRowCount / perPageNum);
@@ -87,6 +91,11 @@ public class FreeBoardController {
         // 현재 페이지와 시작 페이지 추가
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("startPage", criteria.getPageStart());
+        // 검색 결과만을 모델에 추가
+        model.addAttribute("list", result);
+        model.addAttribute("searchType", searchType);
+        model.addAttribute("searchWord", searchWord);
+        model.addAttribute("totalRowCount", totalRowCount); // 검색 결과에 따른 총 게시물 수 추가
 
         return "community/free/freelist";
     }
