@@ -77,5 +77,10 @@
 		    #{typecode}
 		</foreach>
 	</select>
+	
+	<!-- 홈에 띄울거 -->
+	<select id="selectFestivalOfTour" resultType="TourDto">
+		select * from tour where eventenddate > '2023-12-26'
+	</select>
 		
 </mapper>

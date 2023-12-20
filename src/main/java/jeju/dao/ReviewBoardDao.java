@@ -48,7 +48,7 @@ public class ReviewBoardDao {
     	sqlSession.delete("deleteReviewbyReviewcode", reviewcode);
     }
     
-    
+    //tourcode에 해당하는 리뷰만 받기(by 김나혜)
     public List<BoardReviewDto> selectReviewListOfTour(int tourcode) {
         return sqlSession.selectList("ReviewBoardDao.selectReviewListOfTour", tourcode);
     }

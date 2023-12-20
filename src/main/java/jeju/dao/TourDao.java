@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import jeju.dto.BoardReviewDto;
 import jeju.dto.TourDto;
 
 @Repository
@@ -52,7 +53,7 @@ public class TourDao {
 			retDto = session.selectList(nameSpace+"selectListOfTour", map);
 		}
 		
-		System.out.println(retDto);
+		//System.out.println(retDto);
 		
 		return retDto;
 	}
@@ -68,5 +69,11 @@ public class TourDao {
 	{
 		return session.selectList(nameSpace + "searchTourByQueries", queryMap);
 	}
+	
+	//홈에 띄울거
+	public List<TourDto> selectFestivalOfTour() {
+    	return session.selectList(nameSpace + "selectFestivalOfTour");
+    }
+	
 	
 }
