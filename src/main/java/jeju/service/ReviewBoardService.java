@@ -54,4 +54,11 @@ public class ReviewBoardService {
     public void saveReviewPhoto(BoardReviewPhotoDto boardReviewPhotoDto) {
         reviewBoardDao.insertReviewPhoto(boardReviewPhotoDto);
     }
+    
+    //
+    public List<BoardReviewDto> getReviewListOfTour(int tourcode) {
+        return reviewBoardDao.selectReviewListOfTour(tourcode);
+    }
+    
+    
 }

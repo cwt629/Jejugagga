@@ -47,6 +47,11 @@ public class ReviewBoardDao {
     public void deleteReviewbyReviewcode(int reviewcode) {
     	sqlSession.delete("deleteReviewbyReviewcode", reviewcode);
     }
+    
+    
+    public List<BoardReviewDto> selectReviewListOfTour(int tourcode) {
+        return sqlSession.selectList("ReviewBoardDao.selectReviewListOfTour", tourcode);
+    }
 
 
 }
