@@ -114,7 +114,6 @@
    
    div.courseadd_routes div.courseadd_routeplace div.courseadd_tag {
        color: white;
-       background-color: skyblue; /* 임시 */
        height: 30px;
        padding: 5px;
        display: flex;
@@ -126,7 +125,19 @@
        left: 5px;
    }
    
-   
+   /* 카테고리별 태그 색깔 */
+   div.courseadd_tag.course_tourspot {
+       background-color: #ff6888;
+   }
+   div.courseadd_tag.course_culture {
+       background-color: #b964f7;
+   }
+   div.courseadd_tag.course_festival {
+       background-color: #58a8ff;
+   }
+   div.courseadd_tag.course_cafeteria {
+       background-color: #fbad00;
+   }
    
    div.courseadd_app button.courseadd_general_brownbtn {
        border: none;
@@ -267,6 +278,13 @@
 			"longdetail": 2000
 	};
 	
+	// contenttype별 클래스명
+	const CONTENT_TYPE_CLASS = {
+		"12": "course_tourspot",
+		"14": "course_culture",
+		"15": "course_festival",
+		"39": "course_cafeteria"
+	};
 	
 	$(function(){
 		displayCurrentRoute(); // 여행지 루트 렌더링
@@ -556,7 +574,7 @@
 							<img src="\${routes[i].getImage()}">
 						</div>
 						<h5>\${routes[i].getTitle()}</h5>
-						<div class="courseadd_tag">
+						<div class="courseadd_tag \${CONTENT_TYPE_CLASS[routes[i].getContenttype()]}">
 							\${getCategory(routes[i].getContenttype())}
 						</div>
 					</div>

@@ -114,7 +114,6 @@
    
    div.courserevise_routes div.courserevise_routeplace div.courserevise_tag {
        color: white;
-       background-color: skyblue; /* 임시 */
        height: 30px;
        padding: 5px;
        display: flex;
@@ -126,6 +125,19 @@
        left: 5px;
    }
    
+   /* 카테고리별 태그 색깔 */
+   div.courserevise_tag.course_tourspot {
+       background-color: #ff6888;
+   }
+   div.courserevise_tag.course_culture {
+       background-color: #b964f7;
+   }
+   div.courserevise_tag.course_festival {
+       background-color: #58a8ff;
+   }
+   div.courserevise_tag.course_cafeteria {
+       background-color: #fbad00;
+   }
    
    
    div.courserevise_app button.courserevise_general_brownbtn {
@@ -270,6 +282,13 @@
 			"longdetail": 2000
 	};
 	
+	// contenttype별 클래스명
+	const CONTENT_TYPE_CLASS = {
+		"12": "course_tourspot",
+		"14": "course_culture",
+		"15": "course_festival",
+		"39": "course_cafeteria"
+	};
 	
 	$(function(){
 		// 여행지 추가 모달 - 카테고리 버튼 클릭 이벤트
@@ -553,7 +572,7 @@
 							<img src="\${routes[i].getImage()}">
 						</div>
 						<h5>\${routes[i].getTitle()}</h5>
-						<div class="courserevise_tag">
+						<div class="courserevise_tag \${CONTENT_TYPE_CLASS[routes[i].getContenttype()]}">
 							\${getCategory(routes[i].getContenttype())}
 						</div>
 					</div>

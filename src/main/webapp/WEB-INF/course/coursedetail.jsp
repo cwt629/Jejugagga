@@ -144,7 +144,6 @@
    
    div.coursedetail_routes div.coursedetail_routeplace div.coursedetail_tag {
        color: white;
-       background-color: skyblue; /* 임시 */
        height: 30px;
        padding: 5px;
        display: flex;
@@ -154,6 +153,20 @@
        position: absolute;
        top: 5px;
        left: 5px;
+   }
+   
+   /* 카테고리별 태그 색깔 지정 */
+   div.coursedetail_tag.course_tourspot {
+       background-color: #ff6888;
+   }
+   div.coursedetail_tag.course_culture {
+       background-color: #b964f7;
+   }
+   div.coursedetail_tag.course_festival {
+       background-color: #58a8ff;
+   }
+   div.coursedetail_tag.course_cafeteria {
+       background-color: #fbad00;
    }
    
    div.coursedetail_explain {
@@ -169,13 +182,22 @@
 </style>
 <script>
 	let clickingHeart = false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
+	// contenttype별 클래스명
+	const CONTENT_TYPE_CLASS = {
+		"12": "course_tourspot",
+		"14": "course_culture",
+		"15": "course_festival",
+		"39": "course_cafeteria"
+	};
 	
 	$(function(){
 		// 각 여행지에 카테고리 넣어주기
 		$("div.coursedetail_tag").each(function(idx, item){
+			let contenttype = $(this).attr("contenttype");
 			// 카테고리명
-			let category = getCategory(parseInt($(this).attr("contenttype")));
-			$(this).css("background-color", "skyblue").text(category);
+			let category = getCategory(parseInt(contenttype));
+			$(this).addClass(CONTENT_TYPE_CLASS[contenttype]);
+			$(this).text(category);
 		})
 		
 		// 하트 아이콘 클릭 시
