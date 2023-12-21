@@ -27,16 +27,24 @@
     <select id="selectNicknameByUsercode" resultType="String" parameterType="int">
         SELECT nickname FROM member_table WHERE usercode = #{usercode}
     </select>
-    
-	<select id="selectReview10Bydesc" resultType="BoardReviewDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
-		select * from board_review order by registereddate desc limit 0,10
-	</select>
-	
-	
-	<!-- tourcode에 해당하는 리뷰만 받기(by 김나혜) -->
-	<select id="selectReviewListOfTour" parameterType="int" resultType="BoardReviewDto">
+
+    <delete id="deleteReview" parameterType="int">
+        DELETE FROM board_review WHERE reviewcode = #{reviewId}
+    </delete>
+
+    <select id="selectPagedReviews" resultType="jeju.dto.BoardReviewDto">
+        SELECT * FROM board_review
+        ORDER BY registereddate DESC
+            LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="selectReviewCount" resultType="int">
+        SELECT COUNT(*) FROM board_review
+    </select>
+
+    <!-- tourcode에 해당하는 리뷰만 받기(by 김나혜) -->
+    <select id="selectReviewListOfTour" parameterType="int" resultType="BoardReviewDto">
         SELECT * FROM board_review WHERE tourcode = #{tourcode}
     </select>
-	
-	
+
 </mapper>

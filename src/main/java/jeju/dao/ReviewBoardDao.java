@@ -2,10 +2,12 @@ package jeju.dao;
 
 import jeju.dto.BoardReviewDto;
 import jeju.dto.BoardReviewPhotoDto;
+import jeju.dto.ReviewPageDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ReviewBoardDao {
@@ -53,5 +55,16 @@ public class ReviewBoardDao {
         return sqlSession.selectList("ReviewBoardDao.selectReviewListOfTour", tourcode);
     }
 
+    public void deleteReview(int reviewId) {
+        sqlSession.delete("ReviewBoardDao.deleteReview", reviewId);
+    }
+
+    public List<ReviewPageDto> selectPagedReviews(Map<String, Object> params) {
+        return sqlSession.selectList("ReviewBoardDao.selectPagedReviews", params);
+    }
+
+    public int selectReviewCount() {
+        return sqlSession.selectOne("ReviewBoardDao.selectReviewCount");
+    }
 
 }
