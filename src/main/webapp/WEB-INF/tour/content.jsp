@@ -508,7 +508,7 @@
 					    </c:if>
 					    
 					    <div class="container-write"
-					             data-logged-in="${sessionScope.loginok == 'yes'}">
+					             data-logged-in="${sessionScope.loginok != null}">
 					        <button class="learn-more" id="reviewButton">
 						        <span class="circle" aria-hidden="true"  style="background-color: #EEB182 ">
 						        </span>
