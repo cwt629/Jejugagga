@@ -60,6 +60,11 @@ public class ReviewBoardService {
         reviewBoardDao.insertReviewPhoto(boardReviewPhotoDto);
     }
 
+    //tourcode에 해당하는 리뷰만 받기(by 김나혜)
+    public List<BoardReviewDto> getReviewListOfTour(int tourcode) {
+        return reviewBoardDao.selectReviewListOfTour(tourcode);
+    }
+
     public void deleteReview(int reviewId) {
         reviewBoardDao.deleteReview(reviewId);
     }

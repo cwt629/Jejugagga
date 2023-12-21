@@ -41,4 +41,10 @@
     <select id="selectReviewCount" resultType="int">
         SELECT COUNT(*) FROM board_review
     </select>
+
+    <!-- tourcode에 해당하는 리뷰만 받기(by 김나혜) -->
+    <select id="selectReviewListOfTour" parameterType="int" resultType="BoardReviewDto">
+        SELECT * FROM board_review WHERE tourcode = #{tourcode}
+    </select>
+
 </mapper>
