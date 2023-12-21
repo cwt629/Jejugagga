@@ -6,6 +6,8 @@ import lombok.Getter;
 public class BoardFreePagingCriteria {
     private int page;
     private int perPageNum;
+    private String searchType;
+    private String searchWord;
 
     /* 페이징 처리 0이 1부터 시작, 5번부터 끊기*/
     public BoardFreePagingCriteria() {
@@ -33,5 +35,14 @@ public class BoardFreePagingCriteria {
     public int getPageStart() {
         return (this.page - 1) * perPageNum;
     }
+
+    public void setSearchType(String searchType) {
+        this.searchType = searchType;
+    }
+
+    public void setSearchWord(String searchWord) {
+        this.searchWord = searchWord;
+    }
 }
+
 
