@@ -13,6 +13,8 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="../res/course/style/paging.css">
+<link rel="stylesheet" href="../res/course/style/writebutton.css">
+
 <style>
    body * {
        font-family: 'Orbit';
@@ -41,10 +43,12 @@
    
    div.course_innerheader button.course_addbtn {
        margin: 0 15px;
+       /*
        color: white;
        background-color: #ab6749;
        border: none;
        padding: 5px;
+       */
        position: relative;
        top: 4px;
        left: 2px;
@@ -536,8 +540,15 @@
 			<div class="course_innerheader">
 				<span class="course_title">추천코스(${totalCount})</span>
 				<c:if test="${sessionScope.loginok != null}">
-					<button type="button" class="course_addbtn"
-					onclick="location.href = './add'">코스추가</button>
+					<div class="container-write">
+					<button type="button" class="course_addbtn learn-more"
+					onclick="location.href = './add'">
+						<span class="circle" aria-hidden="true">
+            				<span class="icon arrow"></span>
+        				</span>
+                		<span class="button-text" style="font-family: 'Mukta', sans-serif;">add course</span>
+					</button>
+					</div>
 				</c:if>
 				<div class="course_search">
 					<div class="course_search_input">

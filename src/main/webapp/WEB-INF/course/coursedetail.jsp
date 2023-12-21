@@ -59,6 +59,7 @@
        padding: 5px;
        margin: 0 10px;
        border: none;
+       box-shadow: 3px 3px 3px #ccc;
    }
    
    div.coursedetail_header div.coursedetail_headerbtns {
@@ -297,7 +298,7 @@
 		<div class="coursedetail_header">
 			<div class="coursedetail_headerbtns">
 				<button type="button" class="coursedetail_prevbtn coursedetail_generalbtn"
-				onclick="history.back()">이전으로</button>
+				onclick="location.href = './list'">목록으로</button>
 				<c:if test="${sessionScope.loginok != null}">
 					<c:if test="${sessionScope.usercode == dto.usercode || sessionScope.loginok == 'admin' }">
 						<button type="button" class="coursedetail_revisebtn coursedetail_generalbtn">코스수정</button>
@@ -393,7 +394,7 @@
 		<hr>
 		<div class="coursedetail_footer">
 			<button type="button" class="coursedetail_prevbtn coursedetail_generalbtn"
-				onclick="history.back()">이전으로</button>
+				onclick="location.href = './list'">목록으로</button>
 			<c:if test="${sessionScope.loginok != null}">
 				<c:if test="${sessionScope.usercode == dto.usercode || sessionScope.loginok == 'admin' }">
 					<button type="button" class="coursedetail_revisebtn coursedetail_generalbtn">코스수정</button>
