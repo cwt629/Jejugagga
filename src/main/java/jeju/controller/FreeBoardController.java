@@ -74,6 +74,8 @@ public class FreeBoardController {
 
 
         List<BoardFreeDto> result = boardFreeService.getList(criteria);
+
+        // 창호나 주변 원찬이한테 한번 슬쩍 물어보기(점심 이후)
 //        List<BoardFreeDto> result = boardFreeService.getBoardListWithUserNickname(searchWord);
 
         // 여기서 usercode를 사용하여 닉네임을 적용시킨다.

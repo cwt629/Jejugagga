@@ -70,6 +70,7 @@
         ORDER BY registereddate DESC
         LIMIT #{pageStart}, #{perPageNum}
     </select>
+
     <!--닉네임 중복값 검색을 방지하기 위한 명령어-->
     <select id="getBoardListWithUserNickname" parameterType="Map"
             resultType="BoardFreeDto">

@@ -43,6 +43,14 @@
             }
         });
     })
+
+    function showLoginRequiredModal() {
+        $("#loginRequiredModal").show();
+    }
+
+    function hideLoginRequiredModal() {
+        $("#loginRequiredModal").hide();
+    }
 </script>
 
 <body>
@@ -105,7 +113,14 @@
                 <c:forEach var="item" items="${list}">
                     <tr>
                         <td>${item.freeboardcode}</td>
-                        <th><a href="${root}/community/free/detail?usercode=${item.usercode}&freeboardcode=${item.freeboardcode}">${item.title}</a></th>
+                        <c:choose>
+                            <c:when test="${sessionScope.loginok != null}">
+                                <th><a href="${root}/community/free/detail?usercode=${item.usercode}&freeboardcode=${item.freeboardcode}">${item.title}</a></th>
+                            </c:when>
+                            <c:otherwise>
+                                <th><a href="javascript:void(0);" onclick="showLoginRequiredModal()">${item.title}</a></th>
+                            </c:otherwise>
+                        </c:choose>
                         <th><fmt:formatDate pattern="yyyy-MM-dd" value="${item.registereddate}"/></th>
                         <th>${item.writersNickname}</th>
                         <td>${item.viewcount}</td>
@@ -155,3 +170,17 @@
 </div>
 </body>
 </html>
+
+<div class="modal" id="loginRequiredModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">게시물을 보기 위해선 로그인을 해주세요!</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="hideLoginRequiredModal()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+

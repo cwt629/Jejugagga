@@ -43,7 +43,6 @@ public class BoardFreePagingCriteria {
     public void setSearchWord(String searchWord) {
         this.searchWord = searchWord;
     }
-
 }
 
 

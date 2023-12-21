@@ -17,28 +17,19 @@
 
 <script>
     // 전역 변수 설정
-    var loginStatus = "${sessionScope.loginok != null ? 'true' : 'false'}";
-    var boardFreeUserCode = "${boardFreeDto.usercode}";
-    var writersNickname = "${sessionScope.loginok != null ? sessionScope.loginok.writersNickname : ''}";
-    var userauth = "${sessionScope.loginok != null ? sessionScope.loginok.userauth : ''}";
+    var loginStatus = ${sessionScope.loginok != null};
+    var boardFreeUserCode = ${boardFreeDto.usercode};
 
-    // 로그인하지 않은 사용자에 대한 모달창 표시
-    function showNotLoggedInModal() {
-        $("#agreeModal").show();
-    }
 
-    function hideModal() {
-        $("#agreeModal").hide();
-    }
 
     // 게시글 상세 페이지 이동
     function goToDetailPage(usercode, freeboardcode) {
-        if (loginStatus === 'false') {
+        if (!loginStatus) {
             showNotLoggedInModal();
             return;
         }
 
-        if (usercode === boardFreeUserCode || userauth === 'A') {
+        if (usercode === boardFreeUserCode || loginStatus) {
             window.location.href = "${root}/community/free/detail?usercode=" + usercode + "&freeboardcode=" + freeboardcode;
         } else {
             showNotLoggedInModal();
@@ -46,9 +37,9 @@
     }
 
     // 게시글 삭제 확인
-    function deleteConfirm() {
-        var confirmDelete = confirm("정말 삭제하시겠습니까?");
-        if (confirmDelete) {
+    function deleteItem() {
+        var deleteItem = confirm("정말 삭제하시겠습니까?");
+        if (deleteItem) {
             location.href = "${root}/community/free/delete?freeboardcode=${boardFreeDto.freeboardcode}";
         }
     }
@@ -61,44 +52,26 @@
     <th>${boardFreeDto.content}</th>
     <th><img src="${boardFreeDto.photo}"></th>
 </div>
-<c:if test="${empty sessionScope.loginok and empty boardFreeDto}">
-    <p>세부페이지를 보려면 로그인이 필요합니다.</p>
-    <button type="button" id="okButton2" class="btn btn-primary" onclick="showNotLoggedInModal()">OK</button>
-</c:if>
 
-<c:if test="${not empty sessionScope.loginok and not empty boardFreeDto}">
-     <input type="hidden" name="loginStatus" id="loginStatus" value="${loginStatus}" />
-    <c:if test="${loginStatus == '0'}">
-        <button type="button" class="btn btn-outline-secondary btn-sm" style="width: 80px;" onclick="showNotLoggedInModal()">수정</button>
-        <button type="button" class="btn btn-outline-secondary btn-sm" style="width: 80px;" onclick="showNotLoggedInModal()">삭제</button>
-    </c:if>
-    <c:if test="${loginStatus == '1'}">
-        <a href="${root}/community/free/updateBoardFree?freeboardcode=${boardFreeDto.freeboardcode}">수정</a>
-        <button type="button" class="btn btn-danger" onclick="deleteConfirm()">삭제</button>
-    </c:if>
-</c:if>
-
-<%--<!-- 로그인한 사람이 쓴 글에만 수정,삭제 버튼이 보이도록 한다 -->--%>
-<%--<c:if test="${sessionScope.loginok != null && dto.usercode == sessionScope.loginok.usercode}">--%>
-<%--    <button type="button" class="btn btn-outline-secondary btn-sm" style="width: 80px;"--%>
-<%--            onclick="location.href='./updateform?num=${dto.num}&currentPage=${currentPage}'">수정</button>--%>
-
-<%--    <button type="button" class="btn btn-outline-secondary btn-sm" style="width: 80px;"--%>
-<%--            onclick="location.href='./delete?num=${dto.num}&currentPage=${currentPage}'">삭제</button>--%>
-<%--</c:if>--%>
-
-<!-- 필수 항목 미동의 모달 창 -->
-<div class="modal" id="agreeModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">글작성을 하려면 로그인이 필요합니다.</h5>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="okButton1" class="btn btn-primary" onclick="hideModal()">OK</button>
-            </div>
-        </div>
-    </div>
-</div>
+<c:choose>
+    <c:when test="sessionScope.loginok!=null">
+        <c:if test="{sessionScope.loginok.usercode == boardFreeDto.usercode}">
+            <button type="button" class="btn btn-outline-secondary btn-sm" style="width: 80px;"
+                    onclick="location.href='${root}/community/free/updateBoardFree?freeboardcode=${boardFreeDto.freeboardcode}'">
+                수정
+            </button>
+            <button type="button" class="btn btn-danger" onclick="deleteItem()">삭제</button>
+        </c:if>
+    </c:when>
+    <c:otherwise>
+        <button type="button" class="btn btn-outline-secondary btn-sm" style="width: 80px;"
+                onclick="showNotLoggedInModal()">
+            수정
+        </button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" style="width: 80px;"
+                onclick="showNotLoggedInModal()">
+            삭제
+        </button>
+    </c:otherwise>
+</c:choose>
 </body>
-</html>
