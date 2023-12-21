@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="jeju.dao.BoardFreeDao">
+<mapper namespace="jeju.dao.UserPageDao">
 	<select id="selectOfFreeBoardByUsercode" parameterType="int" resultType="BoardFreeDto">
 		select * from board_free where usercode = #{usercode} order by modifieddate desc
 	</select>
@@ -21,4 +21,7 @@
 			ORDER BY hasAnswer ASC, board_inquiry.registereddate ASC
 			LIMIT 0, 10;
 	</select>
+	<update id="updateNicknameEmailByNum" parameterType="MemberTableDto">
+		update member_table set nickname = #{nickname}, email = #{email} where usercode = #{usercode}
+	</update>
 </mapper>
