@@ -144,7 +144,7 @@ th.admin_board_head{
 $(function(){
 	$(".kickmemberbtn").click(function(){
 		let id = $(this).val();
-		let checkkick = confirm(id+'님을 정말 추방하실거 ㅋㅋ?');
+		let checkkick = confirm(id+'님을 추방하시겠습니까??');
 		if(checkkick){
 			$.ajax({
 				type:"get",
@@ -200,7 +200,7 @@ $(function(){
 </script>
 <c:set var="root" value="<%=request.getContextPath()%>"/>
 <body>
-	<h1 class="container">관리자 페이지</h1>
+	<h1 class="container" style="margin-top: 20px;">관리자 페이지</h1>
 	<div class="container">
 		<div class="item membertable">
 			<div class="table-title">회원 목록

@@ -18,6 +18,9 @@ import jeju.dao.AdminDao;
 import jeju.dao.BoardFreeDao;
 import jeju.dao.MemberTableDao;
 import jeju.dao.ReviewBoardDao;
+import jeju.dao.UserPageDao;
+import jeju.dto.BoardFreeDto;
+import jeju.dto.BoardReviewDto;
 import jeju.dto.MemberTableDto;
 
 @Controller
@@ -33,6 +36,9 @@ public class AdminController {
 	
 	@Autowired
 	AdminDao admindao;
+	
+	@Autowired
+	UserPageDao userPageDao;
 	
 	@GetMapping("/admin/adminpage")
 	public String admin(Model model, HttpSession session ) {
@@ -78,12 +84,30 @@ public class AdminController {
 	}
 	
 	@ResponseBody
-	@PostMapping("admin/member/search")
-	public MemberTableDto searchmember(@RequestParam String id)
+	@PostMapping("admin/member/information")
+	public MemberTableDto memberinformation(@RequestParam String id)
 	{
 		MemberTableDto dto = memberTableDao.getData(id);
 		return dto;
 	}
+	
+	@ResponseBody
+	@PostMapping("admin/member/writefree")
+	public List<BoardFreeDto> memberwritefree(@RequestParam int usercode)
+	{
+		List<BoardFreeDto> memberfreeBoardlist = userPageDao.selectOfFreeBoardByUsercode(usercode);
+		return memberfreeBoardlist;
+	}
+	
+	@ResponseBody
+	@PostMapping("admin/member/writereview")
+	public List<BoardReviewDto> memberwritereview(@RequestParam int usercode)
+	{
+		List<BoardReviewDto> memberreviewlist = userPageDao.selectOfReviewBoardByUsercode(usercode);
+		return memberreviewlist;
+	}
+	
+	
 	
 	
 }
