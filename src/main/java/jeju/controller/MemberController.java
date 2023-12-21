@@ -3,6 +3,8 @@ package jeju.controller;
 import jeju.dao.MemberTableDao;
 import jeju.dto.MemberTableDto;
 import jeju.service.HashService;
+import jeju.storage.NcpObjectStorageService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.sql.Date;
@@ -29,7 +33,9 @@ public class MemberController {
 	
 	@Autowired
 	JavaMailSender mailSender;
-
+	
+	String path="https://kr.object.ncloudstorage.com/jejugagga-cwt/profile_photo/";
+	
 	@GetMapping("/member/login")
 	public String login(@RequestParam(defaultValue = "1") int num , Model model) {
 		model.addAttribute("num",num);
@@ -50,14 +56,16 @@ public class MemberController {
 	{
 		// 패스워드 해싱
 		password = HashService.hashPassword(password);
-
+		
 		boolean bLogin=dao.isLoginCheck(id, password);
 		if(bLogin)
 		{
+			//멤버 등급 식별
+			String membertype = dao.getData(id).getType();
 			// 세션의 저장 기한 설정
 			session.setMaxInactiveInterval(60*60*6);
 			// 세션에 정보 저장
-			session.setAttribute("loginok","yes");
+			session.setAttribute("loginok",(membertype.equals("admin"))?"admin":"yes"); //admin이면 loginok를 admin이라는 이름으로 세션을 줌
 			session.setAttribute("saveid",saveidvalue?"yes":"no");
 			session.setAttribute("id",id);
 
@@ -70,11 +78,16 @@ public class MemberController {
 			// 받은 아이디에 대한 사진 URL 받아오기
 			String myphoto=dao.getData(id).getPhoto();
 			session.setAttribute("myphoto", myphoto);
+			session.setAttribute("profile_photo", path + myphoto);
 			
 			// 받은 아이디에 대한 이메일 받아오기
 			String myemail = dao.getData(id).getEmail();
 			session.setAttribute("myemail", myemail);
-
+			
+			// 받은 아이디에 대한 전화번호 받아오기
+			String phone = dao.getData(id).getPhone();
+			session.setAttribute("phone", phone);
+			
 		}else {
 			return 	"redirect:../login?num=2";
 
@@ -177,6 +190,20 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 
+	
+	@GetMapping("/mypage/member/delete")
+	@ResponseBody public void deleteMember(@RequestParam String id)
+	{
+		dao.deleteMemberbyID(id);
+	}
+	
+	
+	@PostMapping("/mypage/member/withdraw")
+	@ResponseBody public void userWithdraw(@RequestParam String id, HttpSession session)
+	{
+		dao.deleteMemberbyID(id);
+		session.removeAttribute("loginok");
+	}
 
 
 }

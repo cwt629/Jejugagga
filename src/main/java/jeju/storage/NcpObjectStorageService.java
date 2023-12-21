@@ -74,5 +74,35 @@ public class NcpObjectStorageService implements ObjectStorageService {
 			System.out.println(path+":삭제완료!");
 		}				
 	}
+
+	public String reviewUploadFile(String bucketName, String bucketFolder, MultipartFile file) {
+		if (file.isEmpty()) {
+			return null;
+		}
+
+		try (InputStream fileIn = file.getInputStream()) {
+			String filename = UUID.randomUUID().toString();
+			String fullFilePath = bucketFolder + "/" + filename;
+
+			ObjectMetadata objectMetadata = new ObjectMetadata();
+			objectMetadata.setContentType(file.getContentType());
+
+			PutObjectRequest objectRequest = new PutObjectRequest(
+					bucketName,
+					fullFilePath,
+					fileIn,
+					objectMetadata).withCannedAcl(CannedAccessControlList.PublicRead);
+
+			// 실제 파일 업로드
+			s3.putObject(objectRequest);
+
+			// 업로드된 파일의 URL을 반환
+			String fileUrl = s3.getUrl(bucketName, fullFilePath).toString();
+			return fileUrl;
+
+		} catch (Exception e) {
+			throw new RuntimeException("파일 업로드 오류", e);
+		}
+	}
 }
 

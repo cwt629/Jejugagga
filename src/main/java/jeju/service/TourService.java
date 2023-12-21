@@ -21,9 +21,6 @@ public class TourService {
 		
 		queryMap.put("searchingName", searchingName);
 		queryMap.put("categories", categories);
-		System.out.println(categories);
-		
-		System.out.println(queryMap);
 		
 		return tourDao.getSearchedTourByQueries(queryMap);
 	}

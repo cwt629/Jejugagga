@@ -51,11 +51,31 @@
 				processData: false,
 				contentType: false,
 				success: function(res) {
-				   $("#profilePhoto").attr("src", `${root}/res/photo/profile_photo/\${res.photo}`);
+				   $("#profilePhoto").attr("src", `\${res.path}`);
 				   location.reload();
 			    }
 			});		
 		});
+		
+		$(".user_withdraw").click(function() {
+			let id = $(this).val();
+			if (confirm("정말 탈퇴하시겠습니까?") == true) {
+				$.ajax({
+					type: "post",
+					dataType: "json",
+					data: {"id": id},
+					url: "${root}/mypage/member/withdraw",
+					success: function(res) {
+				    }
+				});
+				alert("회원 탈퇴가 완료되었습니다.");
+				window.location.href = "${root}/main";
+				} else {
+					alert("취소되었습니다");
+					location.reload();
+					}
+			
+			});
 	});
 </script>
 </head>
@@ -68,7 +88,7 @@
 	<nav class="navbar navbar-expand-lg" id="sideNav">
 		<div style="position: relative;">
 			<c:if test="${sessionScope.myphoto != 'no' || sessionScope.myphoto != null}">
-				<img src="${root}/res/photo/profile_photo/${sessionScope.myphoto}"
+				<img src="${sessionScope.profile_photo }"
 					id="profilePhoto" onerror="this.src='${root}/res/photo/noimage.png'">
 				<input type="file" id="profileUpdate" style="display: none;">
 				<i class="bi bi-pencil-square changephoto"
@@ -107,7 +127,7 @@
 			<div>
 				<h4>기본정보</h4>
 					<c:if test="${sessionScope.myphoto != 'no' || sessionScope.myphoto != null}">
-						<img src="${root}/res/photo/profile_photo/${sessionScope.myphoto}"
+						<img src="${sessionScope.profile_photo}"
 							onerror="this.src='${root}/res/photo/noimage.png'"
 							style="margin-right: 30px; width: 50px; height: 50px; border: 2px solid black; float: left;">
 					</c:if>
@@ -115,35 +135,45 @@
 					<span>${sessionScope.nickname }</span>
 					<span>${sessionScope.myemail }</span>
 				</div>
-				<button type="button" style="float: right;  transform: translate(-100%, -100%);">수정</button>
 			</div>
 			<hr>
 			<div>
 			<i class="bi bi-phone"></i>
 			핸드폰
+			<br>
+			<span>${sessionScope.phone }</span>
 			</div>
 			<hr>
 			<div>
 			<i class="bi bi-envelope"></i>
 			이메일
+			<br>
+			<span>${sessionScope.myemail }</span>
 			</div>		
 		</div>
 		<br><br><br>
 		<div class="profilebox">
 			<h4>부가 정보 관리</h4>
 				<div>
-				<i class="bi bi-building-add"></i>
-				주소
-				<button type="button" style="float: right;  transform: translate(-100%, -50%);">수정</button>
+				<i class="bi bi-gear"></i>
+				<form action="../member/changeinfo" method="post" enctype="multipart/form-data" style="display: inline-block;">
+					<input type="hidden" value="${sessionScope.usercode }" name="usercode">
+					<br>
+					<button type="submit" style="border: none; background-color: #EEB182; border-radius: 10px;">기본 정보 변경</button>
+				</form>
 				</div>
 				<hr>
 				<div>
 				<i class="bi bi-key"></i>
-				비밀번호 변경
+				<form action="../member/changepass" method="post" enctype="multipart/form-data" style="display: inline-block;">
+					<input type="hidden" value="${sessionScope.id }" name="id">
+					<br>
+					<button type="submit" style="border: none; background-color: #EEB182; border-radius: 10px;">비밀번호 변경</button>
+				</form>
 				</div>
 		</div>
 		<br><br><br><br>
-		<button type="button" class="btn btn-warning user_withdraw" style="width: 10%;">회원탈퇴</button>
+		<button type="button" class="btn btn-warning user_withdraw" value="${sessionScope.id }">회원탈퇴</button>
 	</div>
 </div>
 </c:if>

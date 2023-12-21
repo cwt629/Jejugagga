@@ -17,6 +17,8 @@
 <link rel="stylesheet" type="text/css" href="${root}/res/styles/tour_plugin.css">
 <link rel="stylesheet" type="text/css" href="${root}/res/styles/tour_style.css">
 <link rel="stylesheet" type="text/css" href="${root}/res/styles/tour_fontawesome.min.css">
+<link rel="stylesheet" type="text/css" href="${root}/res/review/reviewwritebutton.css">
+
 
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
@@ -45,14 +47,77 @@
    
    button.tour_back {
        color: white;
-	    background-color: #b7a89f;
+	    background-color: #ccc;
 	    border: none;
 	    padding: 10px;
 	    border-radius: 2px;
 	    box-shadow: 3px 3px 3px;
 	    position: absolute;
     	top: 30px;
+    	left : 40px;
+    	z-index: 1;
    }
+   
+   .review-container {
+            width: 90%;
+            max-width: 1000px;
+            box-sizing: border-box;
+            margin: auto;
+            font-family: "Hind", sans-serif;
+            background: #fff;
+            color: #4d5974;
+            min-height: 70vh;
+        }
+   
+   .reviews-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: start;
+        }
+
+        .title-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .review-item {
+            flex: 0 0 22%; /* flex-grow: 0, flex-shrink: 0, flex-basis: 22% */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .review-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .review-content {
+            padding: 0.5rem;
+        }
+
+        .review-content h4 {
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .review-content p {
+            font-size: 0.9rem;
+        }
+
+        .review-date {
+            display: block;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .reviewInputImg {
+            width: 100%;
+        }
+   
    
 </style>
 
@@ -82,12 +147,12 @@
 	});
 </script>
 <body>
-	<div id="container">
+	<div id="container" style="padding:0 250px;">
 		<div id="sub_visual"
 			style="background-image: linear-gradient(rgba(0, 0, 0, 0.7),
         		rgba(255, 255, 255, 0.1)), url(${tourDto.firstimage});">
 			<div class="container">
-				<button onclick="history.back()" class="tour_back">Back</button>
+				<button onclick="history.back()" class="tour_back">이전으로</button>
 				<div class="sub-title-box">
 					<h2 class="title aos-init aos-animate" data-aos="fade-up"
 						data-aos-duration="180" data-aos-delay="100">${tourDto.title}</h2>
@@ -119,9 +184,8 @@
 				</div>
 				
 				<div class="sub-sharing">
-					
 					<button type="button" class="heart-btn">
-						<i class="bi-heart"></i> <span class="number">155</span>
+						<!-- <i class="bi-heart"></i> <span class="number">0</span> -->
 					</button>
 				</div>
 			</div>
@@ -438,9 +502,41 @@
 					
 					<!-- 리뷰 -->
 					<div class="section-story4">
-						<strong>
-							<span style="font-size: 18px;">후기</span>
-						</strong>
+						
+						<c:if test="${empty reviews}">
+					        <p>후기가 없습니다.</p>
+					    </c:if>
+					    
+					    <div class="container-write"
+					             data-logged-in="${sessionScope.loginok != null}">
+					        <button class="learn-more" id="reviewButton">
+						        <span class="circle" aria-hidden="true"  style="background-color: #EEB182 ">
+						        </span>
+						        <span class="button-text">&nbsp;&nbsp;&nbsp;new review</span>
+					        </button>
+					    </div>
+					    <br><br>
+						<div class="reviews-container" style="font-family: Orbit; ">
+				            <c:forEach var="review" items="${reviews}">
+				                <div class="review-item">
+				                    <div class="image-container" style="width: 100%">
+				                        <img src="${photos[review.reviewcode]}" alt="리뷰 사진" class="reviewInputImg">
+				                        <div class="icon-and-nickname">
+				                            <i class="bi bi-person-circle"></i>
+				                            <h4 class="review-nickname">${nicknames[review.usercode]}</h4>
+				                        </div>
+				                    </div>
+				                    <div class="review-content">
+				                        <div class="title-container">
+				                            <i class="bi bi-geo-alt-fill"></i>
+				                            <h4>${review.title}</h4>
+				                        </div>
+				                        <p>${review.content}</p>
+				                        <span class="review-date">${review.registereddate}</span>
+				                    </div>
+				                </div>
+				            </c:forEach>
+				        </div>
 					</div>
 					
 				</div>
@@ -448,6 +544,26 @@
 		</div>
 	</div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var reviewButton = document.getElementById('reviewButton');
+        var containerWrite = document.querySelector('.container-write');
+
+        var isLoggedIn = containerWrite.getAttribute('data-logged-in') === 'true';
+
+        if (isLoggedIn) {
+            reviewButton.addEventListener('click', function () {
+                window.location.href = '${root}/community/review/write';
+            });
+        } else {
+            reviewButton.addEventListener('click', function () {
+                alert('로그인 해주세요.');
+                window.location.href = '${root}/member/login';
+            });
+        }
+    });
+    
+</script>
 
 </body>
 </html>

@@ -5,14 +5,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
     background: white;
     border-radius: 25px;
     /* Simulate an outset border with box-shadow */
     box-shadow:
             0 0 0 2px #fff, /* Inner white border */
             0 0 0 4px #ff8d73; /* Second gradient color */
-    max-width: 300px;
+    max-width: 250px;
     position: relative;
     right: 0px;
 }
@@ -35,4 +34,6 @@
     font-size: 20px;
     margin-left: -35px;
 }
+
+
 

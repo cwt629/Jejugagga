@@ -5,9 +5,13 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!DOCTYPE html>
 <html>
+<c:set var="root" value="<%=request.getContextPath()%>"/>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="${root}/res/photo/main_icons/tangerine.ico" rel="shortcut icon" type="image/x-icon">
+<!-- 아이콘 출처: https://www.flaticon.com/kr/free-icons/ -->
+<title>제주가까</title>
 <style>
 	/*
 	div.main_container div.header {

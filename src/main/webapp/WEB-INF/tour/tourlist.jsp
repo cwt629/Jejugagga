@@ -61,7 +61,7 @@
 		list-style-type: none;
 		display: inline-block;
 		border-right: 1px solid #d7dadb;
-	
+		cursor : pointer;
 		transform: scale(1) rotate(19deg) translateX(0px) translateY(0px) skewX(-10deg) skewY(-20deg);
 	}
 	
@@ -140,6 +140,10 @@
    .filtertablebtn_content.filtertablebtn_selected {
        border: 2px solid #d7897e;
    }
+   .bi-heart-fill {
+   		color : hotpink;
+   }
+   
 	
 	
 </style>	
@@ -151,14 +155,14 @@
 	let sigungu_categories = (urlParams.get('sigungu_categories') == undefined || urlParams.get('sigungu_categories') == '') ? 0 : urlParams.get('sigungu_categories');
 	// 컨텐트 카테고리 번호 배열
 	let content_categories = (urlParams.get('content_categories') == undefined || urlParams.get('content_categories') == '') ? [] : urlParams.get('content_categories').split(',');
-	
-	//console.log(' ===== content_categories : ', content_categories);
+	// 로그인 사용자 체크
+	let userChk = 0;
+	if (${sessionScope.loginok != null}) userChk = "${sessionScope.usercode != null? sessionScope.usercode : 0}";
 	
 	$(document).ready(function(){
 		// 필터 활성화 체크
-		if(content_categories.length != 4 && urlParams.get('content_categories') != undefined) {			
+		if(content_categories.length != 4 && content_categories != 0) {			
 			let contentData = $('.filtertablebtn_content');
-			
 			for(var i=0; i<contentData.length; i++) {
 				let infoCode = $(contentData[i]).attr('infocode');
 				let classChk = true;
@@ -167,15 +171,24 @@
 					if(content_categories[j] == infoCode) classChk = false;
 				}
 				
-				if(classChk) $(contentData[i]).removeClass('filtertablebtn_selected');
+				if(classChk) $(contentData[i]).toggleClass('filtertablebtn_selected');
 			}
-		} 
+		}
+		
+		let sigunguData = $('.filtertablebtn_sigungu');
+		for(var i=0; i<sigunguData.length; i++) {
+			let infoCode = $(sigunguData[i]).attr('infocode');
+			if(sigungu_categories == infoCode) $(sigunguData[i]).toggleClass('filtertablebtn_selected');
+		}
     });
 	
+	let clickingHeart= false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
+	const FULL_HEART_BUTTON = `<i class="bi-heart-fill tourlikes"></i>`;
+	const EMPTY_HEART_BUTTON = `<i class="bi-heart tourlikes"></i>`;
 	
 	$(function() {
 		list();
-	
+		
 		//검색버튼 클릭 이벤트
 		$("#btnsearch").click(function() {
 			word=$("#word").val();
@@ -210,6 +223,7 @@
 			$(".filtertablebtn_content.filtertablebtn_selected").each(function (idx, item) {
             	newContent.push(parseInt($(this).attr("infocode"))); // 정수로 변환하여 배열에 추가
             });
+			
 			if(JSON.stringify(content_categories) != JSON.stringify(newContent)){
 				content_categories = newContent;
 				currentPage = 1;
@@ -227,7 +241,7 @@
 		
 		//페이지 클릭 이벤트
 		$(document).on("click", ".pagination-link", function(){
-			console.log($(this).attr('data'));
+			//console.log($(this).attr('data'));
 			let currentPage = parseInt($(this).attr('data'));
 
 			let link =  `./list?currentPage=\${currentPage}&word=\${word}`
@@ -238,8 +252,60 @@
 		});
 		
 		//좋아요 이벤트
-		$(document).on("click", ".tourlikes", function(){
+		$(document).on("click", ".tourlikes", function() {
+			// 1. 현재 누른 좋아요 확인하기
+			if(userChk > 0 && !clickingHeart) {
+				let fullHart = $(this).attr('class').search('bi-heart-fill');
+				let tourcode = $(this).attr('tourcode');
+				
+				clickingHeart = true;
+				
+				if(fullHart > -1) {
+					// 2. 이미 좋아요 눌럿을때
+					$(this).removeClass('bi-heart-fill');		
+					$(this).addClass('bi-heart');
+							
+					$.ajax({
+						type : "POST",
+						dataType : "json",
+						url:"./like/remove",
+						data: {
+							"tourcode" : tourcode,
+							"usercode" : userChk
+						},
+						success:function(res){
+							$('c[name=likCnt' + tourcode + ']').text(res.totalLikes);
+						}
+					});
 			
+				} else {
+					// 3. 좋아요 안 눌럿을때
+					$(this).removeClass('bi-heart');
+					$(this).addClass('bi-heart-fill');
+					
+					$.ajax({
+						type : "POST",
+						dataType : "json",
+						url:"./like/grant",
+						data: {
+							"tourcode" : tourcode,
+							"usercode" : userChk
+						},
+						success:function(res){
+							$('c[name=likCnt' + tourcode + ']').text(res.totalLikes);
+							
+						}
+					});
+				}
+				
+				clickingHeart = false;
+			} else {
+				if(clickingHeart) alert("좋아요 처리중입니다.");
+				else {
+					alert("로그인 해주세요.");
+					window.location.href = '${root}/member/login';
+				}
+			}
 		});
 		
 	});
@@ -249,10 +315,11 @@
 		
 		// 서버 전송 테이터 셋팅
 		let reqData = {
-			"word"			:	word				,				// 검색 어
+			"word"			:	word				,				// 검색어
 			"currentPage"	:	currentPage			, 				// 현재 페이지
 			"sigungucode"	:	sigungu_categories	,				// 지역코드
-			"contenttype"	:	JSON.stringify(content_categories)	// 카테고리
+			"contenttype"	:	JSON.stringify(content_categories),	// 카테고리
+			"userCode"		:	userChk
 		};
 		
 		$.ajax({
@@ -312,8 +379,12 @@
 								<div class="item-meta">
 									<div class="meta-wrap">
 										<input type="checkbox" id="scrap0" class="chk-scrap"> 
-										<div class="chk-scrap-lbl"> 
-											<i class="bi-heart tourlikes"></i> 27
+										<div class="chk-scrap-lbl">
+										`;
+										if(item.likchk == 1) s+= `<i class="bi-heart-fill tourlikes" style="cursor: pointer;" tourcode="\${item.tourcode}"></i>`; 
+										else s+= `<i class="bi-heart tourlikes" style="cursor: pointer;" tourcode="\${item.tourcode}"></i>`;
+					s+= 				`
+											<c name="likCnt\${item.tourcode}">\${item.likes}</c>
 										</div>
 									</div>
 								</div>
@@ -370,7 +441,7 @@
 	<div class="tour-main">
 		<div class="container">
 			<div class="contents-head">
-				<b class="contents-title" style="font-size: 50px;">여행지</b>
+				<b class="contents-title" style="font-size: 42px; padding-left: 10px">여행지</b>
 				<div class="head-option">
 					<!-- 검색창 -->
 					<div class="page-search">
@@ -419,7 +490,6 @@
 	      <!-- Modal Header -->
 	      <div class="modal-header">
 	        <h4 class="modal-title">필터 선택</h4>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 	      </div>
 	
 	      <!-- Modal body -->
@@ -429,7 +499,7 @@
 		        		<tr><td>지역</td></tr>
 		        		<tr>	
 		        			<td>
-		        				<button type="button" class="filtertablebtn_sigungu filtertablebtn_selected" infocode="0">전체</button>
+		        				<button type="button" class="filtertablebtn_sigungu" infocode="0">전체</button>
 		        				<button type="button" class="filtertablebtn_sigungu" infocode="4">제주시</button>
 		        				<button type="button" class="filtertablebtn_sigungu" infocode="3">서귀포시</button>
 		        			</td>

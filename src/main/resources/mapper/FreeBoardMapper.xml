@@ -1,32 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jeju.dao.BoardFreeDao">
-    <select id="totalCountOfBoard" resultType="int">
-      select count(*) from board_free
+    <select id="totalCountOfBoardFree" resultType="int">
+        select count(*)
+        from board_free
     </select>
-    <select id="selectPagingOfBoardFreeCriteria" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria" resultType="BoardFreeDto">
-        select * from board_free
+    <select id="selectPagingOfBoardFreeCriteria" parameterType="jeju.boardfree_utils.BoardFreePagingCriteria"
+            resultType="BoardFreeDto">
+        select *
+        from board_free
+        ORDER BY registereddate desc
         LIMIT #{pageStart}, #{perPageNum}
     </select>
     <insert id="insertBoardFree" parameterType="BoardFreeDto">
-        insert into board_free (freeboardcode, usercode, title, content, viewcount, registereddate)
-        values (#{freeboardcode}, #{usercode}, #{title}, #{content}, #{viewcount}, now())
+        insert into board_free (usercode, title, content, photo, registereddate)
+        values (#{usercode}, #{title}, #{content}, #{photo}, now())
     </insert>
-
     <select id="selectMaxNumOfBoardFree" resultType="int">
-<!--        <selectKey keyProperty="num" resultType="int" order="AFTER">-->
-<!--            SELECT LAST_INSERT_ID()-->
-<!--        </selectKey>-->
-      select ifnull(max(title), 0) from board_free
-
+        select ifnull(max(title), 0)
+        from board_free
     </select>
     <update id="updateReadCountOfBoardFree" parameterType="int">
-      update board_free set viewcount = viewcount + 1 where title=#{title}
+        update board_free
+        set viewcount = viewcount + 1
+        where freeboardcode = #{freeboardcode}
     </update>
     <update id="updateBoardFree" parameterType="BoardFreeDto">
-      update board_free set title = #{title}, content = #{content} where usercode=#{usercode}
+        update board_free
+        set title   = #{title},
+            content = #{content}
+        where usercode = #{usercode}
     </update>
     <delete id="deleteBoardFree" parameterType="int">
-      delete from board_free where usercode=#{usercode}
+        delete
+        from board_free
+        where freeboardcode = #{freeboardcode}
     </delete>
+    <select id="detailBoardFreePage" parameterType="int" resultType="BoardFreeDto">
+        select *
+        from board_free
+        where freeboardcode = #{freeboardcode}
+    </select>
+    <update id="updateViewCountOfBoardFree" parameterType="int">
+        UPDATE board_free
+        SET viewcount = viewcount + 1
+        WHERE freeboardcode = #{freeboardcode}
+    </update>
+    <select id="selectUserCodeWrite" parameterType="int">
+        SELECT *
+        FROM board_free
+        WHERE usercode = #{userCode}
+        ORDER BY freeboardcode DESC
+    </select>
+    <select id="selectAllfreeboardlist10Bydesc" resultType="BoardFreeDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
+        select * from board_free order by registereddate desc limit 0,10
+    </select>
+    <!-- 게시물 총 갯수 + 검색기능 추가-->
+    <select id="searchCount" parameterType="Map" resultType="int">
+        SELECT COUNT(*) FROM board_free
+        <if test="searchWord!=null and searchWord!=''">
+            where ${searchType} like concat('%',#{searchWord},'%')
+        </if>
+    </select>
+    <select id="getSearchList" parameterType="Map" resultType="BoardFreeDto">
+        SELECT * FROM board_free
+        <if test="searchWord!=null and searchWord!=''">
+            where ${searchType} like concat('%',#{searchWord},'%')
+        </if>
+        ORDER BY registereddate DESC
+        LIMIT #{pageStart}, #{perPageNum}
+    </select>
+
+    <!--닉네임 중복값 검색을 방지하기 위한 명령어-->
+    <select id="getBoardListWithUserNickname" parameterType="Map"
+            resultType="BoardFreeDto">
+        SELECT b.*, m.nickname AS userNickname
+        FROM board_free b
+        JOIN member_table m ON b.usercode = m.usercode
+        WHERE m.nickname LIKE CONCAT('%', #{searchWord}, '%');
+    </select>
+
+
+    <!-- 게시물 총 갯수 조회 쿼리 추가 -->
+    <select id="searchTotalCount" parameterType="Map" resultType="int">
+        SELECT COUNT(*) FROM board_free
+        <if test="searchWord!=null and searchWord!=''">
+            where ${searchType} like concat('%',#{searchWord},'%')
+        </if>
+    </select>
 </mapper>

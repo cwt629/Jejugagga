@@ -14,7 +14,6 @@
 <style>
 	body * {
 		font-family: 'Orbit';
-		font-size: 14px;
 	}
 	
 	.checkdiv {
