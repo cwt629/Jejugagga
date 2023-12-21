@@ -94,18 +94,18 @@ main.blue .wrapper h1 {
     animation: neon2-4 3s infinite;
 }
 main.blue .wrapper h2 {
-    text-shadow: 0 0 10px #03A9F4, 0 0 30px #03f4c7;
-    color: #03A9F4;
+    text-shadow: 0 0 10px #A5948C, 0 0 30px #9D897C;
+    color: #BAA093;
 }
 
 @keyframes neon2-4 {
     0% {
-        color: #03A9F4;
-        text-shadow: 0 0 10px #03A9F4, 1px 1px #92dcfe, 0 0 280px #03f4c7;
+        color: #BAA093;
+        text-shadow: 0 0 10px #BAA093, 1px 1px #A5948C, 0 0 280px #9D897C;
     }
     80% {
-        color: #03A9F4;
-        text-shadow: 0 0 10px #03A9F4, 1px 1px #92dcfe, 0 0 280px #03f4c7;
+        color: #BAA093;
+        text-shadow: 0 0 10px #BAA093, 1px 1px #A5948C, 0 0 280px #9D897C;
     }
     81% {
         color: #222;
@@ -116,28 +116,28 @@ main.blue .wrapper h2 {
         text-shadow: 0 0 10px #000, 1px 1px #634a52, -2px 0px 4px #29121A;
     }
     95% {
-        color: #03A9F4;
-        text-shadow: 0 0 10px #03A9F4, 1px 1px #92dcfe, 0 0 280px #03f4c7;
+        color: #BAA093;
+        text-shadow: 0 0 10px #BAA093, 1px 1px #A5948C, 0 0 280px #9D897C;
     }
     96% {
         color: #222;
         text-shadow: 0 0 10px #000, 1px 1px #634a52, -2px 0px 4px #29121A;
     }
     97% {
-        color: #03A9F4;
-        text-shadow: 0 0 10px #03A9F4, 1px 1px #92dcfe, 0 0 280px #03f4c7;
+        color: #BAA093;
+        text-shadow: 0 0 10px #BAA093, 1px 1px #A5948C, 0 0 280px #9D897C;
     }
     98% {
-        color: #03A9F4;
-        text-shadow: 0 0 10px #03A9F4, 1px 1px #92dcfe, 0 0 280px #03f4c7;
+        color: #BAA093;
+        text-shadow: 0 0 10px #BAA093, 1px 1px #A5948C, 0 0 280px #9D897C;
     }
     99% {
         color: #222;
         text-shadow: 0 0 10px #000, 1px 1px #634a52, -2px 0px 4px #29121A;
     }
     100% {
-        color: #03A9F4;
-        text-shadow: 0 0 10px #03A9F4, 1px 1px #92dcfe, 0 0 280px #03f4c7;
+        color: #BAA093;
+        text-shadow: 0 0 10px #BAA093, 1px 1px #A5948C, 0 0 280px #9D897C;
     }
 }
 @keyframes bgNeon-4 {

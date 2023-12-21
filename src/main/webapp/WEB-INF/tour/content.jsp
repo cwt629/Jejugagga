@@ -17,6 +17,8 @@
 <link rel="stylesheet" type="text/css" href="${root}/res/styles/tour_plugin.css">
 <link rel="stylesheet" type="text/css" href="${root}/res/styles/tour_style.css">
 <link rel="stylesheet" type="text/css" href="${root}/res/styles/tour_fontawesome.min.css">
+<link rel="stylesheet" type="text/css" href="${root}/res/review/reviewwritebutton.css">
+
 
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
@@ -45,7 +47,7 @@
    
    button.tour_back {
        color: white;
-	    background-color: #b7a89f;
+	    background-color: #ccc;
 	    border: none;
 	    padding: 10px;
 	    border-radius: 2px;
@@ -150,7 +152,7 @@
 			style="background-image: linear-gradient(rgba(0, 0, 0, 0.7),
         		rgba(255, 255, 255, 0.1)), url(${tourDto.firstimage});">
 			<div class="container">
-				<button onclick="history.back()" class="tour_back">Back</button>
+				<button onclick="history.back()" class="tour_back">이전으로</button>
 				<div class="sub-title-box">
 					<h2 class="title aos-init aos-animate" data-aos="fade-up"
 						data-aos-duration="180" data-aos-delay="100">${tourDto.title}</h2>
@@ -504,6 +506,16 @@
 						<c:if test="${empty reviews}">
 					        <p>후기가 없습니다.</p>
 					    </c:if>
+					    
+					    <div class="container-write"
+					             data-logged-in="${sessionScope.loginok != null}">
+					        <button class="learn-more" id="reviewButton">
+						        <span class="circle" aria-hidden="true"  style="background-color: #EEB182 ">
+						        </span>
+						        <span class="button-text">&nbsp;&nbsp;&nbsp;new review</span>
+					        </button>
+					    </div>
+					    <br><br>
 						<div class="reviews-container" style="font-family: Orbit; ">
 				            <c:forEach var="review" items="${reviews}">
 				                <div class="review-item">
@@ -532,6 +544,26 @@
 		</div>
 	</div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var reviewButton = document.getElementById('reviewButton');
+        var containerWrite = document.querySelector('.container-write');
+
+        var isLoggedIn = containerWrite.getAttribute('data-logged-in') === 'true';
+
+        if (isLoggedIn) {
+            reviewButton.addEventListener('click', function () {
+                window.location.href = '${root}/community/review/write';
+            });
+        } else {
+            reviewButton.addEventListener('click', function () {
+                alert('로그인 해주세요.');
+                window.location.href = '${root}/member/login';
+            });
+        }
+    });
+    
+</script>
 
 </body>
 </html>
