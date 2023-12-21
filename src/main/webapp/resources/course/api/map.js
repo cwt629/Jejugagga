@@ -24,21 +24,11 @@ function initMap(){
     	let pos = new naver.maps.LatLng(latitude, longitude);
     	let marker = new naver.maps.Marker({
     		position: pos,
-    		map: map
-    	});
-    	/*
-    	let labelOverlay = new naver.maps.CustomOverlay({
-    		position: pos,
     		map: map,
-    		content: '<div class="label">' + String.fromCharCode(65 + idx) + '</div>',
-    		xAnchor: 0.5,
-    		yAnchor: 1.5,
-    		zIndex: 100
+    		title: item.dataset.title,
+    		animation: naver.maps.Animation.BOUNCE
     	});
-    	*/
-    	
-    	marker.setTitle(item.dataset.title); // 마우스 갖다대면 이름 출력
-    	
+    	    	
     	// 각 여행지 요소에 클릭 시 이벤트를 부여한다
 	    item.addEventListener("click", function(){
 	    	let latitude = parseFloat(this.dataset.mapy), longitude = parseFloat(this.dataset.mapx);
