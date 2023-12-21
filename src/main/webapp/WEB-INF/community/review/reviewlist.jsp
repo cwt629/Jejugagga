@@ -238,7 +238,7 @@
         </h2>
 
         <div class="container-write" style="position: absolute; margin-top: -53px; margin-left: 200px"
-             data-logged-in="${sessionScope.loginok == 'yes'}">
+             data-logged-in="${sessionScope.loginok != null}">
             <button class="learn-more" id="reviewButton">
         <span class="circle" aria-hidden="true">
             <span class="icon arrow"></span>
