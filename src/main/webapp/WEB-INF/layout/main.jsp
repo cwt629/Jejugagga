@@ -46,7 +46,7 @@
     	letter-spacing: -0.04em;
     	z-index: 1;
     	position: absolute;
-    	top: 150px;
+    	top: 190px;
     	left: 10%;
    }
    
@@ -121,9 +121,9 @@
 	<div class="main-story">
 		<strong style="font-size: 30px;">당신과 함께 한 아름다운 제주를 공유해주세요!<br><br></strong>
 		<span style="font-size: 20px;">
-			제주가까는<br> 
+			<strong>제주가까는<br> 
 			여러분과 함께 만들어가는 <br>
-			여행 코스 플랫폼입니다.<br></span>
+			여행 코스 플랫폼입니다.<br></strong></span>
 	</div>
 
 <div>
@@ -132,7 +132,7 @@
     margin-bottom: 20px;
     text-align-last: center;
     color: #fd7e14;
-"># 어디로 여행을 떠나시나요?</h2>
+"><strong># 어디로 여행을 떠나시나요?</strong></h2>
 </div>
 	<div class="search-div">
 		<div class="page-search" style="max-width: 590px;">
@@ -150,7 +150,7 @@
     margin-bottom: 20px;
     text-align-last: center;
     color: #fd7e14;
-"># 이달의 행사</h2>
+"><strong># 이달의 행사</strong></h2>
 </div>
  <swiper-container class="mySwiper swiper-container2" pagination="true" effect="coverflow" grab-cursor="true" centered-slides="true"
     slides-per-view="auto" coverflow-effect-rotate="50" coverflow-effect-stretch="0" coverflow-effect-depth="100"
