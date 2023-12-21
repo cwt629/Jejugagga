@@ -157,7 +157,7 @@
     var button = document.getElementById('bttn1');
 
     button.addEventListener('click', function() {
-        window.location.href = '${root}/community/review/list';
+        history.back();
     });
 </script>
 <script>
