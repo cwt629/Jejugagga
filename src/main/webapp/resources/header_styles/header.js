@@ -24,7 +24,7 @@ function hoverItem(item, index) {
 }
 
 function offsetMenuBorder(element, menuBorder) {
-
+	if (!element) return;
     const offsetActiveItem = element.getBoundingClientRect();
     const left = Math.floor(offsetActiveItem.left - menu.offsetLeft - (menuBorder.offsetWidth  - offsetActiveItem.width) / 2) + "px";
     menuBorder.style.transform = `translate3d(${left}, 0 , 0)`;
