@@ -160,7 +160,7 @@
         <ul class="ul-menu-bar" style="margin-top: 0;">
             <menu class="menu">
 
-                <button class="menu__item active" style="--bgColorItem: #FFC47E;">
+                <button class="menu__item" style="--bgColorItem: #FFC47E;">
                     <div class="text-container">
                         <a href="${root}/tour/list" style="color: black; text-decoration: none;">여행정보</a>
                     </div>
