@@ -9,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -127,16 +124,22 @@ public class FreeBoardController {
     }
 
     @PostMapping("/community/free/update")
-    public String update(@ModelAttribute BoardFreeDto boardFreeDto) {
+    public String update(@ModelAttribute BoardFreeDto boardFreeDto
+                         ) {
         boardFreeService.updateBoardFree(boardFreeDto);
         return "redirect:/community/free/list";
     }
 
     @PostMapping("/community/free/delete")
-    public String delete(@ModelAttribute BoardFreeDto boardFreeDto) {
-        int num = boardFreeDto.getFreeboardcode();
-        boardFreeService.deleteBoardFree(num);
-        return "redirect:/community/free/list";
+    @ResponseBody
+    public String delete(@RequestParam("freeboardcode") int freeboardcode) {
+        try {
+            boardFreeService.deleteBoardFree(freeboardcode);
+            return "success"; // 삭제 성공 시 "success" 반환
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error"; // 삭제 실패 시 "error" 반환
+        }
     }
 
     @GetMapping("/community/free/detail")

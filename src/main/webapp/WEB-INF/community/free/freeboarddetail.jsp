@@ -40,7 +40,15 @@
     function deleteItem() {
         var deleteItem = confirm("정말 삭제하시겠습니까?");
         if (deleteItem) {
-            location.href = "${root}/community/free/delete?freeboardcode=${boardFreeDto.freeboardcode}";
+            // jQuery를 사용하여 POST 요청 보내기
+            $.post("${root}/community/free/delete", { freeboardcode: freeboardcode }, function(data) {
+                if (data === 'success') {
+                    // 삭제 성공 시 페이지 리로드 또는 다른 작업 수행
+                    location.reload(); // 예시: 페이지 리로드
+                } else {
+                    alert("삭제 실패");
+                }
+            });
         }
     }
 </script>
