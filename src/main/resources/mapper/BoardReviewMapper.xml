@@ -32,7 +32,11 @@
 		select * from board_review order by registereddate desc limit 0,10
 	</select>
 	
-	<delete id="deleteReviewbyReviewcode" parameterType="int">
-		delete from board_review where reviewcode= #{reviewcode}
-	</delete>
+	
+	<!-- tourcode에 해당하는 리뷰만 받기(by 김나혜) -->
+	<select id="selectReviewListOfTour" parameterType="int" resultType="BoardReviewDto">
+        SELECT * FROM board_review WHERE tourcode = #{tourcode}
+    </select>
+	
+	
 </mapper>
