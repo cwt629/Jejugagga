@@ -50,10 +50,12 @@ public class AdminController {
 		List<Map<String, Object>> freeBoardandNickname = admindao.selectFreeboardAndNickname();
 		List<Map<String, Object>> reviewBoardandNickname = admindao.selectReviewboardAndNickname();
 		List<Map<String, Object>> inquiryisanswer = admindao.selectInquiryisanswer();
+		List<Map<String, Object>> courseAndNickname = admindao.selectcourseAndNickname();
 		model.addAttribute("memberlist10", memberlist10);
 		model.addAttribute("freeBoardandNickname", freeBoardandNickname);
 		model.addAttribute("reviewBoardandNickname", reviewBoardandNickname);
 		model.addAttribute("inquiryisanswer", inquiryisanswer);
+		model.addAttribute("courseAndNickname", courseAndNickname);
 		return "admin/adminpage";
 	}
 	
@@ -66,13 +68,19 @@ public class AdminController {
 	@GetMapping("/admin/freeboard/delete")
 	@ResponseBody public void deletefreeboard(@RequestParam int freeboardcode)
 	{
-		admindao.deleteFreebyReviewcode(freeboardcode);
+		admindao.deleteFreebyFreeboardcode(freeboardcode);
 	}
 	
 	@GetMapping("/admin/reviewboard/delete")
 	@ResponseBody public void deletereviewboard(@RequestParam int reviewcode)
 	{
 		admindao.deleteReviewbyReviewcode(reviewcode);
+	}
+	
+	@GetMapping("/admin/course/delete")
+	@ResponseBody public void deleteCoursebyCoursecode(@RequestParam int coursecode)
+	{
+		admindao.deleteCoursebyCoursecode(coursecode);
 	}
 	
 	@GetMapping("/admin/membermanage")
