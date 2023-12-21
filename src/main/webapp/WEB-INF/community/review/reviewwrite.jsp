@@ -153,8 +153,13 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script type="text/javascript">
+    var button = document.getElementById('bttn1');
 
-
+    button.addEventListener('click', function() {
+        window.location.href = '${root}/community/review/list';
+    });
+</script>
 <script>
     $(document).ready(function () {
         var $titleDropdown = $('#titleDropdown');
