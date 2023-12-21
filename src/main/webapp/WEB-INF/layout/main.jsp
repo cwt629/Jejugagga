@@ -159,7 +159,7 @@
     
 	<c:forEach var="dto" items="${tourDto}">    
 	    <swiper-slide class="swiper-slide2">
-		    <a href="/jeju/tour/content?tourcode=${dto.tourcode}">
+		    <a href="./tour/content?tourcode=${dto.tourcode}">
 		      <p class="slide-title">${dto.title}</p>
 		      <img src="${dto.firstimage}" />
 		     </a>
@@ -185,7 +185,7 @@
 	
 	$(function() {
 		$('#search').on('click', function() {
-			location.href = '/jeju/tour/list?word=' + $('#word').val();
+			location.href = './tour/list?word=' + $('#word').val();
 		});
 	});
 	
