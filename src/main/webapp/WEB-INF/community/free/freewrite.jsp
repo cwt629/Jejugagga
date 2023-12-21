@@ -35,14 +35,13 @@
                 </div>
                 <div class="cont">
                     <textarea name="content" placeholder="내용 입력">
-
                     </textarea>
                 </div>
             </div>
 
             <div class="bt_wrap">
                 <input type="submit" value="등록" class="on"/>
-                <a href="/community/free/list">취소</a>
+                <a href="./community/free/list">취소</a>
             </div>
             <input type="hidden" name="usercode" value="${sessionScope.usercode}" />
         </form>
@@ -50,20 +49,3 @@
 </div>
 </body>
 </html>
-<%--<!DOCTYPE html>--%>
-<%--<html lang="ko">--%>
-<%--<head>--%>
-<%--    <meta charset="UTF-8">--%>
-<%--    <title>자유게시판 글쓰기</title>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<h1>자유게시판 글쓰기</h1>--%>
-<%--<form action="${root}/community/free/save" method="post" enctype="multipart/form-data">--%>
-<%--    <input type="hidden" name="usercode" value="${sessionScope.usercode}">--%>
-<%--    <input type="text" name="title" placeholder="제목">--%>
-<%--    <textarea name="content" placeholder="내용"></textarea>--%>
-<%--    <input type="File" name="uploadFile" placeholder="사진">--%>
-<%--    <input type="submit" value="글쓰기">--%>
-<%--</form>--%>
-<%--</body>--%>
-<%--</html>--%>

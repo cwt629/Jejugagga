@@ -135,18 +135,18 @@
             <li class="pagination-item--wide first">
                 <c:if test="${currentPage > 1}">
                     <a class="pagination-link--wide first"
-                       href="${'/community/free/list?currentPage=' += currentPage - 1}">Previous</a>
+                       href="${'./list?currentPage=' += currentPage - 1}">Previous</a>
                 </c:if>
             </li>
             <c:forEach var="i" begin="1" end="${totalPage}">
                 <li class="pagination-item ${currentPage == i ? 'is-active' : ''}">
-                    <a class="pagination-link" href="/community/free/list?currentPage=${i}&searchType=${searchType}&searchWord=${searchWord}">${i}</a>
+                    <a class="pagination-link" href="${root}/community/free/list?currentPage=${i}&searchType=${searchType}&searchWord=${searchWord}">${i}</a>
                 </li>
             </c:forEach>
             <li class="pagination-item--wide last">
                 <c:if test="${currentPage < totalPage}">
                     <a class="pagination-link--wide first"
-                       href="${'/community/free/list?currentPage=' += currentPage + 1}">Next</a>
+                       href="${'./list?currentPage=' += currentPage + 1}">Next</a>
                 </c:if>
             </li>
         </ul>
