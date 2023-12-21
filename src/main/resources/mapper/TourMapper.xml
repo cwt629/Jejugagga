@@ -80,7 +80,7 @@
 	
 	<!-- 홈에 띄울거 -->
 	<select id="selectFestivalOfTour" resultType="TourDto">
-		select * from tour where eventenddate > '2023-12-26'
+		select * from tour where eventenddate > '2023-12-01'
 	</select>
 		
 </mapper>

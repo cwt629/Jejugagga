@@ -135,7 +135,7 @@
 "># 어디로 여행을 떠나시나요?</h2>
 </div>
 	<div class="search-div">
-		<div class="page-search" style="max-width: 50%;">
+		<div class="page-search" style="max-width: 590px;">
 			<div class="search-wrap">
 				<input placeholder="여행지명을 검색해보세요" class="txt search-input-size" id="word">
 				<button id="search" style="border: 0px; background-color: #fff;">
@@ -154,7 +154,8 @@
 </div>
  <swiper-container class="mySwiper swiper-container2" pagination="true" effect="coverflow" grab-cursor="true" centered-slides="true"
     slides-per-view="auto" coverflow-effect-rotate="50" coverflow-effect-stretch="0" coverflow-effect-depth="100"
-    coverflow-effect-modifier="1" coverflow-effect-slide-shadows="true">
+    coverflow-effect-modifier="1" coverflow-effect-slide-shadows="true"
+    style="--swiper-theme-color: #fd7e14;">
     
 	<c:forEach var="dto" items="${tourDto}">    
 	    <swiper-slide class="swiper-slide2">
@@ -168,10 +169,19 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+
+
 <script>
 	var swiper = document.querySelector('.swiper-container2').swiper
-	swiper.slideNext();
-	swiper.slideNext();
+	
+	let dtoLen = ($('.swiper-slide2').length / 2) - 1;
+	
+	console.log($('.swiper-slide2').length);
+	console.log(dtoLen)
+	
+	for(var i=0; i<dtoLen; i++) {
+		swiper.slideNext();
+	}
 	
 	$(function() {
 		$('#search').on('click', function() {
