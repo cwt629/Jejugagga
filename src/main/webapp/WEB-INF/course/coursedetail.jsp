@@ -59,6 +59,7 @@
        padding: 5px;
        margin: 0 10px;
        border: none;
+       box-shadow: 3px 3px 3px #ccc;
    }
    
    div.coursedetail_header div.coursedetail_headerbtns {
