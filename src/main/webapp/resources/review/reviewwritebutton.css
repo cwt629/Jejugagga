@@ -34,7 +34,7 @@ button.learn-more .circle {
     margin: 0;
     width: 3rem;
     height: 3rem;
-    background: #282936;
+    background: #775555;
     border-radius: 1.625rem;
 }
 button.learn-more .circle .icon {
@@ -43,7 +43,7 @@ button.learn-more .circle .icon {
     top: 0;
     bottom: 0;
     margin: auto;
-    background: #fff;
+    background: #775555;
 }
 button.learn-more .circle .icon.arrow {
     transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
@@ -82,7 +82,7 @@ button:hover .circle {
     width: 100%;
 }
 button:hover .circle .icon.arrow {
-    background: #fff;
+    background: #775555;
     transform: translate(1rem, 0);
 }
 button:hover .button-text {
