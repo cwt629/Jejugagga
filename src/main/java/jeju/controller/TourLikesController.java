@@ -24,7 +24,6 @@ public class TourLikesController {
 	@PostMapping("/tour/like/grant")
 	public Map<String, Integer> addLike(@RequestParam int tourcode, @RequestParam int usercode) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
-		System.out.println("================================ here we gonig ");
 		
 		// 이미 좋아요가 있지 않은 경우에 추가해주도록 하자.
 		if (!tourLikesService.isLikedByUser(usercode, tourcode)) {
