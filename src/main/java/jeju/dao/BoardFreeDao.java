@@ -1,5 +1,6 @@
 package jeju.dao;
 
+import jeju.boardfree_utils.BoardFreePagingCriteria;
 import jeju.dto.BoardFreeDto;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,8 +15,8 @@ import java.util.Map;
 public class BoardFreeDao {
 	@Autowired
 	private SqlSession session;
-	
-	private String nameSpace="jeju.dao.BoardFreeDao.";
+
+	private String nameSpace = "jeju.dao.BoardFreeDao.";
 
 	public int getTotalCount() {
 		return session.selectOne(nameSpace + "totalCountOfBoardFree");
@@ -34,7 +35,7 @@ public class BoardFreeDao {
 	}
 
 	public void insertBoardFree(BoardFreeDto dto) {
-		session.insert(nameSpace + "insertBoard", dto);
+		session.insert(nameSpace + "insertBoardFree", dto);
 	}
 
 	public void updateReadCount(int num) {
@@ -52,9 +53,55 @@ public class BoardFreeDao {
 	public void deleteBoardFree(int num) {
 		session.delete(nameSpace + "deleteBoardFree", num);
 	}
-	
+
 	public List<BoardFreeDto> selectAllfreeboardlist10Bydesc() {
 		return session.selectList(nameSpace + "selectAllfreeboardlist10Bydesc");
 	}
-	
+
+	public BoardFreeDto detailBoardFreePage(int freeboardcode) {
+		return session.selectOne(nameSpace + "detailBoardFreePage", freeboardcode);
+	}
+
+	public void updateViewCount(int freeboardcode) {
+		session.update(nameSpace + "updateViewCountOfBoardFree", freeboardcode);
+	}
+
+	public int searchCount(String searchType, String searchWord) throws Exception {
+		Map<String, String> paramMap = new HashMap<>();
+		paramMap.put("searchType", searchType);
+		paramMap.put("searchWord", searchWord);
+
+		return session.selectOne(nameSpace + "searchCount", paramMap);
+	}
+
+	public List<BoardFreeDto> getSearchList(BoardFreePagingCriteria criteria) {
+		return session.selectList(nameSpace + "getSearchList", criteria);
+	}
+
+	public List<BoardFreeDto> getList(BoardFreePagingCriteria criteria) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("pageStart", criteria.getPageStart());
+		paramMap.put("perPageNum", criteria.getPerPageNum());
+		paramMap.put("searchType", criteria.getSearchType());
+		paramMap.put("searchWord", criteria.getSearchWord());
+
+
+
+			return session.selectList(nameSpace + "getSearchList", paramMap);
+		}
+
+
+	public int searchTotalCount(String searchType, String searchWord) throws Exception {
+		Map<String, String> paramMap = new HashMap<>();
+		paramMap.put("searchType", searchType);
+		paramMap.put("searchWord", searchWord);
+
+		return session.selectOne(nameSpace + "searchTotalCount", paramMap);
+	}
+
+	// Dao에서 맵퍼에서 닉네임 중복 검색을 받아와서 searchWord에 각각 세팅하여 뿌린다.
+	public List<BoardFreeDto> getBoardListWithUserNickname(Map<String, String> paramMap) {
+		return session.selectList(nameSpace + "getBoardListWithUserNickname", paramMap);
+	}
+
 }

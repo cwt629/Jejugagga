@@ -5,49 +5,68 @@
     padding-top: 2em;
     border-top: 1px solid #d7dadb;
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .pagination-item {
     list-style-type: none;
     display: inline-block;
     border-right: 1px solid #d7dadb;
-    transform: scale(1) rotate(19deg) translateX(0px) translateY(0px) skewX(-10deg) skewY(-20deg);
+    margin: 0 0px;
+    transform: skewX(-20deg);
 }
 
-.pagination-item:hover,
-.pagination-item.is-active {
-    background-color: #75444A;
+.pagination-item:last-child {
+    border-right: none;
+}
+
+
+.pagination ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: inline-block;
+    justify-content: center;
+}
+
+.pagination li {
+    display: inline-block;
+    border-right: 1px solid #d7dadb;
+}
+
+.pagination li:hover,
+.pagination li.is-active {
+    background-color: #EEB182;
     opacity: 0.8;
     border-right: 1px solid #fff;
 }
-.pagination-item:hover .pagination-link,
-.pagination-item.is-active .pagination-link {
+
+.pagination li:hover a,
+.pagination li.is-active a {
     color: #fff;
 }
 
-.pagination-item.first-number {
-    border-left: 1px solid #d7dadb;
-}
-
-.pagination-link {
+.pagination a {
     padding: 1.1em 1.6em;
     display: inline-block;
     text-decoration: none;
     color: #8b969c;
-    transform: scale(1) rotate(0deg) translateX(0px) translateY(0px) skewX(20deg) skewY(0deg);
 }
 
 .pagination-item--wide {
-    list-style-type: none;
-    display: inline-block;
+    border: none;
 }
 
 .pagination-item--wide.first {
-    margin: 0 1em 0 0;
+    margin: 0 0em;
+    transform: skewX(-20deg);
 }
 
 .pagination-item--wide.last {
-    margin: 0 0 0 1em;
+    margin: 0 0em;
+    transform: skewX(-20deg);
+    border-right: none;
 }
 
 .pagination-link--wide {
@@ -57,7 +76,7 @@
 }
 
 .pagination-link--wide:hover {
-    color: #75444A;
+    color: #EEB182;
     opacity: 0.8;
 }
 
@@ -74,12 +93,6 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.pagination {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    justify-content: center;
-}
 
 .image-container {
     position: relative;

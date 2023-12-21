@@ -1,5 +1,6 @@
 package jeju.controller;
 
+import javax.servlet.http.HttpSession;
 import jeju.dto.BoardReviewDto;
 import jeju.dto.BoardReviewPhotoDto;
 import jeju.service.ReviewBoardService;
@@ -11,10 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +25,7 @@ public class ReviewBoardController {
 	@Autowired
 	public ReviewBoardController(ReviewBoardService reviewBoardService, NcpObjectStorageService storageService) {
 		this.reviewBoardService = reviewBoardService;
-		this.storageService = storageService; // 스토리지 서비스 초기화
+		this.storageService = storageService;
 	}
 
 	@GetMapping("/community/review/write")
@@ -36,8 +34,15 @@ public class ReviewBoardController {
 	}
 
 	@GetMapping("/community/review/list")
-	public String reviewList(Model model) {
-		List<BoardReviewDto> reviews = reviewBoardService.getAllReviews();
+	public String reviewList(Model model, HttpSession session,
+							 @RequestParam(defaultValue = "1") int page) {
+		// 현재 로그인한 사용자가 'root'인지 확인
+		String currentUserId = (String) session.getAttribute("id");
+		boolean isRootUser = "root".equals(currentUserId);
+
+		Map<String, Object> pageData = reviewBoardService.getReviewsPage(page);
+
+		List<BoardReviewDto> reviews = (List<BoardReviewDto>) pageData.get("reviews");
 		Map<Integer, String> photos = new HashMap<>();
 		Map<Integer, String> nicknames = new HashMap<>();
 
@@ -46,9 +51,12 @@ public class ReviewBoardController {
 			nicknames.put(review.getUsercode(), reviewBoardService.getNicknameByUsercode(review.getUsercode()));
 		}
 
+		// 모델에 속성을 추가합니다.
+		model.addAttribute("isRootUser", isRootUser);
 		model.addAttribute("reviews", reviews);
 		model.addAttribute("photos", photos);
 		model.addAttribute("nicknames", nicknames);
+		model.addAllAttributes(pageData); // 페이징 정보를 모델에 추가합니다.
 
 		return "community/review/reviewlist";
 	}
@@ -86,22 +94,19 @@ public class ReviewBoardController {
 			@RequestParam("photo") List<MultipartFile> photoFiles,
 			@RequestParam("reviewcode") int reviewcode) {
 		try {
-			// 버킷 이름과 폴더 이름을 설정합니다.
+			// 버킷 이름과 폴더 이름을 설정
 			String bucketName = "jejugagga-cwt";
 			String bucketFolder = "review";
 
-			// reviewcode를 사용하여 tourcode를 조회합니다.
 			int tourcode = reviewBoardService.getTourcodeByReviewcode(reviewcode);
 
 			for (MultipartFile file : photoFiles) {
-				// 네이버 클라우드 스토리지에 이미지를 업로드하고 URL을 받습니다.
 				String imageUrl = storageService.reviewUploadFile(bucketName, bucketFolder, file);
 
-				// 이미지 정보를 데이터베이스에 저장합니다.
 				BoardReviewPhotoDto boardReviewPhotoDto = new BoardReviewPhotoDto();
 				boardReviewPhotoDto.setReviewcode(reviewcode);
-				boardReviewPhotoDto.setTourcode(tourcode); // tourcode를 다시 포함합니다.
-				boardReviewPhotoDto.setPhoto(imageUrl); // 이미 메서드에서 반환된 완전한 URL 저장
+				boardReviewPhotoDto.setTourcode(tourcode);
+				boardReviewPhotoDto.setPhoto(imageUrl);
 				reviewBoardService.saveReviewPhoto(boardReviewPhotoDto);
 			}
 
@@ -109,6 +114,22 @@ public class ReviewBoardController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("사진 업로드에 실패했습니다.");
+		}
+	}
+
+	@PostMapping("/community/review/delete")
+	@ResponseBody
+	public ResponseEntity<?> deleteReview(@RequestParam("reviewId") int reviewId, HttpSession session) {
+		String currentUserId = (String) session.getAttribute("id");
+		if (!"root".equals(currentUserId)) {
+			return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
+		}
+
+		try {
+			reviewBoardService.deleteReview(reviewId);
+			return new ResponseEntity<>("Review deleted successfully", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

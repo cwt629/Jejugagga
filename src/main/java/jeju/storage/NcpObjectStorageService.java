@@ -75,7 +75,6 @@ public class NcpObjectStorageService implements ObjectStorageService {
 		}				
 	}
 
-	// 파일을 네이버 클라우드 스토리지에 업로드하고 파일명을 반환하는 메서드
 	public String reviewUploadFile(String bucketName, String bucketFolder, MultipartFile file) {
 		if (file.isEmpty()) {
 			return null;
@@ -83,7 +82,7 @@ public class NcpObjectStorageService implements ObjectStorageService {
 
 		try (InputStream fileIn = file.getInputStream()) {
 			String filename = UUID.randomUUID().toString();
-			String fullFilePath = bucketFolder + "/" + filename; // 폴더와 파일명을 조합한 전체 경로
+			String fullFilePath = bucketFolder + "/" + filename;
 
 			ObjectMetadata objectMetadata = new ObjectMetadata();
 			objectMetadata.setContentType(file.getContentType());
@@ -97,7 +96,7 @@ public class NcpObjectStorageService implements ObjectStorageService {
 			// 실제 파일 업로드
 			s3.putObject(objectRequest);
 
-			// 업로드된 파일의 URL을 반환합니다.
+			// 업로드된 파일의 URL을 반환
 			String fileUrl = s3.getUrl(bucketName, fullFilePath).toString();
 			return fileUrl;
 
