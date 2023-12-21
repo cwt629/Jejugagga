@@ -433,7 +433,6 @@ public class CourseController {
             
             // JSON 형태로 뽑는다
             JSONObject ob = new JSONObject(response.toString());
-            System.out.println(ob);
             distance = ob.getJSONObject("route").getJSONArray("trafast")
             		.getJSONObject(0).getJSONObject("summary")
             		.getInt("distance");
