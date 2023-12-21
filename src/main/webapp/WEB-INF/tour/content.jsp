@@ -557,7 +557,7 @@
             });
         } else {
             reviewButton.addEventListener('click', function () {
-                alert('Please log in to write a review.');
+                alert('로그인 해주세요.');
                 window.location.href = '${root}/member/login';
             });
         }
