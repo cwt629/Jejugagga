@@ -194,7 +194,7 @@
                         <c:if test="${sessionScope.loginok!=null }">
                             <c:choose>
                                 <c:when test="${sessionScope.loginok=='admin' }">
-                                    <li class="li-menu-bar"><a href="${root}/mypage/admin"
+                                    <li class="li-menu-bar"><a href="${root}/admin/adminpage"
                                                                style="color: black; text-decoration: none;">관리자</a>
                                     </li>
                                 </c:when>
