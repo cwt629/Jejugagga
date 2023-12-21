@@ -83,6 +83,7 @@
         .title-container {
             display: flex;
             align-items: center;
+            height: 50px;
         }
 
         .review-item {
@@ -101,6 +102,7 @@
 
         .review-content {
             padding: 0.5rem;
+            justify-content: space-between;
         }
 
         .review-content h4 {
@@ -295,19 +297,25 @@
             </c:forEach>
         </div>
 
-        <div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s"
-             style="margin-bottom: 20px; font-family: Orbit;">
+        <div class="pagination-container">
             <ul class="pagination">
-                <li class="pagination-item--wide first"><a class="pagination-link--wide first"
-                                                           href="#">Previous</a>
-                </li>
-                <li class="pagination-item is-active"><a class="pagination-link" href="#">1</a></li>
-                <li class="pagination-item"><a class="pagination-link" href="#">2</a></li>
-                <li class="pagination-item"><a class="pagination-link" href="#">3</a></li>
-                <li class="pagination-item"><a class="pagination-link" href="#">4</a></li>
-                <li class="pagination-item"><a class="pagination-link" href="#">5</a></li>
-                <li class="pagination-item--wide last"><a class="pagination-link--wide last" href="#">Next</a>
-                </li>
+                <c:if test="${currentPage > 1}">
+                    <li class="pagination-item--wide first">
+                        <a href="${root}/community/review/list?page=${currentPage - 1}">Previous</a>
+                    </li>
+                </c:if>
+
+                <c:forEach begin="1" end="${totalPages}" var="i">
+                    <li class="pagination-item ${i == currentPage ? 'is-active' : ''}">
+                        <a href="${root}/community/review/list?page=${i}">${i}</a>
+                    </li>
+                </c:forEach>
+
+                <c:if test="${currentPage < totalPages}">
+                    <li class="pagination-item--wide last">
+                        <a href="${root}/community/review/list?page=${currentPage + 1}">Next</a>
+                    </li>
+                </c:if>
             </ul>
         </div>
     </div>
@@ -364,6 +372,8 @@
 
     function filterReviews(query) {
         var reviews = document.querySelectorAll('.review-item');
+        var paginationContainer = document.querySelector('.pagination-container');
+
         reviews.forEach(function(review) {
             var title = review.querySelector('.title-container h4').innerText;
             if (query === '' || title.toLowerCase().includes(query.toLowerCase())) {
@@ -372,7 +382,17 @@
                 review.style.display = 'none';
             }
         });
+
+        // 검색어가 있을 때 페이징을 숨깁니다.
+        if (query !== '') {
+            paginationContainer.style.display = 'none';
+        } else {
+            // 검색어가 빈칸일 때 페이징을 다시 보여줍니다.
+            paginationContainer.style.display = 'flex';
+        }
     }
+
+
 
 </script>
 
@@ -391,6 +411,10 @@
                     alert('Error deleting review.');
                 }
             });
+        }
+
+        function goToPage(pageNumber) {
+            window.location.href = '${root}/reviews?page=' + pageNumber;
         }
     </script>
 </c:if>

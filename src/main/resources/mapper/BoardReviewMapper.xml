@@ -31,4 +31,14 @@
     <delete id="deleteReview" parameterType="int">
         DELETE FROM board_review WHERE reviewcode = #{reviewId}
     </delete>
+
+    <select id="selectPagedReviews" resultType="jeju.dto.BoardReviewDto">
+        SELECT * FROM board_review
+        ORDER BY registereddate DESC
+            LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="selectReviewCount" resultType="int">
+        SELECT COUNT(*) FROM board_review
+    </select>
 </mapper>

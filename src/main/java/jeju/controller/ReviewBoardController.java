@@ -12,10 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +25,7 @@ public class ReviewBoardController {
 	@Autowired
 	public ReviewBoardController(ReviewBoardService reviewBoardService, NcpObjectStorageService storageService) {
 		this.reviewBoardService = reviewBoardService;
-		this.storageService = storageService; // 스토리지 서비스 초기화
+		this.storageService = storageService;
 	}
 
 	@GetMapping("/community/review/write")
@@ -37,9 +34,17 @@ public class ReviewBoardController {
 	}
 
 	@GetMapping("/community/review/list")
-	public String reviewList(Model model, HttpSession session) {
-		// 리뷰 목록과 관련 정보를 가져옵니다.
-		List<BoardReviewDto> reviews = reviewBoardService.getAllReviews();
+	public String reviewList(Model model, HttpSession session,
+							 @RequestParam(defaultValue = "1") int page) {
+		// 현재 로그인한 사용자가 'root'인지 확인합니다.
+		String currentUserId = (String) session.getAttribute("id");
+		boolean isRootUser = "root".equals(currentUserId);
+
+		// 페이징 처리된 리뷰 데이터와 페이징 정보를 가져옵니다.
+		Map<String, Object> pageData = reviewBoardService.getReviewsPage(page);
+
+		// 리뷰 목록과 관련된 추가 정보를 가져옵니다.
+		List<BoardReviewDto> reviews = (List<BoardReviewDto>) pageData.get("reviews");
 		Map<Integer, String> photos = new HashMap<>();
 		Map<Integer, String> nicknames = new HashMap<>();
 
@@ -48,19 +53,15 @@ public class ReviewBoardController {
 			nicknames.put(review.getUsercode(), reviewBoardService.getNicknameByUsercode(review.getUsercode()));
 		}
 
-		// 현재 로그인한 사용자가 'root'인지 확인합니다.
-		String currentUserId = (String) session.getAttribute("id");
-		boolean isRootUser = "root".equals(currentUserId);
-
 		// 모델에 속성을 추가합니다.
 		model.addAttribute("isRootUser", isRootUser);
 		model.addAttribute("reviews", reviews);
 		model.addAttribute("photos", photos);
 		model.addAttribute("nicknames", nicknames);
+		model.addAllAttributes(pageData); // 페이징 정보를 모델에 추가합니다.
 
 		return "community/review/reviewlist";
 	}
-
 
 	@PostMapping("/submitReview")
 	@ResponseBody
@@ -138,5 +139,6 @@ public class ReviewBoardController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
 }
 

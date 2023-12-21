@@ -38,7 +38,7 @@ div.dropdown p:hover {
 }
 
 .li-menu-bar a:hover {
-   color: #e78e08;
+    color: #e78e08;
 }
 
 .header-menu-bar {
@@ -65,9 +65,3 @@ nav .li-menu-bar {
 .dropdown {
     display: none;
 }
-
-
-
-
-
-

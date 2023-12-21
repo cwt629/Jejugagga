@@ -10,6 +10,14 @@
     <link rel="stylesheet" href="${root}/res/community/community.css">
     <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
     <style>
+        body {
+            margin: 0;
+        }
+
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+
         #location {
             list-style: none;
             padding: 0;
@@ -46,17 +54,12 @@
             max-width: 1100px;
             box-sizing: border-box;
             margin: auto;
-            font-family: "Hind", sans-serif;
             background: #fff;
             color: #4d5974;
             min-height: 100vh;
             padding: 0;
-            background: #fff;
-            color: #4d5974;
-            font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
             font-weight: 400;
             font-size: 14px;
-            color: #555;
             letter-spacing: -.5px;
             line-height: 22px;
             -webkit-text-size-adjust: 100%;
@@ -134,7 +137,7 @@
             width: 55px;
             height: 55px;
             left: 165px;
-            top: 220px;
+            top: 160px;
             opacity: 0.8;
         }
 
@@ -143,7 +146,7 @@
             width: 55px;
             height: 55px;
             left: 165px;
-            top: 220px;
+            top: 160px;
             opacity: 0.9;
         }
 
@@ -152,7 +155,7 @@
             width: 55px;
             height: 55px;
             left: 165px;
-            top: 220px;
+            top: 160px;
             opacity: 0.9;
         }
 
@@ -161,7 +164,7 @@
             width: 55px;
             height: 55px;
             left: 165px;
-            top: 220px;
+            top: 160px;
             opacity: 0.9;
         }
 
