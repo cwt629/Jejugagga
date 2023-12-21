@@ -301,7 +301,10 @@
 				clickingHeart = false;
 			} else {
 				if(clickingHeart) alert("좋아요 처리중입니다.");
-				else alert("로그인 해주세요.");
+				else {
+					alert("로그인 해주세요.");
+					window.location.href = '${root}/member/login';
+				}
 			}
 		});
 		
@@ -378,8 +381,8 @@
 										<input type="checkbox" id="scrap0" class="chk-scrap"> 
 										<div class="chk-scrap-lbl">
 										`;
-										if(item.likchk == 1) s+= `<i class="bi-heart-fill tourlikes" tourcode="\${item.tourcode}"></i>`; 
-										else s+= `<i class="bi-heart tourlikes" tourcode="\${item.tourcode}"></i>`;
+										if(item.likchk == 1) s+= `<i class="bi-heart-fill tourlikes" style="cursor: pointer;" tourcode="\${item.tourcode}"></i>`; 
+										else s+= `<i class="bi-heart tourlikes" style="cursor: pointer;" tourcode="\${item.tourcode}"></i>`;
 					s+= 				`
 											<c name="likCnt\${item.tourcode}">\${item.likes}</c>
 										</div>
