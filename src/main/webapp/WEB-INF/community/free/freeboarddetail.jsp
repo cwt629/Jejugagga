@@ -21,9 +21,9 @@
     var boardFreeUserCode = ${boardFreeDto.usercode};
 
 
-
     // 게시글 상세 페이지 이동
     function goToDetailPage(usercode, freeboardcode) {
+        // 로그인하지 않았으면 모달을 표시하고 함수 종료
         if (!loginStatus) {
             showNotLoggedInModal();
             return;
@@ -52,26 +52,11 @@
     <th>${boardFreeDto.content}</th>
     <th><img src="${boardFreeDto.photo}"></th>
 </div>
-
-<c:choose>
-    <c:when test="sessionScope.loginok!=null">
-        <c:if test="{sessionScope.loginok.usercode == boardFreeDto.usercode}">
-            <button type="button" class="btn btn-outline-secondary btn-sm" style="width: 80px;"
-                    onclick="location.href='${root}/community/free/updateBoardFree?freeboardcode=${boardFreeDto.freeboardcode}'">
-                수정
-            </button>
-            <button type="button" class="btn btn-danger" onclick="deleteItem()">삭제</button>
-        </c:if>
-    </c:when>
-    <c:otherwise>
+    <c:if test="${boardFreeDto.usercode == sessionScope.usercode}">
         <button type="button" class="btn btn-outline-secondary btn-sm" style="width: 80px;"
-                onclick="showNotLoggedInModal()">
+                onclick="location.href='${root}/community/free/updateBoardFree?freeboardcode=${boardFreeDto.freeboardcode}&usercode=${boardFreeDto.usercode}&usercode_str='+${boardFreeDto.usercode.toString()}">
             수정
         </button>
-        <button type="button" class="btn btn-outline-secondary btn-sm" style="width: 80px;"
-                onclick="showNotLoggedInModal()">
-            삭제
-        </button>
-    </c:otherwise>
-</c:choose>
+        <button type="button" class="btn btn-danger" onclick="deleteItem(${boardFreeDto.freeboardcode})">삭제</button>
+    </c:if>
 </body>
