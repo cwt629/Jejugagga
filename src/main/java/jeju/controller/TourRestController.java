@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +26,7 @@ public class TourRestController {
 	
 	//리스트재생성
 	@PostMapping("/tour/view")
-	public HashMap<String, Object> getAllTour(@RequestParam HashMap<String, Object> reqMap) {
+	public HashMap<String, Object> getAllTour(@RequestParam HashMap<String, Object> reqMap, HttpSession session) {
 		
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		
@@ -53,8 +55,10 @@ public class TourRestController {
 			int perBlock=5; //한블럭당 보여지는 페이지의 개수
 			int startPage; //각블럭당 보여지는 페이지의 시작번호
 			int endPage;
+			
 			//총 글갯수
-			totalCount=tourDao.getTourTotalCount(word, sigungucode, contenttype);
+			totalCount = tourDao.getTourTotalCount(word, sigungucode, contenttype);
+			 
 			//총페이지수,나머지가 있으면 무조건올림
 			//총게시글이 37-한페이지 3-12.3333....13페이지
 			totalPage=totalCount/perPage+(totalCount%perPage>0?1:0);
@@ -62,8 +66,7 @@ public class TourRestController {
 			startPage=(currentPage - 1)/perBlock*perBlock+1;
 			endPage=startPage+perBlock-1;
 			//endPage는 totalPage를 넘지않도록 한다
-			if(endPage>totalPage)
-				endPage=totalPage;
+			if(endPage>totalPage) endPage=totalPage;
 			//각페이지당 불러올 글의 번호
 			//10개씩일 경우 기준
 			//1페이지:0~9 2페이지:10~19
@@ -81,7 +84,16 @@ public class TourRestController {
 			pageMap.put("no",no);
 			
 			resultMap.put("pageInfo", pageMap);
-			resultMap.put("data", tourDao.getTourList(word, startNum, contenttype, sigungucode));
+			
+			// 현재 로그인한 유저 코드 로그인 하지 않았을 때는 -1
+			int currentUserCode = -1;
+			
+			if (session.getAttribute("usercode") != null && Integer.valueOf(reqMap.get("userCode").toString()) > 0)
+				currentUserCode = (int)session.getAttribute("usercode");
+				
+			resultMap.put("data", tourDao.getTourList(word, startNum, contenttype, sigungucode, currentUserCode));
+					
+			//System.out.println(resultMap);
 			
 		}catch (JsonMappingException e) {
 			e.printStackTrace();

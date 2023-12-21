@@ -8,13 +8,24 @@
 	
 	#mypageContext {
 		position: absolute;
-		width: 85%;
-		top: 150px;
-		left: 22%;
+		width: 75%;
+		top: 100px;
+		left: 25%;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
 	}
+	
+	#historyContext {
+		position: absolute;
+		width: 80%;
+		top: 100px;
+		left: 25%;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+	}
+	
 	
 	#sideNav {
 		text-align: center;
@@ -58,12 +69,21 @@
 	}
 	
 	.profilebox {
+		text-align: left;
 		width: 80%;
 		border-radius: 30px;
 		box-shadow: 5px 5px 10px;
 		padding: 30px 30px 30px 30px;
 	}
 	
+	.historybox {
+		text-align: left;
+		width: 80%;
+		border-radius: 30px;
+		box-shadow: 5px 5px 10px;
+		padding: 30px 30px 30px 30px;
+	}	
+
 	.navmenu_list {
 		list-style: none;
 	}
@@ -83,14 +103,22 @@
 		flex-direction: column;
 	}
 	
-	.profilebox {
-		text-align: left;
-	}
-	
 	hr {
 		width: 100%;
 	}
 	
 	h4 {
 		margin-bottom: 30px;
+	}
+	
+	.user_withdraw {
+		width: 10%;
+		background-color: #EEB182;
+		--bs-btn-hover-bg: #EEB182;
+		margin-bottom: 5%;
+	}
+	
+	.historybox span:hover {
+		color: #FF5500;
+		cursor: pointer;
 	}

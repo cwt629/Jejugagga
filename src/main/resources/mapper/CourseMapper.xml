@@ -10,15 +10,66 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
+	
 	<select id="selectAllCourses" resultType="CourseDto">
 		select * from course order by coursecode desc
 	</select>
+	
 	<select id="getTotalCount" resultType="int">
 		select count(*) from course
 	</select>
+	
 	<select id="selectAllCoursesInPage" parameterType="Map" resultType="CourseDto">
 		select * from course
 		order by coursecode desc
 		limit #{coursePerPage} offset #{startIndex}
 	</select>
+	
+	<select id="selectOneCourse" parameterType="int" resultType="CourseDto">
+		select * from course where coursecode = #{coursecode}
+	</select>
+	
+	<update id="incrementReadcount" parameterType="int">
+		update course set readcount = readcount + 1 where coursecode = #{coursecode}
+	</update>
+	
+	<delete id="deleteCourse" parameterType="int">
+		delete from course where coursecode = #{coursecode}
+	</delete>
+	
+	<select id="getSearchedCount" parameterType="Map" resultType="int">
+		select count(*) from course c
+		where name like concat('%', #{query}, '%')
+		<if test="numstd != ''">
+			and
+			(select count(*) from course_route where coursecode = c.coursecode)
+			<if test="numstd == '이상'">&gt;=</if><if test="numstd == '이하'">&lt;=</if>#{count}
+		</if>
+	</select>
+	
+	<select id="selectSearchedCoursesInPage" parameterType="Map" resultType="CourseDto">
+		select * from course c
+		where name like concat('%', #{query}, '%')
+		<if test="numstd != ''">
+			and
+			(select count(*) from course_route where coursecode = c.coursecode)
+			<if test="numstd == '이상'">&gt;=</if><if test="numstd == '이하'">&lt;=</if>#{count}
+		</if>
+		order by 
+		<if test="sortstd == '조회수'">
+		readcount desc,
+		</if>
+		<if test="sortstd == '좋아요'">
+		(select count(*) from course_likes where coursecode = c.coursecode) desc,
+		</if>
+		coursecode desc
+		limit #{coursePerPage} offset #{startIndex}
+	</select>
+	
+	<update id="updateCourse" parameterType="CourseDto">
+		update course set name = #{name}, spendingtime = #{spendingtime},
+		timestandard = #{timestandard}, distance = #{distance},
+		briefcontent = #{briefcontent}, longdetail = #{longdetail}
+		where coursecode = #{coursecode}
+	</update>
 </mapper>

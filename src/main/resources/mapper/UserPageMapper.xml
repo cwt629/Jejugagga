@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jeju.dao.BoardFreeDao">
+	<select id="selectOfFreeBoardByUsercode" parameterType="int" resultType="BoardFreeDto">
+		select * from board_free where usercode = #{usercode} order by modifieddate desc
+	</select>
+	<select id="selectOfReviewBoardByUsercode" parameterType="int" resultType="BoardFreeDto">
+		select * from board_review where usercode = #{usercode} order by registereddate desc
+	</select>
+	<select id="selectOfInquiryBoardByUsercode" parameterType="int" resultType="BoardFreeDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select * from board_inquiry where usercode = #{usercode} order by registereddate desc
+	</select>
+	<select id="selectOfInquiryAnswerResultByUsercode" parameterType="int" resultType="Map">
+		SELECT board_inquiry.*, member_table.nickname,
+			CASE WHEN COUNT(bia.questioncode) > 0 THEN 1 ELSE 0 END AS hasAnswer
+			FROM board_inquiry
+			JOIN member_table ON board_inquiry.usercode = member_table.usercode
+			LEFT JOIN board_inquiry_answer bia ON board_inquiry.questioncode = bia.questioncode
+			WHERE board_inquiry.usercode = #{usercode}
+			GROUP BY board_inquiry.questioncode, member_table.nickname
+			ORDER BY hasAnswer ASC, board_inquiry.registereddate ASC
+			LIMIT 0, 10;
+	</select>
+</mapper>
