@@ -28,15 +28,21 @@ public class AdminDao {
 	public List<Map<String, Object>> selectInquiryisanswer() {
 		return session.selectList(nameSpace + "selectInquiryisanswer");
 	}
-	public void deleteFreebyReviewcode(int freeboardcode)
+	public List<Map<String, Object>> selectcourseAndNickname() {
+		return session.selectList(nameSpace + "selectcourseAndNickname");
+	}
+	public void deleteFreebyFreeboardcode(int freeboardcode)
 	{
-		session.delete(nameSpace + "deleteFreebyReviewcode", freeboardcode);
+		session.delete(nameSpace + "deleteFreebyFreeboardcode", freeboardcode);
 	}
     public void deleteReviewbyReviewcode(int reviewcode) {
     	session.delete(nameSpace + "deleteReviewbyReviewcode", reviewcode);
     }
     public void deleteMemberbyID(String id) {
     	session.delete(nameSpace + "deleteMemberbyID", id);
+    }
+    public void deleteCoursebyCoursecode(int coursecode) {
+    	session.delete(nameSpace + "deleteCoursebyCoursecode", coursecode);
     }
 	
 	
