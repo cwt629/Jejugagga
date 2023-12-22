@@ -1,11 +1,12 @@
 package jeju.service;
 
 import jeju.boardfree_utils.BoardInquiryPagingCriteria;
-import jeju.dao.inquiryBoard;
+import jeju.dao.inquiryBoardDao;
 import jeju.dto.BoardFreeDto;
 import jeju.dto.BoardInquiryAnswerDto;
 import jeju.dto.BoardInquiryDto;
 import lombok.AllArgsConstructor;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,11 @@ import java.util.List;
 @AllArgsConstructor
 public class BoardInquiryService {
 		@Autowired
-		private inquiryBoard boardInquiryDao;
+		private inquiryBoardDao boardInquiryDao;
+
+		private String nameSpace = "jeju.dao.BoardinquiryAnswerDto.";
+
+		private SqlSession session;
 
 		public List<BoardInquiryDto> selectAllInquiries() {
 			return boardInquiryDao.selectAllInquiries();
@@ -39,38 +44,39 @@ public class BoardInquiryService {
 		return boardInquiryDao.getList(criteria);
 	}
 
-	public void updateReadCount(int num) {
-		boardInquiryDao.updateReadCount(num);
+	public void updateReadCount(BoardInquiryDto dto) {
+			boardInquiryDao.updateReadCount(dto);
 	}
 
-	public void insertBoardFree(BoardFreeDto dto) {
+	public void insertBoardInquiryDto(BoardInquiryDto dto) {
 
-		boardInquiryDao.insertBoardFree(dto);
+		boardInquiryDao.insertInquiry(dto);
 	}
 
-	public bo getData(int num) {
+	public inquiryBoardDao getData(int num) {
 
-		return boardFreeDao.getData(num);
+		return boardInquiryDao.getData(num);
 	}
 
-	public void updateBoardFree(BoardFreeDto dto) {
-		boardFreeDao.updateBoardFree(dto);
+	public void updateinquiryBoard(BoardInquiryDto dto) {
+		session.update(nameSpace + )
 	}
 
 	public int getTotalCount() {
-		return boardFreeDao.getTotalCount();
+
+			return boardInquiryDao.get();
 	}
 
-	public void deleteBoardFree(int num) {
+	public void delete(int num) {
 
-		boardFreeDao.deleteBoardFree(num);
+		boardInquiryDao.deleteInquiry(num);
 	}
 
-	public BoardFreeDto detailBoardFreePage(int freeboardcode) {
-		return boardFreeDao.detailBoardFreePage(freeboardcode);
+	public BoardFreeDto detailBoardFreePage(int questioncode) {
+			return boardInquiryDao.detail(questioncode);
 	}
 
-	public void updateViewCount(int freeboardcode) {
+	public void updateViewCount(int questioncode) {
 		boardFreeDao.updateViewCount(freeboardcode);
 	}
 

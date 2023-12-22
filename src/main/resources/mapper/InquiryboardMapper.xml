@@ -5,10 +5,13 @@
         INSERT INTO board_inquiry (usercode, registereddate, title, content, isprivate)
         VALUES (#{usercode}, NOW(), #{title}, #{content}, #{isprivate})
     </insert>
-
-    <update id="updateInquiry" parameterType="jeju.dto.BoardInquiryDto">
-        UPDATE board_inquiry SET title = #{title}, content = #{content} WHERE questioncode = #{questioncode}
-    </update>
+    <select id="selectPagingOfInquiryCriteria" parameterType="jeju.boardfree_utils.BoardInquiryPagingCriteria"
+            resultType="BoardFreeDto">
+        select *
+        from board_inquiry
+        ORDER BY registereddate desc
+        LIMIT #{pageStart}, #{perPageNum}
+    </select>
 
     <delete id="deleteInquiry" parameterType="int">
         DELETE FROM board_inquiry WHERE questioncode = #{questioncode}

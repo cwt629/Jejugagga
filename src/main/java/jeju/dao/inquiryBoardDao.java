@@ -2,6 +2,7 @@ package jeju.dao;
 
 import jeju.boardfree_utils.BoardInquiryPagingCriteria;
 import jeju.dto.BoardFreeDto;
+import jeju.dto.BoardInquiryAnswerDto;
 import jeju.dto.BoardInquiryDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class inquiryBoard {
+public class inquiryBoardDao {
 	@Autowired
 	private SqlSession session;
 
@@ -29,8 +30,12 @@ public class inquiryBoard {
 		return session.selectList(nameSpace + "selectPagingOfBoardFreeCriteria", paramMap);
 	}
 
-	public void updateInquiry(BoardInquiryDto dto) {
+	public void updateReadCount(BoardInquiryDto dto) {
 		session.update(nameSpace + "updateInquiry", dto);
+	}
+
+	public inquiryBoardDao getData(int num) {
+		return session.selectOne(nameSpace + "selectDataByNum", num);
 	}
 
 	public void deleteInquiry(int questioncode) {
@@ -38,6 +43,7 @@ public class inquiryBoard {
 	}
 
 	public List<BoardInquiryDto> selectAllInquiries() {
+
 		return session.selectList(nameSpace + "selectAllInquiries");
 	}
 
@@ -69,5 +75,9 @@ public class inquiryBoard {
 		return session.selectOne(nameSpace + "searchTotalCount", paramMap);
 	}
 
+	public List<BoardInquiryAnswerDto> selectAnswersForQuestion(Map<String, String> paramMap) {
+		return session.selectList(nameSpace + "getBoardListWithUserNickname", paramMap);
+
+	}
 }
 
