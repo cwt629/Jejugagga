@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jeju.dao.AdminDao">
+	<select id="selectAllmem10Bydesc" resultType="MemberTableDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select * from member_table order by registereddate desc limit 0,10
+	</select>	
+	<select id="selectFreeboardAndNickname" resultType="Map"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select board_free.*, member_table.nickname 
+		from board_free join member_table on board_free.usercode = member_table.usercode 
+		order by registereddate desc limit 0,10
+	</select>	
+	<select id="selectReviewboardAndNickname" resultType="Map"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select board_review.*, member_table.nickname 
+		from board_review join member_table on board_review.usercode = member_table.usercode 
+		order by registereddate desc limit 0,10
+	</select>	
+	<select id="selectInquiryisanswer" resultType="Map"> <!--답변이 안달린 글을 먼저 나오게 하고, 그 글들 중 오래된 글들을 먼저나오게함, 이후에 멤버테이블과 조인하여 유저코드와 일치하는 닉네임을 가져옴 그리고 딱 10개만가져욤,,-->
+		SELECT board_inquiry.*, member_table.nickname,
+       	CASE WHEN COUNT(bia.questioncode) > 0 THEN 1 ELSE 0 END AS hasAnswer
+		FROM board_inquiry
+		JOIN member_table ON board_inquiry.usercode = member_table.usercode
+		LEFT JOIN board_inquiry_answer bia ON board_inquiry.questioncode = bia.questioncode
+		GROUP BY board_inquiry.questioncode, member_table.nickname
+		ORDER BY hasAnswer ASC, board_inquiry.registereddate ASC
+		LIMIT 0, 10;
+	</select>	
+	<delete id="deleteMemberbyID" parameterType="String">
+		delete from member_table where id= #{id}
+	</delete>
+	<delete id="deleteFreebyReviewcode" parameterType="int">
+		delete from board_free where freeboardcode= #{freeboardcode}
+	</delete>
+	<delete id="deleteReviewbyReviewcode" parameterType="int">
+		delete from board_review where reviewcode= #{reviewcode}
+	</delete>
+</mapper>

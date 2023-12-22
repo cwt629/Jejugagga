@@ -52,7 +52,70 @@
 	    box-shadow: 3px 3px 3px;
 	    position: absolute;
     	top: 30px;
+    	left : 40px;
+    	z-index: 1;
    }
+   
+   .review-container {
+            width: 90%;
+            max-width: 1000px;
+            box-sizing: border-box;
+            margin: auto;
+            font-family: "Hind", sans-serif;
+            background: #fff;
+            color: #4d5974;
+            min-height: 70vh;
+        }
+   
+   .reviews-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: start;
+        }
+
+        .title-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .review-item {
+            flex: 0 0 22%; /* flex-grow: 0, flex-shrink: 0, flex-basis: 22% */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .review-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .review-content {
+            padding: 0.5rem;
+        }
+
+        .review-content h4 {
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .review-content p {
+            font-size: 0.9rem;
+        }
+
+        .review-date {
+            display: block;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .reviewInputImg {
+            width: 100%;
+        }
+   
    
 </style>
 
@@ -82,7 +145,7 @@
 	});
 </script>
 <body>
-	<div id="container">
+	<div id="container" style="padding:0 250px;">
 		<div id="sub_visual"
 			style="background-image: linear-gradient(rgba(0, 0, 0, 0.7),
         		rgba(255, 255, 255, 0.1)), url(${tourDto.firstimage});">
@@ -119,9 +182,8 @@
 				</div>
 				
 				<div class="sub-sharing">
-					
 					<button type="button" class="heart-btn">
-						<i class="bi-heart"></i> <span class="number">155</span>
+						<!-- <i class="bi-heart"></i> <span class="number">0</span> -->
 					</button>
 				</div>
 			</div>
@@ -438,9 +500,31 @@
 					
 					<!-- 리뷰 -->
 					<div class="section-story4">
-						<strong>
-							<span style="font-size: 18px;">후기</span>
-						</strong>
+						
+						<c:if test="${empty reviews}">
+					        <p>후기가 없습니다.</p>
+					    </c:if>
+						<div class="reviews-container" style="font-family: Orbit; ">
+				            <c:forEach var="review" items="${reviews}">
+				                <div class="review-item">
+				                    <div class="image-container" style="width: 100%">
+				                        <img src="${photos[review.reviewcode]}" alt="리뷰 사진" class="reviewInputImg">
+				                        <div class="icon-and-nickname">
+				                            <i class="bi bi-person-circle"></i>
+				                            <h4 class="review-nickname">${nicknames[review.usercode]}</h4>
+				                        </div>
+				                    </div>
+				                    <div class="review-content">
+				                        <div class="title-container">
+				                            <i class="bi bi-geo-alt-fill"></i>
+				                            <h4>${review.title}</h4>
+				                        </div>
+				                        <p>${review.content}</p>
+				                        <span class="review-date">${review.registereddate}</span>
+				                    </div>
+				                </div>
+				            </c:forEach>
+				        </div>
 					</div>
 					
 				</div>

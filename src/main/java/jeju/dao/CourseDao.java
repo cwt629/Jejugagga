@@ -32,4 +32,28 @@ public class CourseDao {
 	public List<CourseDto> selectCoursesInPage(Map<String, Integer> map) {
 		return session.selectList(nameSpace + "selectAllCoursesInPage", map);
 	}
+	
+	public CourseDto selectOneCourse(int coursecode) {
+		return session.selectOne(nameSpace + "selectOneCourse", coursecode);
+	}
+	
+	public void incrementReadcount(int coursecode) {
+		session.update(nameSpace + "incrementReadcount", coursecode);
+	}
+	
+	public void deleteCourse(int coursecode) {
+		session.delete(nameSpace + "deleteCourse", coursecode);
+	}
+	
+	public int getSearchedCount(Map<String, Object> map) {
+		return session.selectOne(nameSpace + "getSearchedCount", map);
+	}
+	
+	public List<CourseDto> selectSearchedCoursesInPage(Map<String, Object> map) {
+		return session.selectList(nameSpace + "selectSearchedCoursesInPage", map);
+	}
+	
+	public void updateCourse(CourseDto dto) {
+		session.update(nameSpace + "updateCourse", dto);
+	}
 }
