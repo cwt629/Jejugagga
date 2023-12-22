@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jeju.dao.inquiryboard.dao">
+    <insert id="insertInquiry" parameterType="jeju.dto.BoardInquiryDto">
+        INSERT INTO board_inquiry (usercode, registereddate, title, content, isprivate)
+        VALUES (#{usercode}, NOW(), #{title}, #{content}, #{isprivate})
+    </insert>
+
+    <update id="updateInquiry" parameterType="jeju.dto.BoardInquiryDto">
+        UPDATE board_inquiry SET title = #{title}, content = #{content} WHERE questioncode = #{questioncode}
+    </update>
+
+    <delete id="deleteInquiry" parameterType="int">
+        DELETE FROM board_inquiry WHERE questioncode = #{questioncode}
+    </delete>
+
+    <select id="selectAllInquiries" resultType="jeju.dto.BoardInquiryDto">
+        SELECT * FROM board_inquiry
+    </select>
+
+    <select id="selectInquiryByCode" parameterType="int" resultType="jeju.dto.BoardInquiryDto">
+        SELECT * FROM board_inquiry WHERE questioncode = #{questioncode}
+    </select>
+
+    <select id="selectUserInquiries" parameterType="int" resultType="jeju.dto.BoardInquiryDto">
+        SELECT * FROM board_inquiry WHERE usercode = #{usercode} ORDER BY registereddate DESC
+    </select>
+</mapper>
