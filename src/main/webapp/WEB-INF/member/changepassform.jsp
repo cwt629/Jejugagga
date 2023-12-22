@@ -20,10 +20,10 @@
 		height: 350px;
 		padding: 40px;
 		position: absolute;
-	        margin: 0 auto;
-	        left: 0;
-	        right: 0px;
-	        TOP: 13%;
+	    margin: 0 auto;
+	    left: 0;
+	    right: 0px;
+	    TOP: 20%;
 	}
 	
 	.signupdiv > .signup_logo_photo{

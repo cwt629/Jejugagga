@@ -57,7 +57,7 @@ th, td {
 }
 
 /* 버튼 스타일 */
-.triggerbtn {
+.triggerbtn, .btn {
   display: inline-block;
   padding: 5px 10px;
   font-size: 16px;
@@ -73,7 +73,7 @@ th, td {
 }
 
 /* 마우스 호버 시의 스타일 */
-.triggerbtn:hover {
+.triggerbtn:hover, .btn:hover {
   background-color: #CA8462; /* 배경색 변경 */
   color: #fff; /* 텍스트 색상 변경 */
 }
@@ -137,8 +137,55 @@ th.admin_board_head{
   width: 200px;
   height: 200px;
 }
+.modal-header{
+	background-color: rgba(202, 132, 98, 0.3);
+}
 
+.memverinfo {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    margin: 30px 30px;
+  }
 
+  .memverinfo > div {
+    margin-bottom: 10px;
+  }
+
+  .memverinfo img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+
+  .membername,
+  .memberid,
+  .membernickname,
+  .memberphone,
+  .memberemail,
+  .memberbirth,
+  .memberregistereddate {
+    font-weight: bold;
+  }
+  
+  .pfofilefile{
+  float: right;
+  text-align: center;
+  }
+  
+  .memberphoto{
+  border: solid wheat;
+  }
+  
+  .memverinfo img {
+    width: 200px;
+  	height: 200px;
+  }
+  
 
 
 
@@ -162,7 +209,9 @@ $(function(){
 	        		
 					let s="";
 					s+=
-					`
+					` 
+					 <div class="memverinfo">
+						<div class="pfofilefile"> <img src="../res/photo/noimage.png" class="memberphoto"><div><b>프로필 사진</b></div> </div>
 			        	<div class="membername">이름 :</div>
 			        	<div class="memberid">아이디 :</div>
 			        	<div class="membernickname">닉네임 :</div>
@@ -170,7 +219,8 @@ $(function(){
 			        	<div class="memberemail">이메일 :</div>
 			        	<div class="memberbirth">생년월일 :</div>
 			        	<div class="memberregistereddate">등록일</div>
-			        	<div>프로필 사진 <img src="../res/photo/noimage.png" class="memberphoto"> </div>
+			        	
+			         </div>
 					`;
 					$(".changemodalbodyform").html(s);
 					
@@ -202,6 +252,8 @@ $(function(){
 	        		let s="";
 					s+=
 					`
+			         <div class="memverinfo">
+						<div class="pfofilefile"> <img src="../res/photo/noimage.png" class="memberphoto"><div><b>프로필 사진</b></div> </div>
 			        	<div class="membername">이름 :</div>
 			        	<div class="memberid">아이디 :</div>
 			        	<div class="membernickname">닉네임 :</div>
@@ -209,7 +261,8 @@ $(function(){
 			        	<div class="memberemail">이메일 :</div>
 			        	<div class="memberbirth">생년월일 :</div>
 			        	<div class="memberregistereddate">등록일</div>
-			        	<div>프로필 사진 <img src="../res/photo/noimage.png" class="memberphoto"> </div>
+			        	
+			         </div>
 					`;
 					$(".changemodalbodyform").html(s);
 					
@@ -335,7 +388,7 @@ $(function(){
 	<div class="container">
 		<div class="item membertable">
 			<div class="table-title">회원 목록
-				<input type="text" style="float: right;"><button style="float: right;">검색</button>
+				<!-- <input type="text" style="float: right;"><button style="float: right;">검색</button> -->
 			</div> 
 			<table class="admin_board_wrap table table-hover" id="user-admin">
 				<thead class="admin_boardList">
@@ -379,9 +432,9 @@ $(function(){
 
       <!-- Modal body -->
       <div class="modal-body">
-      	<button class="memberinformation">회원정보</button>
-      	<button class="memberwritefree">작성글</button>
-      	<button class="memeberwritereview">작성후기</button>
+      	<button class="memberinformation btn btn-member-info">회원정보</button>
+      	<button class="memberwritefree btn btn-member-write-free">작성글</button>
+      	<button class="memeberwritereview btn btn-member-write-review">작성후기</button>
         <div class="changemodalbodyform">
         
       	</div>
