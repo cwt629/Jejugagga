@@ -41,7 +41,7 @@ function initMap(){
     	
     	    	
     	// 각 여행지 요소에 클릭 시 이벤트를 부여한다
-	    item.querySelector("div.coursedetail_card").addEventListener("click", function(){
+	    item.querySelector("button.coursedetail_mapsender").addEventListener("click", function(){
 	    	let latitude = parseFloat(item.dataset.mapy), longitude = parseFloat(item.dataset.mapx);
 	    	center = new naver.maps.LatLng(latitude, longitude);
 	    	map.setCenter(center);

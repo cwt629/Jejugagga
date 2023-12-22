@@ -114,7 +114,7 @@
    }
    
    div.coursedetail_routeinfo {
-       /*padding: 30px;*/
+       margin: 40px 0 10px 0;
    }
    
    div.coursedetail_routes {
@@ -151,7 +151,7 @@
    
    div.coursedetail_routes>img.coursedetail_arrow {
        position: relative;
-       top: -3px;
+       top: 3px;
    }
    
    div.coursedetail_routes div.coursedetail_routeplace div.coursedetail_tag {
@@ -163,22 +163,23 @@
        border-radius: 30px;
        text-align: center;
        position: absolute;
-       top: 44px;
+       top: 59px;
        left: 10px;
    }
    
-   div.coursedetail_routeplace div.coursedetail_detailsend {
+   div.coursedetail_routeplace div.coursedetail_mapsend {
        display: flex;
        justify-content: center;
+       margin-bottom: 15px;
    }
    
-   button.coursedetail_detailsender {
+   button.coursedetail_mapsender {
        background-color: #eeb182;
        color: #553324;
        transition: background-color 0.4s, color 0.4s;
    }
    
-   button.coursedetail_detailsender:hover {
+   button.coursedetail_mapsender:hover {
        background-color: #553324;
        color: #eeb182;
    }
@@ -198,7 +199,7 @@
    }
    
    div.coursedetail_explain {
-       margin: 30px 0;
+       margin: 40px 0;
    }
    
    div.coursedetail_footer {
@@ -309,10 +310,10 @@
 			location.href = "./revise?coursecode=${dto.coursecode}";
 		});
 		
-		// 여행지 디테일 버튼
-		$("button.coursedetail_detailsender").click(function(){
+		// 여행지 클릭 이벤트
+		$("div.coursedetail_card").click(function(){
 			// 이동해야 하는 여행지코드 받아오기
-			let tourcode = $(this).parent().parent().attr("data-tourcode");
+			let tourcode = $(this).parent().attr("data-tourcode");
 			location.href = "../tour/content?tourcode=" + tourcode;
 		})
 		
@@ -389,9 +390,13 @@
 		<div class="coursedetail_mapdiv">
 			<!-- 지도가 나올 부분 -->
 		</div>
+		<hr>
 		
 		<div class="coursedetail_routeinfo">
 			<h4 style="text-align: center;">코스 구성</h4>
+			<br>
+			<h6 style="text-align: center;">Map 버튼을 클릭하면 지도 상 위치를 확인할 수 있습니다.</h6>
+			
 			<div class="coursedetail_routes">
 				<c:set var="spotindex" value="0"/> <!-- 각 여행지의 인덱스 -->
 				<c:forEach var="tourdto" items="${dto.tourInfos}">
@@ -403,12 +408,12 @@
 					<div class="coursedetail_routeplace" data-mapx="${tourdto.mapx}" data-mapy="${tourdto.mapy}"
 					data-title="${tourdto.title}" data-tourcode="${tourdto.tourcode}">
 						<!-- 여행지 정보로 이동하는 버튼 -->
-						<div class="coursedetail_detailsend">
-							<button type="button" class="coursedetail_generalbtn coursedetail_detailsender">
-								<i class="bi bi-send">Detail</i>
+						<div class="coursedetail_mapsend">
+							<button type="button" class="coursedetail_generalbtn coursedetail_mapsender">
+								<i class="bi bi-send">Map</i>
 							</button>
 						</div>
-						<div class="coursedetail_card" title="클릭 시 지도 이동">
+						<div class="coursedetail_card" title="클릭 시 여행지 정보로 이동">
 							<div class="coursedetail_routephoto">
 								<img src="${tourdto.firstimage != ''? tourdto.firstimage : '../res/photo/noimage.png'}">
 							</div>
@@ -423,7 +428,6 @@
 					<c:set var="spotindex" value="${spotindex + 1}"/>
 				</c:forEach>
 			</div>
-			<h6 style="text-align: center;">각 여행지를 클릭하면 지도 상으로 위치를 확인할 수 있습니다.</h6>
 		</div>
 		
 		<hr>
