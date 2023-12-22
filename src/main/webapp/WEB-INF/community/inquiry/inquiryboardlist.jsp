@@ -35,7 +35,7 @@
     showNotLoggedInModal();
    } else {
     const formData = new FormData(document.getElementById('boardFreeForm'));
-    document.getElementById('boardFreeForm').action = '/community/free/write';
+    document.getElementById('boardFreeForm').action = '/community/inquiry/write';
     document.getElementById('boardFreeForm').method = 'GET';
     // 폼을 제출
     document.getElementById('boardFreeForm').submit();
@@ -56,7 +56,7 @@
  <div id="board-search">
   <div class="container">
    <div class="search-window">
-    <form action="${root}/community/free/search" id="boardFreeForm" style="margin-left: 20%; /*justify-content: space-between; align-items: center;*/">
+    <form action="${root}/community/inquiry/search" id="boardFreeForm" style="margin-left: 20%; /*justify-content: space-between; align-items: center;*/">
 
      <div class="search-wrap search-wrap--with-write">
       <label for="search" class="blind">1대1문의 검색</label>
@@ -98,7 +98,7 @@
     <c:forEach var="item" items="${list}">
      <tr>
       <td>${item.freeboardcode}</td>
-      <th><a href="${root}/community/free/detail?usercode=${item.usercode}&freeboardcode=${item.freeboardcode}">${item.title}</a></th>
+      <th><a href="${root}/community/inquiry/inquiryboardlist?usercode=${item.usercode}&questioncode=${item.questioncode}">${item.title}</a></th>
       <th><fmt:formatDate pattern="yyyy-MM-dd" value="${item.registereddate}"/></th>
       <th>${item.usercode}</th>
      </tr>
@@ -112,18 +112,18 @@
    <li class="pagination-item--wide first">
     <c:if test="${currentPage > 1}">
      <a class="pagination-link--wide first"
-        href="${'/community/free/list?currentPage=' += currentPage - 1}">Previous</a>
+        href="${'/community/inquiry/list?currentPage=' += currentPage - 1}">Previous</a>
     </c:if>
    </li>
    <c:forEach var="i" begin="1" end="${totalPage}">
     <li class="pagination-item ${currentPage == i ? 'is-active' : ''}">
-     <a class="pagination-link" href="/community/free/list?currentPage=${i}">${i}</a>
+     <a class="pagination-link" href="/community/inquiry/list?currentPage=${i}">${i}</a>
     </li>
    </c:forEach>
    <li class="pagination-item--wide last">
     <c:if test="${currentPage < totalPage}">
      <a class="pagination-link--wide first"
-        href="${'/community/free/list?currentPage=' += currentPage + 1}">Next</a>
+        href="${'/community/inquiry/list?currentPage=' += currentPage + 1}">Next</a>
     </c:if>
    </li>
   </ul>
