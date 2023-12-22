@@ -50,8 +50,8 @@ public class BoardFreeDao {
 		session.update(nameSpace + "updateBoardFree", dto);
 	}
 
-	public void deleteBoardFree(int num) {
-		session.delete(nameSpace + "deleteBoardFree", num);
+	public void deleteBoardFree(int freeboardcode) {
+		session.delete(nameSpace + "deleteBoardFree", freeboardcode);
 	}
 
 	public List<BoardFreeDto> selectAllfreeboardlist10Bydesc() {
