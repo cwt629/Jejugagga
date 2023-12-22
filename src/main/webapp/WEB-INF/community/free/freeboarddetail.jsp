@@ -16,31 +16,15 @@
 </head>
 
 <script>
-    // 전역 변수 설정
-    var loginStatus = ${sessionScope.loginok != null};
-    var boardFreeUserCode = ${boardFreeDto.usercode};
-
-
-    // 게시글 상세 페이지 이동
-    function goToDetailPage(usercode, freeboardcode) {
-        // 로그인하지 않았으면 모달을 표시하고 함수 종료
-        if (!loginStatus) {
-            showNotLoggedInModal();
-            return;
-        }
-
-        if (usercode === boardFreeUserCode || loginStatus) {
-            window.location.href = "${root}/community/free/detail?usercode=" + usercode + "&freeboardcode=" + freeboardcode;
-        } else {
-            showNotLoggedInModal();
-        }
-    }
 
     // 게시글 삭제 확인
     function deleteItem() {
         var deleteItem = confirm("정말 삭제하시겠습니까?");
         if (deleteItem) {
-            location.href = "${root}/community/free/delete?freeboardcode=${boardFreeDto.freeboardcode}";
+            // jQuery를 사용하여 POST 요청 보내기
+                $('.deletesubmitform').submit();
+
+
         }
     }
 </script>
@@ -57,6 +41,10 @@
                 onclick="location.href='${root}/community/free/updateBoardFree?freeboardcode=${boardFreeDto.freeboardcode}&usercode=${boardFreeDto.usercode}&usercode_str='+${boardFreeDto.usercode.toString()}">
             수정
         </button>
+        <form class="deletesubmitform" action="${root}/community/free/delete" method="post" style="display: none">
+            <input type="hidden" value="${freeboardcode}" name="freeboardcode">
+            <button type="submit"></button>
+        </form>
         <button type="button" class="btn btn-danger" onclick="deleteItem(${boardFreeDto.freeboardcode})">삭제</button>
     </c:if>
 </body>
