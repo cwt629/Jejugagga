@@ -77,11 +77,17 @@ public class MypageController {
 	}
 	
 	@PostMapping("/member/changeinfo/change")
-	public String changeinfo(@ModelAttribute MemberTableDto dto, @RequestParam String id,
-			@RequestParam String password) {
-		String pass = HashService.hashPassword(password);
-		dto.setId(id);
-		dto.setPassword(pass);
-		return "redirect:/member/login";
+	public String changeinfo(@ModelAttribute MemberTableDto dto, @RequestParam String nickname,
+			@RequestParam String email, @RequestParam int usercode, HttpSession session) {
+		dto.setNickname(nickname);
+		dto.setEmail(email);
+		dto.setUsercode(usercode);
+		
+		userPageDao.userInfoUpdate(dto);
+		
+		session.setAttribute("nickname", nickname);
+		session.setAttribute("myemail", email);
+		
+		return "redirect:/mypage/user";
 	}
 }

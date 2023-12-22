@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Mukta:700");
 
-.container-write {
+div.course_list_app div.container-write {
     font-family: "Mukta", sans-serif;
     font-size: 1rem;
     line-height: 1.5;
@@ -34,7 +34,7 @@ button.learn-more .circle {
     margin: 0;
     width: 3rem;
     height: 3rem;
-    background: #775555;
+    background: #eeb182;
     border-radius: 1.625rem;
 }
 button.learn-more .circle .icon {
@@ -43,7 +43,7 @@ button.learn-more .circle .icon {
     top: 0;
     bottom: 0;
     margin: auto;
-    background: #775555;
+    background: #eeb182;
 }
 button.learn-more .circle .icon.arrow {
     transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
@@ -82,13 +82,14 @@ button:hover .circle {
     width: 100%;
 }
 button:hover .circle .icon.arrow {
-    background: #775555;
+    background: #eeb182;
     transform: translate(1rem, 0);
 }
 button:hover .button-text {
     color: #fff;
 }
 
+/*
 @supports (display: grid) {
     .container-write {
         display: grid;
@@ -103,3 +104,4 @@ button:hover .button-text {
         justify-self: center;
     }
 }
+*/

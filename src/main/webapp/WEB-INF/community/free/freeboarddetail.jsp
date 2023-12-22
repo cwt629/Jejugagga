@@ -8,7 +8,27 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle&family=Noto+Sans+KR&family=Orbit&display=swap"
+          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 </head>
+
+<script>
+
+    // 게시글 삭제 확인
+    function deleteItem() {
+        var deleteItem = confirm("정말 삭제하시겠습니까?");
+        if (deleteItem) {
+            // jQuery를 사용하여 POST 요청 보내기
+                $('.deletesubmitform').submit();
+
+
+        }
+    }
+</script>
+
 <body>
 <h1>상세페이지</h1>
 <div>
@@ -16,5 +36,15 @@
     <th>${boardFreeDto.content}</th>
     <th><img src="${boardFreeDto.photo}"></th>
 </div>
+    <c:if test="${boardFreeDto.usercode == sessionScope.usercode}">
+        <button type="button" class="btn btn-outline-secondary btn-sm" style="width: 80px;"
+                onclick="location.href='${root}/community/free/updateBoardFree?freeboardcode=${boardFreeDto.freeboardcode}&usercode=${boardFreeDto.usercode}&usercode_str='+${boardFreeDto.usercode.toString()}">
+            수정
+        </button>
+        <form class="deletesubmitform" action="${root}/community/free/delete" method="post" style="display: none">
+            <input type="hidden" value="${freeboardcode}" name="freeboardcode">
+            <button type="submit"></button>
+        </form>
+        <button type="button" class="btn btn-danger" onclick="deleteItem(${boardFreeDto.freeboardcode})">삭제</button>
+    </c:if>
 </body>
-</html>

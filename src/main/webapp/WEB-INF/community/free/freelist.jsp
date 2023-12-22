@@ -43,6 +43,14 @@
             }
         });
     })
+
+    function showLoginRequiredModal() {
+        $("#loginRequiredModal").show();
+    }
+
+    function hideLoginRequiredModal() {
+        $("#loginRequiredModal").hide();
+    }
 </script>
 
 <body>
@@ -57,11 +65,11 @@
     <div id="board-search">
         <div class="container">
             <div class="search-window">
-                <form action="${root}/community/free/search" id="boardFreeForm" style="margin-left: 20%; /*justify-content: space-between; align-items: center;*/">
+                <form action="${root}/community/free/list" id="boardFreeForm" style="margin-left: 20%; /*justify-content: space-between; align-items: center;*/">
                     <!-- 검색 범위 선택 드롭다운 추가 -->
                     <select id="searchType" name="searchType">
                         <option value="title">제목</option>
-                        <option value="author">작성자</option>
+                        <option value="usercode">작성자</option>
                         <option value="content">내용</option>
                     </select>
                     <div class="search-wrap search-wrap--with-write">
@@ -105,9 +113,16 @@
                 <c:forEach var="item" items="${list}">
                     <tr>
                         <td>${item.freeboardcode}</td>
-                        <th><a href="${root}/community/free/detail?usercode=${item.usercode}&freeboardcode=${item.freeboardcode}">${item.title}</a></th>
+                        <c:choose>
+                            <c:when test="${sessionScope.loginok != null}">
+                                <th><a href="${root}/community/free/detail?usercode=${item.usercode}&freeboardcode=${item.freeboardcode}">${item.title}</a></th>
+                            </c:when>
+                            <c:otherwise>
+                                <th><a href="javascript:void(0);" onclick="showLoginRequiredModal()">${item.title}</a></th>
+                            </c:otherwise>
+                        </c:choose>
                         <th><fmt:formatDate pattern="yyyy-MM-dd" value="${item.registereddate}"/></th>
-                        <th>${item.usercode}</th>
+                        <th>${item.writersNickname}</th>
                         <td>${item.viewcount}</td>
                     </tr>
                 </c:forEach>
@@ -120,18 +135,18 @@
             <li class="pagination-item--wide first">
                 <c:if test="${currentPage > 1}">
                     <a class="pagination-link--wide first"
-                       href="${'/community/free/list?currentPage=' += currentPage - 1}">Previous</a>
+                       href="${'./list?currentPage=' += currentPage - 1}">Previous</a>
                 </c:if>
             </li>
             <c:forEach var="i" begin="1" end="${totalPage}">
                 <li class="pagination-item ${currentPage == i ? 'is-active' : ''}">
-                    <a class="pagination-link" href="/community/free/list?currentPage=${i}">${i}</a>
+                    <a class="pagination-link" href="${root}/community/free/list?currentPage=${i}&searchType=${searchType}&searchWord=${searchWord}">${i}</a>
                 </li>
             </c:forEach>
             <li class="pagination-item--wide last">
                 <c:if test="${currentPage < totalPage}">
                     <a class="pagination-link--wide first"
-                       href="${'/community/free/list?currentPage=' += currentPage + 1}">Next</a>
+                       href="${'./list?currentPage=' += currentPage + 1}">Next</a>
                 </c:if>
             </li>
         </ul>
@@ -155,3 +170,17 @@
 </div>
 </body>
 </html>
+
+<div class="modal" id="loginRequiredModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">게시물을 보기 위해선 로그인을 해주세요!</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="hideLoginRequiredModal()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+

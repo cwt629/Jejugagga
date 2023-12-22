@@ -97,7 +97,8 @@
 				<c:forEach var="freeBoard" items="${freeBoardlist}">
 					<tr>
 						<!-- 제목 -->
-						<td>${freeBoard.title }
+						<td><span onclick="location.href='${root}/community/free/detail?usercode=${sessionScope.usercode}&freeboardcode=${freeBoard.freeboardcode}';">
+						${freeBoard.title }</span>
 						<c:if test="${freeBoard.photo != null}">
 							<i class="bi bi-image" style="color:gray;"></i>
 						</c:if>

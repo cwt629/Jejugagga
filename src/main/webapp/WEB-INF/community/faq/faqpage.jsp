@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="${root}/res/faq/faq.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
 
     <style>
         .accordion-button-img {
@@ -122,6 +122,10 @@
             padding: 0;
             list-style: none;
         }
+
+        body * {
+            font-family: Orbit;
+        }
     </style>
 </head>
 
@@ -154,7 +158,7 @@
         </ul>
     </div>
 
-    <h2 style="font-size: 45px;">FAQ</h2>
+    <h2 style="font-size: 45px; color: #775555">FAQ</h2>
     <div class="tab-content">
         <div class="accordion">
             <div class="accordion-item">

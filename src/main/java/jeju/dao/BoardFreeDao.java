@@ -50,8 +50,8 @@ public class BoardFreeDao {
 		session.update(nameSpace + "updateBoardFree", dto);
 	}
 
-	public void deleteBoardFree(int num) {
-		session.delete(nameSpace + "deleteBoardFree", num);
+	public void deleteBoardFree(int freeboardcode) {
+		session.delete(nameSpace + "deleteBoardFree", freeboardcode);
 	}
 
 	public List<BoardFreeDto> selectAllfreeboardlist10Bydesc() {
@@ -85,19 +85,11 @@ public class BoardFreeDao {
 		paramMap.put("searchType", criteria.getSearchType());
 		paramMap.put("searchWord", criteria.getSearchWord());
 
-		if ("title".equals(criteria.getSearchType())) {
-			return session.selectList(nameSpace + "getSearchListByTitle", paramMap);
-		} else if ("content".equals(criteria.getSearchType())) {
-			return session.selectList(nameSpace + "getSearchListByContent", paramMap);
-		} else if ("usercode".equals(criteria.getSearchType())) {
-			return session.selectList(nameSpace + "getSearchListByUserCode", paramMap);
-		} else {
-			// 기본적으로 title 검색을 수행
-			return session.selectList(nameSpace + "getSearchListByTitle", paramMap);
+
+
+			return session.selectList(nameSpace + "getSearchList", paramMap);
 		}
 
-//		return session.selectList(nameSpace + "getSearchList", paramMap);
-	}
 
 	public int searchTotalCount(String searchType, String searchWord) throws Exception {
 		Map<String, String> paramMap = new HashMap<>();
@@ -105,6 +97,11 @@ public class BoardFreeDao {
 		paramMap.put("searchWord", searchWord);
 
 		return session.selectOne(nameSpace + "searchTotalCount", paramMap);
+	}
+
+	// Dao에서 맵퍼에서 닉네임 중복 검색을 받아와서 searchWord에 각각 세팅하여 뿌린다.
+	public List<BoardFreeDto> getBoardListWithUserNickname(Map<String, String> paramMap) {
+		return session.selectList(nameSpace + "getBoardListWithUserNickname", paramMap);
 	}
 
 }

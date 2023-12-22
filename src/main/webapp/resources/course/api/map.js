@@ -1,3 +1,11 @@
+const MAP_MARKER1 = "../res/photo/map_markers/mapmarker1.png";
+const MAP_MARKER2 = "../res/photo/map_markers/mapmarker2.png";
+const MAP_MARKER3 = "../res/photo/map_markers/mapmarker3.png";
+const MAP_MARKER4 = "../res/photo/map_markers/mapmarker4.png";
+const MAP_MARKER5 = "../res/photo/map_markers/mapmarker5.png";
+
+const MAP_MARKER_ICONS = [MAP_MARKER1, MAP_MARKER2, MAP_MARKER3, MAP_MARKER4, MAP_MARKER5];
+
 function initMap(){
     // 지도가 들어갈 div 찾아오기
     let mapDiv = document.querySelector("div.coursedetail_mapdiv");
@@ -15,22 +23,26 @@ function initMap(){
     let coords = []; // 위도, 경도를 순서대로 저장하는 2차원 배열
     
     // 각 여행지의 위도, 경도를 가져와 핀을 찍는다
-    document.querySelectorAll("div.coursedetail_routeplace").forEach(function(item){
+    document.querySelectorAll("div.coursedetail_routeplace").forEach(function(item, idx){
     	let latitude = parseFloat(item.dataset.mapy), longitude = parseFloat(item.dataset.mapx);
     	// 위도, 경도를 각각 저장해준다
     	coords.push([latitude, longitude]);
     	
-    	// 핀 찍기
+    	// 지도에 핀 찍기
     	let pos = new naver.maps.LatLng(latitude, longitude);
+    	
     	let marker = new naver.maps.Marker({
     		position: pos,
-    		map: map
+    		map: map,
+    		title: item.dataset.title,
+    		icon: MAP_MARKER_ICONS[idx],
+    		animation: naver.maps.Animation.BOUNCE
     	});
-    	marker.setTitle(item.dataset.title); // 마우스 갖다대면 이름 출력
     	
+    	    	
     	// 각 여행지 요소에 클릭 시 이벤트를 부여한다
-	    item.addEventListener("click", function(){
-	    	let latitude = parseFloat(this.dataset.mapy), longitude = parseFloat(this.dataset.mapx);
+	    item.querySelector("button.coursedetail_mapsender").addEventListener("click", function(){
+	    	let latitude = parseFloat(item.dataset.mapy), longitude = parseFloat(item.dataset.mapx);
 	    	center = new naver.maps.LatLng(latitude, longitude);
 	    	map.setCenter(center);
 	    	map.setZoom(16, false); // 특정 여행지 클릭 시 그 여행지에 줌인
@@ -66,7 +78,7 @@ function renderRoute(map, coords){
 			// polyline 그리기
 			let renderedPolyLine = new naver.maps.Polyline({
 				path: polylines,
-				strokeColor: '#4cb9e7',
+				strokeColor: '#dd6969',
 				strokeOpacity: 0.8,
 				strokeWeight: 6,
 				map: map
