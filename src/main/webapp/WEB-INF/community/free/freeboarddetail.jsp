@@ -55,7 +55,7 @@
 
 <body>
 <div class="freedetail_app">
-	<h1>자유게시판</h1>
+	<h1><b>자유게시판</b></h1>
 	<br><br>
 	<div class="freedetail_text">
 	    <h3>${boardFreeDto.title}</h3>
