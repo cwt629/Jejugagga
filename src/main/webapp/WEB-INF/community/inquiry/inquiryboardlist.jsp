@@ -12,8 +12,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <link rel="stylesheet" type="text/css" href="${root}/res/board_inquiry/board_inquiry.css">
-    <link rel="stylesheet" type="text/css" href="${root}/res/board_inquiry_page/board_inquiry_page.css">
+    <link rel="stylesheet" type="text/css" href="../../res/board_inquiry/board_inquiry.css">
+    <link rel="stylesheet" type="text/css" href="../../res/board_inquiry_page/board_inquiry_page.css">
 </head>
 
 <script>
