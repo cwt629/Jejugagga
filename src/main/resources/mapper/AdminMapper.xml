@@ -41,4 +41,11 @@
 	<delete id="deleteCoursebyCoursecode" parameterType="int">
 		delete from course where coursecode= #{coursecode}
 	</delete>
+	<insert id="inquiryanswerinsert" parameterType="BoardInquiryAnswerDto">
+		insert into board_inquiry_answer (questioncode,usercode,registereddate,title,content)
+		values (#{questioncode},#{usercode},now(),#{title},#{content})
+	</insert>
+	<select id="getBoardInquiryAnswerbyQuestioncode" parameterType="int" resultType="BoardInquiryAnswerDto"> <!-- num으로 멤버의 정보를 가져올떄 -->
+		select * from board_inquiry_answer where questioncode=#{questioncode}
+	</select>
 </mapper>

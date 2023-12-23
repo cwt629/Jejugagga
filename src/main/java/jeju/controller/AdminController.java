@@ -20,6 +20,7 @@ import jeju.dao.MemberTableDao;
 import jeju.dao.ReviewBoardDao;
 import jeju.dao.UserPageDao;
 import jeju.dto.BoardFreeDto;
+import jeju.dto.BoardInquiryAnswerDto;
 import jeju.dto.BoardReviewDto;
 import jeju.dto.MemberTableDto;
 
@@ -115,7 +116,39 @@ public class AdminController {
 		return memberreviewlist;
 	}
 	
+	@PostMapping("/admin/inquiryanswer")
+	public String inquiryanswer(Model model, @RequestParam int questioncode, @RequestParam String title, @RequestParam String content )
+	{
+		model.addAttribute("questioncode", questioncode);
+		model.addAttribute("title", title);
+		model.addAttribute("content", content);
+		return "admin/inquiryboardanswerform";
+	}
 	
+	@PostMapping("/admin/inquiryanswer/insert")
+	public String inquiryanswerinsert(Model model, BoardInquiryAnswerDto dto, 
+			@RequestParam int questioncode, @RequestParam String title, @RequestParam String content, @RequestParam int usercode)
+	{
+		dto.setQuestioncode(questioncode);
+		dto.setTitle(title);
+		dto.setContent(content);
+		dto.setUsercode(usercode);
+		admindao.inquiryanswerinsert(dto);
+		model.addAttribute("questioncode", questioncode);
+		model.addAttribute("title", title);
+		model.addAttribute("content", content);
+		return "redirect:../adminpage";
+	}
 	
-	
+	@PostMapping("/admin/inquirydetail")
+	public String inquiryanswerdetail(Model model, BoardInquiryAnswerDto dto, 
+			@RequestParam int questioncode, @RequestParam String title, @RequestParam String content)
+	{
+		dto = admindao.getBoardInquiryAnswerbyQuestioncode(questioncode);
+		model.addAttribute("dto", dto);
+		model.addAttribute("questioncode", questioncode);
+		model.addAttribute("title", title);
+		model.addAttribute("content", content);
+		return "admin/inquiryboarddetail";
+	}
 }

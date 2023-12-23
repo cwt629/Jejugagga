@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import jeju.dto.BoardInquiryAnswerDto;
 import jeju.dto.CourseDto;
 import jeju.dto.MemberTableDto;
 
@@ -44,6 +45,14 @@ public class AdminDao {
     public void deleteCoursebyCoursecode(int coursecode) {
     	session.delete(nameSpace + "deleteCoursebyCoursecode", coursecode);
     }
+    public void inquiryanswerinsert(BoardInquiryAnswerDto dto)
+	{
+		session.insert(nameSpace+"inquiryanswerinsert",dto);
+	}
+    public BoardInquiryAnswerDto getBoardInquiryAnswerbyQuestioncode(int questioncode)
+	{
+		return session.selectOne(nameSpace + "getBoardInquiryAnswerbyQuestioncode", questioncode);
+	}
 	
 	
 }
