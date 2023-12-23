@@ -15,8 +15,12 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <link rel="stylesheet" type="text/css" href="../../res/board_inquiry/board_inquiry.css">
     <link rel="stylesheet" type="text/css" href="../../res/board_inquiry_page/board_inquiry_page.css">
+    <style>
+    body * {
+        font-family: 'Orbit';
+    }
+    </style>
 </head>
-
 <script>
     function showNotLoggedInModal() {
         // 모달창을 표시합니다.
