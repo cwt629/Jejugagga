@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="${root}/res/board_inquiry_write/board_inquiry_write.css/">
+    <link rel="stylesheet" type="text/css" href="../../res/board_inquiry_write/board_inquiry_write.css/">
 </head>
 <body>
 <div class="board_wrap">
@@ -18,7 +18,7 @@
         <strong>문의내용</strong>
         <p></p>
         <div class="board_write">
-            <form action="${root}/community/inquiry/write" method="post" enctype="multipart/form-data">
+            <form action="../../community/inquiry/write" method="post" enctype="multipart/form-data">
                 <div class="board_write">
                     <div class="title">
                         <dl>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="bt_wrap">
                     <input type="submit" value="등록" class="on"/>
-                    <a href="${root}/community/inquiry/list">취소</a>
+                    <a href="../../community/inquiry/list">취소</a>
                 </div>
                 <input type="hidden" name="usercode" value="${sessionScope.usercode}"/>
             </form>
