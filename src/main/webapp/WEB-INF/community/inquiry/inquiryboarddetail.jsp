@@ -9,11 +9,50 @@
     <meta charset="UTF-8">
     <title></title>
 </head>
+
+<style>
+	body * {
+       font-family: 'Orbit';
+   }
+   
+   div.inquirydetail_app {
+       padding: 30px 200px;
+   }
+   
+   div.inquirydetail_photo img {
+       max-width: 300px;
+       max-height: 300px;
+   }
+   
+   div.inquirydetail_text {
+       padding: 20px;
+       border: 2px solid #ccc;
+   }
+   
+   div.inquirydetail_text>div {
+       padding: 0 10px;
+   }
+   
+   div.inquirydetail_buttons {
+       margin: 30px;
+   }
+</style>
 <body>
-<h1>1대1문의 유저페이지</h1>
-<div>
-    <th>${boardInquiryDto.title}</th>
-    <th>${boardInquiryDto.content}</th>
+
+<div class="inquirydetail_app">
+	<h1>1대1문의</h1>
+	<br><br>
+	<div class="inquirydetail_text">
+	    <h3>${biDto.title}</h3>
+	    <hr>
+	    <div class="inquirydetail_content">
+		    ${biDto.content}
+	    </div>
+	</div>
+	<div class="inquirydetail_buttons">
+		<button type="button" class="btn btn-secondary"
+		onclick="location.href = './list'">이전으로</button>
+    </div>
 </div>
 </body>
 </html>

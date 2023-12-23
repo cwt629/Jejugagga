@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="root" value="<%=request.getContextPath()%>"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +38,7 @@
                 showNotLoggedInModal();
             } else {
                 const formData = new FormData(document.getElementById('inquiryBoardListForm'));
-                document.getElementById('inquiryBoardListForm').action = '/community/inquiry/write';
+                document.getElementById('inquiryBoardListForm').action = './write';
                 document.getElementById('inquiryBoardListForm').method = 'POST';
                 // 폼을 제출
                 document.getElementById('inquiryBoardListForm').submit();
@@ -67,25 +68,23 @@
         <div class="container">
             <div class="search-window">
                 <form action="${root}/community/inquiry/list" id="inquiryBoardListForm"
-                      style="margin-left: 20%; /*justify-content: space-between; align-items: center;*/">
+                      style="">
 
-                    <div class="search-wrap search-wrap--with-write">
+                   <!--  <div class="search-wrap search-wrap--with-write">
                         <label for="search" class="blind">1대1문의 검색</label>
                         <input id="search" type="search" name="searchWord" placeholder="검색어를 입력해주세요." value="">
                         <button type="submit" id="searchButton" class="board_inquiry_btn board_inquiry_btn-dark">검색</button>
-                    </div>
+                    </div> -->
                     <!-- '글쓰기' 아이콘 링크를 form 안으로 이동 -->
 
                     <c:if test="${sessionScope.loginok==null}">
-                        <button type="button" class="board_inquiry_btn board_inquiry_btn-write loginCheck"
-                                style="margin-right: 10%;">
+                        <button type="button" class="board_inquiry_btn board_inquiry_btn-write loginCheck">
                             <i class="bi bi-pencil-fill"></i>
                             <input type="hidden" name="loginStatus" value="0"/>
                         </button>
                     </c:if>
                     <c:if test="${sessionScope.loginok!=null}">
-                        <button type="button" class="board_inquiry_btn board_inquiry_btn-write loginCheck"
-                                style="margin-right: 10%;">
+                        <button type="button" class="board_inquiry_btn board_inquiry_btn-write loginCheck">
                             <i class="bi bi-pencil-fill"></i>
                             <input type="hidden" name="loginStatus" value="1"/>
                         </button>
@@ -102,8 +101,9 @@
                 <tr>
                     <th scope="col" class="th-num">번호</th>
                     <th scope="col" class="th-title">제목</th>
-                    <th scope="col" class="th-date">등록일</th>
+                    
                     <th scope="col" class="th-usercode">작성자</th>
+                    <th scope="col" class="th-date">등록일</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -121,15 +121,16 @@
                                 </th>
                             </c:otherwise>
                         </c:choose>
-                        <th><fmt:formatDate pattern="yyyy-MM-dd" value="${item.registereddate}"/></th>
+                        
                         <th>${item.nickname}</th>
+                        <th><fmt:formatDate pattern="yyyy-MM-dd" value="${item.registereddate}"/></th>
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
         </div>
     </div>
-    <div class="pagination-container" data-wow-duration="0.5s">
+    <%-- <div class="pagination-container" data-wow-duration="0.5s">
         <ul class="pagination">
             <li class="pagination-item--wide first">
                 <c:if test="${currentPage > 1}">
@@ -150,7 +151,7 @@
                 </c:if>
             </li>
         </ul>
-    </div>
+    </div> --%>
 </section>
 
 
