@@ -62,14 +62,18 @@
 
 .board_write .title dl,
 .board_write .info dl {
-    font-size: 0;
+    font-size: 20px;
 }
 
 .board_write .info dl {
     width: 100%; /* 한 줄로 표시 */
 }
 
-.board_write .title dt,
+.board_write .title dt {
+    padding: 15px;
+    display: flex; /* flexbox를 사용하여 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+}
 .board_write .title dd {
     /*width: calc(100% - 100px);*/
 }
