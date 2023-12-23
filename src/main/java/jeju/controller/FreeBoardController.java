@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
@@ -100,9 +102,18 @@ public class FreeBoardController {
     }
 
     @PostMapping("/community/free/update")
-    public String update(@ModelAttribute BoardFreeDto boardFreeDto) {
+    public String update(@ModelAttribute BoardFreeDto boardFreeDto, Model model,
+                         @RequestParam int currentPage,
+                         HttpServletRequest request,
+                         HttpSession session) {
+        // 이미지 업로드 및 URL 획득
+
+        // 이미지 URL을 게시글 정보에 설정
+
+        // 게시글 업데이트 수행
         boardFreeService.updateBoardFree(boardFreeDto);
-        return "redirect:/community/free/list";
+
+        return "redirect:/community/free/list?currentPage=" + currentPage;
     }
 
     @PostMapping("/community/free/delete")
