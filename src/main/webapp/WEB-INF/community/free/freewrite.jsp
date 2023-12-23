@@ -12,11 +12,17 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="${root}/res/board_free_write/board_free_write.css/">
 </head>
+<style>
+	body * {
+       font-family: 'Orbit';
+   }
+</style>
 <body>
 <div class="board_wrap">
     <div class="board_title">
         <strong>자유게시판</strong>
         <p></p>
+    </div>
     <div class="board_write_wrap">
         <form action="${root}/community/free/save" method="post" enctype="multipart/form-data">
             <div class="board_write">
@@ -38,7 +44,7 @@
             </div>
             <div class="bt_wrap">
                 <input type="submit" value="등록" class="on"/>
-                <a href="./community/free/list">취소</a>
+                <a href="./list">취소</a>
             </div>
             <input type="hidden" name="usercode" value="${sessionScope.usercode}" />
         </form>

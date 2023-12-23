@@ -132,6 +132,11 @@ public class FreeBoardController {
     @GetMapping("/community/free/detail")
     public String detail(@RequestParam int usercode, @RequestParam int freeboardcode, Model model) {
         BoardFreeDto boardFreeDto = boardFreeService.detailBoardFreePage(freeboardcode);
+        // 내용에서 띄어쓰기를 <br>로 바꾸어 보내준다
+        String originalContent = boardFreeDto.getContent();
+        String convertedContent = originalContent.replaceAll("\n", "<br>");
+        boardFreeDto.setContent(convertedContent);
+        
         model.addAttribute("boardFreeDto", boardFreeDto);
         model.addAttribute("freeboardcode", freeboardcode);
 

@@ -16,7 +16,11 @@
     <link rel="stylesheet" type="text/css" href="${root}/res/board_free/board_free.css">
     <link rel="stylesheet" type="text/css" href="${root}/res/board_page/board_page.css">
 </head>
-
+<style>
+	body * {
+       font-family: 'Orbit';
+   }
+</style>
 <script>
     function showNotLoggedInModal() {
         // 모달창을 표시합니다.
@@ -36,7 +40,7 @@
                 showNotLoggedInModal();
             } else {
                 const formData = new FormData(document.getElementById('boardFreeForm'));
-                document.getElementById('boardFreeForm').action = '/community/free/write';
+                document.getElementById('boardFreeForm').action = '${root}/community/free/write';
                 document.getElementById('boardFreeForm').method = 'GET';
                 // 폼을 제출
                 document.getElementById('boardFreeForm').submit();
