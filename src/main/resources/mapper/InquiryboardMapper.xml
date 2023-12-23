@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jeju.dao.inquiryboard.dao">
     <insert id="insertInquiry" parameterType="jeju.dto.BoardInquiryDto">
-        INSERT INTO board_inquiry (usercode, registereddate, title, content, isprivate)
-        VALUES (#{usercode}, NOW(), #{title}, #{content}, #{isprivate})
+        INSERT INTO board_inquiry (usercode, registereddate, title, content)
+        VALUES (#{usercode}, NOW(), #{title}, #{content})
     </insert>
     <select id="selectPagingOfInquiryCriteria" parameterType="jeju.boardfree_utils.BoardInquiryPagingCriteria"
             resultType="BoardFreeDto">
