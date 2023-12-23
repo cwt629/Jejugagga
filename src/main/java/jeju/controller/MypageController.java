@@ -61,7 +61,19 @@ public class MypageController {
 	
 	
 	@GetMapping("/mypage/mycourse")
-	public String myTripCourse() {
+	public String myTripCourse(Model model, HttpSession session) {
+		
+		// 현재 로그인한 유저코드 얻기
+		int usercode = (int)session.getAttribute("usercode");
+		System.out.println(usercode);
+		
+		
+		List<Map<String, String>> tourLikesList = userPageDao.selectOfTourLikesByNum(usercode);
+		List<Map<String, String>> courseLikesList = userPageDao.selectOfCourseLikesByNum(usercode);
+		
+		model.addAttribute("tourLikesList", tourLikesList);
+		model.addAttribute("courseLikesList", courseLikesList);
+		
 		return "mypage/mytrip_course";
 	}
 	
