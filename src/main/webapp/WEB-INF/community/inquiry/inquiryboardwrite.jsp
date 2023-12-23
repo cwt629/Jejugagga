@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="${root}/res/board_inquiry_write/board_inquiry_write.css/">
+    <link rel="stylesheet" type="text/css" href="../../res/board_inquiry_write/board_inquiry_write.css/">
 </head>
 <style>
 /* Basic Grey */
@@ -103,10 +103,6 @@ textarea{
 </style>
 <body>
 
-
-
-
-
 <div class="board_wrap" style="margin-top:20px;">
 	<form action="${root}/community/inquiry/insert" method="post" class="multipart/form-data">
     <h1>문의 글 작성
@@ -128,8 +124,6 @@ textarea{
         <input type="button" class="button" value="이전으로" onclick="location.href = './list'"/> 
     </label>    
 </form>
-
-    	
 
 </body>
 </html>
