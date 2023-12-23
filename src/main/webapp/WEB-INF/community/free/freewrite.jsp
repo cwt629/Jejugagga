@@ -17,7 +17,6 @@
     <div class="board_title">
         <strong>자유게시판</strong>
         <p></p>
-    </div>
     <div class="board_write_wrap">
         <form action="${root}/community/free/save" method="post" enctype="multipart/form-data">
             <div class="board_write">
@@ -38,7 +37,6 @@
                     </textarea>
                 </div>
             </div>
-
             <div class="bt_wrap">
                 <input type="submit" value="등록" class="on"/>
                 <a href="./community/free/list">취소</a>

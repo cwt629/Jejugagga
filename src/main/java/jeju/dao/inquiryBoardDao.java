@@ -27,7 +27,7 @@ public class inquiryBoardDao {
 		Map<String, Integer> paramMap = new HashMap<>();
 		paramMap.put("pageStart", pageStart);
 		paramMap.put("perPageNum", perPageNum);
-		return session.selectList(nameSpace + "selectPagingOfBoardFreeCriteria", paramMap);
+		return session.selectList(nameSpace + "selectPagingOfBoardInquiryCriteria", paramMap);
 	}
 
 	public void updateReadCount(BoardInquiryDto dto) {
@@ -78,6 +78,22 @@ public class inquiryBoardDao {
 	public List<BoardInquiryAnswerDto> selectAnswersForQuestion(Map<String, String> paramMap) {
 		return session.selectList(nameSpace + "getBoardListWithUserNickname", paramMap);
 
+	}
+
+	public int getTotalCount() {
+		return session.selectOne(nameSpace + "totalCountOfBoardInquiry");
+	}
+
+    public BoardInquiryDto detail(int questioncode) {
+		return session.selectOne(nameSpace + "detail", questioncode);
+	}
+
+	public List<BoardFreeDto> getBoardListWithUserNickname(Map<String, String> paramMap) {
+		return session.selectList(nameSpace + "getBoardListWithUserNickname", paramMap);
+	}
+
+	public List<Map<String, Object>> selectInquiryisanswer() {
+		return session.selectList(nameSpace + "selectInquiryisanswer");
 	}
 }
 

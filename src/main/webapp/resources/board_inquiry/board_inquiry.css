@@ -1,0 +1,235 @@
+.All-board-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+section.notice {
+    padding: 80px 0;
+}
+
+.page-title {
+    margin-bottom: 60px;
+}
+.page-title h3 {
+    font-size: 28px;
+    color: #333333;
+    font-weight: 400;
+    text-align: center;
+}
+
+#board-search .search-window {
+    padding: 15px 0;
+    background-color: #f9f7f9;
+}
+#board-search .search-window .search-wrap {
+    position: relative;
+    /*   padding-right: 124px; */
+    /*margin: 0 auto;*/
+    margin-left: 10px;
+    margin-right: 40px;
+    width: 60%;
+    max-width: 564px;
+}
+#board-search .search-window .search-wrap input {
+    height: 40px;
+    width: 100%;
+    font-size: 14px;
+    padding: 7px 14px;
+    border: 1px solid #ccc;
+}
+#board-search .search-window .search-wrap input:focus {
+    border-color: #333;
+    outline: 0;
+    border-width: 1px;
+}
+#board-search .search-window .search-wrap .board_inquiry_btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 108px;
+    padding: 0;
+    font-size: 16px;
+}
+
+#board-search .search-wrap .bi-pencil-fill {
+    margin-left: 100px; /* 또는 필요에 따라 조절 */
+}
+.board-table {
+    font-size: 13px;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.board-table a {
+    color: #333;
+    display: inline-block;
+    line-height: 1.4;
+    word-break: break-all;
+    vertical-align: middle;
+    text-decoration: none;
+}
+.board-table a:hover {
+    color: #75444A;
+}
+.board-table th {
+    text-align: center;
+}
+
+.board-table .th-num {
+    width: 100px;
+    text-align: center;
+}
+
+.board-table .th-date {
+    width: 200px;
+}
+
+.board-table th, .board-table td {
+    padding: 14px 0;
+}
+
+.board-table tbody td {
+    border-top: 1px solid #e7e7e7;
+    text-align: center;
+}
+
+.board-table tbody th {
+    padding-left: 28px;
+    padding-right: 14px;
+    border-top: 1px solid #e7e7e7;
+    text-align: center;
+}
+
+.board-table tbody th p{
+    display: none;
+}
+
+.board_btn {
+    display: inline-block;
+    padding: 0 30px;
+    font-size: 15px;
+    font-weight: 400;
+    background: transparent;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    text-transform: uppercase;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+
+}
+
+.board_inquiry_btn-dark {
+    background: #555;
+    color: #fff;
+}
+
+.board_inquiry_btn-dark:hover, .board_inquiry_btn-dark:focus {
+    background: #373737;
+    border-color: #373737;
+    color: #fff;
+}
+
+.board_inquiry_btn-dark {
+    background: #555;
+    color: #fff;
+}
+
+.board_inquiry_btn-dark:hover, .board_inquiry_btn-dark:focus {
+    background: #373737;
+    border-color: #373737;
+    color: #fff;
+}
+
+/* reset*/
+
+.search-wrap {
+    list-style: none;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#board-search .search-window form {
+    display: flex; /* Flexbox를 사용합니다 */
+    /*justify-content: space-between; !* 요소들을 양쪽 끝으로 정렬합니다 *!*/
+    align-items: center; /* 요소들을 수직 중앙에 정렬합니다 */
+    width: 100%; /* 폼의 너비를 컨테이너의 전체 너비로 설정합니다 */
+}
+
+#board-search .search-wrap--with-write {
+    flex-grow: 1; /* 검색창을 확장하여 가능한 많은 공간을 차지하도록 합니다 */
+    display: flex; /* 검색창 내부도 flex로 설정하여 버튼과 아이콘이 나란히 있도록 합니다 */
+    /*justify-content: space-between; !* 내부 요소들을 양쪽 끝으로 정렬합니다 *!*/
+}
+
+.board_inquiry_btn-write {
+    /* margin-left를 줄여 아이콘을 검색 버튼에 더 가깝게 위치시킵니다 */
+    margin-right: 100px; /* 또는 필요에 따라 조절 */
+    order: 2; /* flexbox 내에서 순서를 변경할 수 있습니다 */
+}
+
+.bi-pencil-fill {
+    font-size: 20px; /* 아이콘 크기 조절 */
+    color: #151414; /* 아이콘 색상 조절 */
+    /* 필요하다면 여기에 추가 스타일을 적용 */
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.container {
+    width: 1100px;
+    margin: 0 auto;
+}
+.blind {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    width: 1px;
+    height: 1px;
+}
+
+/* 검색 셀렉창 css */
+.search-type-select {
+    position: absolute;
+    /* 검색창의 왼쪽에 위치시킵니다 */
+    left: 0;
+    /* 검색창의 높이와 너비를 사용합니다 */
+    height: 100%;
+    width: 100%;
+    /* 검색창과 같은 배경색을 사용합니다 */
+    background-color: #f9f7f9;
+    /* 검색창과 같은 색상으로 글자를 표시합니다 */
+    color: #333;
+    /* 검색창과 같은 크기의 글자를 사용합니다 */
+    font-size: 14px;
+    /* 검색창과 같은 패딩을 사용합니다 */
+    padding: 7px 14px;
+    /* 검색창과 같은 테두리를 사용합니다 */
+    border: 1px solid #ccc;
+}
+
+.search-type-select {
+    border-radius: 8px;
+}

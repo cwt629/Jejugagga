@@ -12,8 +12,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <link rel="stylesheet" type="text/css" href="${root}/res/inquirylist/inquirylist.css">
-    <link rel="stylesheet" type="text/css" href="${root}/res/board_page/board_page.css">
+    <link rel="stylesheet" type="text/css" href="${root}/res/board_inquiry/board_inquiry.css">
+    <link rel="stylesheet" type="text/css" href="${root}/res/board_inquiry_page/board_inquiry_page.css">
 </head>
 
 <script>
@@ -37,8 +37,8 @@
                 showNotLoggedInModal();
             } else {
                 const formData = new FormData(document.getElementById('inquiryBoardListForm'));
-                document.getElementById('inquiryBoardListForm').action = '/community/free/write';
-                document.getElementById('inquiryBoardListForm').method = 'GET';
+                document.getElementById('inquiryBoardListForm').action = '/community/inquiry/write';
+                document.getElementById('inquiryBoardListForm').method = 'POST';
                 // 폼을 제출
                 document.getElementById('inquiryBoardListForm').submit();
             }
@@ -59,37 +59,32 @@
 <section class="notice">
     <div class="page-title">
         <div class="container">
-            <h3>자유게시판</h3>
+            <h3>1:1 문의</h3>
         </div>
     </div>
     <!-- board seach area -->
     <div id="board-search">
         <div class="container">
             <div class="search-window">
-                <form action="${root}/community/free/list" id="boardFreeForm"
+                <form action="${root}/community/inquiry/list" id="inquiryBoardListForm"
                       style="margin-left: 20%; /*justify-content: space-between; align-items: center;*/">
-                    <!-- 검색 범위 선택 드롭다운 추가 -->
-                    <select id="searchType" name="searchType">
-                        <option value="title">제목</option>
-                        <option value="usercode">작성자</option>
-                        <option value="content">내용</option>
-                    </select>
+
                     <div class="search-wrap search-wrap--with-write">
-                        <label for="search" class="blind">자유게시판 검색</label>
+                        <label for="search" class="blind">1대1문의 검색</label>
                         <input id="search" type="search" name="searchWord" placeholder="검색어를 입력해주세요." value="">
-                        <button type="submit" id="searchButton" class="board_free_btn board_free_btn-dark">검색</button>
+                        <button type="submit" id="searchButton" class="board_inquiry_btn board_inquiry_btn-dark">검색</button>
                     </div>
                     <!-- '글쓰기' 아이콘 링크를 form 안으로 이동 -->
 
-                    <c:if test="${sessionScope.loginok==null }">
-                        <button type="button" class="board_free_btn board_free_btn-write loginCheck"
+                    <c:if test="${sessionScope.loginok==null}">
+                        <button type="button" class="board_inquiry_btn board_inquiry_btn-write loginCheck"
                                 style="margin-right: 10%;">
                             <i class="bi bi-pencil-fill"></i>
                             <input type="hidden" name="loginStatus" value="0"/>
                         </button>
                     </c:if>
-                    <c:if test="${sessionScope.loginok!=null }">
-                        <button type="button" class="board_free_btn board_free_btn-write loginCheck"
+                    <c:if test="${sessionScope.loginok!=null}">
+                        <button type="button" class="board_inquiry_btn board_inquiry_btn-write loginCheck"
                                 style="margin-right: 10%;">
                             <i class="bi bi-pencil-fill"></i>
                             <input type="hidden" name="loginStatus" value="1"/>
@@ -112,7 +107,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="item" items="${list}">
+                <c:forEach var="item" items="${inquiryList}">
                     <tr>
                         <td>${item.questioncode}</td>
                         <c:choose>
@@ -127,7 +122,7 @@
                             </c:otherwise>
                         </c:choose>
                         <th><fmt:formatDate pattern="yyyy-MM-dd" value="${item.registereddate}"/></th>
-                        <th>${item.writersNickname}</th>
+                        <th>${item.nickname}</th>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -145,7 +140,7 @@
             <c:forEach var="i" begin="1" end="${totalPage}">
                 <li class="pagination-item ${currentPage == i ? 'is-active' : ''}">
                     <a class="pagination-link"
-                       href="${root}/community/free/list?currentPage=${i}&searchType=${searchType}&searchWord=${searchWord}">${i}</a>
+                       href="${root}/community/inquiry/list?currentPage=${i}&searchType=${searchType}&searchWord=${searchWord}">${i}</a>
                 </li>
             </c:forEach>
             <li class="pagination-item--wide last">

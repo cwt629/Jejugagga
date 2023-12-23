@@ -6,17 +6,37 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>자유게시판 글쓰기</title>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="${root}/res/board_inquiry_write/board_inquiry_write.css/">
 </head>
 <body>
-<h1>자유게시판 글쓰기</h1>
-<form action="${root}/community/free/save" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="usercode" value="${sessionScope.usercode}">
-    <input type="text" name="title" placeholder="제목">
-    <textarea name="content" placeholder="내용"></textarea>
-    <input type="File" name="uploadFile" placeholder="사진">
-    <input type="submit" value="글쓰기">
-</form>
+<div class="board_wrap">
+    <div class="board_title">
+        <strong>문의내용</strong>
+        <p></p>
+        <div class="board_write">
+            <form action="${root}/community/inquiry/write" method="post" enctype="multipart/form-data">
+                <div class="board_write">
+                    <div class="title">
+                        <dl>
+                            <dt>제목</dt>
+                            <dd><input type="text" name="title" placeholder="제목 입력"/></dd>
+                        </dl>
+                    </div>
+                    <div class="cont">
+                    <textarea name="content" placeholder="내용 입력"></textarea>
+                    </div>
+                </div>
+                <div class="bt_wrap">
+                    <input type="submit" value="등록" class="on"/>
+                    <a href="./community/inquiry/list">취소</a>
+                </div>
+                <input type="hidden" name="usercode" value="${sessionScope.usercode}"/>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
