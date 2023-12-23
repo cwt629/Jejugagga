@@ -38,6 +38,7 @@ public class BoardFreeService {
 	}
 
 	public void updateBoardFree(BoardFreeDto dto) {
+
 		boardFreeDao.updateBoardFree(dto);
 	}
 
