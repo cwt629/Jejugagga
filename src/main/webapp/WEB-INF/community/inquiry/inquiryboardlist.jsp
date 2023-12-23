@@ -36,11 +36,11 @@
                 /*                alert("로그인해라")*/
                 showNotLoggedInModal();
             } else {
-                const formData = new FormData(document.getElementById('boardFreeForm'));
-                document.getElementById('boardFreeForm').action = '/community/free/write';
-                document.getElementById('boardFreeForm').method = 'GET';
+                const formData = new FormData(document.getElementById('inquiryBoardListForm'));
+                document.getElementById('inquiryBoardListForm').action = '/community/free/write';
+                document.getElementById('inquiryBoardListForm').method = 'GET';
                 // 폼을 제출
-                document.getElementById('boardFreeForm').submit();
+                document.getElementById('inquiryBoardListForm').submit();
             }
         });
     })
@@ -128,7 +128,6 @@
                         </c:choose>
                         <th><fmt:formatDate pattern="yyyy-MM-dd" value="${item.registereddate}"/></th>
                         <th>${item.writersNickname}</th>
-                        <td>${item.viewcount}</td>
                     </tr>
                 </c:forEach>
                 </tbody>

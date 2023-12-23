@@ -10,11 +10,10 @@
     <title></title>
 </head>
 <body>
-<h1>상세페이지</h1>
+<h1>1대1문의 유저페이지</h1>
 <div>
-    <th>${boardFreeDto.title}</th>
-    <th>${boardFreeDto.content}</th>
-    <th><img src="${boardFreeDto.photo}"></th>
+    <th>${boardInquiryDto.title}</th>
+    <th>${boardInquiryDto.content}</th>
 </div>
 </body>
 </html>

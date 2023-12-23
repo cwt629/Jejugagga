@@ -76,10 +76,6 @@ public class BoardInquiryService {
 			return boardInquiryDao.detail(questioncode);
 	}
 
-	public void updateViewCount(int questioncode) {
-		boardFreeDao.updateViewCount(freeboardcode);
-	}
-
 	public int searchTotalCount(String searchType, String searchWord) throws Exception {
 		return boardFreeDao.searchTotalCount(searchType, searchWord);
 	}
