@@ -23,7 +23,7 @@
 	    margin: 0 auto;
 	    left: 0;
 	    right: 0px;
-	    TOP: 13%;
+	    TOP: 20%;
 	}
 	
 	.signupdiv > .signup_logo_photo{
@@ -81,6 +81,15 @@
 		background-image: url("checkbox-active.png");
 		background-repeat: no-repeat;
 		background-size: contain;
+	}
+	
+	.form-select{
+		width: 300px;
+		height: 48px;
+		padding: 0 10px;
+		border-radius: 6px;
+		background-color: #F8F8F8;
+		border: solid 2px;
 	}
 </style>
 <script>
@@ -183,7 +192,7 @@
 			    <div id="passwordMismatch" style="color: red; display: none;">
 			        비밀번호가 일치하지 않습니다.<br><br>
 			    </div>
-			      	 성별<select name="gender" id="gender">
+			      	 성별 <select class="form-select" name="gender" id="gender">
 			    		<option value="남자">남자</option>
 			    		<option value="여자">여자</option>
 			  		</select>

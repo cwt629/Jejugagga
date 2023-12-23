@@ -201,7 +201,7 @@ $(function(){
 		if(checkkick){
 			$.ajax({
 				type:"get",
-				dataType:"json",
+				dataType:"text",
 				url:"./course/delete",
 				data:{"coursecode":coursecode},
 				success:function(res){
