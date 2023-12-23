@@ -24,7 +24,7 @@
 	    margin: 0 auto;
 	    left: 0;
 	    right: 0px;
-	    TOP: 13%;
+	    TOP: 20%;
 		
 	}
 	

@@ -12,6 +12,11 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="${root}/res/board_free_write/board_free_write.css/">
 </head>
+<style>
+	body * {
+       font-family: 'Orbit';
+   }
+</style>
 <body>
 <div class="board_wrap">
     <div class="board_title">
@@ -34,14 +39,12 @@
                     </dl>
                 </div>
                 <div class="cont">
-                    <textarea name="content" placeholder="내용 입력">
-                    </textarea>
+                    <textarea name="content" placeholder="내용 입력"></textarea>
                 </div>
             </div>
-
             <div class="bt_wrap">
                 <input type="submit" value="등록" class="on"/>
-                <a href="./community/free/list">취소</a>
+                <a href="./list">취소</a>
             </div>
             <input type="hidden" name="usercode" value="${sessionScope.usercode}" />
         </form>

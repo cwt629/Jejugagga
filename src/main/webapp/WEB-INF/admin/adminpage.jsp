@@ -201,7 +201,7 @@ $(function(){
 		if(checkkick){
 			$.ajax({
 				type:"get",
-				dataType:"json",
+				dataType:"text",
 				url:"./course/delete",
 				data:{"coursecode":coursecode},
 				success:function(res){
@@ -214,6 +214,11 @@ $(function(){
 	});
 });
 
+</script>
+<script>
+function submitform() {
+document.getElementById('detail').submit();
+}
 </script>
 <c:set var="root" value="<%=request.getContextPath()%>"/>
 <body>
@@ -247,7 +252,7 @@ $(function(){
 		</div>
 		<div class="item inquirytable">
 			<div class="table-title">문의 목록
-				<a href="/라랄라" style="float: right; font-size: 16px; color: gray; margin-right: 10px; margin-top: 5px;">전체보기</a>			
+				<a href="${root}/community/inquiry/list" style="float: right; font-size: 16px; color: gray; margin-right: 10px; margin-top: 5px;">전체보기</a>			
 			</div>
 			<table class="admin_board_wrap table table-hover" id="user-admin">
 				<thead class="admin_boardList">
@@ -267,10 +272,22 @@ $(function(){
 									pattern="yyyy-MM-dd" /></td>
 							<c:choose>
 								<c:when test="${inquiry.hasAnswer==0 }">
-									<td><button class=" triggerbtn" value="${inquiry.id }">답변</button></td>
+									<td>
+									<form action="${root}/admin/inquiryanswer?${inquiry.questioncode }" method="post">
+										<input type="hidden" name="title" value="${inquiry.title }">
+										<input type="hidden" name="content" value="${inquiry.content }">
+										<input type="hidden" name="questioncode" value="${inquiry.questioncode }">
+										<button type="submit" class=" triggerbtn">답변</button>
+									</form>
 								</c:when>
 								<c:otherwise>
-									<td><a href="어디로갈까" class="commentcomple">답변완료</a></td>
+									<form action="${root}/admin/inquirydetail?${inquiry.questioncode }" method="post" id="detail">
+										<input type="hidden" name="title" value="${inquiry.title }">
+										<input type="hidden" name="content" value="${inquiry.content }">
+										<input type="hidden" name="questioncode" value="${inquiry.questioncode }">
+										<button style="display: none;" type="submit" class=" triggerbtn">답변</button>
+									</form>
+									<td><a href="#" class="commentcomple" onclick="return submitform()">답변완료</a></td>
 								</c:otherwise>
 							</c:choose>
 						</tr>

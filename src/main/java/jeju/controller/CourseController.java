@@ -6,7 +6,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
 
 import javax.servlet.http.HttpSession;
 
@@ -145,15 +144,17 @@ public class CourseController {
 		model.addAttribute("sortstd", sortstd);
 		
 		// url 뒤에 붙을 쿼리문을 currentPage를 제외하고 만들어주자
-		StringJoiner params = new StringJoiner("&"); // 문자열 여러개를 &로 이어주는 클래스
+		List<String> params = new ArrayList<String>();
 		if (query.length() > 0) params.add("query=" + query);
 		if (count > 0) params.add("count=" + count);
 		if (numstd.length() > 0) params.add("numstd=" + numstd);
 		if (sortstd.length() > 0) params.add("sortstd=" + sortstd);
 		
 		// 쿼리문 생성
-		String urlParams = params.toString();
-		if (urlParams.length() > 0) urlParams = "&" + urlParams;
+		String urlParams = "";
+		for (int i = 0; i < params.size(); i++) {
+			urlParams += "&" + params.get(i); // currentPage=? 이 앞에 붙으므로, 쿼리문은 모두 &로 시작함
+		}
 		
 		model.addAttribute("urlParams", urlParams);
 		

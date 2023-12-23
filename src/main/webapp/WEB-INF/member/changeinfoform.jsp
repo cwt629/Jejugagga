@@ -149,7 +149,7 @@
 				<hr>
 			  <input type="hidden" value="${memberList.usercode}" name="usercode">
 			  <input type="submit" value="회원정보 변경">
-			  <button type="button">취소</button>
+			  <button type="button" onclick="history.back()">취소</button>
 			</form>
 	</div>
 </body>

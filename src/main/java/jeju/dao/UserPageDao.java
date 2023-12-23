@@ -44,4 +44,12 @@ public class UserPageDao {
 		session.update(nameSpace + "updateNicknameEmailByNum", dto);
 	}
 	
+	public List<Map<String, String>> selectOfTourLikesByNum(int usercode) {
+		return session.selectList(nameSpace + "selectOfTourLikesByNum", usercode);
+	}
+	
+	public List<Map<String, String>> selectOfCourseLikesByNum(int usercode) {
+		return session.selectList(nameSpace + "selectOfCourseLikesByNum", usercode);
+	}
+	
 }

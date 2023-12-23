@@ -1,8 +1,8 @@
 package jeju.dto;
 
-import java.sql.Timestamp;
-
 import lombok.Data;
+
+import java.sql.Timestamp;
 
 @Data
 public class BoardInquiryAnswerDto {
@@ -12,4 +12,5 @@ public class BoardInquiryAnswerDto {
 	private Timestamp registereddate;
 	private String title;
 	private String content;
+
 }

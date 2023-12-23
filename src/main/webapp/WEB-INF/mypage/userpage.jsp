@@ -81,7 +81,7 @@
 </head>
 <body>
 <c:if test="${sessionScope.loginok == null}">
-	<h3>로그인을 한후 글을 써주세요</h3>
+	<h3 style="text-align: center; margin-top: 10%;">로그인을 먼저 해주세요.</h3>
 </c:if>
 <c:if test="${sessionScope.loginok != null}">
 <div id="mypageBox">
