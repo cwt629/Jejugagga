@@ -117,7 +117,7 @@ public class ReviewBoardController {
 		}
 	}
 
-	@PostMapping("/delete")
+	@PostMapping("community/review/delete")
 	@ResponseBody
 	public ResponseEntity<?> deleteReview(@RequestParam("reviewId") int reviewId, HttpSession session) {
 		String currentUserId = (String) session.getAttribute("id");
