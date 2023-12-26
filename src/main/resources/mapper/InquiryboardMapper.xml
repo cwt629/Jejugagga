@@ -40,6 +40,6 @@
         JOIN member_table ON board_inquiry.usercode = member_table.usercode
         LEFT JOIN board_inquiry_answer bia ON board_inquiry.questioncode = bia.questioncode
         GROUP BY board_inquiry.questioncode, member_table.nickname
-        ORDER BY hasAnswer ASC, board_inquiry.registereddate ASC
+        ORDER BY board_inquiry.registereddate DESC
     </select>
 </mapper>
