@@ -47,11 +47,12 @@ public class BoardFreeDao {
 	}
 
 	public void updateBoardFree(BoardFreeDto dto) {
+
 		session.update(nameSpace + "updateBoardFree", dto);
 	}
 
-	public void deleteBoardFree(int num) {
-		session.delete(nameSpace + "deleteBoardFree", num);
+	public void deleteBoardFree(int freeboardcode) {
+		session.delete(nameSpace + "deleteBoardFree", freeboardcode);
 	}
 
 	public List<BoardFreeDto> selectAllfreeboardlist10Bydesc() {
@@ -84,9 +85,6 @@ public class BoardFreeDao {
 		paramMap.put("perPageNum", criteria.getPerPageNum());
 		paramMap.put("searchType", criteria.getSearchType());
 		paramMap.put("searchWord", criteria.getSearchWord());
-
-
-
 			return session.selectList(nameSpace + "getSearchList", paramMap);
 		}
 

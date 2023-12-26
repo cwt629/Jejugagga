@@ -37,7 +37,7 @@
 </head>
 <body>
 <c:if test="${sessionScope.loginok == null}">
-	<h3>로그인을 한후 글을 써주세요</h3>
+	<h3 style="margin: 0 auto;">로그인을 먼저 해주세요.</h3>
 </c:if>
 <c:if test="${sessionScope.loginok != null}">
 <div id="mypageBox">
@@ -97,7 +97,8 @@
 				<c:forEach var="freeBoard" items="${freeBoardlist}">
 					<tr>
 						<!-- 제목 -->
-						<td>${freeBoard.title }
+						<td><span onclick="location.href='${root}/community/free/detail?usercode=${sessionScope.usercode}&freeboardcode=${freeBoard.freeboardcode}';">
+						${freeBoard.title }</span>
 						<c:if test="${freeBoard.photo != null}">
 							<i class="bi bi-image" style="color:gray;"></i>
 						</c:if>
@@ -134,28 +135,25 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th width="300">제목</th>
-						<th width="80">작성일</th>
-						<th width="100">tourcode</th>
-						<th width="100">조회</th>				
+						<th width="280">여행지</th>
+						<th width="250">내용</th>
+						<th width="50">작성일</th>
 					</tr>
 				</thead>
 				<tbody>
 				<c:forEach var="reviewBoard" items="${reviewBoardlist}">
 					<tr>
-						<!-- 제목 -->
+						<!-- 여행지 -->
 						<td>${reviewBoard.title }</td>
+						
+						<!-- tourcode -->
+		   			<td>${reviewBoard.content }</td>
 		   			
 		   			<!-- 작성일 -->
 		   			<td>
 		   				<fmt:formatDate value="${reviewBoard.registereddate}" pattern="yyyy.MM.dd."/>
 		   			</td>
-		   			
-		   			<!-- tourcode -->
-		   			<td>tourcode</td>
-		   			
-		   			<!-- 조회수 -->
-		   			<td>컬럼 없음..</td>
+
 		  	 	</tr>		
 				</c:forEach>
 				</tbody>

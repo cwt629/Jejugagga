@@ -19,7 +19,7 @@ public class UserPageDao {
 	@Autowired
 	private SqlSession session;
 	
-	private String nameSpace="jeju.dao.BoardFreeDao.";
+	private String nameSpace="jeju.dao.UserPageDao.";
 	private String nameSpace2 = "jeju.dao.MemberTableDao.";
 	
 	public MemberTableDto getData(int usercode)
@@ -37,6 +37,19 @@ public class UserPageDao {
 
 	public List<Map<String, String>> selectOfInquiryAnswerResultByUsercode(int usercode) {
 		return session.selectList(nameSpace + "selectOfInquiryAnswerResultByUsercode", usercode);
+	}
+	
+	public void userInfoUpdate(MemberTableDto dto)
+	{
+		session.update(nameSpace + "updateNicknameEmailByNum", dto);
+	}
+	
+	public List<Map<String, String>> selectOfTourLikesByNum(int usercode) {
+		return session.selectList(nameSpace + "selectOfTourLikesByNum", usercode);
+	}
+	
+	public List<Map<String, String>> selectOfCourseLikesByNum(int usercode) {
+		return session.selectList(nameSpace + "selectOfCourseLikesByNum", usercode);
 	}
 	
 }

@@ -57,7 +57,7 @@ th, td {
 }
 
 /* 버튼 스타일 */
-.triggerbtn {
+.triggerbtn, .btn {
   display: inline-block;
   padding: 5px 10px;
   font-size: 16px;
@@ -73,7 +73,7 @@ th, td {
 }
 
 /* 마우스 호버 시의 스타일 */
-.triggerbtn:hover {
+.triggerbtn:hover, .btn:hover {
   background-color: #CA8462; /* 배경색 변경 */
   color: #fff; /* 텍스트 색상 변경 */
 }
@@ -108,12 +108,12 @@ td:nth-child(4) {
 
 th.admin_board_head:nth-child(6),
 td:nth-child(6) {
-  width: 120px;
+  width: 105px;
 }
 
 th.admin_board_head:nth-child(7),
 td:nth-child(7) {
-  width: 99px;
+  width: 80px;
 }
 
 .membertable, .inquirytable, .freeboardtable, .reviewboardtable {
@@ -133,9 +133,59 @@ td:nth-child(7) {
 th.admin_board_head{
   text-decoration: underline;
 }
+.memberphoto{
+  width: 200px;
+  height: 200px;
+}
+.modal-header{
+	background-color: rgba(202, 132, 98, 0.3);
+}
 
+.memverinfo {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    margin: 30px 30px;
+  }
 
+  .memverinfo > div {
+    margin-bottom: 10px;
+  }
 
+  .memverinfo img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+
+  .membername,
+  .memberid,
+  .membernickname,
+  .memberphone,
+  .memberemail,
+  .memberbirth,
+  .memberregistereddate {
+    font-weight: bold;
+  }
+  
+  .pfofilefile{
+  float: right;
+  text-align: center;
+  }
+  
+  .memberphoto{
+  border: solid wheat;
+  }
+  
+  .memverinfo img {
+    width: 200px;
+  	height: 200px;
+  }
+  
 
 
 
@@ -153,30 +203,192 @@ $(function(){
 			$.ajax({
 				type:"post",
 				dataType:"json",
-				url:"./member/search",
+				url:"./member/information",
 				data:{"id":id},
 				success:function(res){
-					$("input[name='name']").val(res.name);
-	        		$("input[name='id']").val(res.id);
-	        		$("input[name='nickname']").val(res.nickname);
-	        		$("input[name='phone']").val(res.phone);
-	        		$("input[name='email']").val(res.email);
-	        		$("input[name='birth']").val(res.birth);
-	        		$("input[name='registereddate']").val(res.registereddate);
+	        		
+					let s="";
+					s+=
+					` 
+					 <div class="memverinfo">
+						<div class="pfofilefile"> <img src="../res/photo/noimage.png" class="memberphoto"><div><b>프로필 사진</b></div> </div>
+			        	<div class="membername">이름 :</div>
+			        	<div class="memberid">아이디 :</div>
+			        	<div class="membernickname">닉네임 :</div>
+			        	<div class="memberphone">연락처 : </div>
+			        	<div class="memberemail">이메일 :</div>
+			        	<div class="memberbirth">생년월일 :</div>
+			        	<div class="memberregistereddate">등록일</div>
+			        	
+			         </div>
+					`;
+					$(".changemodalbodyform").html(s);
+					
+					$(".membername").html("이름 : "+res.name);
+					$(".memberid").html("아이디 : "+res.id);
+	        		$(".membernickname").html("닉네임 : "+res.nickname);
+	        		$(".memberphone").html("연락처 : "+res.phone);
+	        		$(".memberemail").html("이메일 : "+res.email);
+	        		$(".memberbirth").html("생년월일 : "+res.birth);
+	        		$(".memberregistereddate").html("등록일 : "+res.registereddate);
 	        		$(".memberinfotitle").html(res.id+"님의 회원 정보");
+	        		$(".memberinfotitle").val(res.usercode);
+	        		$(".memberinformation").val(res.id);
+	        		$(".memberphoto").attr('src',res.photo==null? '../res/photo/noimage.png' : "https://kr.object.ncloudstorage.com/jejugagga-cwt/profile_photo/"+res.photo);
+					
 				}
 			});	
 	});	
+	
+	$(".memberinformation").click(function(){
+		let id = $(this).val();
+			$.ajax({
+				type:"post",
+				dataType:"json",
+				url:"./member/information",
+				data:{"id":id},
+				success:function(res){
+	        		
+	        		let s="";
+					s+=
+					`
+			         <div class="memverinfo">
+						<div class="pfofilefile"> <img src="../res/photo/noimage.png" class="memberphoto"><div><b>프로필 사진</b></div> </div>
+			        	<div class="membername">이름 :</div>
+			        	<div class="memberid">아이디 :</div>
+			        	<div class="membernickname">닉네임 :</div>
+			        	<div class="memberphone">연락처 : </div>
+			        	<div class="memberemail">이메일 :</div>
+			        	<div class="memberbirth">생년월일 :</div>
+			        	<div class="memberregistereddate">등록일</div>
+			        	
+			         </div>
+					`;
+					$(".changemodalbodyform").html(s);
+					
+					$(".membername").html("이름 : "+res.name);
+					$(".memberid").html("아이디 : "+res.id);
+	        		$(".membernickname").html("닉네임 : "+res.nickname);
+	        		$(".memberphone").html("연락처 : "+res.phone);
+	        		$(".memberemail").html("이메일 : "+res.email);
+	        		$(".memberbirth").html("생년월일 : "+res.birth);
+	        		$(".memberregistereddate").html("등록일 : "+res.registereddate);
+	        		$(".memberinfotitle").html(res.id+"님의 회원 정보");
+	        		$(".memberinfotitle").val(res.usercode);
+	        		$(".memberinformation").val(res.id);
+	        		$(".memberphoto").attr('src',res.photo==null? '../res/photo/noimage.png' : "https://kr.object.ncloudstorage.com/jejugagga-cwt/profile_photo/"+res.photo);
+					
+				}
+			});	
+	});	
+	
+	$(".kickmemberbtn").click(function(){
+		let id = $(this).val();
+		let checkkick = confirm(id+'님을 추방하시겠습니까??');
+		if(checkkick){
+			$.ajax({
+				type:"get",
+				dataType:"text",
+				url:"./member/delete",
+				data:{"id":id},
+				success:function(res){
+					location.reload();
+				}
+			});	
+			
+		}
+		
+	});
+	
+	$(".memberwritefree").click(function(){
+		let usercode = $(".memberinfotitle").val();
+			$.ajax({
+				type:"post",
+				dataType:"json",
+				url:"./member/writefree",
+				data:{"usercode":usercode},
+				success:function(res){
+					let s="";
+					s+=
+					`
+					<table class="admin_board_wrap table table-hover" id="user-admin">
+					<thead class="admin_boardList">
+						<th class="admin_board_head">제목</th>
+						<th class="admin_board_head">내용</th>
+						<th class="admin_board_head">작성일</th>
+					</thead>
+					`;
+					
+					$.each(res, function(idx, item){
+					s += 
+						`
+						<tr>
+						<td>\${item.title }</td>
+						<td>\${item.content }</td>
+						<td>\${item.registereddate }</td>
+						
+						`;
+					})
+				
+					
+					s+=`
+					</tbody>
+					</table>
+					`;
+					$(".changemodalbodyform").html(s);
+				}
+			});	
+	});
+	
+	$(".memeberwritereview").click(function(){
+		let usercode = $(".memberinfotitle").val();
+			$.ajax({
+				type:"post",
+				dataType:"json",
+				url:"./member/writereview",
+				data:{"usercode":usercode},
+				success:function(res){
+					let s="";
+					s+=
+					`
+					<table class="admin_board_wrap table table-hover" id="user-admin">
+					<thead class="admin_boardList">
+						<th class="admin_board_head">제목</th>
+						<th class="admin_board_head">내용</th>
+						<th class="admin_board_head">작성일</th>
+					</thead>
+					`;
+					
+					$.each(res, function(idx, item){
+					s += 
+						`
+						<tr>
+						<td>\${item.title }</td>
+						<td>\${item.content }</td>
+						<td>\${item.registereddate }</td>
+						
+						`;
+					})
+				
+					
+					s+=`
+					</tbody>
+					</table>
+					`;
+					$(".changemodalbodyform").html(s);
+				}
+			});	
+	});
 });
 
 </script>
 <c:set var="root" value="<%=request.getContextPath()%>"/>
 <body>
-	<h1 class="container">회원 관리</h1>
+	<h1 class="container" style="margin-top: 20px;">회원 관리</h1>
 	<div class="container">
 		<div class="item membertable">
 			<div class="table-title">회원 목록
-				<input type="text" style="float: right;"><button style="float: right;">검색</button>
+				<!-- <input type="text" style="float: right;"><button style="float: right;">검색</button> -->
 			</div> 
 			<table class="admin_board_wrap table table-hover" id="user-admin">
 				<thead class="admin_boardList">
@@ -208,8 +420,8 @@ $(function(){
 	</div>
 	
 	<!-- The Modal -->
-<div class="modal fade" id="myModal" style="margin-top: 200px;">
-  <div class="modal-dialog" >
+<div class="modal fade" id="myModal" style="margin-top: 150px;">
+  <div class="modal-dialog modal-lg" >
     <div class="modal-content">
 
       <!-- Modal Header -->
@@ -220,22 +432,15 @@ $(function(){
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form action="/라라라라랄~" method="post">
-        	<table>
-	        	<div>이름 <input type="text" name="name"><div>
-	        	<div>아이디<input type="text" name="id"><div>
-	        	<div>닉네임<input type="text" name="nickname"><div>
-	        	<div>연락처<input type="text" name="phone"><div>
-	        	<div>이메일<input type="text" name="email"><div>
-	        	<div>생년월일<input type="text" name="birth"><div>
-	        	<div>등록일<input type="text" name="registereddate"><div>
-        	</table>
-        </form>
+      	<button class="memberinformation btn btn-member-info">회원정보</button>
+      	<button class="memberwritefree btn btn-member-write-free">작성글</button>
+      	<button class="memeberwritereview btn btn-member-write-review">작성후기</button>
+        <div class="changemodalbodyform">
+        
+      	</div>
       </div>
-
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-bs-dismiss="modal">수정</button>
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
       </div>
 

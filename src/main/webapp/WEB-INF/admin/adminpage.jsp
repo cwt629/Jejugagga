@@ -144,7 +144,7 @@ th.admin_board_head{
 $(function(){
 	$(".kickmemberbtn").click(function(){
 		let id = $(this).val();
-		let checkkick = confirm(id+'님을 정말 추방하실거 ㅋㅋ?');
+		let checkkick = confirm(id+'님을 추방하시겠습니까??');
 		if(checkkick){
 			$.ajax({
 				type:"get",
@@ -195,12 +195,34 @@ $(function(){
 		}
 		
 	});
+	$(".kickCourse").click(function(){
+		let coursecode = $(this).val();
+		let checkkick = confirm('해당 코스를 삭제하시겠습니까?');
+		if(checkkick){
+			$.ajax({
+				type:"get",
+				dataType:"text",
+				url:"./course/delete",
+				data:{"coursecode":coursecode},
+				success:function(res){
+					location.reload();
+				}
+			});	
+			
+		}
+		
+	});
 });
 
 </script>
+<script>
+function submitform() {
+document.getElementById('detail').submit();
+}
+</script>
 <c:set var="root" value="<%=request.getContextPath()%>"/>
 <body>
-	<h1 class="container">관리자 페이지</h1>
+	<h1 class="container" style="margin-top: 20px;">관리자 페이지</h1>
 	<div class="container">
 		<div class="item membertable">
 			<div class="table-title">회원 목록
@@ -230,7 +252,7 @@ $(function(){
 		</div>
 		<div class="item inquirytable">
 			<div class="table-title">문의 목록
-				<a href="/라랄라" style="float: right; font-size: 16px; color: gray; margin-right: 10px; margin-top: 5px;">전체보기</a>			
+				<a href="${root}/community/inquiry/list" style="float: right; font-size: 16px; color: gray; margin-right: 10px; margin-top: 5px;">전체보기</a>			
 			</div>
 			<table class="admin_board_wrap table table-hover" id="user-admin">
 				<thead class="admin_boardList">
@@ -250,10 +272,22 @@ $(function(){
 									pattern="yyyy-MM-dd" /></td>
 							<c:choose>
 								<c:when test="${inquiry.hasAnswer==0 }">
-									<td><button class=" triggerbtn" value="${inquiry.id }">답변</button></td>
+									<td>
+									<form action="${root}/admin/inquiryanswer?${inquiry.questioncode }" method="post">
+										<input type="hidden" name="title" value="${inquiry.title }">
+										<input type="hidden" name="content" value="${inquiry.content }">
+										<input type="hidden" name="questioncode" value="${inquiry.questioncode }">
+										<button type="submit" class=" triggerbtn">답변</button>
+									</form>
 								</c:when>
 								<c:otherwise>
-									<td><a href="어디로갈까" class="commentcomple">답변완료</a></td>
+									<form action="${root}/admin/inquirydetail?${inquiry.questioncode }" method="post" id="detail">
+										<input type="hidden" name="title" value="${inquiry.title }">
+										<input type="hidden" name="content" value="${inquiry.content }">
+										<input type="hidden" name="questioncode" value="${inquiry.questioncode }">
+										<button style="display: none;" type="submit" class=" triggerbtn">답변</button>
+									</form>
+									<td><a href="#" class="commentcomple" onclick="return submitform()">답변완료</a></td>
 								</c:otherwise>
 							</c:choose>
 						</tr>
@@ -316,7 +350,34 @@ $(function(){
 				</tbody>
 			</table>
 		</div>
-		<div class="item color3">코스 관리</div>
+		<div class="item reviewboardtable">
+			<div class="table-title">코스 목록
+				<a href="${root }/course/list" style="float: right; font-size: 16px; color: gray; margin-right: 10px; margin-top: 5px;">전체보기</a>			
+			</div>
+			<table class="admin_board_wrap table table-hover" id="user-admin">
+				<thead class="admin_boardList">
+					<th class="admin_board_head">작성자</th>
+					<th class="admin_board_head">제목</th>
+					<th class="admin_board_head">내용</th>
+					<th class="admin_board_head">작성일</th>
+					<th class="admin_board_head"></th>
+					
+				</thead>
+				<tbody>
+					<c:forEach var="course" items="${courseAndNickname }">
+						<tr>
+							<td>${course.nickname }</td>
+							<td>${course.name }</td>
+							<td>${course.briefcontent }</td>
+							<td><fmt:formatDate value="${course.registereddate}"
+									pattern="yyyy-MM-dd" /></td>
+		          			<td><button class="kickCourse triggerbtn" value="${course.coursecode }">삭제</button></td>
+
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 
 	</div>
 </body>

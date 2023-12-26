@@ -88,49 +88,13 @@
 		background-color: #F8F8F8;
 	}
 </style>
-<script>
-    $(document).ready(function() {
-        $("#signupForm").submit(function() {
-            return validatePassword();
-        });
-
-        $("#password, #confirmPass").on("keyup", function() {
-            validatePassword();
-        });
-
-        function validatePassword() {
-            var password = $("#password").val();
-            var confirmPassword = $("#confirmPass").val();
-
-            // 비밀번호 일치 여부 확인
-            if (password !== confirmPassword) {
-                $("#passwordMismatch").show();
-                return false;
-            } else {
-                $("#passwordMismatch").hide();
-            }
-
-            // 강력한 비밀번호 조건 확인
-            // 8자리 이상 : .{8,} 특수문자 : (?=.*?[#?!@$%^&*-]) 대문자(?=.*[A-Z]) 정규식 문법 참고했음
-            var passwordRegex = /^(?=.*[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-            if (!passwordRegex.test(password)) {
-                $("#passwordStrength").show();
-                return false;
-            } else {
-                $("#passwordStrength").hide();
-            }
-
-            return true;
-        }
-    });
-</script>
 </head>
 <c:set var="root" value="<%=request.getContextPath() %>"/>
 <body>
 	<div class="signupdiv">
 		<img alt="logo" src="${root }/res/photo/jejuhome.png" class="signup_logo_photo">
 			<p><b>기본 정보</b></p>
-			<form id="signupForm" action="${root }/member/changepass/change" method="post" onsubmit="return check()">
+			<form id="signupForm" action="${root }/member/changeinfo/change" method="post">
 				<hr>
 			  <div class="mb-3 row inforow">
 				<label for="staticId" class="col-sm-2 col-form-label">아이디</label>
@@ -185,7 +149,7 @@
 				<hr>
 			  <input type="hidden" value="${memberList.usercode}" name="usercode">
 			  <input type="submit" value="회원정보 변경">
-			  <button type="button">취소</button>
+			  <button type="button" onclick="history.back()">취소</button>
 			</form>
 	</div>
 </body>

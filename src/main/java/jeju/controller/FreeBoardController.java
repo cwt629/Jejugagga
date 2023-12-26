@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
@@ -25,33 +27,6 @@ public class FreeBoardController {
     private final BoardFreeService boardFreeService;
     private final NcpObjectStorageService storageService;
     private final MemberTableService memberTableService;
-
-
-//    @GetMapping("/community/free/list")
-//    public String list(Model model,
-//                       @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "5") int perPageNum)  {
-//
-//        BoardFreePagingCriteria criteria = new BoardFreePagingCriteria();
-//        criteria.setPage(currentPage);
-//        criteria.setPerPageNum(perPageNum);
-//
-//        criteria.setSearchType("");
-//        List<BoardFreeDto> result = boardFreeService.getList(criteria);
-//
-//        // 페이징 정보를 모델에 추가
-//        int totalCount = boardFreeService.getTotalCount();
-//        int totalPage = (double) totalCount / criteria.getPerPageNum() > 0 ? (int) Math.ceil((double) totalCount / criteria.getPerPageNum()) : 1;
-//
-//
-//        model.addAttribute("list", result);
-//        model.addAttribute("totalCount", totalCount);
-//        model.addAttribute("totalPage", totalPage); // totalPage를 정확하게 계산하여 추가
-//        model.addAttribute("startPage", criteria.getPageStart()); // 시작페이지 정보를 추가
-//        model.addAttribute("currentPage", currentPage); // 현재 페이지 정보 추가
-//
-//        return "community/free/freelist";
-//    }
-
 
     @GetMapping("/community/free/list")
     public String search(Model model,
@@ -127,22 +102,44 @@ public class FreeBoardController {
     }
 
     @PostMapping("/community/free/update")
-    public String update(@ModelAttribute BoardFreeDto boardFreeDto) {
+    public String update(@ModelAttribute BoardFreeDto boardFreeDto, Model model,
+                         @RequestParam int currentPage,
+                         HttpServletRequest request,
+                         HttpSession session) {
+        // 이미지 업로드 및 URL 획득
+
+        // 이미지 URL을 게시글 정보에 설정
+
+        // 게시글 업데이트 수행
         boardFreeService.updateBoardFree(boardFreeDto);
-        return "redirect:/community/free/list";
+
+        return "redirect:/community/free/list?currentPage=" + currentPage;
     }
 
     @PostMapping("/community/free/delete")
-    public String delete(@ModelAttribute BoardFreeDto boardFreeDto) {
-        int num = boardFreeDto.getFreeboardcode();
-        boardFreeService.deleteBoardFree(num);
+    public String deleteBoard(@ModelAttribute BoardFreeDto boardFreeDto, @RequestParam int freeboardcode) {
+        //int num = boardFreeDto.getFreeboardcode();
+        boardFreeService.deleteBoardFree(freeboardcode);
         return "redirect:/community/free/list";
     }
+
+//    @GetMapping("/community/free/deletee")
+//    public String deleteBoard(@RequestParam int num,@RequestParam int currentPage) {
+//        boardService.deleteBoard(num);
+//        return "redirect:./list?currentPage="+currentPage;
+//    }
 
     @GetMapping("/community/free/detail")
     public String detail(@RequestParam int usercode, @RequestParam int freeboardcode, Model model) {
         BoardFreeDto boardFreeDto = boardFreeService.detailBoardFreePage(freeboardcode);
+        // 내용에서 띄어쓰기를 <br>로 바꾸어 보내준다
+        String originalContent = boardFreeDto.getContent();
+        String convertedContent = originalContent.replaceAll("\n", "<br>");
+        boardFreeDto.setContent(convertedContent);
+        
         model.addAttribute("boardFreeDto", boardFreeDto);
+        model.addAttribute("freeboardcode", freeboardcode);
+
         boardFreeService.updateViewCount(freeboardcode);
         return "community/free/freeboarddetail";
     }

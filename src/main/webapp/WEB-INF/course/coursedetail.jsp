@@ -59,6 +59,7 @@
        padding: 5px;
        margin: 0 10px;
        border: none;
+       box-shadow: 3px 3px 3px #ccc;
    }
    
    div.coursedetail_header div.coursedetail_headerbtns {
@@ -113,22 +114,33 @@
    }
    
    div.coursedetail_routeinfo {
-       /*padding: 30px;*/
+       margin: 40px 0 10px 0;
    }
    
    div.coursedetail_routes {
-       height: 300px;
+       height: 350px;
        display: flex;
        align-items: center;
        justify-content: center;
    }
    
    div.coursedetail_routes div.coursedetail_routeplace {
-       width: 150px;
-       height: 250px;
+       width: 160px;
        position: relative;
        top: 22px;
+   }
+   
+   div.coursedetail_routeplace div.coursedetail_card {
+       width: 160px;
+       height: 250px;
+       border-radius: 5px;
        cursor: pointer;
+       padding: 5px;
+       transition: background-color 0.3s;
+   }
+   
+   div.coursedetail_routeplace div.coursedetail_card:hover {
+       background-color: #ddd;
    }
    
    div.coursedetail_routes div.coursedetail_routeplace img {
@@ -139,7 +151,7 @@
    
    div.coursedetail_routes>img.coursedetail_arrow {
        position: relative;
-       top: -25px;
+       top: 3px;
    }
    
    div.coursedetail_routes div.coursedetail_routeplace div.coursedetail_tag {
@@ -151,8 +163,25 @@
        border-radius: 30px;
        text-align: center;
        position: absolute;
-       top: 5px;
-       left: 5px;
+       top: 59px;
+       left: 10px;
+   }
+   
+   div.coursedetail_routeplace div.coursedetail_mapsend {
+       display: flex;
+       justify-content: center;
+       margin-bottom: 15px;
+   }
+   
+   button.coursedetail_mapsender {
+       background-color: #eeb182;
+       color: #553324;
+       transition: background-color 0.4s, color 0.4s;
+   }
+   
+   button.coursedetail_mapsender:hover {
+       background-color: #553324;
+       color: #eeb182;
    }
    
    /* 카테고리별 태그 색깔 지정 */
@@ -170,7 +199,7 @@
    }
    
    div.coursedetail_explain {
-       margin: 30px 0;
+       margin: 40px 0;
    }
    
    div.coursedetail_footer {
@@ -281,6 +310,13 @@
 			location.href = "./revise?coursecode=${dto.coursecode}";
 		});
 		
+		// 여행지 클릭 이벤트
+		$("div.coursedetail_card").click(function(){
+			// 이동해야 하는 여행지코드 받아오기
+			let tourcode = $(this).parent().attr("data-tourcode");
+			location.href = "../tour/content?tourcode=" + tourcode;
+		})
+		
 	}); // end of $(function())
 	
 	// contenttype을 카테고리명으로 치환하는 함수
@@ -297,7 +333,7 @@
 		<div class="coursedetail_header">
 			<div class="coursedetail_headerbtns">
 				<button type="button" class="coursedetail_prevbtn coursedetail_generalbtn"
-				onclick="history.back()">이전으로</button>
+				onclick="location.href = './list'">목록으로</button>
 				<c:if test="${sessionScope.loginok != null}">
 					<c:if test="${sessionScope.usercode == dto.usercode || sessionScope.loginok == 'admin' }">
 						<button type="button" class="coursedetail_revisebtn coursedetail_generalbtn">코스수정</button>
@@ -354,9 +390,13 @@
 		<div class="coursedetail_mapdiv">
 			<!-- 지도가 나올 부분 -->
 		</div>
+		<hr>
 		
 		<div class="coursedetail_routeinfo">
 			<h4 style="text-align: center;">코스 구성</h4>
+			<br>
+			<h6 style="text-align: center;">Map 버튼을 클릭하면 지도 상 위치를 확인할 수 있습니다.</h6>
+			
 			<div class="coursedetail_routes">
 				<c:set var="spotindex" value="0"/> <!-- 각 여행지의 인덱스 -->
 				<c:forEach var="tourdto" items="${dto.tourInfos}">
@@ -366,20 +406,28 @@
 					</c:if>
 					<!-- 여행지 정보 -->
 					<div class="coursedetail_routeplace" data-mapx="${tourdto.mapx}" data-mapy="${tourdto.mapy}"
-					data-title="${tourdto.title}">
-						<div class="coursedetail_routephoto">
-							<img src="${tourdto.firstimage != ''? tourdto.firstimage : '../res/photo/noimage.png'}">
+					data-title="${tourdto.title}" data-tourcode="${tourdto.tourcode}">
+						<!-- 여행지 정보로 이동하는 버튼 -->
+						<div class="coursedetail_mapsend">
+							<button type="button" class="coursedetail_generalbtn coursedetail_mapsender">
+								<i class="bi bi-send">Map</i>
+							</button>
 						</div>
-						<h5>${tourdto.title}</h5>
-						<div class="coursedetail_tag" contenttype="${tourdto.contenttype}">
-							<!-- script에서 태그 색깔과 카테고리명을 지정해 넣어준다 -->
+						<div class="coursedetail_card" title="클릭 시 여행지 정보로 이동">
+							<div class="coursedetail_routephoto">
+								<img src="${tourdto.firstimage != ''? tourdto.firstimage : '../res/photo/noimage.png'}">
+							</div>
+							<h5>${tourdto.title}</h5>
+							<div class="coursedetail_tag" contenttype="${tourdto.contenttype}">
+								<!-- script에서 태그 색깔과 카테고리명을 지정해 넣어준다 -->
+							</div>
 						</div>
 					</div>
+					
 					<!-- 인덱스 1 증가 -->
 					<c:set var="spotindex" value="${spotindex + 1}"/>
 				</c:forEach>
 			</div>
-			<h6 style="text-align: center;">각 여행지를 클릭하면 지도 상으로 위치를 확인할 수 있습니다.</h6>
 		</div>
 		
 		<hr>
@@ -393,7 +441,7 @@
 		<hr>
 		<div class="coursedetail_footer">
 			<button type="button" class="coursedetail_prevbtn coursedetail_generalbtn"
-				onclick="history.back()">이전으로</button>
+				onclick="location.href = './list'">목록으로</button>
 			<c:if test="${sessionScope.loginok != null}">
 				<c:if test="${sessionScope.usercode == dto.usercode || sessionScope.loginok == 'admin' }">
 					<button type="button" class="coursedetail_revisebtn coursedetail_generalbtn">코스수정</button>

@@ -13,23 +13,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <link rel="stylesheet" type="text/css" href="${root}/res/board_free/board_free.css">
-    <link rel="stylesheet" type="text/css" href="${root}/res/board_page/board_page.css">
+    <link rel="stylesheet" type="text/css" href="../../res/board_inquiry/board_inquiry.css">
+    <link rel="stylesheet" type="text/css" href="../../res/board_inquiry_page/board_inquiry_page.css">
+    <style>
+    body * {
+        font-family: 'Orbit';
+    }
+    </style>
 </head>
-<style>
-	body * {
-       font-family: 'Orbit';
-   }
-</style>
 <script>
     function showNotLoggedInModal() {
         // 모달창을 표시합니다.
         $("#agreeModal").show();
     }
+
     function hideModal() {
         $("#agreeModal").hide();
     }
-    $(document).ready(function() {
+
+    $(document).ready(function () {
         $(".loginCheck").click(function () {
             // 버튼에서 로그인 상태 정보 가져오기
             var loginStatus = $(this).find("input[name='loginStatus']").val();
@@ -39,11 +41,11 @@
                 /*                alert("로그인해라")*/
                 showNotLoggedInModal();
             } else {
-                const formData = new FormData(document.getElementById('boardFreeForm'));
-                document.getElementById('boardFreeForm').action = '${root}/community/free/write';
-                document.getElementById('boardFreeForm').method = 'GET';
+                const formData = new FormData(document.getElementById('inquiryBoardListForm'));
+                document.getElementById('inquiryBoardListForm').action = './write';
+                document.getElementById('inquiryBoardListForm').method = 'POST';
                 // 폼을 제출
-                document.getElementById('boardFreeForm').submit();
+                document.getElementById('inquiryBoardListForm').submit();
             }
         });
     })
@@ -62,44 +64,39 @@
 <section class="notice">
     <div class="page-title">
         <div class="container">
-            <h3>자유게시판</h3>
+            <h3>1:1 문의</h3>
         </div>
     </div>
     <!-- board seach area -->
     <div id="board-search">
         <div class="container">
             <div class="search-window">
-                <form action="${root}/community/free/list" id="boardFreeForm" style="margin-left: 20%; /*justify-content: space-between; align-items: center;*/">
-                    <!-- 검색 범위 선택 드롭다운 추가 -->
-                    <select id="searchType" name="searchType">
-                        <option value="title">제목</option>
-                        <option value="usercode">작성자</option>
-                        <option value="content">내용</option>
-                    </select>
-                    <div class="search-wrap search-wrap--with-write">
-                        <label for="search" class="blind">자유게시판 검색</label>
+                <form action="${root}/community/inquiry/list" id="inquiryBoardListForm"
+                      style="">
+
+                   <!--  <div class="search-wrap search-wrap--with-write">
+                        <label for="search" class="blind">1대1문의 검색</label>
                         <input id="search" type="search" name="searchWord" placeholder="검색어를 입력해주세요." value="">
-                        <button type="submit" id="searchButton" class="board_free_btn board_free_btn-dark">검색</button>
-                    </div>
+                        <button type="submit" id="searchButton" class="board_inquiry_btn board_inquiry_btn-dark">검색</button>
+                    </div> -->
                     <!-- '글쓰기' 아이콘 링크를 form 안으로 이동 -->
 
-                    <c:if test="${sessionScope.loginok==null }">
-                        <button type="button" class="board_free_btn board_free_btn-write loginCheck" style="margin-right: 10%;">
-                            <i class="bi bi-pencil-fill" ></i>
-                            <input type="hidden" name="loginStatus" value="0" />
+                    <c:if test="${sessionScope.loginok==null}">
+                        <button type="button" class="board_inquiry_btn board_inquiry_btn-write loginCheck">
+                            <i class="bi bi-pencil-fill"></i>
+                            <input type="hidden" name="loginStatus" value="0"/>
                         </button>
                     </c:if>
-                    <c:if test="${sessionScope.loginok!=null }">
-                        <button type="button" class="board_free_btn board_free_btn-write loginCheck" style="margin-right: 10%;">
-                            <i class="bi bi-pencil-fill" ></i>
-                            <input type="hidden" name="loginStatus" value="1" />
+                    <c:if test="${sessionScope.loginok!=null}">
+                        <button type="button" class="board_inquiry_btn board_inquiry_btn-write loginCheck">
+                            <i class="bi bi-pencil-fill"></i>
+                            <input type="hidden" name="loginStatus" value="1"/>
                         </button>
                     </c:if>
                 </form>
             </div>
         </div>
     </div>
-
     <!-- board list area -->
     <div id="board-list">
         <div class="container">
@@ -108,33 +105,36 @@
                 <tr>
                     <th scope="col" class="th-num">번호</th>
                     <th scope="col" class="th-title">제목</th>
-                    <th scope="col" class="th-date">등록일</th>
+                    
                     <th scope="col" class="th-usercode">작성자</th>
-                    <th scope="col" class="th-viewcont">조회수</th>
+                    <th scope="col" class="th-date">등록일</th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="item" items="${list}">
+                <c:forEach var="item" items="${inquiryList}">
                     <tr>
-                        <td>${item.freeboardcode}</td>
+                        <td>${item.questioncode}</td>
                         <c:choose>
                             <c:when test="${sessionScope.loginok != null}">
-                                <th><a href="${root}/community/free/detail?usercode=${item.usercode}&freeboardcode=${item.freeboardcode}">${item.title}</a></th>
+                                <th>
+                                    <a href="${root}/community/inquiry/detail?usercode=${item.usercode}&questioncode=${item.questioncode}">${item.title}</a>
+                                </th>
                             </c:when>
                             <c:otherwise>
-                                <th><a href="javascript:void(0);" onclick="showLoginRequiredModal()">${item.title}</a></th>
+                                <th><a href="javascript:void(0);" onclick="showLoginRequiredModal()">${item.title}</a>
+                                </th>
                             </c:otherwise>
                         </c:choose>
+                        
+                        <th>${item.nickname}</th>
                         <th><fmt:formatDate pattern="yyyy-MM-dd" value="${item.registereddate}"/></th>
-                        <th>${item.writersNickname}</th>
-                        <td>${item.viewcount}</td>
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
         </div>
     </div>
-    <div class="pagination-container" data-wow-duration="0.5s">
+    <%-- <div class="pagination-container" data-wow-duration="0.5s">
         <ul class="pagination">
             <li class="pagination-item--wide first">
                 <c:if test="${currentPage > 1}">
@@ -144,7 +144,8 @@
             </li>
             <c:forEach var="i" begin="1" end="${totalPage}">
                 <li class="pagination-item ${currentPage == i ? 'is-active' : ''}">
-                    <a class="pagination-link" href="${root}/community/free/list?currentPage=${i}&searchType=${searchType}&searchWord=${searchWord}">${i}</a>
+                    <a class="pagination-link"
+                       href="${root}/community/inquiry/list?currentPage=${i}&searchType=${searchType}&searchWord=${searchWord}">${i}</a>
                 </li>
             </c:forEach>
             <li class="pagination-item--wide last">
@@ -154,9 +155,8 @@
                 </c:if>
             </li>
         </ul>
-    </div>
+    </div> --%>
 </section>
-
 
 
 <!-- 필수 항목 미동의 모달 창 -->
@@ -187,4 +187,3 @@
         </div>
     </div>
 </div>
-

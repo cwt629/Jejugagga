@@ -61,7 +61,19 @@ public class MypageController {
 	
 	
 	@GetMapping("/mypage/mycourse")
-	public String myTripCourse() {
+	public String myTripCourse(Model model, HttpSession session) {
+		
+		// 현재 로그인한 유저코드 얻기
+		int usercode = (int)session.getAttribute("usercode");
+		System.out.println(usercode);
+		
+		
+		List<Map<String, String>> tourLikesList = userPageDao.selectOfTourLikesByNum(usercode);
+		List<Map<String, String>> courseLikesList = userPageDao.selectOfCourseLikesByNum(usercode);
+		
+		model.addAttribute("tourLikesList", tourLikesList);
+		model.addAttribute("courseLikesList", courseLikesList);
+		
 		return "mypage/mytrip_course";
 	}
 	
@@ -77,11 +89,17 @@ public class MypageController {
 	}
 	
 	@PostMapping("/member/changeinfo/change")
-	public String changeinfo(@ModelAttribute MemberTableDto dto, @RequestParam String id,
-			@RequestParam String password) {
-		String pass = HashService.hashPassword(password);
-		dto.setId(id);
-		dto.setPassword(pass);
-		return "redirect:/member/login";
+	public String changeinfo(@ModelAttribute MemberTableDto dto, @RequestParam String nickname,
+			@RequestParam String email, @RequestParam int usercode, HttpSession session) {
+		dto.setNickname(nickname);
+		dto.setEmail(email);
+		dto.setUsercode(usercode);
+		
+		userPageDao.userInfoUpdate(dto);
+		
+		session.setAttribute("nickname", nickname);
+		session.setAttribute("myemail", email);
+		
+		return "redirect:/mypage/user";
 	}
 }

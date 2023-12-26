@@ -160,70 +160,87 @@
         <ul class="ul-menu-bar" style="margin-top: 0;">
             <menu class="menu">
 
-                <button class="menu__item active" style="--bgColorItem: #FFC47E;">
+                <button class="menu__item" style="--bgColorItem: #FFC47E;"
+                onclick="location.href = '${root}/tour/list'">
                     <div class="text-container">
-                        <a href="${root}/tour/list" style="color: black; text-decoration: none;">여행정보</a>
+                        <span style="color: black; text-decoration: none;">여행정보</span>
                     </div>
                     <svg class="icon" viewBox="0 0 24 24">
 
                     </svg>
                 </button>
 
-                <button class="menu__item" style="--bgColorItem: #F6D6D6;">
+                <button class="menu__item" style="--bgColorItem: #F6D6D6;"
+                onclick="location.href = '${root}/course/list'">
                     <div class="text-container">
-                        <a href="${root}/course/list" style="color: black; text-decoration: none;">추천코스</a>
+                        <span style="color: black; text-decoration: none;">추천코스</span>
                     </div>
                     <svg class="icon" viewBox="0 0 24 24">
 
                     </svg>
                 </button>
 
-                <button class="menu__item" style="--bgColorItem: #7BD3EA;">
+                <button class="menu__item" style="--bgColorItem: #7BD3EA;"
+                onclick="location.href = '${root}/community/nav'">
                     <div class="text-container">
-                        <a href="${root}/community/nav" style="color: black; text-decoration: none;">커뮤니티</a>
+                        <span style="color: black; text-decoration: none;">커뮤니티</span>
                     </div>
                     <svg class="icon" viewBox="0 0 24 24">
                 </button>
-
-                <button class="menu__item" style="--bgColorItem:#DF826C;">
-                    <div class="text-container">
-                        <c:if test="${sessionScope.loginok==null }">
-                            <li class="li-menu-bar"><a href="${root}/member/login"
-                                                       style="color: black; text-decoration: none;">비회원</a></li>
-                        </c:if>
-                        <c:if test="${sessionScope.loginok!=null }">
-                            <c:choose>
-                                <c:when test="${sessionScope.loginok=='admin' }">
-                                    <li class="li-menu-bar"><a href="${root}/mypage/admin"
-                                                               style="color: black; text-decoration: none;">관리자</a>
-                                    </li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li class="li-menu-bar"><a href="${root}/mypage/user"
-                                                               style="color: black; text-decoration: none;">${sessionScope.nickname}</a>
-                                    </li>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:if>
-                    </div>
-                    <svg class="icon" viewBox="0 0 24 24">
-
-                    </svg>
-                </button>
-
-                <button class="menu__item" style="--bgColorItem: #F5CCA0;">
-                    <div class="text-container">
-                        <c:if test="${sessionScope.loginok==null }">
-                            <li class="li-menu-bar"><a href="${root}/member/login"
-                                                       style="color: black; text-decoration: none;">로그인</a></li>
-                        </c:if>
-                        <c:if test="${sessionScope.loginok!=null }">
-                            <li class="li-menu-bar"><a href="${root}/member/logout"
-                                                       style="color: black; text-decoration: none;">로그아웃</a></li>
-                        </c:if>
-                    </div>
-                    <svg class="icon" viewBox="0 0 24 24">
-                </button>
+                
+                <c:if test="${sessionScope.loginok==null }">
+                	<button class="menu__item" style="--bgColorItem:#DF826C;"
+                	onclick="location.href = '${root}/member/login'">
+                    	<div class="text-container">
+                    		<li class="li-menu-bar"><span style="color: black; text-decoration: none;">비회원</span></li>
+                        </div>
+	                    <svg class="icon" viewBox="0 0 24 24">
+	                    </svg>
+                    </button>
+                </c:if>
+                <c:if test="${sessionScope.loginok!=null}">
+                	<c:choose>
+                		<c:when test="${sessionScope.loginok == 'admin' }">
+	                		<button class="menu__item" style="--bgColorItem:#DF826C;"
+	                	onclick="location.href = '${root}/admin/adminpage'">
+		                    	<div class="text-container">
+		                    		<li class="li-menu-bar"><span style="color: black; text-decoration: none;">관리자</span></li>
+		                        </div>
+			                    <svg class="icon" viewBox="0 0 24 24">
+			                    </svg>
+	                    	</button>
+                		</c:when>
+                		<c:otherwise>
+                			<button class="menu__item" style="--bgColorItem:#DF826C;"
+	                	onclick="location.href = '${root}/mypage/user'">
+		                    	<div class="text-container">
+		                    		<li class="li-menu-bar"><span style="color: black; text-decoration: none;">${sessionScope.nickname}</span></li>
+		                        </div>
+			                    <svg class="icon" viewBox="0 0 24 24">
+			                    </svg>
+	                    	</button>
+                		</c:otherwise>
+                	</c:choose>
+                </c:if>
+ 				
+ 				<c:if test="${sessionScope.loginok==null }">
+ 					<button class="menu__item" style="--bgColorItem: #F5CCA0;"
+ 					onclick="location.href = '${root}/member/login'">
+                    	<div class="text-container">
+                    		<li class="li-menu-bar"><span style="color: black; text-decoration: none;">로그인</span></li>
+                        </div>
+                    	<svg class="icon" viewBox="0 0 24 24">
+                	</button>
+ 				</c:if>
+ 				<c:if test="${sessionScope.loginok!=null }">
+ 					<button class="menu__item" style="--bgColorItem: #F5CCA0;"
+ 					onclick="location.href = '${root}/member/logout'">
+                    	<div class="text-container">
+                    		<li class="li-menu-bar"><span style="color: black; text-decoration: none;">로그아웃</span></li>
+                        </div>
+                    	<svg class="icon" viewBox="0 0 24 24">
+                	</button>
+ 				</c:if>
 
                 <div class="menu__border"></div>
 

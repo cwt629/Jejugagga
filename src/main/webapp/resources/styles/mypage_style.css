@@ -18,7 +18,7 @@
 	
 	#historyContext {
 		position: absolute;
-		width: 80%;
+		width: 75%;
 		top: 100px;
 		left: 25%;
 		text-align: center;
@@ -30,9 +30,9 @@
 	#sideNav {
 		text-align: center;
 		position: fixed;
-		top: 80px;
+		top: 140px;
 		width: 15%;
-		height: 85%;
+		height: 80%;
 		background-color: #F0D0C1;
 		align-items: start;
 		border-top-right-radius: 50px;
@@ -55,7 +55,7 @@
 	.navmenu {
 		width: 100%;
 		position: absolute;
-		bottom: 200px;
+		bottom: 30%;
 		left: 42%;
 		transform: translate(-50%);
 	}
@@ -122,3 +122,4 @@
 		color: #FF5500;
 		cursor: pointer;
 	}
+	

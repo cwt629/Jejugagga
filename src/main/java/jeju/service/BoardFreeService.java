@@ -38,6 +38,7 @@ public class BoardFreeService {
 	}
 
 	public void updateBoardFree(BoardFreeDto dto) {
+
 		boardFreeDao.updateBoardFree(dto);
 	}
 
@@ -45,9 +46,9 @@ public class BoardFreeService {
 		return boardFreeDao.getTotalCount();
 	}
 
-	public void deleteBoardFree(int num) {
+	public void deleteBoardFree(int freeboardcode) {
 
-		boardFreeDao.deleteBoardFree(num);
+		boardFreeDao.deleteBoardFree(freeboardcode);
 	}
 
 	public BoardFreeDto detailBoardFreePage(int freeboardcode) {

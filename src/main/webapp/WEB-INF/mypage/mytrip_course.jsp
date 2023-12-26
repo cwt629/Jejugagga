@@ -18,9 +18,37 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
 <style>
-	body * {
-		font-family: 'Orbit';
-	}
+body * {
+	font-family: 'Orbit';
+}
+
+.grid-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap; /* 줄 바꿈을 허용하여 다음 행으로 넘어갈 수 있도록 설정 */
+}
+
+.grid-list li {
+  flex: 0 0 calc(22% - 3%); /* flex-grow, flex-shrink, flex-basis 순서로 지정 */
+  margin-right: 3%;
+  margin-bottom: 10px;
+  box-sizing: border-box; /* 너비와 여백을 합친 크기로 설정 */
+}
+
+.item-images {
+  width: 100%;
+  height: 100%;
+}
+
+
+.item-images img {
+  width: 100%;
+  height: 100%; /* 이미지의 세로 비율 유지 */
+  border-radius: 10px;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -80,52 +108,63 @@
 		<div class="historybox" style="text-align: left;">
 			<div>
 				<i class="bi bi-heart"></i>
-				좋아요 목록
-				<span style="float: right; margin-left: 15px;">삭제</span>
-				<span style="float: right;">수정</span>
+				여행지 좋아요 목록
+				<span style="float: right;" onclick="location.href='${root}/tour/list';">전체보기 ></span>
 			</div>
 			<hr>
 			<!-- 좋아요 표시 여행지 정렬 코드 작성 필요 -->
-			<div class="history_innerbox" style="text-align: left;">
-				<div>
-				
-				</div>		
-			</div>
-			<!-- 좋아요 표시 여행지 정렬 코드 작성 필요 -->
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th width="350">여행지</th>
+						<th width="250">사진</th>
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="tourLikes" items="${tourLikesList}">
+					<tr>
+						<!-- 여행지 -->
+						<td>${tourLikes.title }</td>
+		   			
+		   			<!-- 작성일 -->
+		   			<td>
+		   				<img src="${tourLikes.firstimage != ''? tourLikes.firstimage : '../res/photo/noimage.png'}" style="width: 100%; height: 50%;">
+		   			</td>
+		  	 	</tr>		
+				</c:forEach>
+				</tbody>
+			</table>
 		</div>
 		<br><br><br>
-		<div class="historybox" style="text-align: left;">
-			<div>
-				<i class="bi bi-star"></i>
-				즐겨찾기 목록
-				<span style="float: right; margin-left: 15px;">삭제</span>
-				<span style="float: right;">수정</span>
-			</div>
-			<hr>
-			<!-- 즐겨찾기 표시 여행지 정렬 코드 작성 필요 -->
-			<div class="history_innerbox" style="text-align: left;">
-				<div>
-				
-				</div>		
-			</div>
-			<!-- 즐겨찾기 표시 여행지 정렬 코드 작성 필요 -->
-		</div>
-		<br><br><br>
-		<div class="historybox" style="text-align: left;">
+		<div class="historybox" style="text-align: left; margin-bottom: 5%;">
 			<div>
 				<i class="bi bi-list-check"></i>
-				내 여행 코스
-				<span style="float: right; margin-left: 15px;">삭제</span>
-				<span style="float: right;">수정</span>
+				여행 코스 좋아요 목록
+				<span style="float: right;" onclick="location.href='${root}/course/list';">전체보기 ></span>
 			</div>
 			<hr>
 			<!-- 내 여행 코스 저장 코드 작성 필요 -->
-			<div class="history_innerbox" style="text-align: left;">
-				<div>
-				
-				</div>		
-			</div>
-			<!-- 내 여행 코스 저장 코드 작성 필요 -->
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th width="350">여행 코스</th>
+						<th width="250">사진</th>
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="courseLikes" items="${courseLikesList}">
+					<tr>
+						<!-- 여행지 -->
+						<td>${courseLikes.name }</td>
+		   			
+		   			<!-- 작성일 -->
+						<td>
+							<img src="${courseLikes.firstimage != ''? courseLikes.firstimage : '../res/photo/noimage.png'}" style="width: 100%;">
+						</td>
+		  	 	</tr>		
+				</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
