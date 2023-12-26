@@ -87,13 +87,13 @@ public class AdminController {
 	@GetMapping("/admin/membermanage")
 	public String membermanage(Model model)
 	{
-		List<MemberTableDto> memberlist = memberTableDao.selectAllmem10Bydesc();
+		List<MemberTableDto> memberlist = memberTableDao.selectAllmemBydesc();
 		model.addAttribute("memberlist", memberlist);
 		return "admin/membermanage";
 	}
 	
 	@ResponseBody
-	@PostMapping("admin/member/information")
+	@PostMapping("/admin/member/information")
 	public MemberTableDto memberinformation(@RequestParam String id)
 	{
 		MemberTableDto dto = memberTableDao.getData(id);
@@ -101,7 +101,7 @@ public class AdminController {
 	}
 	
 	@ResponseBody
-	@PostMapping("admin/member/writefree")
+	@PostMapping("/admin/member/writefree")
 	public List<BoardFreeDto> memberwritefree(@RequestParam int usercode)
 	{
 		List<BoardFreeDto> memberfreeBoardlist = userPageDao.selectOfFreeBoardByUsercode(usercode);
@@ -109,7 +109,7 @@ public class AdminController {
 	}
 	
 	@ResponseBody
-	@PostMapping("admin/member/writereview")
+	@PostMapping("/admin/member/writereview")
 	public List<BoardReviewDto> memberwritereview(@RequestParam int usercode)
 	{
 		List<BoardReviewDto> memberreviewlist = userPageDao.selectOfReviewBoardByUsercode(usercode);

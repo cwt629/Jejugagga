@@ -58,6 +58,10 @@ public class MemberTableDao {
 	}
 	
 	public List<MemberTableDto> selectAllmem10Bydesc() {
+		return session.selectList(nameSpace + "selectAllmem10Bydesc");
+	}
+	
+	public List<MemberTableDto> selectAllmemBydesc() {
 		return session.selectList(nameSpace + "selectAllmemBydesc");
 	}
 	
