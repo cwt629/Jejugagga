@@ -180,7 +180,10 @@
 				<c:forEach var="inquiryBoard" items="${inquiryBoardlist}">
 					<tr>
 						<!-- 제목 -->
-						<td>${inquiryBoard.title }</td>
+						<td>
+							<span onclick="location.href='${root}/community/inquiry/detail?usercode=${sessionScope.usercode}&questioncode=${inquiryBoard.questioncode}';">
+							${inquiryBoard.title }</span>
+						</td>
 		   			
 		   			<!-- 작성일 -->
 		   			<td>

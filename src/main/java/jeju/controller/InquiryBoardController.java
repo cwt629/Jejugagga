@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jeju.dao.AdminDao;
 import jeju.dao.inquiryBoardDao;
+import jeju.dto.BoardInquiryAnswerDto;
 import jeju.dto.BoardInquiryDto;
 import jeju.service.BoardInquiryService;
 
@@ -23,6 +25,9 @@ public class InquiryBoardController {
 	
 	@Autowired
 	private inquiryBoardDao biDao;
+	
+	@Autowired
+	AdminDao admindao;
 
 
 	@GetMapping("/community/inquiry/list")
@@ -43,9 +48,10 @@ public class InquiryBoardController {
 	@GetMapping("/community/inquiry/detail")
 	public String inquiryboarddetail(Model model, @RequestParam int questioncode) {
 		BoardInquiryDto biDto = boardInquiryService.selectInquiryByCode(questioncode);
+		BoardInquiryAnswerDto inquiryanswer = boardInquiryService.selectAnswersForQuestion(questioncode);
 		
 		model.addAttribute("biDto", biDto);
-		
+		model.addAttribute("answer", inquiryanswer);
 		return "community/inquiry/inquiryboarddetail";
 	}
 	

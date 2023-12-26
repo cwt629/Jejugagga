@@ -1,6 +1,7 @@
 package jeju.service;
 
 import jeju.dao.inquiryBoardDao;
+import jeju.dto.BoardInquiryAnswerDto;
 import jeju.dto.BoardInquiryDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,10 @@ public class BoardInquiryService {
 
 	public BoardInquiryDto detailBoardFreePage(int questioncode) {
 		return boardInquiryDao.detail(questioncode);
+	}
+	
+	public BoardInquiryAnswerDto selectAnswersForQuestion(int questioncode) {
+		return boardInquiryDao.selectAnswersForQuestion(questioncode);
 	}
 
 
