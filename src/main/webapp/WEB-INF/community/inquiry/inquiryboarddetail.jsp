@@ -43,13 +43,15 @@
 	<h1>1대1문의</h1>
 	<br><br>
 	<div class="inquirydetail_text">
-	    <h3>${biDto.title}</h3>
+	    [질문]
+		<h3>${biDto.title}</h3>
 	    <hr>
 	    <div class="inquirydetail_content">
 		    ${biDto.content}
 	    </div>
 	</div>
 	<div class="inquirydetail_text">
+		[답변]
 	    <h3>${answer.title }</h3>
 	    <hr>
 	    <div class="inquirydetail_content">
