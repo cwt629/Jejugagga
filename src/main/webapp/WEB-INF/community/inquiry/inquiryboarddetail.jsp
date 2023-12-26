@@ -49,6 +49,14 @@
 		    ${biDto.content}
 	    </div>
 	</div>
+	<div class="inquirydetail_text">
+	    <h3>${answer.title }</h3>
+	    <hr>
+	    <div class="inquirydetail_content">
+		    ${answer.content }
+	    </div>
+	    
+	</div>
 	<div class="inquirydetail_buttons">
 		<button type="button" class="btn btn-secondary"
 		onclick="location.href = './list'">이전으로</button>

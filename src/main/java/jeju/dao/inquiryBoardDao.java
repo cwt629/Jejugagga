@@ -95,5 +95,12 @@ public class inquiryBoardDao {
 	public List<Map<String, Object>> selectInquiryisanswer() {
 		return session.selectList(nameSpace + "selectInquiryisanswer");
 	}
+	
+	public BoardInquiryAnswerDto selectAnswersForQuestion(int questioncode) {
+		return session.selectOne(nameSpace + "selectAnswersForQuestion", questioncode);
+	}
+	
+	
+	
 }
 
