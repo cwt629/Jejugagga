@@ -400,7 +400,7 @@
     <script>
         function deleteReview(reviewId) {
             $.ajax({
-                url: '/community/review/delete',
+                url: '../../delete',
                 type: 'POST',
                 data: { reviewId: reviewId },
                 success: function(response) {
