@@ -1,37 +1,4 @@
-class CourseSpot {
-	constructor(tourcode, title, contenttype, image, mapx, mapy){
-		this.tourcode = tourcode;
-		this.title = title;
-		this.contenttype = contenttype;
-		this.image = image;
-		this.mapx = mapx;
-		this.mapy = mapy;
-	}
-	
-	getTourcode(){
-		return this.tourcode;
-	}
-	
-	getTitle(){
-		return this.title;
-	}
-	
-	getContenttype(){
-		return this.contenttype;
-	}
-	
-	getImage(){
-		return this.image;
-	}
-	
-	getMapx(){
-		return this.mapx;
-	}
-	
-	getMapy(){
-		return this.mapy;
-	}
-}
+import {CourseSpot} from "../CourseSpot.js";
 
 let routes = []; // 루트에 포함되는 여행지 정보
 let selectedCode = -1; // 현재 검색창에서 선택된 여행지 코드
@@ -77,11 +44,6 @@ function displaySearchedTour(name = "", categories = []){
 	const LOADING_DISPLAY = "<div class='courseadd_searchmessage'>데이터 로딩중입니다...</div>";
 	$("div.courseadd_searchresultdiv").html(LOADING_DISPLAY);
 	
-	/*
-	[Trouble-Shooting]
-	배열을 넘겨주려면, traditional: true 를 넘겨줘야 한다.
-	그리고 Controller에서는 List 형태로 받아오면 된다.
-	*/
 	$.ajax({
 		type: "get",
 		dataType: "json",
