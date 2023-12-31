@@ -1,11 +1,6 @@
+import {CONTENT_TYPE_CLASS, getCategory} from "../../utils/category.js";
+
 let clickingHeart = false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
-// contenttype별 클래스명
-const CONTENT_TYPE_CLASS = {
-	"12": "course_tourspot",
-	"14": "course_culture",
-	"15": "course_festival",
-	"39": "course_cafeteria"
-};
 
 // 각 여행지에 카테고리 넣어주기
 $("div.coursedetail_tag").each(function(idx, item){
@@ -103,12 +98,3 @@ $("div.coursedetail_card").click(function(){
 	let tourcode = $(this).parent().attr("data-tourcode");
 	location.href = "../tour/content?tourcode=" + tourcode;
 })
-
-
-// contenttype을 카테고리명으로 치환하는 함수
-function getCategory(contenttype){
-	return (contenttype === 12)? '관광지' :
-			(contenttype === 14)? '문화시설' :
-			(contenttype === 15)? '축제행사' :
-			(contenttype === 39)? '음식점' : '기타';
-}
