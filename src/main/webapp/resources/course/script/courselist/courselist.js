@@ -1,9 +1,11 @@
+import {isValidSearchInput} from "../../utils/validate.js";
+import {MINIMUM_COUNTER, MAXIMUM_COUNTER, incrementCounter, decrementCounter} from "../../utils/counter.js";
+import {generateGetURLQuery} from "../../utils/urlquery.js";
+
 let clickingHeart = false; // 하트를 클릭하고 처리중인지 여부(하트를 연타하는 경우에 대비)
 const FULL_HEART_BUTTON = `<i class="bi bi-heart-fill course_heart"></i>`;
 const EMPTY_HEART_BUTTON = `<i class="bi bi-heart course_heart"></i>`;
 
-const MINIMUM_COUNTER = 1;
-const MAXIMUM_COUNTER = 5;
 
 // 하트 아이콘 클릭 시
 $(document).on("click", "div.course_content div.course_like_button", function(){
@@ -149,44 +151,9 @@ $("div.course_search_input>input[type='text']").on("keydown", function(e){
 });
 
 
-// 특정 선택자의 카운터값을 1 증가시키는 함수
-function incrementCounter(selector, maxNumber){
-	let currentCount = parseInt($(selector).text()); // 현재 카운트
-	// 이미 최대치에 도달한 경우
-	if (currentCount >= maxNumber) return;
-	
-	// 1 증가시킨 카운터를 넘겨준다
-	$(selector).text(currentCount + 1);
-}
 
-// 특정 선택자의 카운터값을 1 감소시키는 함수
-function decrementCounter(selector, minNumber){
-	let currentCount = parseInt($(selector).text()); // 현재 카운트
-	// 이미 최소치에 도달한 경우
-	if (currentCount <= minNumber) return;
-	
-	// 1 감소시킨 카운터를 넘겨준다
-	$(selector).text(currentCount - 1);
-}
 
-// 주어진 dictionary를 바탕으로 url 뒤에 붙는 쿼리문을 작성해주는 함수
-function generateGetURLQuery(dict){
-	let queries = []; // 각 쿼리를 저장한 배열
-	for (let key in dict){
-		let query = key + "=" + dict[key];
-		queries.push(query);
-	}
-	
-	let result = queries.join("&"); // 쿼리들을 &로 이어붙여준다
-	// 하나라도 쿼리문이 있으면 "?"를 앞에 붙여준다
-	if (result.length > 0) result = "?" + result;
-	
-	return result;
-}
 
-// 한글, 영어, 숫자와 띄어쓰기로만 이루어진 문자인지 판단하는 함수
-function isValidSearchInput(input){
-	let regex = new RegExp('^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9 ]*$');
-	return regex.test(input);
-}
+
+
 	
