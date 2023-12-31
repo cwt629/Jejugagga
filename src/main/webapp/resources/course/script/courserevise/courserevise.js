@@ -1,118 +1,8 @@
-const MAX_SPOTS_IN_COURSE = 5; // 하나의 코스에 들어갈 수 있는 여행지 최대 개수
+import {isValidTimeInput, isValidDistanceInput} from "../../utils/validate.js";
+import {CONTENT_TYPE_CLASS, getCategory} from "../../utils/category.js";
+import {MAX_SPOTS_IN_COURSE, INPUT_MAX_LENGTH} from "../restriction.js";
 
 let selectedCode = -1; // 현재 검색창에서 선택된 여행지 코드
-	
-// 각 input의 최대 길이
-const INPUT_MAX_LENGTH = {
-		"name": 100,
-		"briefcontent": 500,
-		"longdetail": 2000
-};
-
-// contenttype별 클래스명
-const CONTENT_TYPE_CLASS = {
-	"12": "course_tourspot",
-	"14": "course_culture",
-	"15": "course_festival",
-	"39": "course_cafeteria"
-};
-
-// 페이지 로드 시 이벤트
-$(function(){
-	init();
-});
-
-// 특정 contenttype에 대한 카테고리명을 출력하는 함수
-function getCategory(contenttype) {
-	return (contenttype == 12)? "관광지": (contenttype == 14)? "문화시설"
-			: (contenttype == 15)? "축제행사": (contenttype == 39)? "음식점" : "기타";
-}
-
-// 검색된 여행지 목록을 출력하는 함수
-function displaySearchedTour(name = "", categories = []){
-	// 로딩 멘트
-	const LOADING_DISPLAY = "<div class='courserevise_searchmessage'>데이터 로딩중입니다...</div>";
-	$("div.courserevise_searchresultdiv").html(LOADING_DISPLAY);
-	
-	$.ajax({
-		type: "get",
-		dataType: "json",
-		url: "./searchtour",
-		data: {"name": name, "categories": categories},
-		traditional: true,
-		success: function(res){
-			//console.log(res);
-			let results = "";
-			
-			$.each(res, function(idx, item){
-				results += 
-					`
-					<figure tourcode="${item.tourcode}" contenttype="${item.contenttype}"
-					${(item.tourcode == selectedCode)? 'class="courserevise_selected"' : ''}
-					data-mapx="${item.mapx}" data-mapy="${item.mapy}">
-		        		<img src=${(item.firstimage)? item.firstimage : '../res/photo/noimage.png'}>
-		        		<figcaption>
-		        			<h5>${item.title}</h5>
-		        			<h6>${getCategory(item.contenttype)}</h6>
-		        		</figcaption>
-		        	</figure>
-						`;
-			})
-			
-			if (results.length === 0){
-				results = "<div class='courserevise_searchmessage'>검색된 결과가 없습니다.</div>";
-			}
-			
-			// 문서 반영
-			$("div.courserevise_searchresultdiv").html(results);
-		}
-	});
-};
-
-// 현재 추가된 여행지 리스트를 출력하는 함수
-function displayCurrentRoute(){
-	let result = ``;
-	const ARROW_ENABLED = `<img class="courserevise_arrow" src="../res/photo/course_icons/next_enabled.png">`;
-	const ARROW_DISABLED = `<img class="courserevise_arrow" src="../res/photo/course_icons/next_disabled.png">`;
-	
-	for (let i = 0; i < MAX_SPOTS_IN_COURSE; i++){
-		// 첫 시작을 제외하고는 화살표부터 그려준다
-		if (i > 0) {
-			// 해당 번째에 여행지가 있으면 화살표가 활성화되고, 그렇지 않으면 비활성화
-			let currentArrow = (i < routes.length)? ARROW_ENABLED : ARROW_DISABLED;
-			result += currentArrow;
-		}
-		
-		// 여행지가 있으면 표시해준다
-		if (i < routes.length) {
-			result += 
-				`
-				<div class="courserevise_routeplace courserevise_enabled" index=${i}>
-					<img class="courserevise_remove" src="../res/photo/course_icons/Icon_remove.png">
-					<div class="courserevise_routephoto">
-						<img src="${routes[i].getImage()}">
-					</div>
-					<h5>${routes[i].getTitle()}</h5>
-					<div class="courserevise_tag ${CONTENT_TYPE_CLASS[routes[i].getContenttype()]}">
-						${getCategory(routes[i].getContenttype())}
-					</div>
-				</div>
-				`;
-		}
-		// 여행지가 없으면 빈칸 표시
-		else {
-			result += 
-				`
-				<div class="courserevise_routeplace">
-					<div class="courserevise_routephoto">
-					</div>
-				</div>
-				`;
-		}
-	}
-	
-	$("table.courserevise_table div.courserevise_routes").html(result);
-}
 
 // 여행지 추가 모달 - 카테고리 버튼 클릭 이벤트
 $(".courserevise_searchcategory").click(function(){
@@ -232,7 +122,7 @@ $("input.courserevise_timeinput").on("input", function(){
 	}
 	
 	// 올바른 입력
-	if (validateTimeInput($(this).val())){
+	if (isValidTimeInput($(this).val())){
 		messageBlock.css("color", "blue").text("올바른 입력입니다.");
 		return;
 	}
@@ -252,7 +142,7 @@ $("input.courserevise_distanceinput").on("input", function(){
 	}
 	
 	// 올바른 입력
-	if (validateDistanceInput($(this).val())){
+	if (isValidDistanceInput($(this).val())){
 		messageBlock.css("color", "blue").text("올바른 입력입니다.");
 		return;
 	}
@@ -328,38 +218,6 @@ $("form.courserevise_form").on("submit", function(event){
 	}
 });
 
-// int 입력을 체크하는 함수
-function isValidIntegerInput(input){
-	let intRegex = new RegExp('^[0-9]*$');
-	
-	// 완전한 정수 형태인지 확인
-	return intRegex.test(input);
-}
-
-// double 입력을 체크하는 함수
-function isValidDoubleInput(input){
-	// 정수 형태인 경우
-	if (isValidIntegerInput(input)) return true;
-	
-	// 소수 형태인 경우에 대한 정규표현식
-	let doubleRegex = new RegExp('^[0-9]+\.?[0-9]+$');
-	
-	// 올바른 소수 형태인지 확인
-	return doubleRegex.test(input);
-}
-
-// 예상 소요 시간 입력 검증 함수
-function validateTimeInput(input){
-	// 0 이상인 정수
-	return isValidIntegerInput(input) && parseInt(input) >= 0;
-}
-
-// 이동거리 검증 함수
-function validateDistanceInput(input){
-	// 소수여야 한다
-	return isValidDoubleInput(input);
-}
-
 // 수정 폼으로 처음 들어왔을 때 불리는 함수
 function init(){
 	// 여러 text input들의 글자 수 세기를 위해, input event를 촉발시킨다
@@ -370,6 +228,93 @@ function init(){
 	displayCurrentRoute(); // 여행지 루트 렌더링
 }
 
+// 검색된 여행지 목록을 출력하는 함수
+function displaySearchedTour(name = "", categories = []){
+	// 로딩 멘트
+	const LOADING_DISPLAY = "<div class='courserevise_searchmessage'>데이터 로딩중입니다...</div>";
+	$("div.courserevise_searchresultdiv").html(LOADING_DISPLAY);
+	
+	$.ajax({
+		type: "get",
+		dataType: "json",
+		url: "./searchtour",
+		data: {"name": name, "categories": categories},
+		traditional: true,
+		success: function(res){
+			//console.log(res);
+			let results = "";
+			
+			$.each(res, function(idx, item){
+				results += 
+					`
+					<figure tourcode="${item.tourcode}" contenttype="${item.contenttype}"
+					${(item.tourcode == selectedCode)? 'class="courserevise_selected"' : ''}
+					data-mapx="${item.mapx}" data-mapy="${item.mapy}">
+		        		<img src=${(item.firstimage)? item.firstimage : '../res/photo/noimage.png'}>
+		        		<figcaption>
+		        			<h5>${item.title}</h5>
+		        			<h6>${getCategory(item.contenttype)}</h6>
+		        		</figcaption>
+		        	</figure>
+						`;
+			})
+			
+			if (results.length === 0){
+				results = "<div class='courserevise_searchmessage'>검색된 결과가 없습니다.</div>";
+			}
+			
+			// 문서 반영
+			$("div.courserevise_searchresultdiv").html(results);
+		}
+	});
+};
+
+// 현재 추가된 여행지 리스트를 출력하는 함수
+function displayCurrentRoute(){
+	let result = ``;
+	const ARROW_ENABLED = `<img class="courserevise_arrow" src="../res/photo/course_icons/next_enabled.png">`;
+	const ARROW_DISABLED = `<img class="courserevise_arrow" src="../res/photo/course_icons/next_disabled.png">`;
+	
+	for (let i = 0; i < MAX_SPOTS_IN_COURSE; i++){
+		// 첫 시작을 제외하고는 화살표부터 그려준다
+		if (i > 0) {
+			// 해당 번째에 여행지가 있으면 화살표가 활성화되고, 그렇지 않으면 비활성화
+			let currentArrow = (i < routes.length)? ARROW_ENABLED : ARROW_DISABLED;
+			result += currentArrow;
+		}
+		
+		// 여행지가 있으면 표시해준다
+		if (i < routes.length) {
+			result += 
+				`
+				<div class="courserevise_routeplace courserevise_enabled" index=${i}>
+					<img class="courserevise_remove" src="../res/photo/course_icons/Icon_remove.png">
+					<div class="courserevise_routephoto">
+						<img src="${routes[i].getImage()}">
+					</div>
+					<h5>${routes[i].getTitle()}</h5>
+					<div class="courserevise_tag ${CONTENT_TYPE_CLASS[routes[i].getContenttype()]}">
+						${getCategory(routes[i].getContenttype())}
+					</div>
+				</div>
+				`;
+		}
+		// 여행지가 없으면 빈칸 표시
+		else {
+			result += 
+				`
+				<div class="courserevise_routeplace">
+					<div class="courserevise_routephoto">
+					</div>
+				</div>
+				`;
+		}
+	}
+	
+	$("table.courserevise_table div.courserevise_routes").html(result);
+}
+
+
 // 폼 제출 시 호출할 함수
 function handleCourseFormSubmit(){
 	// 여행지를 하나도 선택하지 않은 경우
@@ -379,14 +324,14 @@ function handleCourseFormSubmit(){
 	}
 	
 	// 소요 시간 입력이 올바르지 않은 경우
-	if (!validateTimeInput($("input.courserevise_timeinput").val())){
+	if (!isValidTimeInput($("input.courserevise_timeinput").val())){
 		alert("예상 소요 시간을 올바르게 입력해주세요.");
 		$("input.courserevise_timeinput").focus(); // 자동 포커스
 		return false;
 	}
 	
 	// 이동 거리 입력이 올바르지 않은 경우
-	if (!validateDistanceInput($("input.courserevise_distanceinput").val())){
+	if (!isValidDistanceInput($("input.courserevise_distanceinput").val())){
 		alert("이동 거리를 올바르게 입력해주세요.");
 		$("input.courserevise_distanceinput").focus(); // 자동 포커스
 		return false;
@@ -402,3 +347,7 @@ function handleCourseFormSubmit(){
 	
 	return true;
 }
+
+
+// 페이지 로드 시 초기 상태를 만든다.
+init();
