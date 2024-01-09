@@ -16,11 +16,11 @@ http://223.130.135.142:8090/jejugagga/
 ## 팀원 소개
 | 장원태 | 김나혜 | 김동현 |
 | :------------------: | :------------------: | :------------------: |
-| <img src="https://github.com/cwt629/Jejugagga/assets/81515049/baa62258-6633-471d-8470-9d06ff618d5a" alt="장원태" width="240" height="240"> | <img src="https://github.com/cwt629/Jejugagga/assets/81515049/d59adaff-afa8-4a89-b0e0-939f3df03cb8" alt="김나혜" width="240" height="240"> | <img src="https://github.com/cwt629/Jejugagga/assets/81515049/12ab9646-b5f7-4213-80ac-2f5b28e3f293" alt="김동현" width="240" height="240"> |
+| <img src="https://github.com/cwt629/Jejugagga/assets/81515049/baa62258-6633-471d-8470-9d06ff618d5a" alt="장원태" width="90%" height="90%"> | <img src="https://github.com/cwt629/Jejugagga/assets/81515049/d59adaff-afa8-4a89-b0e0-939f3df03cb8" alt="김나혜" width="90%" height="90%"> | <img src="https://github.com/cwt629/Jejugagga/assets/81515049/12ab9646-b5f7-4213-80ac-2f5b28e3f293" alt="김동현" width="90%" height="90%"> |
 | [@cwt629](https://github.com/cwt629) | [@joyzoey](https://github.com/joyzoey) | [@dongpyeon](https://github.com/dongpyeon) |
 | - 추천코스 페이지 <br> - 프로젝트 배포 관리| - 홈페이지 <br> - 여행정보 API 호출 <br> - 여행지 정보 페이지 | - 로그인 및 회원가입 <br> - 관리자 페이지 |
 | <b>김요한</b> | <b>김재형</b> | <b>한종빈</b> |
-| <img src="https://github.com/cwt629/Jejugagga/assets/81515049/14e81e30-d34f-4edd-97aa-b120db4299d4" alt="김요한" width="240" height="240"> | <img src="https://github.com/cwt629/Jejugagga/assets/81515049/fb05abf6-22d1-46b7-bac4-60640a2170a4" alt="김재형" width="240" height="240"> | <img src="https://github.com/cwt629/Jejugagga/assets/81515049/d4760b69-1bb8-4793-b4b9-3575d980a6e6" alt="한종빈" width="240" height="240"> |
+| <img src="https://github.com/cwt629/Jejugagga/assets/81515049/14e81e30-d34f-4edd-97aa-b120db4299d4" alt="김요한" width="90%" height="90%"> | <img src="https://github.com/cwt629/Jejugagga/assets/81515049/fb05abf6-22d1-46b7-bac4-60640a2170a4" alt="김재형" width="90%" height="90%"> | <img src="https://github.com/cwt629/Jejugagga/assets/81515049/d4760b69-1bb8-4793-b4b9-3575d980a6e6" alt="한종빈" width="90%" height="90%"> |
 | [@kimyoda](https://github.com/kimyoda) | [@jaehyoung119](https://github.com/jaehyoung119) | [@isthatrue](https://github.com/isthatrue) |
 | - 메뉴바 <br> - 자유게시판 <br> - 일대일 문의 게시판 | - 메뉴바 <br> - 시작화면 <br> - FAQ <br> - 후기게시판 | - 마이페이지 |
 
