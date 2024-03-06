@@ -7,8 +7,6 @@
 ## 프로젝트 정보
 > 네이버 클라우드 데브옵스 3기 2조 - 세미 프로젝트<br>개발기간: 2023.12.04 - 2023.12.26
 
-### 배포 주소
-http://223.130.135.142:8090/jejugagga/
 
 ### 발표 자료
 [Click here to download](https://github.com/cwt629/Jejugagga/files/13859073/_.3._2._._ver1.1.pdf)
