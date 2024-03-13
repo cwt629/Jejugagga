@@ -47,7 +47,7 @@
 
 # 페이지 구성
 <details>
-  <summary><h2>시작 화면</h2></summary>
+  <summary><b>시작 화면</b></summary>
   <blockquote>담당자: 김재형</blockquote>
   <table>
     <tr>
@@ -64,7 +64,7 @@
 </details>
 
 <details>
-  <summary><h2>메뉴바</h2></summary>
+  <summary><b>메뉴바</b></summary>
   <blockquote>담당자: 김요한, 김재형</blockquote>
   <table>
     <tr>
@@ -81,7 +81,7 @@
 </details>
 
 <details>
-  <summary><h2>홈 화면</h2></summary>
+  <summary><b>홈 화면</b></summary>
   <blockquote>담당자: 김나혜</blockquote>
   <table>
     <tr>
@@ -133,7 +133,7 @@
 </details>
 
 <details>
-  <summary><h2>여행지 페이지</h2></summary>
+  <summary><b>여행지 페이지</b></summary>
   <blockquote>담당자: 김나혜</blockquote>
   <table>
     <tr>
@@ -195,7 +195,7 @@
 </details>
 
 <details>
-  <summary><h2>추천코스 페이지</h2></summary>
+  <summary><b>추천코스 페이지</b></summary>
   <blockquote>담당자: 장원태</blockquote>
   <table>
     <tr>
@@ -297,7 +297,7 @@
 </details>
 
 <details>
-  <summary><h2>커뮤니티 - 홈</h2></summary>
+  <summary><b>커뮤니티 - 홈</b></summary>
   <blockquote>담당자: 김재형</blockquote>
   <table>
     <tr>
@@ -314,7 +314,7 @@
 </details>
 
 <details>
-  <summary><h2>커뮤니티 - 일대일 문의 게시판</h2></summary>
+  <summary><b>커뮤니티 - 일대일 문의 게시판</b></summary>
   <blockquote>담당자: 김요한</blockquote>
   <table>
     <tr>
@@ -351,7 +351,7 @@
 </details>
 
 <details>
-  <summary><h2>커뮤니티 - FAQ</h2></summary>
+  <summary><b>커뮤니티 - FAQ</b></summary>
   <blockquote>담당자: 김재형</blockquote>
   <table>
     <tr>
@@ -368,7 +368,7 @@
 </details>
 
 <details>
-  <summary><h2>커뮤니티 - 후기 게시판</h2></summary>
+  <summary><b>커뮤니티 - 후기 게시판</b></summary>
   <blockquote>담당자: 김재형</blockquote>
   <table>
     <tr>
@@ -430,7 +430,7 @@
 </details>
 
 <details>
-  <summary><h2>커뮤니티 - 자유 게시판</h2></summary>
+  <summary><b>커뮤니티 - 자유 게시판</b></summary>
   <blockquote>담당자: 김요한</blockquote>
   <table>
     <tr>
@@ -492,7 +492,7 @@
 </details>
 
 <details>
-  <summary><h2>로그인 & 회원가입</h2></summary>
+  <summary><b>로그인 & 회원가입</b></summary>
   <blockquote>담당자: 김동현</blockquote>
   <table>
     <tr>
@@ -554,7 +554,7 @@
 </details>
 
 <details>
-  <summary><h2>마이페이지</h2></summary>
+  <summary><b>마이페이지</b></summary>
   <blockquote>담당자: 한종빈</blockquote>
   <table>
     <tr>
@@ -656,7 +656,7 @@
 </details>
 
 <details>
-  <summary><h2>관리자페이지</h2></summary>
+  <summary><b>관리자페이지</b></summary>
   <blockquote>담당자: 김동현</blockquote>
   <table>
     <tr>
