@@ -48,6 +48,7 @@
 # 페이지 구성
 <details>
   <summary><b>시작 화면</b></summary>
+  <br>
   <blockquote>담당자: 김재형</blockquote>
   <table>
     <tr>
@@ -65,6 +66,7 @@
 
 <details>
   <summary><b>메뉴바</b></summary>
+  <br>
   <blockquote>담당자: 김요한, 김재형</blockquote>
   <table>
     <tr>
@@ -82,6 +84,7 @@
 
 <details>
   <summary><b>홈 화면</b></summary>
+  <br>
   <blockquote>담당자: 김나혜</blockquote>
   <table>
     <tr>
@@ -134,6 +137,7 @@
 
 <details>
   <summary><b>여행지 페이지</b></summary>
+  <br>
   <blockquote>담당자: 김나혜</blockquote>
   <table>
     <tr>
@@ -196,6 +200,7 @@
 
 <details>
   <summary><b>추천코스 페이지</b></summary>
+  <br>
   <blockquote>담당자: 장원태</blockquote>
   <table>
     <tr>
@@ -298,6 +303,7 @@
 
 <details>
   <summary><b>커뮤니티 - 홈</b></summary>
+  <br>
   <blockquote>담당자: 김재형</blockquote>
   <table>
     <tr>
@@ -315,6 +321,7 @@
 
 <details>
   <summary><b>커뮤니티 - 일대일 문의 게시판</b></summary>
+  <br>
   <blockquote>담당자: 김요한</blockquote>
   <table>
     <tr>
@@ -352,6 +359,7 @@
 
 <details>
   <summary><b>커뮤니티 - FAQ</b></summary>
+  <br>
   <blockquote>담당자: 김재형</blockquote>
   <table>
     <tr>
@@ -369,6 +377,7 @@
 
 <details>
   <summary><b>커뮤니티 - 후기 게시판</b></summary>
+  <br>
   <blockquote>담당자: 김재형</blockquote>
   <table>
     <tr>
@@ -431,6 +440,7 @@
 
 <details>
   <summary><b>커뮤니티 - 자유 게시판</b></summary>
+  <br>
   <blockquote>담당자: 김요한</blockquote>
   <table>
     <tr>
@@ -493,6 +503,7 @@
 
 <details>
   <summary><b>로그인 & 회원가입</b></summary>
+  <br>
   <blockquote>담당자: 김동현</blockquote>
   <table>
     <tr>
@@ -555,6 +566,7 @@
 
 <details>
   <summary><b>마이페이지</b></summary>
+  <br>
   <blockquote>담당자: 한종빈</blockquote>
   <table>
     <tr>
@@ -657,6 +669,7 @@
 
 <details>
   <summary><b>관리자페이지</b></summary>
+  <br>
   <blockquote>담당자: 김동현</blockquote>
   <table>
     <tr>
